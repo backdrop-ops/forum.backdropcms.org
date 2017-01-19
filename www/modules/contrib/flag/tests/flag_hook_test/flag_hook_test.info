@@ -1,0 +1,11 @@
+name = Flag Hooks Test
+description = Test module for invocation of flag hooks.
+dependencies[] = flag
+dependencies[] = rules
+backdrop = 1.x
+hidden = TRUE
+
+; Added by Backdrop CMS packaging script on 2016-02-11
+project = flag
+version = 1.x-1.0.0
+timestamp = 1455229866

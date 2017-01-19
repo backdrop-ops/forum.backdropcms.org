@@ -1,0 +1,10 @@
+name = Flag Bookmark
+description = Provides an example bookmark flag and supporting views.
+backdrop = 1.x
+dependencies[] = flag
+package = Flags
+
+; Added by Backdrop CMS packaging script on 2016-02-11
+project = flag
+version = 1.x-1.0.0
+timestamp = 1455229866

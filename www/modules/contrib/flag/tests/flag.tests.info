@@ -1,0 +1,65 @@
+[FlagFlaggingCRUDTestCase]
+name = CRUD API
+description = Test CRUD operations on flagging entities.
+group = Flag
+file = flag.test
+
+[FlagAdminTestCase]
+name = Admin UI
+description = Test Flag admin UI, Add, edit and delete flags.
+group = Flag
+file = flag.test
+
+[FlagAccessFormTestCase]
+name = Access to flags via entity forms
+description = Access to flag and unflag entities via entity forms.
+group = Flag
+file = flag.test
+
+[FlagEntityTokensTestCase]
+name = Entity tokens
+description = Tokens for flag count on entities.
+group = Flag
+file = flag.test
+
+[FlagAccessLinkTestCase]
+name = Access to flags via basic link
+description = Access to flag and unflag entities using the basic link.
+group = Flag
+file = flag.test
+
+[FlagLinkTypeConfirmTestCase]
+name = Confirm form
+description = Flag confirm form link type.
+group = Flag
+file = flag.test
+
+[FlagHookFlagAccessTestCase]
+name = hook_flag_access()
+description = Checks the ability of modules to use hook_flag_access().
+group = Flag
+file = flag.test
+
+[FlagFlaggingFieldTestCase]
+name = Flagging fields
+description = Test use of fields on flagging entities.
+group = Flag
+file = flag.test
+
+[FlagEntityFieldQueryTestCase]
+name = Entity Field Query
+description = Test use of EntityFieldQuery with flagging entities.
+group = Flag
+file = flag.test
+
+[FlagHookInvocationsTestCase]
+name = Hook invocations
+description = Invocation of flag and entity hooks and rules during flagging and unflagging.
+group = Flag
+file = flag.test
+
+
+; Added by Backdrop CMS packaging script on 2016-02-11
+project = flag
+version = 1.x-1.0.0
+timestamp = 1455229866

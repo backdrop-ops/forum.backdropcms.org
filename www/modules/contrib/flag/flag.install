@@ -1,0 +1,275 @@
+<?php
+
+/**
+ * @file
+ * Flag module install/schema/update hooks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function flag_schema() {
+  $schema = array();
+
+  $schema['flag'] = array(
+    'description' => 'All available flags in the system.',
+    'fields' => array(
+      'fid' => array(
+        'description' => 'The unique ID for this particular flag.',
+        'type' => 'serial',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'entity_type' => array(
+        'description' => 'The flag type, such as one of "node", "comment", or "user".',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => 'The machine-name for this flag.',
+        'type' => 'varchar',
+        'length' => '32',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'title' => array(
+        'description' => 'The human-readable title for this flag.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'global' => array(
+        'description' => 'Whether this flag state should act as a single toggle to all users across the site.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'options' => array(
+        'description' => 'The options and configuration of this flag.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('fid'),
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
+  );
+
+  $schema['flagging'] = array(
+    'description' => 'Objects that have been flagged.',
+    'fields' => array(
+      'flagging_id' => array(
+        'description' => 'The unique ID for this particular tag.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'The unique flag ID this object has been flagged with, from {flag}.',
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'The flag type, eg "node", "comment", "user".',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'description' => 'The unique ID of the object, such as either the {cid}, {uid}, or {nid}.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'The user ID by whom this object was flagged.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sid' => array(
+        'description' => "The user's numeric sid from the session_api table.",
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'timestamp' => array(
+        'description' => 'The UNIX time stamp representing when the flag was set.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-size' => 11,
+      ),
+    ),
+    'primary key' => array('flagging_id'),
+    'unique keys' => array(
+      'fid_entity_id_uid_sid' => array('fid', 'entity_id', 'uid', 'sid'),
+    ),
+    'indexes' => array(
+      'entity_type_uid_sid' => array('entity_type', 'uid', 'sid'),
+      'entity_type_entity_id_uid_sid' => array(
+        'entity_type',
+        'entity_id',
+        'uid',
+        'sid',
+      ),
+      'entity_id_fid' => array('entity_id', 'fid'),
+    ),
+  );
+
+  $schema['flag_types'] = array(
+    'description' => 'The entity bundles that are affected by a flag.',
+    'fields' => array(
+      'fid' => array(
+        'description' => 'The unqiue flag ID as defined for the flag in {flag}.',
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'type' => array(
+        'description' => 'The entity bundles that can be flagged by this fid.',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'fid' => array('fid'),
+    ),
+  );
+
+  $schema['flag_counts'] = array(
+    'description' => 'The number of times an item has been flagged.',
+    'fields' => array(
+      'fid' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_type' => array(
+        'description' => 'The flag type, usually one of "node", "comment", "user".',
+        'type' => 'varchar',
+        'length' => '128',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'description' => 'The unique ID of the content, usually either the {cid}, {uid}, or {nid}.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-width' => '10',
+      ),
+      'count' => array(
+        'description' => 'The number of times this object has been flagged for this flag.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-width' => '10',
+      ),
+      'last_updated' => array(
+        'description' => 'The UNIX time stamp representing when the flag was last updated.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-size' => 11,
+      ),
+    ),
+    'primary key' => array('fid', 'entity_id'),
+    'indexes' => array(
+      'fid_entity_type' => array('fid', 'entity_type'),
+      'entity_type_entity_id' => array('entity_type', 'entity_id'),
+      'fid_count' => array('fid', 'count'),
+      'fid_last_updated' => array('fid', 'last_updated'),
+    ),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function flag_uninstall() {
+  backdrop_set_message(t('Flag has been uninstalled, but some per-flag permissions may remain (sorry).'));
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function flag_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+    if (module_exists('translation') && !module_exists('translation_helpers')) {
+      $requirements['flag_translation'] = array(
+        'title' => $t('Flag'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t('To have the flag module work with translations, you need to install and enable the <a href="http://drupal.org/project/translation_helpers">Translation helpers</a> module.'),
+        'value' => $t('Translation helpers module not found.'),
+      );
+    }
+    if (module_exists('session_api')) {
+      if (file_exists('./robots.txt')) {
+        $flag_path = url('flag') . '/';
+        // We don't use url() because this may return an absolute URL when
+        // language negotiation is set to 'domain'.
+        $flag_path = parse_url($flag_path, PHP_URL_PATH);
+        $robots_string = 'Disallow: ' . $flag_path;
+        $contents = file_get_contents('./robots.txt');
+        if (strpos($contents, $robots_string) === FALSE) {
+          $requirements['flag_robots'] = array(
+            'title' => $t('Flag robots.txt problem'),
+            'severity' => REQUIREMENT_WARNING,
+            'description' => $t('Flag module may currently be used with anonymous users, however the robots.txt file does not exclude the "@flag-path" path, which may cause search engines to randomly flag and unflag content when they index the site. It is highly recommended to add "@robots-string" to your robots.txt file (located in the root of your Drupal installation).', array('@flag-path' => $flag_path, '@robots-string' => $robots_string)),
+            'value' => $t('Search engines flagging content'),
+          );
+        }
+      }
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Move flag settings from variables to config.
+ */
+function flag_update_1000() {
+  // Migrate variables to config.
+  $config = config('flag.settings');
+  $config->set('flag_default_flag_status', update_variable_get('flag_default_flag_status', array()));
+  $config->save();
+
+  // TODO: look for flag_[flag_name]_default_[node_type] variables?
+
+  // Delete variables.
+  update_variable_del('flag_default_flag_status');
+}
+
+function flag_update_last_removed() {
+  return 7306;
+}

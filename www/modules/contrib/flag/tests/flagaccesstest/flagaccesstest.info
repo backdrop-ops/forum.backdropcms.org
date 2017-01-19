@@ -1,0 +1,11 @@
+name = Flag hook_flag_access test
+description = Tests for hook_flag_access
+backdrop = 1.x
+dependencies[] = flag
+package = Flags
+hidden = TRUE
+
+; Added by Backdrop CMS packaging script on 2016-02-11
+project = flag
+version = 1.x-1.0.0
+timestamp = 1455229866
