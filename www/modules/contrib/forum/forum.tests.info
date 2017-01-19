@@ -1,0 +1,17 @@
+[ForumTestCase]
+name = Test Forums
+description = Provides automated tests for the Forum module.
+group = Forum
+file = tests/forum.test
+
+[ForumIndexTestCase]
+name = Test Forum Index
+description = Tests the forum index listing.
+group = Forum
+file = tests/forum.test
+
+
+; Added by Backdrop CMS packaging script on 2015-04-21
+project = forum
+version = 1.x-1.0.0
+timestamp = 1429673448
