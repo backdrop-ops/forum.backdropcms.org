@@ -1,0 +1,42 @@
+{
+    "_config_name": "node.type.forum_custom",
+    "type": "forum_custom",
+    "name": "Forum topic - custom",
+    "base": "node_content",
+    "module": "node",
+    "description": "This is a custom content type.",
+    "help": "",
+    "modified": true,
+    "disabled": false,
+    "has_title": true,
+    "title_label": "Title",
+    "settings": {
+        "comment_enabled": false,
+        "comment_default": "2",
+        "comment_per_page": "50",
+        "comment_mode": 1,
+        "comment_anonymous": 0,
+        "comment_subject_field": 0,
+        "comment_user_picture": 1,
+        "comment_form_location": 1,
+        "comment_preview": "1",
+        "menu_options": {
+            "user-menu": 0,
+            "management": 0,
+            "main-menu": 0
+        },
+        "menu_parent": "main-menu:0",
+        "status_default": "1",
+        "promote_enabled": 0,
+        "promote_default": 0,
+        "sticky_enabled": 1,
+        "sticky_default": 0,
+        "revision_enabled": 0,
+        "revision_default": 0,
+        "node_submitted": 1,
+        "node_user_picture": 1,
+        "language": 0,
+        "node_permissions": true
+    },
+    "orig_type": "forum_custom"
+}

@@ -1,0 +1,8 @@
+{
+    "_config_name": "taxonomy.vocabulary.forums_custom",
+    "name": "Forums (custom)",
+    "machine_name": "forums_custom",
+    "description": "",
+    "hierarchy": "0",
+    "weight": 0
+}
