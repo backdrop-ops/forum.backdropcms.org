@@ -1,0 +1,311 @@
+<?php
+
+/**
+ * @file qa_helper.module
+ *   Find answers to the Question node being viewed.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function qa_forum_menu() {
+  $items = array();
+  $items['question/%'] = array(
+    'title' => t('Question'),
+    'description' => t("Get a question and the related answers."),
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('qa_forum_answer_form'),
+    'access arguments' => array('access content'),
+  );
+  $items['record-vote/nojs/%/%'] = array(
+    'title' => t('AJAX callback to get the votes for a given piece of content.'),
+    'access arguments' => array('access content'),
+    'page callback' => 'qa_forum_get_votes',
+    'page arguments' => array(1, 2, 3),
+    'type' => MENU_CALLBACK,
+  );
+  $items['record-vote/ajax/%/%'] = array(
+    'delivery callback' => 'ajax_deliver',
+  ) + $items['record-vote/nojs/%/%'];
+
+  return $items;
+}
+
+/**
+ * Ajax callback for menu item 'get-votes/nojs/%'.
+ *
+ * @param string $delivery
+ *   URL param 2; ajax to use ajax, nojs fallback.
+ *
+ * @param string $cid
+ *   The id of the content, i.e. question->nid, answer->aid.
+ */
+function qa_forum_get_votes($delivery, $cid, $type) {
+  if ($delivery != 'ajax') {
+    backdrop_goto("question/$cid");
+  }
+  // Make sure trying to load a valid node.
+  elseif($node = node_load($cid)) {
+    global $user;
+    $user = user_load($user->uid);
+
+    // Records the vote based on link clicked.
+    _record_vote($node, $user, $type);
+    $score = _total_votes($node->nid);
+
+    // Return AJAX commands.
+    $commands = array(
+      //ajax_command_html('#ajax-target', $node->title),
+      qa_forum_ajax_callback($node, $user, $type, $score),
+    );
+
+    return array(
+      '#type' => 'ajax',
+      '#commands' => $commands,
+    );
+  }
+}
+
+/**
+ * Create the getVotes js function.
+ *
+ * @param Node $node
+ *   Pass through the node object to use its properties and fields.
+ *
+ * @param Uode $user
+ *   Pass through the user object to use its properties and fields.
+ */
+function qa_forum_ajax_callback($node, $user, $type, $score) {
+  return array(
+    'command' => 'getVotes',
+    'cid' => $node->nid,
+    'uid' => $user->uid,
+    'type' => $type,
+    'score' => $score,
+  );
+}
+
+/**
+ * Helper function to get page title.
+ */
+function _get_title() {
+  $node = _get_node();
+  print $node->title;
+  return $node->title;
+}
+
+/**
+ * Callback for question/% path.
+ */
+function qa_forum_question_answer_content() {
+  $node = _get_node();
+
+  // Build links to our AJAX path, make sure to include needed classes.
+  $up_link = l("Up vote", "record-vote/nojs/" . $node->nid . '/up-vote', array(
+      'attributes' => array(
+        'class' => array('use-ajax', 'up-vote')
+        ),
+      )
+  );
+  $down_link = l("Down vote", "record-vote/nojs/" . $node->nid . '/down-vote', array(
+      'attributes' => array(
+        'class' => array('use-ajax', 'down-vote')
+        ),
+      )
+  );
+
+  // TODO: write this function.
+  $score = _total_votes($node->nid);
+
+  $my_ajax_target = "
+    <div id=\"ajax-target\">
+      $score
+    </div>
+  ";
+
+  // Question content.
+  // @TODO: Move this all into a a template and call with the theme() function.
+  backdrop_set_title($node->title);
+  $markup = '<div class="qa-forum-quetion-container">';
+    $markup .= '<div class="qa-forum-question-body">';
+      $markup .= $node->body[LANGUAGE_NONE][0]['value'];
+    $markup .= '</div>';
+    $markup .= '<div class="qa-forum-voting-form">';
+      $markup .= $up_link;
+      $markup .= $my_ajax_target;
+      $markup .= $down_link;
+    $markup .= '</div>';
+  $markup .= '</div>';
+
+  // Get the current answers to the question.
+  // @TODO: move this into its own function
+  $answers = db_select('qaf_answers', 'a')
+    ->fields('a')
+    ->condition('nid', $node->nid)
+    ->execute();
+
+  $answer_markup = '<div class="answers-wrapper">Answers: ';
+  foreach($answers as $key => $answer) {
+    $user = user_load($answer->uid);
+    if ($key % 2 == 0) {
+      $class = 'even';
+    }
+    else {
+      $class = 'odd';
+    }
+    $answer_markup .=
+      '<div class="an-answer ' . $class . '">' .
+        '<div class="answer-username">User: <strong>' . $user->name . '</strong></div>' .
+        '<div class="answer-body">' . $answer->body . '</div>' .
+      '</div>';
+  }
+  $answer_markup .= '</div>';
+  $markup .= $answer_markup;
+
+  return $markup;
+}
+
+/**
+ *  Define the provide an answer form.
+ */
+function qa_forum_answer_form() {
+  backdrop_add_library('system', 'backdrop.ajax');
+  backdrop_add_js(backdrop_get_path('module', 'qa_forum') . '/js/qa_forum.js');
+  $form = array();
+  $form['#attached']['css'] = array(
+  backdrop_get_path('module', 'qa_forum') . '/css/qa_forum.css',
+);
+  $form['content'] = array(
+    '#markup' => qa_forum_question_answer_content(),
+  );
+  $form['answer-wrapper'] = array(
+    '#prefix' => '<div id="answer-wrapper">',
+    '#suffix' => '</div>'
+  );
+  $form['answer-wrapper']['answer'] = array(
+    '#title' => t('Add your Answer'),
+    '#type' => 'text_format',
+    '#format' => NULL,
+    '#description' => t('Provide an answer to the question.'),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Add your answer',
+  );
+
+  return $form;
+}
+
+/**
+ * Validate callback for the qa_forum_answer_form.
+ */
+function qa_forum_answer_form_validate($form, &$form_state) {
+  // text_format saves data as an array('format', 'value') we are extracting
+  // just the 'value' part.
+  $form_state['my-answer'] = $form_state['values']['answer']['value'];
+}
+
+/**
+ * Submit handler for qa_forum_answer_form().
+ */
+function qa_forum_answer_form_submit(&$form, &$form_state) {
+  global $user;
+  $answer = db_insert('qaf_answers')
+    ->fields(
+      array(
+        'uid' => $user->uid,
+        'nid' => _get_node()->nid,
+        'body' => $form_state['my-answer'],
+        'created' => REQUEST_TIME,
+      )
+    )
+    ->execute();
+}
+
+/**
+ * Helper function to get the node requested.
+ */
+function _get_node() {
+  $url = current_path();
+  $nid = explode('/', $url);
+  $nid = $nid[1];
+  $node = node_load($nid);
+  return $node;
+}
+
+/**
+ * Records the vote.
+ *
+ * @param Node $node
+ *   Pass through the node object.
+ *
+ * @param User $user
+ *   Pass through the user object.
+ *
+ * @param string $type
+ *   The type of vote: up or down.
+ */
+function _record_vote($node, $user, $type) {
+  // TODO: Compute if a vote for this uid::cid is already recorded and update
+  // rather than recording a new entry.
+  $events = db_select('qaf_events', 'e')
+    ->fields('e')
+    ->condition('cid', $node->nid)
+    ->condition('uid', $user->uid)
+    ->execute();
+  $num = $events->rowCount();
+
+  if ($type == 'up-vote') {
+    $vote = 1;
+  }
+  elseif ($type == 'down-vote') {
+    $vote = -1;
+  }
+  else {
+    $vote = 0;
+  }
+  if ($num == 0) {
+    $vote_record = db_insert('qaf_events')
+      ->fields(
+        array(
+          'uid' => $user->uid,
+          'cid' => $node->nid,
+          'vote' => $vote,
+          'created' => REQUEST_TIME,
+        )
+      )
+      ->execute();
+  }
+  elseif ($num != 0 && isset($num)) {
+    $vote_record = db_update('qaf_events')
+      ->fields(
+        array(
+          'vote' => $vote,
+          'last_modified' => REQUEST_TIME,
+        )
+      )
+      ->condition('cid', $node->nid)
+      ->condition('uid', $user->uid)
+      ->execute();
+  }
+}
+
+/**
+ * Get the total score given a cid.
+ *
+ * @param string $cid
+ *   The cid of the content in question.
+ */
+function _total_votes($cid) {
+  $score = 0;
+  $query = db_select('qaf_events', 'e')
+    ->fields('e')
+    ->condition('cid', $cid)
+    ->execute();
+
+  foreach ($query as $q) {
+    $score += $q->vote;
+  }
+
+  return $score;
+}

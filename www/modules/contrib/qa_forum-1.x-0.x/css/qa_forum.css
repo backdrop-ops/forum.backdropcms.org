@@ -1,0 +1,34 @@
+.qa-forum-quetion-container {
+    border-bottom: 3px solid #bbb;
+    min-height: 171px;
+}
+
+.qa-forum-question-body {
+  float: left;
+  width: 66%;
+}
+.qa-forum-voting-form {
+  float: left;
+  width: 30%;
+  border: solid 2px #aaa;
+  border-radius: 7px;
+  padding-left: 6px;
+}
+
+.answers-wrapper {
+  width: 100%;
+  padding: 7px;
+  background-color: #fdfdfd;
+}
+.an-answer {
+  margin: 16px;
+  padding: 12px;
+}
+
+.an-answer.even {
+  background-color: #eee;
+}
+
+#edit-answer-format {
+  display: none;
+}
