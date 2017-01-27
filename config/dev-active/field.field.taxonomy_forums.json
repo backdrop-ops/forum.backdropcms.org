@@ -1,12 +1,11 @@
 {
-    "_config_name": "field.field.field_tags",
-    "field_name": "field_tags",
+    "_config_name": "field.field.taxonomy_forums",
+    "field_name": "taxonomy_forums",
     "type": "taxonomy_term_reference",
-    "cardinality": -1,
     "settings": {
         "allowed_values": [
             {
-                "vocabulary": "tags",
+                "vocabulary": "forums",
                 "parent": 0
             }
         ]
@@ -14,6 +13,7 @@
     "module": "taxonomy",
     "active": 1,
     "locked": 0,
+    "cardinality": 1,
     "translatable": 0,
     "deleted": 0,
     "entity_types": [],

@@ -46,5 +46,6 @@
     "taxonomy_term_pattern": "[term:vocabulary]/[term:name]",
     "user_pattern": "accounts/[user:name]",
     "node_page_pattern": "[node:title]",
-    "node_post_pattern": "posts/[node:title]"
+    "node_post_pattern": "posts/[node:title]",
+    "taxonomy_term_forum_topics_pattern": "forum/[term:name]"
 }

@@ -1,18 +1,15 @@
 {
-    "_config_name": "field.instance.node.post.field_tags",
-    "field_name": "field_tags",
+    "_config_name": "field.instance.node.forum.taxonomy_forums",
+    "field_name": "taxonomy_forums",
     "entity_type": "node",
-    "label": "Tags",
-    "bundle": "post",
-    "description": "Enter a comma-separated list of words to describe your content.",
+    "label": "Forums",
+    "bundle": "forum",
+    "required": true,
     "widget": {
-        "type": "taxonomy_autocomplete",
-        "weight": -4,
-        "settings": {
-            "size": 60,
-            "autocomplete_path": "taxonomy/autocomplete"
-        },
-        "module": "taxonomy"
+        "type": "options_select",
+        "settings": [],
+        "weight": -3,
+        "module": "options"
     },
     "display": {
         "default": {
@@ -30,7 +27,7 @@
             "module": "taxonomy"
         }
     },
-    "required": 0,
+    "description": "",
     "deleted": 0,
     "default_value": null,
     "default_value_function": null,

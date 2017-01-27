@@ -1,8 +1,8 @@
 {
-    "_config_name": "field.instance.node.post.body",
+    "_config_name": "field.instance.node.forum.body",
     "field_name": "body",
     "entity_type": "node",
-    "bundle": "post",
+    "bundle": "forum",
     "label": "Body",
     "widget": {
         "type": "text_textarea_with_summary",

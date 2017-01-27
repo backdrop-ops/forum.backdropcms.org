@@ -73,6 +73,20 @@
         "access contextual links",
         "administer layouts",
         "access administration bar",
-        "flush caches"
+        "flush caches",
+        "administer flags",
+        "use flag import",
+        "flag bookmarks",
+        "unflag bookmarks",
+        "administer forums",
+        "edit terms in forum_topics",
+        "delete terms in forum_topics",
+        "create forum_one content",
+        "edit own forum_one content",
+        "edit any forum_one content",
+        "delete own forum_one content",
+        "delete any forum_one content",
+        "edit terms in forum_topics_custom",
+        "delete terms in forum_topics_custom"
     ]
 }
