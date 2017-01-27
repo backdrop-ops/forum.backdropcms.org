@@ -12,7 +12,7 @@
  * advanced database documentation at
  * https://api.backdropcms.org/database-configuration
  */
-$database = 'mysql://backdrop:backdrop01@localhost/borg_forum';
+$database = 'mysql://user:pass@localhost/database_name';
 $database_prefix = '';
 //$database_charset = 'utf8mb4';
 
