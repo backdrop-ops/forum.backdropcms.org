@@ -6,7 +6,7 @@
     "description": null,
     "module": "layout",
     "weight": 0,
-    "storage": 4,
+    "storage": 2,
     "layout_template": "moscone_flipped",
     "disabled": false,
     "settings": {
@@ -19,16 +19,19 @@
             "84c43df4-1165-4faf-8700-c362a7153c0b",
             "13b2f325-af26-40bb-8c61-97fe1d93f19f"
         ],
-        "content": [
-            "default"
+        "top": [
+            "09f11b4e-877e-45ab-9000-a4c6254faa04"
         ],
+        "content": [
+            "default",
+            "a531c13d-be06-4a61-9302-2acfbc883f62"
+        ],
+        "sidebar": [],
+        "bottom": [],
         "footer": [
             "cd4d033d-3f67-4191-8655-85ee758877c0"
         ],
-        "sidebar": [],
-        "top": [
-            "09f11b4e-877e-45ab-9000-a4c6254faa04"
-        ]
+        "title": []
     },
     "content": {
         "84c43df4-1165-4faf-8700-c362a7153c0b": {
@@ -95,7 +98,9 @@
                     "title_display": "default",
                     "title": "",
                     "style": "default",
-                    "block_settings": [],
+                    "block_settings": {
+                        "current": 1
+                    },
                     "contexts": []
                 },
                 "uuid": "09f11b4e-877e-45ab-9000-a4c6254faa04",
@@ -130,6 +135,41 @@
                         }
                     }
                 }
+            }
+        },
+        "a531c13d-be06-4a61-9302-2acfbc883f62": {
+            "plugin": "views:categories-block",
+            "data": {
+                "module": "views",
+                "delta": "categories-block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "a531c13d-be06-4a61-9302-2acfbc883f62",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                },
+                "conditions": [
+                    {
+                        "plugin": "path",
+                        "data": {
+                            "settings": {
+                                "visibility_setting": "1",
+                                "paths": "forum-two",
+                                "load_condition_nojs": "Load condition"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {
