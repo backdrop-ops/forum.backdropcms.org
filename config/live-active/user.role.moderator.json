@@ -1,0 +1,24 @@
+{
+    "_config_name": "user.role.moderator",
+    "name": "moderator",
+    "label": "Moderator",
+    "weight": "2",
+    "permissions": [
+        "access administration bar",
+        "administer comments",
+        "edit own comments",
+        "access contextual links",
+        "access administration pages",
+        "block IP addresses",
+        "administer taxonomy",
+        "edit terms in forums",
+        "delete terms in forums",
+        "edit terms in tags",
+        "delete terms in tags",
+        "edit terms in forums_custom",
+        "delete terms in forums_custom",
+        "administer users",
+        "flag frequently_asked_question",
+        "unflag frequently_asked_question"
+    ]
+}

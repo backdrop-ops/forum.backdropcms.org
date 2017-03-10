@@ -1,8 +1,0 @@
-{
-    "_config_name": "taxonomy.vocabulary.forum_topics",
-    "name": "Forum Topics",
-    "machine_name": "forum_topics",
-    "description": "",
-    "hierarchy": "0",
-    "weight": 0
-}

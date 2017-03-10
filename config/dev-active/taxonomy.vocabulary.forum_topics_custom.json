@@ -1,8 +1,0 @@
-{
-    "_config_name": "taxonomy.vocabulary.forum_topics_custom",
-    "name": "Forum topics (custom)",
-    "machine_name": "forum_topics_custom",
-    "description": "testing ",
-    "hierarchy": "0",
-    "weight": 0
-}

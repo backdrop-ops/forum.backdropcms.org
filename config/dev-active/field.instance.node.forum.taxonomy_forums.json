@@ -8,14 +8,14 @@
     "widget": {
         "type": "options_select",
         "settings": [],
-        "weight": -3,
+        "weight": "0",
         "module": "options"
     },
     "display": {
         "default": {
+            "label": "inline",
             "type": "taxonomy_term_reference_link",
-            "weight": 10,
-            "label": "above",
+            "weight": "10",
             "settings": [],
             "module": "taxonomy"
         },

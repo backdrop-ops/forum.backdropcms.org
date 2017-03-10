@@ -1,15 +1,15 @@
 {
-    "_config_name": "node.type.forum_one",
-    "type": "forum_one",
-    "name": "Forum topic (one)",
+    "_config_name": "node.type.forum_custom",
+    "type": "forum_custom",
+    "name": "Forum topic - custom",
     "base": "node_content",
     "module": "node",
-    "description": "Simple content type.",
+    "description": "This is a custom content type.",
     "help": "",
     "modified": true,
     "disabled": false,
     "has_title": true,
-    "title_label": "Topic",
+    "title_label": "Title",
     "settings": {
         "comment_enabled": false,
         "comment_default": "2",
@@ -29,7 +29,7 @@
         "status_default": "1",
         "promote_enabled": 0,
         "promote_default": 0,
-        "sticky_enabled": 0,
+        "sticky_enabled": 1,
         "sticky_default": 0,
         "revision_enabled": 0,
         "revision_default": 0,
@@ -38,5 +38,5 @@
         "language": 0,
         "node_permissions": true
     },
-    "orig_type": "forum_one"
+    "orig_type": "forum_custom"
 }

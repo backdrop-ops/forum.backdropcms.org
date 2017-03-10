@@ -1,0 +1,14 @@
+{
+    "_config_name": "field.bundle.node.forum_custom",
+    "bundle": "forum_custom",
+    "entity_type": "node",
+    "view_modes": [],
+    "extra_fields": {
+        "form": {
+            "title": {
+                "weight": "1"
+            }
+        },
+        "display": []
+    }
+}

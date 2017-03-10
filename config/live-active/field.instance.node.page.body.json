@@ -1,22 +1,21 @@
 {
-    "_config_name": "field.instance.node.forum_one.body",
+    "_config_name": "field.instance.node.page.body",
     "field_name": "body",
     "entity_type": "node",
-    "bundle": "forum_one",
-    "label": "Discussion",
+    "bundle": "page",
+    "label": "Body",
     "widget": {
-        "weight": -4,
         "type": "text_textarea_with_summary",
-        "module": "text",
-        "active": 1,
         "settings": {
-            "rows": "10",
+            "rows": 10,
             "summary_rows": 5
-        }
+        },
+        "weight": -4,
+        "module": "text"
     },
     "settings": {
-        "text_processing": "1",
-        "display_summary": 1,
+        "display_summary": true,
+        "text_processing": 1,
         "user_register_form": false
     },
     "display": {

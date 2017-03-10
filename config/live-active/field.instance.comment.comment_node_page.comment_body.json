@@ -1,9 +1,9 @@
 {
-    "_config_name": "field.instance.comment.comment_node_forum_one.comment_body",
+    "_config_name": "field.instance.comment.comment_node_page.comment_body",
     "field_name": "comment_body",
     "label": "Comment",
     "entity_type": "comment",
-    "bundle": "comment_node_forum_one",
+    "bundle": "comment_node_page",
     "settings": {
         "text_processing": 1,
         "user_register_form": false

@@ -1,8 +1,8 @@
 {
     "_config_name": "taxonomy.vocabulary.forums",
-    "name": "Forums",
+    "name": "Forums (module)",
     "machine_name": "forums",
     "description": "Forum navigation vocabulary",
-    "hierarchy": 1,
+    "hierarchy": "0",
     "weight": -10
 }
