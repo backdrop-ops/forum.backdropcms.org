@@ -164,7 +164,7 @@
                         "data": {
                             "settings": {
                                 "visibility_setting": "1",
-                                "paths": "forum-two",
+                                "paths": "forum-list",
                                 "load_condition_nojs": "Load condition"
                             }
                         }

@@ -1,11 +1,11 @@
 {
-    "_config_name": "views.view.forum_custom",
-    "name": "forum_custom",
+    "_config_name": "views.view.faq",
+    "name": "faq",
     "description": "",
     "tag": "default",
     "disabled": false,
-    "base_table": "taxonomy_term_data",
-    "human_name": "Forum (custom)",
+    "base_table": "node",
+    "human_name": "FAQ",
     "core": "1.6.0",
     "display": {
         "default": {
@@ -35,10 +35,87 @@
                 "style_plugin": "table",
                 "row_plugin": "fields",
                 "fields": {
-                    "tid": {
-                        "id": "tid",
-                        "table": "taxonomy_term_data",
-                        "field": "tid",
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "alter": {
+                            "alter_text": 0,
+                            "make_link": 0,
+                            "absolute": 0,
+                            "trim": 0,
+                            "word_boundary": 0,
+                            "ellipsis": 0,
+                            "strip_tags": 0,
+                            "html": 0
+                        },
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "link_to_node": 1
+                    },
+                    "comment_count": {
+                        "id": "comment_count",
+                        "table": "node_comment_statistics",
+                        "field": "comment_count",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Comments",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "set_precision": false,
+                        "precision": 0,
+                        "decimal": ".",
+                        "separator": ",",
+                        "format_plural": 0,
+                        "format_plural_singular": "1",
+                        "format_plural_plural": "@count",
+                        "prefix": "",
+                        "suffix": ""
+                    },
+                    "last_comment_name": {
+                        "id": "last_comment_name",
+                        "table": "node_comment_statistics",
+                        "field": "last_comment_name",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
@@ -84,28 +161,20 @@
                         "hide_empty": 0,
                         "empty_zero": 0,
                         "hide_alter_empty": 1,
-                        "set_precision": false,
-                        "precision": 0,
-                        "decimal": ".",
-                        "separator": ",",
-                        "format_plural": 0,
-                        "format_plural_singular": "1",
-                        "format_plural_plural": "@count",
-                        "prefix": "",
-                        "suffix": ""
+                        "link_to_user": true
                     },
-                    "name": {
-                        "id": "name",
-                        "table": "taxonomy_term_data",
-                        "field": "name",
+                    "last_comment_timestamp": {
+                        "id": "last_comment_timestamp",
+                        "table": "node_comment_statistics",
+                        "field": "last_comment_timestamp",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "Category",
+                        "label": "Last comment",
                         "exclude": 0,
                         "alter": {
-                            "alter_text": 0,
-                            "text": "",
+                            "alter_text": 1,
+                            "text": "By [last_comment_name] [last_comment_timestamp]",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,
@@ -121,8 +190,8 @@
                             "target": "",
                             "nl2br": 0,
                             "max_length": "",
-                            "word_boundary": 0,
-                            "ellipsis": 0,
+                            "word_boundary": 1,
+                            "ellipsis": 1,
                             "more_link": 0,
                             "more_link_text": "",
                             "more_link_path": "",
@@ -143,21 +212,34 @@
                         "hide_empty": 0,
                         "empty_zero": 0,
                         "hide_alter_empty": 1,
-                        "link_to_taxonomy": 1,
-                        "convert_spaces": 0
+                        "date_format": "time ago",
+                        "custom_date_format": "",
+                        "timezone": ""
                     }
                 },
                 "filters": {
-                    "vocabulary": {
-                        "id": "vocabulary",
-                        "table": "taxonomy_term_data",
-                        "field": "vocabulary",
+                    "status": {
+                        "value": 1,
+                        "table": "node",
+                        "field": "status",
+                        "id": "status",
+                        "expose": {
+                            "operator": false
+                        },
+                        "group": 1
+                    },
+                    "type": {
+                        "id": "type",
+                        "table": "node",
+                        "field": "type",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
                         "operator": "in",
                         "value": {
-                            "forums_custom": "forums_custom"
+                            "forum_custom": "forum_custom",
+                            "forum": "forum",
+                            "question": "question"
                         },
                         "group": "1",
                         "exposed": false,
@@ -191,8 +273,29 @@
                         }
                     }
                 },
-                "sorts": [],
-                "title": "Forum (custom)"
+                "sorts": {
+                    "created": {
+                        "id": "created",
+                        "table": "node",
+                        "field": "created",
+                        "order": "ASC"
+                    }
+                },
+                "title": "Frequently Asked Questions",
+                "relationships": {
+                    "flag_content_rel": {
+                        "id": "flag_content_rel",
+                        "table": "node",
+                        "field": "flag_content_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "flag",
+                        "required": 1,
+                        "flag": "frequently_asked_question",
+                        "user_scope": "any"
+                    }
+                }
             }
         },
         "page": {
@@ -203,15 +306,11 @@
                     "type": "views_query",
                     "options": []
                 },
-                "path": "forum-custom",
+                "path": "faq",
                 "menu": {
                     "type": "normal",
-                    "title": "Forum (custom)",
-                    "description": "",
-                    "name": "main-menu",
-                    "weight": "0",
-                    "context": 0,
-                    "context_only_inline": 0
+                    "title": "FAQ",
+                    "name": "main-menu"
                 }
             }
         }

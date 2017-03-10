@@ -1,18 +1,18 @@
 {
     "_config_name": "image.style.large",
-    "storage": 4,
+    "overridden": true,
     "module": "image",
-    "label": "Large (800x600)",
+    "label": "Large (1024x1024)",
     "name": "large",
-    "effects": [
-        {
+    "effects": {
+        "2": {
             "name": "image_scale",
             "data": {
-                "width": "800",
-                "height": "600",
-                "upscale": 1
+                "width": "1024",
+                "height": "",
+                "upscale": 0
             },
-            "weight": 1
+            "weight": 2
         }
-    ]
+    }
 }

@@ -1,8 +1,8 @@
 {
-    "_config_name": "field.instance.node.forum_custom.field_forums_custom",
+    "_config_name": "field.instance.node.forum_topic.field_forums_custom",
     "field_name": "field_forums_custom",
     "entity_type": "node",
-    "bundle": "forum_custom",
+    "bundle": "forum_topic",
     "label": "Forums (custom)",
     "widget": {
         "weight": "0",

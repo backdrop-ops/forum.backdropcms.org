@@ -1,7 +1,7 @@
 {
-    "_config_name": "node.type.forum_custom",
-    "type": "forum_custom",
-    "name": "Forum topic - custom",
+    "_config_name": "node.type.forum_topic",
+    "type": "forum_topic",
+    "name": "Forum topic",
     "base": "node_content",
     "module": "node",
     "description": "This is a custom content type.",
@@ -38,5 +38,5 @@
         "language": 0,
         "node_permissions": true
     },
-    "orig_type": "forum_custom"
+    "orig_type": "forum_topic"
 }

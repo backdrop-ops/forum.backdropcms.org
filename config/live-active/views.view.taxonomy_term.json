@@ -225,7 +225,7 @@
                         "exclude": 0,
                         "alter": {
                             "alter_text": 0,
-                            "text": "",
+                            "text": "By [name] [last_comment_timestamp] ",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,

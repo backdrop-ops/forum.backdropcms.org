@@ -1,8 +1,8 @@
 {
-    "_config_name": "field.instance.node.question.body",
+    "_config_name": "field.instance.node.forum_topic.body",
     "field_name": "body",
     "entity_type": "node",
-    "bundle": "question",
+    "bundle": "forum_topic",
     "label": "Body",
     "widget": {
         "type": "text_textarea_with_summary",
@@ -10,7 +10,7 @@
             "rows": 10,
             "summary_rows": 5
         },
-        "weight": "1",
+        "weight": "2",
         "module": "text"
     },
     "settings": {
@@ -22,9 +22,9 @@
         "default": {
             "label": "hidden",
             "type": "text_default",
+            "weight": "0",
             "settings": [],
-            "module": "text",
-            "weight": 0
+            "module": "text"
         },
         "teaser": {
             "label": "hidden",
