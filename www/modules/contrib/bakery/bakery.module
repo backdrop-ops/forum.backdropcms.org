@@ -9,6 +9,7 @@
  */
 function bakery_menu() {
   $items = array();
+  $config = config('bakery.settings');
 
   $items['admin/config/system/bakery'] = array(
     'title' => 'Bakery',
@@ -18,45 +19,43 @@ function bakery_menu() {
     'description' => 'Infrastructure-wide single-sign-on system options.',
   );
 
-  if (config_get('bakery.settings', 'is_master')) {
-    $items['bakery'] = array(
-      'title' => 'Register',
-      'access callback' => 'user_is_anonymous',
-      'page callback' => 'bakery_register',
-      'type' => MENU_CALLBACK,
-    );
-    $items['bakery/login'] = array(
-      'title' => 'Login',
-      'access callback' => 'user_is_anonymous',
-      'page callback' => 'bakery_login',
-      'type' => MENU_CALLBACK,
-    );
-    $items['bakery/validate'] = array(
-      'title' => 'Validate',
-      'access callback' => 'bakery_taste_thinmint_cookie',
-      'page callback' => 'bakery_eat_thinmint_cookie',
-      'type' => MENU_CALLBACK,
-    );
-    $items['bakery/create'] = array(
-      'title' => 'Bakery create',
-      'access callback' => 'bakery_taste_gingerbread_cookie',
-      'page callback' => 'bakery_eat_gingerbread_cookie',
-      'type' => MENU_CALLBACK,
-    );
+  if ($config->get(is_master)) {
+    if ($config->get(subsite_login)) {
+      $items['bakery'] = array(
+        'title' => 'Register',
+        'access callback' => 'user_is_anonymous',
+        'page callback' => 'bakery_register',
+        'type' => MENU_CALLBACK,
+      );
+      $items['bakery/login'] = array(
+        'title' => 'Login',
+        'access callback' => 'user_is_anonymous',
+        'page callback' => 'bakery_login',
+        'type' => MENU_CALLBACK,
+      );
+      $items['bakery/create'] = array(
+        'title' => 'Bakery create',
+        'access callback' => 'bakery_taste_gingerbread_cookie',
+        'page callback' => 'bakery_eat_gingerbread_cookie',
+        'type' => MENU_CALLBACK,
+      );
+    }
   }
   else {
-    $items['bakery'] = array(
-      'title' => 'Register',
-      'access callback' => TRUE,
-      'page callback' => 'bakery_register_return',
-      'type' => MENU_CALLBACK,
-    );
-    $items['bakery/login'] = array(
-      'title' => 'Login',
-      'access callback' => TRUE,
-      'page callback' => 'bakery_login_return',
-      'type' => MENU_CALLBACK,
-    );
+    if ($config->get('subsite_login')) {
+      $items['bakery'] = array(
+        'title' => 'Register',
+        'access callback' => TRUE,
+        'page callback' => 'bakery_register_return',
+        'type' => MENU_CALLBACK,
+      );
+      $items['bakery/login'] = array(
+        'title' => 'Login',
+        'access callback' => TRUE,
+        'page callback' => 'bakery_login_return',
+        'type' => MENU_CALLBACK,
+      );
+    }
     $items['bakery/update'] = array(
       'title' => 'Update',
       'access callback' => 'bakery_taste_stroopwafel_cookie',
@@ -324,8 +323,11 @@ function bakery_form_alter(&$form, $form_state, $form_id) {
       break;
 
     case 'user_register_form':
-      // Provide register ability on the slave sites.
-      if (!$config->get('is_master')) {
+      if ($config->get('is_master')) {
+        $form['#submit'][] = '_bakery_login_redirect';
+      }
+      else {
+        // Provide register ability on the slave sites.
         if (arg(0) == 'admin') {
           // Admin create user form. Add a note about account synchronization.
           $form['account']['bakery_help'] = array(
@@ -336,7 +338,7 @@ function bakery_form_alter(&$form, $form_state, $form_id) {
             '#weight' => -100,
           );
         }
-        else {
+        elseif ($config->get('subsite_login')) {
           // Anonymous user registration form.
           // Populate fields if set from previous attempt.
           if (isset($_SESSION['bakery']['register'])) {
@@ -346,6 +348,15 @@ function bakery_form_alter(&$form, $form_state, $form_id) {
           }
           // Replace the submit handler with our own.
           $form['#submit'] = array('_bakery_register_submit');
+        }
+        else {
+          $query = array();
+          if (isset($_GET['destination']) && !url_is_external($_GET['destination'])) {
+            $query['bd'] = url($_GET['destination'], array('absolute' => TRUE));
+            // Do not let backdrop_goto() use the destination.
+            unset($_GET['destination']);
+          }
+          backdrop_goto($config->get('master') . 'user/register', array('query' => $query));
         }
       }
       break;
@@ -358,33 +369,64 @@ function bakery_form_alter(&$form, $form_state, $form_id) {
       }
       break;
 
-    case 'user_pass_reset':
-      // As part of the slave site registration we need to handle email
-      // validation and password reset.
-      if (!$config->get('is_master')) {
-        // Set a submit handler for the psuedo-reset form.
-        $form['#submit'] = array('_bakery_reset_submit');
-        // Unset its custom action.
-        unset($form['#action']);
-      }
-      break;
-
     case 'user_login_block':
+      // If this is a subsite, and subsite login is disabled, remove the login
+      // form.
+      if (!$config->get('is_master') && !$config->get('subsite_login')) {
+        $form['name']['#access'] = FALSE;
+        $form['pass']['#access'] = FALSE;
+        $form['actions']['#access'] = FALSE;
+        break;
+      }
     case 'user_login':
-      // Provide login ability on the slave sites.
-      if (!$config->get('is_master')) {
-        // Replace two validators from user module because they log the user in
-        // and test if account exists. We want to check if the account exists on
-        // the master instead.
-        $form['#validate'] = array_diff($form['#validate'], array('user_login_authenticate_validate', 'user_login_final_validate'));
-        // Replace the submit handler with our own to set a redirect cookie.
-        $form['#submit'] = array('_bakery_login_submit');
+      if ($config->get('is_master')) {
+        // Use both validate and submit, in case other modules like TFA are
+        // also altering the login process.
+        $form['#validate'][] = '_bakery_login_redirect';
+        $form['#submit'][] = '_bakery_login_redirect';
+      }
+      else {
+        // Only process login on subsites if enabled, or if this is bakery
+        // logging the user in from bakery_user_external_login().
+        if ($config->get('subsite_login') || (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0] === 'via_bakery')) {
+          // Replace two validators from user module because they log the user in
+          // and test if account exists. We want to check if the account exists on
+          // the master instead.
+          $form['#validate'] = array_diff($form['#validate'], array('user_login_authenticate_validate', 'user_login_final_validate'));
+          // Replace the submit handler with our own to set a redirect cookie.
+          $form['#submit'] = array('_bakery_login_submit');
+        }
+        else {
+          $query = array();
+          if (isset($_GET['destination']) && !url_is_external($_GET['destination'])) {
+            $query['bd'] = url($_GET['destination'], array('absolute' => TRUE));
+            // Do not let backdrop_goto() use the destination.
+            unset($_GET['destination']);
+          }
+          backdrop_goto($config->get('master') . 'user', array('query' => $query));
+        }
       }
       break;
 
     default:
       break;
   }
+}
+
+/**
+ * Get the bakery destination from the bd query parameter, if set.
+ */
+function bakery_get_destination() {
+  $parameters = backdrop_get_query_parameters();
+
+  if (isset($parameters['bd']) && $parameters['bd'] === backdrop_strip_dangerous_protocols($parameters['bd'])) {
+    foreach (config_get('bakery_slaves') as $subsite) {
+      if (strpos($parameters['bd'], $subsite) === 0) {
+        return $parameters['bd'];
+      }
+    }
+  }
+  return FALSE;
 }
 
 /**
@@ -408,73 +450,11 @@ function _bakery_pass_validate($form, &$form_state) {
 }
 
 /**
- * Submit handler for the password reset form.
+ * Redirect back to a subsite after login.
  */
-function _bakery_reset_submit($form, &$form_state) {
-  $config = config('bakery.settings');
-  global $base_url;
-
-  // If we're here it means the user has validated their email correctly.
-  $master = $config->get('master');
-  $key = $config->get('key');
-  // It's safe to use arg(2) here to load the user and log in because the
-  // callback has validated the request and Backdrop's Form API protects us
-  // against forgery.
-  $account = user_load(arg(2));
-  // If they have not logged in before we need to update the master site.
-  if ($account->login == 0) {
-    $type = 'thinmint';
-    $payload = array();
-    $payload['name'] = $account->name;
-    // Match how slaves are set on the master.
-    $payload['slave'] = rtrim($base_url, '/') . '/';
-    $payload['uid'] = $account->uid;
-    $payload['timestamp'] = $_SERVER['REQUEST_TIME'];
-    $payload['type'] = $type;
-    $data = bakery_bake_data($payload);
-    $payload = backdrop_http_build_query(array($type => $data));
-    // Push validation to master.
-    $http_options = array(
-      'method' => 'POST',
-      'data' => $payload,
-      'headers' => array(
-        'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8',
-      ),
-    );
-
-    if ($config->get('bakery_insecure_ssl') == TRUE) {
-      $context = stream_context_create(array(
-        'ssl' => array(
-          'verify_peer' => FALSE,
-          'verify_depth' => 5,
-          'allow_self_signed' => TRUE,
-          'verify_peer_name' => FALSE,
-        )
-      ));
-      $http_options['context'] = $context;
-    }
-
-    $result = backdrop_http_request($master . 'bakery/validate', $http_options);
-  }
-
-  // If they have logged in before or the master updated correctly, log them in.
-  if ($account->login > 0 || $result->code == 200) {
-    // Log the user in.
-    $init = _bakery_init_field($account->uid);
-    _bakery_bake_chocolatechip_cookie($account->name, $account->mail, $init);
-    global $user;
-    $user = $account;
-    $edit = array('name' => $user->name);
-    bakery_user_authenticate_finalize($edit);
-    // Inform them that they need to reset their password.
-    backdrop_set_message(t('You have just used your one-time login link. It is no longer necessary to use this link to login. Please change your password at <a href="!url">@master</a>.', array(
-      '!url' => check_url(_bakery_init_field_url($user->init)),
-      '@master' => $config->get('master'),
-    )));
-    backdrop_goto('user/' . $user->uid);
-  }
-  else {
-    backdrop_goto('user/login');
+function _bakery_login_redirect($form, &$form_state) {
+  if ($bd = bakery_get_destination()) {
+    $form_state['redirect'] = $bd;
   }
 }
 
@@ -570,7 +550,18 @@ function bakery_settings($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => 'Is this the master site?',
     '#default_value' => $config->get('is_master'),
-    '#description' => t('On the master site, accounts need to be created by traditional processes, i.e by a user registering or an admin creating them.'),
+    '#description' => t('On the master site, accounts are created by traditional processes, i.e by a user registering or an admin creating them.'),
+    );
+
+  $form['bakery_subsite_login'] = array(
+    '#type' => 'radios',
+    '#title' => t('Subsite log in & registration'),
+    '#options' => array(
+      0 => t('Only log in & register on master site'),
+      1 => t('Allow log in & register on any site (deprecated)'),
+    ),
+    '#default_value' => $config->get('subsite_login'),
+    '#description' => t('Limiting log ins and registration to the master site gives users a consistent experience and reduces the surface area available to attackers.'),
   );
 
   $form['master'] = array(
@@ -1085,11 +1076,21 @@ function _bakery_taste_chocolatechip_cookie() {
     }
 
     if ($config->get('is_master')) {
-      // Bake a fresh cookie. Yum.
-      _bakery_bake_chocolatechip_cookie($cookie['name'], $cookie['mail'], $cookie['init']);
+      if ($user->uid || $config->get('subsite_login')) {
+        // User is logged in or acquired a chocolatechip cookie from a subsite.
+        // Bake a fresh cookie. Yum.
+        _bakery_bake_chocolatechip_cookie($cookie['name'], $cookie['mail'], $cookie['init']);
+      }
+      else {
+        // User is not logged in and couldn't have logged in from a subsite,
+        // destroy their cookie.
+        $destroy_cookie = TRUE;
+      }
     }
 
-    if (!$user->uid) {
+    // If the user is not logged in and their cookie is not marked for
+    // destruction.
+    if (!$user->uid && !$destroy_cookie) {
       // Since this might happen in hook_boot we need to bootstrap first.
       // Note that this only runs if they have a valid session on the master
       // and do not have one on the slave so it only creates the extra load of
@@ -1418,45 +1419,6 @@ function bakery_eat_stroopwafel_cookie() {
 }
 
 /**
- * Verify the validation request.
- */
-function bakery_taste_thinmint_cookie() {
-  $type = 'thinmint';
-  if (empty($_POST[$type])) {
-    return FALSE;
-  }
-  if (($cookie = bakery_validate_data($_POST[$type], $type)) === FALSE) {
-    return FALSE;
-  }
-  $_SESSION['bakery']['name'] = $cookie['name'];
-  $_SESSION['bakery']['slave'] = $cookie['slave'];
-  $_SESSION['bakery']['uid'] = $cookie['uid'];
-  return TRUE;
-}
-
-/**
- * Update the user's login time to reflect them validating their email address.
- */
-function bakery_eat_thinmint_cookie() {
-  // Session was set in validate.
-  $name = $_SESSION['bakery']['name'];
-  unset($_SESSION['bakery']['name']);
-  $slave = $_SESSION['bakery']['slave'];
-  unset($_SESSION['bakery']['slave']);
-  $uid = $_SESSION['bakery']['uid'];
-  unset($_SESSION['bakery']['uid']);
-
-  $account = user_load_by_name($name);
-  if ($account) {
-    // @todo
-    db_query("UPDATE {users} SET login = :login WHERE uid = :uid", array(':login' => $_SERVER['REQUEST_TIME'], ':uid' => $account->uid));
-
-    // Save UID provided by slave site.
-    _bakery_save_slave_uid($account, $slave, $uid);
-  }
-}
-
-/**
  * Request account information from master to create account locally.
  *
  * @param string $name
@@ -1742,7 +1704,7 @@ function bakery_decrypt($text) {
  *   TRUE if the login succeeds, FALSE otherwise.
  */
 function bakery_user_external_login($account, $edit = array()) {
-  $form = backdrop_get_form('user_login');
+  $form = backdrop_get_form('user_login', 'via_bakery');
 
   $state['values'] = $edit;
   if (empty($state['values']['name'])) {

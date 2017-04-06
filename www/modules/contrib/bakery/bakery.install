@@ -72,3 +72,11 @@ function bakery_update_1000() {
   update_variable_del('bakery_freshness');
   update_variable_del('bakery_cookie_extension');
 }
+
+/**
+ * Keep legacy support for subsite log in & registration. Disabling this
+ * deprecated feature is recommended.
+ */
+function bakery_update_1001() {
+  config_set('bakery.settings', 'subsite_login', 1);
+}
