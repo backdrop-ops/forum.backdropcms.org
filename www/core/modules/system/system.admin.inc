@@ -10,11 +10,16 @@
 function system_admin_config_page() {
   $blocks = array();
   if ($admin = db_query("SELECT menu_name, mlid FROM {menu_links} WHERE link_path = 'admin/config' AND module = 'system'")->fetchAssoc()) {
+    $admin[':type'] = MENU_NORMAL_ITEM;
     $result = db_query("
       SELECT m.*, ml.*
       FROM {menu_links} ml
       INNER JOIN {menu_router} m ON ml.router_path = m.path
-      WHERE menu_name = :menu_name AND ml.plid = :mlid AND hidden = 0", $admin, array('fetch' => PDO::FETCH_ASSOC));
+      WHERE menu_name = :menu_name
+        AND ml.plid = :mlid
+        AND m.type = :type
+        AND hidden = 0
+      ORDER BY ml.link_title ASC", $admin, array('fetch' => PDO::FETCH_ASSOC));
     foreach ($result as $item) {
       _menu_link_translate($item);
       if (!$item['access']) {
@@ -39,7 +44,6 @@ function system_admin_config_page() {
     }
   }
   if ($blocks) {
-    ksort($blocks);
     return theme('admin_page', array('blocks' => $blocks));
   }
   else {
@@ -508,6 +512,7 @@ function system_modules($form, $form_state = array()) {
       'autocomplete' => 'off',
       'title' => t('Enter a part of the module name or description to filter.'),
     ),
+    '#default_value' => (isset($_GET['search'])) ? $_GET['search'] : '',
   );
 
   // Get current list of modules.
@@ -729,8 +734,8 @@ function _system_modules_build_row($info, $extra) {
   // Check the core compatibility.
   elseif (!isset($info['backdrop']) || $info['backdrop'] != BACKDROP_CORE_COMPATIBILITY) {
     $compatible = FALSE;
-    $status_short .= t('Incompatible with this version of Backdrop CMS.') . ' ';
-    $status_long .= t('This version is not compatible with Backdrop CMS !core_version and should be replaced.', array('!core_version' => BACKDROP_CORE_COMPATIBILITY)) . ' ';
+    $status_short .= t('Incompatible with Backdrop CMS !core_version.') . ' ';
+    $status_long .= t('This version is not compatible with Backdrop CMS !core_version.', array('!core_version' => BACKDROP_CORE_COMPATIBILITY)) . ' ';
   }
 
   // Ensure this module is compatible with the currently installed version of PHP.
@@ -758,7 +763,7 @@ function _system_modules_build_row($info, $extra) {
   }
   else {
     $form['enable'] = array(
-      '#markup' =>  theme('image', array('uri' => 'core/misc/watchdog-error.png', 'alt' => t('Unable to enable'), 'title' => trim($status_short))),
+      '#markup' =>  theme('image', array('path' => 'core/misc/watchdog-error.png', 'alt' => t('Unable to enable'), 'title' => trim($status_short))),
     );
     $form['description']['#markup'] .= theme('system_modules_incompatible', array('message' => trim($status_long)));
   }
@@ -963,7 +968,17 @@ function system_modules_submit($form, &$form_state) {
     backdrop_set_message(t('The configuration options have been saved.'));
   }
 
-  $form_state['redirect'] = 'admin/modules';
+  // Check if a previous search is present and preserve it on redirect.
+  if (!empty($form_state['values']['search'])) {
+    $parameter = $form_state['values']['search'];
+    $form_state['redirect'] = array(
+      'admin/modules',
+      array('query' => array('search' => $parameter))
+    );
+  }
+  else {
+    $form_state['redirect'] = 'admin/modules';
+  }
 }
 
 /**
@@ -2010,7 +2025,7 @@ function system_site_maintenance_mode_submit($form, &$form_state) {
   config_set('system.core', 'maintenance_mode_message', $form_state['values']['maintenance_mode_message']);
 
   // Give specific messages on the primary action for this form.
-  if ($form_state['values']['maintenance_mode']) {
+  if ($form_state['values']['maintenance_mode'] && current_path() == 'admin/config/development/maintenance') {
     backdrop_set_message(t('The site is now in maintenance mode. Only users with the "Access site in maintenance mode" permission will be able to access the site.'), 'warning');
   }
   elseif ($form['maintenance_mode']['#default_value'] != $form_state['values']['maintenance_mode']) {
@@ -2081,14 +2096,14 @@ function system_urls_settings($form, &$form_state) {
     if ($conflict) {
       // $form_state['redirect'] needs to be set to the non-clean URL,
       // otherwise the setting is not saved.
-      $form_state['redirect'] = url('', array('query' => array('q' => '/admin/config/search/clean-urls')));
+      $form_state['redirect'] = url('', array('query' => array('q' => '/admin/config/urls/clean-urls')));
     }
   }
   // Show the clean URLs test form.
   else {
     backdrop_add_js(backdrop_get_path('module', 'system') . '/js/system.admin.js');
 
-    $form_state['redirect'] = url('admin/config/search/clean-urls');
+    $form_state['redirect'] = url('admin/config/urls/clean-urls');
     $form['clean_url_description'] = array(
       '#type' => 'markup',
       '#markup' => '<p>' . t('Use URLs like <code>example.com/user</code> instead of <code>example.com/?q=user</code>.'),
@@ -2097,7 +2112,7 @@ function system_urls_settings($form, &$form_state) {
     // clicking the 'Run the clean URL test' button.
     $form['clean_url_test_result'] = array(
       '#type' => 'markup',
-      '#markup' => '<p>' . t('Clean URLs cannot be enabled. If you are directed to this page or to a <em>Page not found (404)</em> error after testing for clean URLs, see the <a href="@handbook">online handbook</a>.', array('@handbook' => 'http://drupal.org/node/15365')) . '</p>',
+      '#markup' => '<p>' . t('Clean URLs cannot be enabled. If you are directed to this page or to a <em>Page not found (404)</em> error after testing for clean URLs, see the <a href="@url">online handbook</a>.', array('@url' => url('http://drupal.org/node/15365'))) . '</p>',
     );
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['clean_url_test'] = array(
@@ -2115,7 +2130,7 @@ function system_urls_settings($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('Use HTTPS for canonical URLs'),
     '#default_value' => config_get('system.core', 'canonical_secure'),
-    '#description' => t('This option makes Backdrop use HTTPS protocol for generated canonical URLs. Please note: to get it working in mixed-mode (both secure and insecure) sessions, the variable "https" should be set to TRUE in your file <code>settings.php</code>' ),
+    '#description' => t('This option makes Backdrop use HTTPS protocol for generated canonical URLs. Please note: to get it working in mixed-mode (both secure and insecure) sessions, the variable <code>https</code> should be set to <code>TRUE</code> in your file <code>settings.php</code>' ),
   );
 
   return system_settings_form($form);
@@ -2301,7 +2316,7 @@ function system_configure_date_formats_form($form, &$form_state, $format = NULL)
 
   $form['label'] = array(
     '#type' => 'textfield',
-    '#title' => 'Label',
+    '#title' => t('Label'),
     '#maxlength' => 100,
     '#default_value' => empty($format['label']) ? '' : $format['label'],
     '#description' => t('A name for the new format'),
@@ -2395,6 +2410,7 @@ function system_utf8mb4_convert_form($form, &$form_state) {
   $utf8mb4_tables_converted = state_get('database_utf8mb4_active', FALSE);
 
   $form['help'] = array(
+    '#type' => 'help',
     '#markup' => '<p>' . $requirements['description'] . '</p>',
   );
 

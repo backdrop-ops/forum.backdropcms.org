@@ -149,14 +149,17 @@ fieldset .fieldset-legend {
   background: #20252e;
 }
 
+.l-header-inner {
+  color: #fff;
+  padding: 0;
+}
+
 @media (min-width: 34em) {
   .l-header-inner {
     min-height: 6.125rem;
+    padding-right: .9375rem;
+    padding-left: .9375rem;
   }
-}
-
-.l-header-inner {
-  color: #fff;
 }
 
 .l-header a {
@@ -318,7 +321,7 @@ fieldset .fieldset-legend {
 }
 
 .js .menu-dropdown > li {
-  border-bottom-color: #114a75;
+  border-bottom-color: #777;
 }
 
 .menu-dropdown a.disabled {
@@ -344,7 +347,7 @@ fieldset .fieldset-legend {
   }
 
   .menu-dropdown a span.sub-arrow {
-    border-color-top: #fff;
+    border-top-color: #fff;
   }
 
   .menu-dropdown ul {
@@ -372,7 +375,7 @@ fieldset .fieldset-legend {
   }
 
   .menu-dropdown ul a span.sub-arrow {
-    border-color-left: #fff;
+    border-left-color: #fff;
   }
 
   .menu-dropdown span.scroll-up,
@@ -387,15 +390,15 @@ fieldset .fieldset-legend {
 
   .menu-dropdown span.scroll-up-arrow,
   .menu-dropdown span.scroll-down-arrow {
-    border-color-bottom: #fff;
+    border-bottom-color: #fff;
   }
 
   .menu-dropdown span.scroll-down-arrow {
-    border-color-top: #fff;
+    border-top-color: #fff;
   }
 
   [dir="rtl"] .menu-dropdown span.sub-arrow {
-    border-color-right: #fff;
+    border-right-color: #fff;
   }
 }
 
@@ -627,6 +630,7 @@ button.button-primary,
 .ui-widget-header .ui-state-default {
   color: white;
   background: #0074bd;
+  border: none;
 }
 
 input.button-primary:hover,
@@ -756,6 +760,31 @@ select.form-select[disabled] {
   color: #777;
 }
 
+.form-error input.form-autocomplete,
+.form-error input.form-text,
+.form-error input.form-tel,
+.form-error input.form-email,
+.form-error input.form-url,
+.form-error input.form-color,
+.form-error input.form-number,
+.form-error input.form-search,
+.form-error input.form-file,
+.form-error textarea.form-textarea,
+.form-error select.form-select {
+  border-color: #EC351C;
+}
+
+.form-type-checkboxes.form-error,
+.form-type-radios.form-error {
+  border: 0.125rem solid #EC351C;
+}
+/* Display border on a single checkbox, but not on checkboxes within a group. */
+.form-type-checkbox.form-error {
+  border: 0.125rem solid #EC351C;
+}
+.form-type-checkboxes.form-error .form-type-checkbox.form-error {
+  border: none;
+}
 
 ul.action-links a {
   background: transparent url(../images/add.png) no-repeat 0 center;
@@ -1007,6 +1036,16 @@ ul.secondary li a:active {
  */
 .contextual-links-wrapper {
   font-size: 0.9rem;
+}
+
+/**
+ * Unpublished indicator.
+ */
+.unpublished-indicator {
+  line-height: 1.6rem;
+  background-color: #ee3d23;
+  color: #fff;
+  padding: .75rem;
 }
 
 /**

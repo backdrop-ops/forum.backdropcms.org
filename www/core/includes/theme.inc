@@ -1927,12 +1927,35 @@ function theme_dropbutton_wrapper($variables) {
 }
 
 /**
+ * Preprocess variables for theme_image().
+ *
+ * @since 1.8.0 Function added. Populates $variables['attributes'] before
+ *   theme_image() is called.
+ */
+function template_preprocess_image(&$variables) {
+  // Accept either URI or path key. But both are handled by file_create_url().
+  $path_or_uri = $variables['uri'] ? $variables['uri'] : $variables['path'];
+  $variables['attributes']['src'] = file_create_url($path_or_uri);
+
+  // Convert all other variables into the attributes array.
+  foreach (array('width', 'height', 'alt', 'title') as $key) {
+    if (isset($variables[$key])) {
+      $variables['attributes'][$key] = $variables[$key];
+    }
+  }
+}
+
+/**
  * Returns HTML for an image.
+ *
+ * Either a "uri" or "path" should be provided to the image. URIs should be used
+ * for files that are stored in the public or private file directories. Paths
+ * should be used for images relative to the Backdrop installation.
  *
  * @param $variables
  *   An associative array containing:
- *   - uri: Either the path of the image file (relative to base_path()) or a
- *     full URL.
+ *   - uri: A file URI, prefixed with a file scheme such as public://
+ *   - path: A file path relative to the root of the Backdrop installation.
  *   - width: The width of the image (if known).
  *   - height: The height of the image (if known).
  *   - alt: The alternative text for text-based browsers. HTML 4 and XHTML 1.0
@@ -1948,18 +1971,14 @@ function theme_dropbutton_wrapper($variables) {
  *   - title: The title text is displayed when the image is hovered in some
  *     popular browsers.
  *   - attributes: Associative array of attributes to be placed in the img tag.
+ *     All attributes should be populated with the correct values that match
+ *     the other input variables.
+ *
+ * @since 1.8.0 Added support for $variables['path']. All variables are now
+ *   populated into $variables['attributes'] in template_preprocess_image().
  */
 function theme_image($variables) {
-  $attributes = $variables['attributes'];
-  $attributes['src'] = file_create_url($variables['uri']);
-
-  foreach (array('width', 'height', 'alt', 'title') as $key) {
-    if (isset($variables[$key])) {
-      $attributes[$key] = $variables[$key];
-    }
-  }
-
-  return '<img' . backdrop_attributes($attributes) . ' />';
+  return '<img' . backdrop_attributes($variables['attributes']) . ' />';
 }
 
 /**
@@ -1994,7 +2013,7 @@ function theme_breadcrumb($variables) {
  *     - "data": The localized title of the table column.
  *     - "field": The database field represented in the table column (required
  *       if user is to be able to sort on this column).
- *     - "sort": A default sort order for this column ("asc" or "desc"). 
+ *     - "sort": A default sort order for this column ("asc" or "desc").
  *     - "class": An array of values for the 'class' attribute. In particular,
  *       the least important columns that can be hidden on narrow and medium
  *       width screens should have a 'priority-low' class, referenced with the
@@ -2249,10 +2268,10 @@ function theme_table($variables) {
  */
 function theme_tablesort_indicator($variables) {
   if ($variables['style'] == "asc") {
-    return theme('image', array('uri' => 'core/misc/arrow-asc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort ascending'), 'title' => t('sort ascending')));
+    return theme('image', array('path' => 'core/misc/arrow-asc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort ascending'), 'title' => t('sort ascending')));
   }
   else {
-    return theme('image', array('uri' => 'core/misc/arrow-desc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort descending'), 'title' => t('sort descending')));
+    return theme('image', array('path' => 'core/misc/arrow-desc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort descending'), 'title' => t('sort descending')));
   }
 }
 
@@ -2367,6 +2386,17 @@ function theme_item_list($variables) {
 }
 
 /**
+ * Returns HTML for a help element.
+ */
+function theme_help($variables) {
+  // Wrap in a paragraph tag if one is not present.
+  if (strpos($variables['markup'], '<p') === FALSE) {
+    $variables['markup'] = '<p>' . $variables['markup'] . '</p>';
+  }
+  return '<div class="help">' . $variables['markup'] . '</div>';
+}
+
+/**
  * Returns HTML for a "more help" link.
  *
  * @param $variables
@@ -2388,7 +2418,7 @@ function theme_more_help_link($variables) {
  */
 function theme_feed_icon($variables) {
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
-  if ($image = theme('image', array('uri' => 'core/misc/feed.png', 'width' => 16, 'height' => 16, 'alt' => $text))) {
+  if ($image = theme('image', array('path' => 'core/misc/feed.png', 'width' => 16, 'height' => 16, 'alt' => $text))) {
     return l($image, $variables['url'], array('html' => TRUE, 'attributes' => array('class' => array('feed-icon'), 'title' => $text)));
   }
 }
@@ -2795,7 +2825,6 @@ function template_preprocess_maintenance_page(&$variables) {
   $variables['front_page']        = url();
   $variables['breadcrumb']        = '';
   $variables['feed_icons']        = '';
-  $variables['help']              = '';
   $variables['messages']          = $variables['show_messages'] ? theme('status_messages') : '';
   $variables['main_menu']         = array();
   $variables['secondary_menu']    = array();
