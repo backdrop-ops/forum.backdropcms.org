@@ -239,53 +239,11 @@
                     }
                 },
                 "filters": {
-                    "vocabulary": {
-                        "id": "vocabulary",
-                        "table": "taxonomy_term_data",
-                        "field": "vocabulary",
-                        "relationship": "none",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "operator": "in",
-                        "value": {
-                            "forums_custom": "forums_custom"
-                        },
-                        "group": "1",
-                        "exposed": false,
-                        "expose": {
-                            "operator_id": false,
-                            "label": "",
-                            "description": "",
-                            "use_operator": false,
-                            "operator": "",
-                            "identifier": "",
-                            "required": false,
-                            "remember": false,
-                            "multiple": false,
-                            "remember_roles": {
-                                "authenticated": "authenticated"
-                            },
-                            "reduce": false
-                        },
-                        "is_grouped": false,
-                        "group_info": {
-                            "label": "",
-                            "description": "",
-                            "identifier": "",
-                            "optional": true,
-                            "widget": "select",
-                            "multiple": false,
-                            "remember": 0,
-                            "default_group": "All",
-                            "default_group_multiple": [],
-                            "group_items": []
-                        }
-                    },
-                    "field_forums_custom_tid": {
-                        "id": "field_forums_custom_tid",
-                        "table": "field_data_field_forums_custom",
-                        "field": "field_forums_custom_tid",
-                        "relationship": "reverse_field_forums_custom_node",
+                    "field_forums_tid": {
+                        "id": "field_forums_tid",
+                        "table": "field_data_field_forums",
+                        "field": "field_forums_tid",
+                        "relationship": "reverse_field_forums_node",
                         "group_type": "group",
                         "ui_name": "",
                         "operator": "empty",
@@ -326,6 +284,48 @@
                         "vocabulary": "forums_custom",
                         "hierarchy": 0,
                         "error_message": true
+                    },
+                    "vocabulary_1": {
+                        "id": "vocabulary_1",
+                        "table": "taxonomy_term_data",
+                        "field": "vocabulary",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "in",
+                        "value": {
+                            "forums_custom": "forums_custom"
+                        },
+                        "group": "1",
+                        "exposed": false,
+                        "expose": {
+                            "operator_id": false,
+                            "label": "",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "",
+                            "identifier": "",
+                            "required": false,
+                            "remember": false,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated"
+                            },
+                            "reduce": false
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        }
                     }
                 },
                 "sorts": {
@@ -381,14 +381,14 @@
                     "empty_table": 0
                 },
                 "relationships": {
-                    "reverse_field_forums_custom_node": {
-                        "id": "reverse_field_forums_custom_node",
+                    "reverse_field_forums_node": {
+                        "id": "reverse_field_forums_node",
                         "table": "taxonomy_term_data",
-                        "field": "reverse_field_forums_custom_node",
+                        "field": "reverse_field_forums_node",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "field_forums_custom",
+                        "label": "field_forums",
                         "required": 0
                     }
                 }

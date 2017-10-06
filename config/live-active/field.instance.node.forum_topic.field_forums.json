@@ -1,11 +1,11 @@
 {
-    "_config_name": "field.instance.node.forum_topic.field_forums_custom",
-    "field_name": "field_forums_custom",
+    "_config_name": "field.instance.node.forum_topic.field_forums",
+    "field_name": "field_forums",
     "entity_type": "node",
     "bundle": "forum_topic",
-    "label": "Forums (custom)",
+    "label": "Forums",
     "widget": {
-        "weight": "0",
+        "weight": "4",
         "type": "options_select",
         "module": "options",
         "active": 1,
@@ -21,11 +21,11 @@
     },
     "display": {
         "default": {
-            "label": "inline",
+            "label": "above",
             "type": "taxonomy_term_reference_link",
-            "weight": "1",
             "settings": [],
-            "module": "taxonomy"
+            "module": "taxonomy",
+            "weight": 3
         }
     }
 }
