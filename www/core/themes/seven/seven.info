@@ -7,9 +7,12 @@ stylesheets[screen][] = css/seven.base.css
 stylesheets[screen][] = css/style.css
 stylesheets[screen][] = css/responsive-tabs.css
 
+; Include a style sheet in the rich-text editor.
+ckeditor_stylesheets[] = css/seven.base.css
+
 scripts[] = js/script.js
 
-; Added by Backdrop CMS packaging script on 2017-02-12
+; Added by Backdrop CMS packaging script on 2017-09-15
 project = backdrop
-version = 1.6.1
-timestamp = 1486959382
+version = 1.8.0
+timestamp = 1505542963
