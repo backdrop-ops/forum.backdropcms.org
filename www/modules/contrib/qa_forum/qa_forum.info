@@ -1,4 +1,0 @@
-name = QA Forum
-description = Provide a Question and Answer type forum.
-type = module
-backdrop = 1.x

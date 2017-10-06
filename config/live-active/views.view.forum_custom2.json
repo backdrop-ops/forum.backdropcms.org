@@ -332,7 +332,7 @@
                         "granularity": "second"
                     }
                 },
-                "title": "Forum (custom)",
+                "title": "Forum",
                 "relationships": {
                     "field_forums_custom_tid": {
                         "id": "field_forums_custom_tid",
