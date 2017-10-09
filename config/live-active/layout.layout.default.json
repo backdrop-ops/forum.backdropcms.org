@@ -23,8 +23,7 @@
             "09f11b4e-877e-45ab-9000-a4c6254faa04"
         ],
         "content": [
-            "default",
-            "a531c13d-be06-4a61-9302-2acfbc883f62"
+            "default"
         ],
         "sidebar": [],
         "bottom": [],
@@ -135,41 +134,6 @@
                         }
                     }
                 }
-            }
-        },
-        "a531c13d-be06-4a61-9302-2acfbc883f62": {
-            "plugin": "views:categories-block",
-            "data": {
-                "module": "views",
-                "delta": "categories-block",
-                "settings": {
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": []
-                },
-                "uuid": "a531c13d-be06-4a61-9302-2acfbc883f62",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                },
-                "conditions": [
-                    {
-                        "plugin": "path",
-                        "data": {
-                            "settings": {
-                                "visibility_setting": "1",
-                                "paths": "forum-list",
-                                "load_condition_nojs": "Load condition"
-                            }
-                        }
-                    }
-                ]
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {

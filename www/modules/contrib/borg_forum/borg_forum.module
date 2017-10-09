@@ -53,3 +53,48 @@ function borg_forum_last_comment_timestamp($tid) {
 
   return ($cache[$tid]);
 }
+
+/**
+ * Implements hook_node_view().
+ */
+function borg_forum_node_view(Node $node, $view_mode, $langcode) {
+  if ($node->type == 'forum_topic') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), NULL);
+    $breadcrumb[] = l(t('Forums'), 'forums');
+    $field_forums = field_get_items('node', $node, 'field_forums');
+    if ($field_forums) {
+      $data = reset($field_forums);
+      $data = $data['taxonomy_term'];
+      $breadcrumb[] = l($data->name, $data->path['alias']);
+    }
+    backdrop_set_breadcrumb($breadcrumb);
+    
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function borg_forum_views_pre_render(&$view) {
+  if ($view->name == 'taxonomy_term') {
+    $parents = taxonomy_term_load_parents_all($view->args[0]);
+    unset($parents[0]);
+    $parents = array_reverse($parents);
+
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), NULL);
+    $breadcrumb[] = l(t('Forums'), 'forums');
+    if ($parents) {
+      foreach ($parents as $parent) {
+        $breadcrumb[] = l($parent->name, 'forums/' . $parent->tid);
+      }
+    }
+    backdrop_set_breadcrumb($breadcrumb);
+  }
+  if ($view->name == 'categories') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), NULL);
+    backdrop_set_breadcrumb($breadcrumb);
+  }
+}

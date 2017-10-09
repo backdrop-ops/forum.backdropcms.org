@@ -453,6 +453,26 @@
                     "options": []
                 }
             }
+        },
+        "page_1": {
+            "display_title": "Page",
+            "display_plugin": "page",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "path": "forums",
+                "menu": {
+                    "type": "normal",
+                    "title": "Forums",
+                    "description": "Backdrop discussion forums",
+                    "name": "main-menu",
+                    "weight": "0",
+                    "context": 0,
+                    "context_only_inline": 0
+                }
+            }
         }
     }
 }
