@@ -110,7 +110,7 @@ function flag_token_info() {
 function flag_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   $sanitize = !empty($options['sanitize']);
-  $langcode = isset($options['language']) ? $options['language']->language : NULL;
+  $langcode = isset($options['language']) ? $options['language']->langcode : NULL;
 
   if ($type == 'flag' && !empty($data['flag'])) {
     $flag = $data['flag'];

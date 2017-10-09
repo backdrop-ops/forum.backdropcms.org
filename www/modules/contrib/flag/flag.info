@@ -29,8 +29,3 @@ files[] = views/flag_handler_sort_flagged.inc
 files[] = views/flag_handler_relationships.inc
 files[] = views/flag_plugin_argument_validate_flaggability.inc
 files[] = tests/flag.test
-
-; Added by Backdrop CMS packaging script on 2016-02-11
-project = flag
-version = 1.x-1.0.0
-timestamp = 1455229866
