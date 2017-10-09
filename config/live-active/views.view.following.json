@@ -3,7 +3,7 @@
     "name": "following",
     "description": "",
     "tag": "default",
-    "disabled": false,
+    "disabled": true,
     "base_table": "node",
     "human_name": "Following",
     "core": "1.6.0",

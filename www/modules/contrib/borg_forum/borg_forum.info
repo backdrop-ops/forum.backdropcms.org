@@ -1,0 +1,10 @@
+name = Borg Forum
+description = Provides additional functions for Backdrop.org discussion forums.
+type = module
+
+dependencies[] = taxonomy
+dependencies[] = comment
+
+package = Forum
+
+backdrop = 1.x

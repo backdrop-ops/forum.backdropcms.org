@@ -277,7 +277,7 @@
                         "group_type": "group",
                         "ui_name": "",
                         "label": "Comments",
-                        "required": 1
+                        "required": 0
                     },
                     "uid": {
                         "id": "uid",
@@ -287,10 +287,11 @@
                         "group_type": "group",
                         "ui_name": "",
                         "label": "author",
-                        "required": 1
+                        "required": 0
                     }
                 },
-                "group_by": 1
+                "group_by": 1,
+                "header": []
             }
         },
         "page": {

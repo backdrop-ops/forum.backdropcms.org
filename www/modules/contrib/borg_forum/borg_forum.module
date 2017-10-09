@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Provides additional functions for Backdrop.org discussion forums.
+ */
+
+
+/**
+ * Implements hook_autoload_info().
+ */
+function borg_forum_autoload_info() {
+  return array(
+    'taxonomy_term_data_handler_field_last_comment' => 'views/taxonomy_term_data_handler_field_last_comment.inc',
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function borg_forum_views_api() {
+  return array(
+    'api' => 3,
+    'path' => backdrop_get_path('module', 'borg_forum') . '/views',
+  );
+}
+
+/**
+ * Implements hook_config_info().
+ */
+function borg_forum_config_info() {
+  $prefixes['borg_forum.settings'] = array(
+    'label' => t('Borg forum settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}
+
+/**
+ * Stores last comment timestamps.
+ */
+function borg_forum_last_comment_timestamp($tid) {
+  $cache = &backdrop_static(__FUNCTION__, '');
+  if (isset($cache[$tid])) {
+    return $cache[$tid];
+  }
+
+  $results = db_query('SELECT t.tid AS tid, nc.last_comment_timestamp AS last_comment_timestamp FROM {taxonomy_index} t LEFT JOIN {node_comment_statistics} nc ON t.nid = nc.nid')->fetchAll();
+
+  foreach ($results as $result) {
+    $cache[$result->tid] = (isset($result->last_comment_timestamp)) ? $result->last_comment_timestamp : NULL;
+  }
+
+  return ($cache[$tid]);
+}

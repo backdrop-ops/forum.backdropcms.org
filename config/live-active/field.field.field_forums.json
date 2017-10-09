@@ -1,6 +1,6 @@
 {
-    "_config_name": "field.field.field_forums_custom",
-    "field_name": "field_forums_custom",
+    "_config_name": "field.field.field_forums",
+    "field_name": "field_forums",
     "type": "taxonomy_term_reference",
     "translatable": false,
     "module": "taxonomy",
