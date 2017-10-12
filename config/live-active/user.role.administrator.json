@@ -1,8 +1,8 @@
 {
     "_config_name": "user.role.administrator",
     "name": "administrator",
-    "label": "Administrator",
-    "weight": "3",
+    "label": "Developer",
+    "weight": "4",
     "permissions": [
         "administer blocks",
         "administer comments",

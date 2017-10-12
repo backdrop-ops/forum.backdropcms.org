@@ -1,6 +1,6 @@
 {
     "_config_name": "taxonomy.vocabulary.forums_custom",
-    "name": "Forums (custom)",
+    "name": "Forums",
     "machine_name": "forums_custom",
     "description": "",
     "hierarchy": "0",

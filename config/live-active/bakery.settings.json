@@ -3,11 +3,10 @@
     "key": "j8kL2hp4ua)pjZEUUJuxo22NRMGP99mMkaK7oVBLmp]ceVvcab2swR",
     "domain": ".backdropcms.org",
     "is_master": 0,
-    "master": "http://www.backdropcms.org/",
+    "master": "https://backdropcms.org/",
     "slaves": [
-        "http://api.backdropcms.org/",
-        "http://forum.backdropcms.org/",
-        "http://localize.backdropcms.org/"
+        "https://api.backdropcms.org/",
+        "https://forum.backdropcms.org/"
     ],
     "supported_fields": {
         "name": "name",
@@ -20,5 +19,6 @@
     "help_text": "If you need help, please feel free to email the website administrators: info@backdropcms.org.",
     "freshness": "2000000",
     "cookie_extension": "",
-    "bakery_insecure_ssl": false
+    "bakery_insecure_ssl": true,
+    "subsite_login": 0 
 }
