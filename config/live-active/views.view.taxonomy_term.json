@@ -225,7 +225,7 @@
                         "exclude": 0,
                         "alter": {
                             "alter_text": 0,
-                            "text": "By [name] [last_comment_timestamp] ",
+                            "text": "",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,
@@ -277,7 +277,7 @@
                         "group_type": "group",
                         "ui_name": "",
                         "label": "Comments",
-                        "required": 0
+                        "required": 1
                     },
                     "uid": {
                         "id": "uid",
@@ -287,11 +287,10 @@
                         "group_type": "group",
                         "ui_name": "",
                         "label": "author",
-                        "required": 0
+                        "required": 1
                     }
                 },
-                "group_by": 1,
-                "header": []
+                "group_by": 1
             }
         },
         "page": {

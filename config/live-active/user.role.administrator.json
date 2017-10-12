@@ -1,8 +1,8 @@
 {
     "_config_name": "user.role.administrator",
     "name": "administrator",
-    "label": "Developer",
-    "weight": "4",
+    "label": "Administrator",
+    "weight": "3",
     "permissions": [
         "administer blocks",
         "administer comments",
@@ -75,6 +75,7 @@
         "administer layouts",
         "access administration bar",
         "flush caches",
+        "administer forums",
         "create forum content",
         "edit own forum content",
         "edit any forum content",
@@ -97,7 +98,6 @@
         "edit terms in forums",
         "delete terms in forums",
         "flag frequently_asked_question",
-        "unflag frequently_asked_question",
-        "assign roles"
+        "unflag frequently_asked_question"
     ]
 }

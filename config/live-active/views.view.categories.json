@@ -87,68 +87,18 @@
                         "link_to_taxonomy": 1,
                         "convert_spaces": 0
                     },
-                    "description": {
-                        "id": "description",
-                        "table": "taxonomy_term_data",
-                        "field": "description",
+                    "nothing": {
+                        "id": "nothing",
+                        "table": "views",
+                        "field": "nothing",
                         "relationship": "none",
                         "group_type": "group",
-                        "ui_name": "",
-                        "label": "Term description",
-                        "exclude": 0,
-                        "alter": {
-                            "alter_text": 0,
-                            "text": "",
-                            "make_link": 0,
-                            "path": "",
-                            "absolute": 0,
-                            "external": 0,
-                            "replace_spaces": 0,
-                            "path_case": "none",
-                            "trim_whitespace": 0,
-                            "alt": "",
-                            "rel": "",
-                            "link_class": "",
-                            "prefix": "",
-                            "suffix": "",
-                            "target": "",
-                            "nl2br": 0,
-                            "max_length": "",
-                            "word_boundary": 1,
-                            "ellipsis": 1,
-                            "more_link": 0,
-                            "more_link_text": "",
-                            "more_link_path": "",
-                            "strip_tags": 0,
-                            "trim": 0,
-                            "preserve_tags": "",
-                            "html": 0
-                        },
-                        "element_type": "",
-                        "element_class": "",
-                        "element_label_type": "",
-                        "element_label_class": "",
-                        "element_label_colon": 1,
-                        "element_wrapper_type": "",
-                        "element_wrapper_class": "",
-                        "element_default_classes": 1,
-                        "empty": "",
-                        "hide_empty": 0,
-                        "empty_zero": 0,
-                        "hide_alter_empty": 1
-                    },
-                    "nid": {
-                        "id": "nid",
-                        "table": "node",
-                        "field": "nid",
-                        "relationship": "nid",
-                        "group_type": "count_distinct",
                         "ui_name": "",
                         "label": "Topics",
                         "exclude": 0,
                         "alter": {
-                            "alter_text": 0,
-                            "text": "",
+                            "alter_text": true,
+                            "text": "0",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,
@@ -185,30 +135,20 @@
                         "empty": "",
                         "hide_empty": 0,
                         "empty_zero": 0,
-                        "hide_alter_empty": 1,
-                        "set_precision": false,
-                        "precision": 0,
-                        "decimal": ".",
-                        "separator": ",",
-                        "format_plural": 0,
-                        "format_plural_singular": "1",
-                        "format_plural_plural": "@count",
-                        "prefix": "",
-                        "suffix": "",
-                        "link_to_node": false
+                        "hide_alter_empty": 0
                     },
-                    "cid": {
-                        "id": "cid",
-                        "table": "comment",
-                        "field": "cid",
-                        "relationship": "cid",
-                        "group_type": "count",
+                    "nothing_1": {
+                        "id": "nothing_1",
+                        "table": "views",
+                        "field": "nothing",
+                        "relationship": "none",
+                        "group_type": "group",
                         "ui_name": "",
                         "label": "Comments",
                         "exclude": 0,
                         "alter": {
-                            "alter_text": 0,
-                            "text": "",
+                            "alter_text": true,
+                            "text": "0",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,
@@ -245,31 +185,20 @@
                         "empty": "",
                         "hide_empty": 0,
                         "empty_zero": 0,
-                        "hide_alter_empty": 1,
-                        "set_precision": false,
-                        "precision": 0,
-                        "decimal": ".",
-                        "separator": ",",
-                        "format_plural": 0,
-                        "format_plural_singular": "1",
-                        "format_plural_plural": "@count",
-                        "prefix": "",
-                        "suffix": "",
-                        "link_to_comment": true,
-                        "link_to_node": false
+                        "hide_alter_empty": 0
                     },
-                    "last_comment": {
-                        "id": "last_comment",
-                        "table": "taxonomy_term_data",
-                        "field": "last_comment",
+                    "nothing_2": {
+                        "id": "nothing_2",
+                        "table": "views",
+                        "field": "nothing",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
                         "label": "Last comment",
                         "exclude": 0,
                         "alter": {
-                            "alter_text": 0,
-                            "text": "",
+                            "alter_text": true,
+                            "text": "N/A",
                             "make_link": 0,
                             "path": "",
                             "absolute": 0,
@@ -306,15 +235,12 @@
                         "empty": "",
                         "hide_empty": 0,
                         "empty_zero": 0,
-                        "hide_alter_empty": 1,
-                        "date_format": "short",
-                        "custom_date_format": "",
-                        "timezone": ""
+                        "hide_alter_empty": 0
                     }
                 },
                 "filters": {
-                    "vocabulary_1": {
-                        "id": "vocabulary_1",
+                    "vocabulary": {
+                        "id": "vocabulary",
                         "table": "taxonomy_term_data",
                         "field": "vocabulary",
                         "relationship": "none",
@@ -354,6 +280,52 @@
                             "default_group_multiple": [],
                             "group_items": []
                         }
+                    },
+                    "field_forums_custom_tid": {
+                        "id": "field_forums_custom_tid",
+                        "table": "field_data_field_forums_custom",
+                        "field": "field_forums_custom_tid",
+                        "relationship": "reverse_field_forums_custom_node",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "empty",
+                        "value": [],
+                        "group": "1",
+                        "exposed": false,
+                        "expose": {
+                            "operator_id": false,
+                            "label": "",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "",
+                            "identifier": "",
+                            "required": false,
+                            "remember": false,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated"
+                            },
+                            "reduce": false
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        },
+                        "reduce_duplicates": 0,
+                        "type": "select",
+                        "limit": true,
+                        "vocabulary": "forums_custom",
+                        "hierarchy": 0,
+                        "error_message": true
                     }
                 },
                 "sorts": {
@@ -383,9 +355,8 @@
                     "summary": "",
                     "columns": {
                         "name": "name",
-                        "description": "name",
-                        "nid": "nid",
-                        "cid": "cid"
+                        "nothing": "nothing",
+                        "nothing_1": "nothing_1"
                     },
                     "info": {
                         "name": {
@@ -395,21 +366,12 @@
                             "separator": "",
                             "empty_column": 0
                         },
-                        "description": {
+                        "nothing": {
                             "align": "",
                             "separator": "",
                             "empty_column": 0
                         },
-                        "nid": {
-                            "sortable": 0,
-                            "default_sort_order": "asc",
-                            "align": "",
-                            "separator": "",
-                            "empty_column": 0
-                        },
-                        "cid": {
-                            "sortable": 0,
-                            "default_sort_order": "asc",
+                        "nothing_1": {
                             "align": "",
                             "separator": "",
                             "empty_column": 0
@@ -419,29 +381,17 @@
                     "empty_table": 0
                 },
                 "relationships": {
-                    "nid": {
-                        "id": "nid",
-                        "table": "taxonomy_index",
-                        "field": "nid",
+                    "reverse_field_forums_custom_node": {
+                        "id": "reverse_field_forums_custom_node",
+                        "table": "taxonomy_term_data",
+                        "field": "reverse_field_forums_custom_node",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "node",
-                        "required": 0
-                    },
-                    "cid": {
-                        "id": "cid",
-                        "table": "node",
-                        "field": "cid",
-                        "relationship": "nid",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "label": "Comments",
+                        "label": "field_forums_custom",
                         "required": 0
                     }
-                },
-                "arguments": [],
-                "group_by": 1
+                }
             }
         },
         "block": {
@@ -451,26 +401,6 @@
                 "query": {
                     "type": "views_query",
                     "options": []
-                }
-            }
-        },
-        "page_1": {
-            "display_title": "Page",
-            "display_plugin": "page",
-            "display_options": {
-                "query": {
-                    "type": "views_query",
-                    "options": []
-                },
-                "path": "forums",
-                "menu": {
-                    "type": "normal",
-                    "title": "Forums",
-                    "description": "Backdrop discussion forums",
-                    "name": "main-menu",
-                    "weight": "0",
-                    "context": 0,
-                    "context_only_inline": 0
                 }
             }
         }
