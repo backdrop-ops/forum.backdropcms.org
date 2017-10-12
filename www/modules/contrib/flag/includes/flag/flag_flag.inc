@@ -966,7 +966,7 @@ class flag_flag {
    *   to eventually populate 'entity_id' and 'flagging_id'.
    */
   function new_flagging($entity_id = NULL, $uid = NULL, $sid = NULL) {
-    return (object) array(
+    $flagging = entity_create('flagging',  array(
       'flagging_id' => NULL,
       'flag_name' => $this->name,
       'fid' => $this->fid,
@@ -975,7 +975,8 @@ class flag_flag {
       'uid' => $uid,
       'sid' => $sid,
       // The timestamp is not set until this is saved.
-    );
+    ));
+    return $flagging;
   }
 
   /**

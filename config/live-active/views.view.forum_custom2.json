@@ -39,7 +39,7 @@
                         "id": "name",
                         "table": "taxonomy_term_data",
                         "field": "name",
-                        "relationship": "field_forums_custom_tid",
+                        "relationship": "field_forums_tid",
                         "group_type": "group",
                         "ui_name": "",
                         "label": "Category",
@@ -332,18 +332,8 @@
                         "granularity": "second"
                     }
                 },
-                "title": "Forum (custom)",
+                "title": "Forum",
                 "relationships": {
-                    "field_forums_custom_tid": {
-                        "id": "field_forums_custom_tid",
-                        "table": "field_data_field_forums_custom",
-                        "field": "field_forums_custom_tid",
-                        "relationship": "none",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "label": "term",
-                        "required": 0
-                    },
                     "cid": {
                         "id": "cid",
                         "table": "node",
@@ -362,6 +352,16 @@
                         "group_type": "group",
                         "ui_name": "",
                         "label": "comment author",
+                        "required": 0
+                    },
+                    "field_forums_tid": {
+                        "id": "field_forums_tid",
+                        "table": "field_data_field_forums",
+                        "field": "field_forums_tid",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "term from field_forums",
                         "required": 0
                     }
                 },
@@ -393,9 +393,13 @@
                 },
                 "path": "forum-list",
                 "menu": {
-                    "type": "normal",
+                    "type": "none",
                     "title": "Forum (custom)",
-                    "name": "main-menu"
+                    "description": "",
+                    "name": "main-menu",
+                    "weight": "0",
+                    "context": 0,
+                    "context_only_inline": 0
                 }
             }
         }

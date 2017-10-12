@@ -3,9 +3,9 @@
     "field_name": "field_name",
     "entity_type": "user",
     "bundle": "user",
-    "label": "Full Name",
+    "label": "Full name",
     "widget": {
-        "weight": "7",
+        "weight": "10",
         "type": "text_textfield",
         "module": "text",
         "active": 1,

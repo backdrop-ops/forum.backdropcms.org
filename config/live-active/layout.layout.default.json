@@ -16,15 +16,14 @@
     },
     "positions": {
         "header": [
-            "84c43df4-1165-4faf-8700-c362a7153c0b",
+            "29c81ce1-de2a-4118-b570-649b81645963",
             "13b2f325-af26-40bb-8c61-97fe1d93f19f"
         ],
         "top": [
             "09f11b4e-877e-45ab-9000-a4c6254faa04"
         ],
         "content": [
-            "default",
-            "a531c13d-be06-4a61-9302-2acfbc883f62"
+            "default"
         ],
         "sidebar": [],
         "bottom": [],
@@ -34,24 +33,19 @@
         "title": []
     },
     "content": {
-        "84c43df4-1165-4faf-8700-c362a7153c0b": {
-            "plugin": "system:header",
+        "29c81ce1-de2a-4118-b570-649b81645963": {
+            "plugin": "borg_forum:branding",
             "data": {
-                "module": "system",
-                "delta": "header",
+                "module": "borg_forum",
+                "delta": "branding",
                 "settings": {
                     "title_display": "default",
                     "title": "",
                     "style": "default",
-                    "block_settings": {
-                        "menu": "user-menu",
-                        "logo": 1,
-                        "site_name": 1,
-                        "site_slogan": 1
-                    },
+                    "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "84c43df4-1165-4faf-8700-c362a7153c0b",
+                "uuid": "29c81ce1-de2a-4118-b570-649b81645963",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -135,41 +129,6 @@
                         }
                     }
                 }
-            }
-        },
-        "a531c13d-be06-4a61-9302-2acfbc883f62": {
-            "plugin": "views:categories-block",
-            "data": {
-                "module": "views",
-                "delta": "categories-block",
-                "settings": {
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": []
-                },
-                "uuid": "a531c13d-be06-4a61-9302-2acfbc883f62",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                },
-                "conditions": [
-                    {
-                        "plugin": "path",
-                        "data": {
-                            "settings": {
-                                "visibility_setting": "1",
-                                "paths": "forum-list",
-                                "load_condition_nojs": "Load condition"
-                            }
-                        }
-                    }
-                ]
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {

@@ -16,6 +16,9 @@ function node_overview_types() {
   $header = array(t('Name'), t('Operations'));
   $rows = array();
 
+  // Sort the list of content types by label instead of machine name.
+  natcasesort($names);
+
   foreach ($names as $key => $name) {
     $type = $types[$key];
     if (node_hook($type->type, 'form')) {
@@ -33,7 +36,7 @@ function node_overview_types() {
           'weight' => 5,
         );
         $links['display'] = array(
-          'title' => t('Manage display'),
+          'title' => t('Manage displays'),
           'href' => 'admin/structure/types/manage/' . $type_url_str . '/display',
           'weight' => 10,
         );

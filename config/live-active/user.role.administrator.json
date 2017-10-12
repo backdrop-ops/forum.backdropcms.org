@@ -98,7 +98,6 @@
         "delete terms in forums",
         "flag frequently_asked_question",
         "unflag frequently_asked_question",
-        "administer bakery",
-        "bypass bakery"
+        "assign roles"
     ]
 }
