@@ -1,0 +1,8 @@
+name = Backdrop ORG Forums
+description = The main theme for the Backdrop forum site.
+version = 1.x
+backdrop = 1.x
+base theme = borg
+
+; Custom stylesheets to be added:
+stylesheets[screen][] = css/forums.css

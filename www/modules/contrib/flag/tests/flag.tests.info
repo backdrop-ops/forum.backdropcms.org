@@ -58,8 +58,3 @@ description = Invocation of flag and entity hooks and rules during flagging and 
 group = Flag
 file = flag.test
 
-
-; Added by Backdrop CMS packaging script on 2016-02-11
-project = flag
-version = 1.x-1.0.0
-timestamp = 1455229866

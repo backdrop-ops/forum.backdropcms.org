@@ -1,0 +1,76 @@
+/*******************************************************************************
+ * forums.scss
+ *
+ * Contains styles for forums.
+ ******************************************************************************/
+
+.l-top {
+  margin-bottom: 50px;
+}
+
+.l-top, .l-bottom, body.front .l-top, body.front .l-bottom {
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #d7d7d7;
+  border-top: 2px solid #d7d7d7;
+  padding: 1.5em 0;
+}
+article.node.view-mode-full {
+  text-align: left;
+}
+.block-system-header {
+  margin-bottom: 3em;
+  width: 100%;
+  float: left;
+}
+.block-system-header h1 {
+  font-size: 2em;
+}
+.block-system-main-menu li.active{
+  border: none;
+}
+.block-system-breadcrumb li {
+  margin-right: 1em;
+}
+nav.header-menu {
+  float: right;
+}
+.name-and-slogan {
+  float: left;
+}
+.l-page-title {
+  padding-top: 5px;
+}
+.views-table {
+  width: 100%;
+}
+.views-table td {
+  padding: 1em;
+}
+.views-table .views-field-name p {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 0;
+}
+article.comment {
+  border: 2px solid #d7d7d7;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+article.comment h3 {
+  margin: 0;
+}
+article.comment .submitted {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 0;
+}
+article.comment ul.links.inline {
+  float: right;
+  margin: 0 -0.125em 0 0;
+  padding: 0.5em 0.5em;
+  background: #dee2ea;
+}
+article.node-forum-topic .links.inline li {
+  padding: 0.5em 0.5em;
+  background: #dee2ea;
+}

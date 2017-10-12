@@ -30,6 +30,7 @@ function flag_autoload_info() {
     'flag_entity'                                => 'includes/flag/flag_entity.inc',
     'flag_flag'                                  => 'includes/flag/flag_flag.inc',
     'flag_broken'                                => 'includes/flag/flag_flag.inc',
+    'flagging'                                   => 'includes/flag/flag.entity.inc',
     'flag_node'                                  => 'includes/flag/flag_node.inc',
     'flag_comment'                               => 'includes/flag/flag_comment.inc',
 
@@ -63,6 +64,7 @@ function flag_entity_info() {
       'label' => t('Flagging'),
       'controller class' => 'FlaggingController',
       'base table' => 'flagging',
+      'entity class' => 'Flagging',
       'fieldable' => TRUE,
       'entity keys' => array(
         'id' => 'flagging_id',
@@ -130,7 +132,6 @@ function flagging_load($flagging_id, $reset = FALSE) {
  *   An unsaved flagging object containing the property values.
  */
 function flagging_create($values = array()) {
-  $flagging = (object) array();
 
   if (!isset($values['flag_name'])) {
     if (isset($values['fid'])) {
@@ -139,6 +140,7 @@ function flagging_create($values = array()) {
       $values['flag_name'] = $flag->name;
     }
   }
+  $flagging = entity_create('flagging', $values);
 
   // Apply the given values.
   foreach ($values as $key => $value) {
