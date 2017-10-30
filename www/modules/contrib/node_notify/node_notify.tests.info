@@ -1,0 +1,6 @@
+[NodeNotifyTestCase]
+name = Node Notify tests
+description = Test Node Notify behaviour and integration with Comment Notify.
+group = Node Notify
+file = node_notify.test
+

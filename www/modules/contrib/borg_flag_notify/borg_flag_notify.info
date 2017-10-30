@@ -1,0 +1,7 @@
+name = Borg Flag Notify
+description = Alters Node Notify module functionality for use on Backdrop.org.
+backdrop = 1.x
+type = module
+
+dependencies[] = flag
+dependencies[] = node_notify
