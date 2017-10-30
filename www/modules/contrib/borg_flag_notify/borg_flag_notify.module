@@ -12,7 +12,7 @@
 function borg_flag_notify_menu_alter(&$items) {
   // Hide the user page tabs provided by Node Notify module.
   $items['node/%node/subscriptions']['access callback'] = FALSE;
-  $items['user/%user/subscriptions']['access callback'] = FALSE;
+  $items['user/%user/subscriptions']['title'] = t('Email settings');
 }
 
 /**

@@ -40,10 +40,10 @@ nav.header-menu {
 .l-page-title {
   padding-top: 5px;
 }
-.views-table {
+table {
   width: 100%;
 }
-.views-table td {
+table td {
   padding: 1em;
 }
 .views-table .views-field-name p {
