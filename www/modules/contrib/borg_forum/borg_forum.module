@@ -51,7 +51,7 @@ function borg_forum_last_comment_timestamp($tid) {
     $cache[$result->tid] = (isset($result->last_comment_timestamp)) ? $result->last_comment_timestamp : NULL;
   }
 
-  return ($cache[$tid]);
+  return isset($cache[$tid]) ? $cache[$tid] : '';
 }
 
 /**
