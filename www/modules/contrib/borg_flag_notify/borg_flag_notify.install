@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Borg Flag Notify .install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function borg_flag_notify_install() {
+  // Automatically subscribe all followed nodes to email notifications.
+  $flaggings = entity_load_multiple('flagging');
+  foreach ($flaggings as $flagging) {
+    if ($flagging->flag_name == 'follow') {
+      node_notify_subscribe($flagging->entity_id, $flagging->uid);
+    }
+  }
+}

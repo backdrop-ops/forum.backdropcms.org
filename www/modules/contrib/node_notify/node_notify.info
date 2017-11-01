@@ -1,0 +1,10 @@
+name = Node Notify
+description = Comment notifications for nodes for anonymous and registered users.
+backdrop = 1.x
+type = module
+
+configure = admin/config/people/node_notify
+
+dependencies[] = node
+dependencies[] = comment
+

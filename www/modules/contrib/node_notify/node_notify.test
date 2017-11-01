@@ -1,0 +1,719 @@
+<?php
+
+/**
+ * @file
+ * Test Node Notify functionality and integration with Comment Notify.
+ */
+
+class NodeNotifyTestCase extends BackdropWebTestCase {
+
+  protected $type = NULL;
+  protected $node = NULL;
+
+  protected $unprivileged = NULL;
+  protected $privileged = NULL;
+  protected $admin = NULL;
+
+  /**
+   * Set up state before testing.
+   */
+  protected function setUp() {
+    parent::setUp('node_notify', 'dblog');
+
+    $this->type = $this->createContentType();
+
+    $type = $this->type->type;
+    $permissions = array(
+      'access content',
+      "create $type content",
+      "edit own $type content",
+      "delete own $type content",
+    );
+
+    $this->unprivileged = $this->backdropCreateUser($permissions);
+
+    $permissions[] = 'subscribe to node';
+    $permissions[] = 'access comments';
+    $permissions[] = 'post comments';
+    $permissions[] = 'skip comment approval';
+    $permissions[] = 'access user profiles';
+    $this->privileged = $this->backdropCreateUser($permissions);
+
+    $permissions[] = 'administer node notify';
+    $permissions[] = 'administer node subscriptions';
+    $permissions[] = "edit any $type content";
+    $permissions[] = "delete any $type content";
+    $permissions[] = 'administer comments';
+    $this->admin = $this->backdropCreateUser($permissions);
+
+    $this->node = $this->backdropCreateNode(array(
+      'type' => $this->type->type,
+      'comment' => COMMENT_NODE_OPEN,
+      'uid' => $this->privileged->uid,
+    ));
+  }
+
+
+  /**
+   * Enabling content types for Node Notify.
+   *
+   * Disabling/enabling content type for node notify will hide/show
+   * subscription widgets on node forms accordingly.
+   */
+  protected function testNodeNotifyEnabledTypes() {
+    $this->backdropLogin($this->privileged);
+
+    $this->disableContentTypes();
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertNoPattern('/edit-node-notify-subscribe/', 'Node Notify disabled for content type.');
+
+    $this->enableContentType($this->type);
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertPattern('/edit-node-notify-subscribe/', 'Node Notify enabled for content type.');
+
+    $this->backdropLogout();
+  }
+
+  /**
+   * Subscription link and widget for anonymous user.
+   *
+   * Anonymous user with "subscribe to node" permission granted sees
+   * subscription widget on node form and subscription link when visiting node
+   * page.
+   */
+  protected function testNodeNotifyAnonymous() {
+    $type = $this->type->type;
+    $nid = $this->node->nid;
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array("create $type content"));
+
+    $this->backdropLogout();
+    $this->enableContentType($this->type);
+
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertNoPattern('/edit-node-notify-subscribe/', 'Node Notify disabled for anonymous user.');
+
+    $this->backdropGet('node/' . $nid);
+    $this->assertNoPattern("/node\/$nid\/subscribe/", 'No Subscribe link for anonymous user.');
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('subscribe to node'));
+    cache_clear_all();
+
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertPattern('/edit-node-notify-subscribe/', 'Node Notify enabled for anonymous user.');
+
+    $this->backdropGet('node/' . $nid);
+    $this->assertPattern("/node\/$nid\/subscribe/", 'Subscribe link is displayed for anonymous user.');
+
+    user_role_revoke_permissions(BACKDROP_ANONYMOUS_ROLE, array(
+      'subscribe to node', "create $type content",
+    ));
+  }
+
+  /**
+   * Access to node/N/subscribe.
+   *
+   * node/N/subscribe is forbidden without "subscribe to node" and accessible
+   * with it. Anonymous user with this permission sees subscription
+   * field. Registered users are subscribed at once and redirected.
+   */
+  protected function testNodeNotifySubscribeLink() {
+    $nid = $this->node->nid;
+    $email = $this->getRandomEmail();
+    $this->enableContentType($this->type);
+
+    $this->backdropLogout();
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_$nid"))));
+    $this->assertResponse(403, 'Forbidden');
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('subscribe to node'));
+    cache_clear_all();
+
+    $this->backdropLogin($this->admin);
+    $this->backdropLogout();
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_$nid"))));
+    $this->assertResponse(200, 'Accessible');
+    $this->assertPattern('/node-notify-subscribe-form/', 'Subscription form is displayed for anonymous user.');
+
+    $edit['email'] = $email;
+    $this->backdropPost(NULL, $edit, t('Subscribe'));
+    $this->assertUrl("node/$nid", array(), 'Redirected to node page.');
+    $this->assertTrue(node_notify_is_subscribed($nid, 0, $email), 'Anonymous user subscribed with node/N/subscribe form.');
+
+    $this->backdropGet("node/$nid/unsubscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_unsubscribe_$nid"))));
+    $this->assertResponse(403, 'Anonymous user is not allowed to access node/N/unsubscribe URL.');
+
+    user_role_revoke_permissions(BACKDROP_ANONYMOUS_ROLE, array('subscribe to node'));
+
+    $this->backdropLogin($this->unprivileged);
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_$nid"))));
+    $this->assertResponse(403, 'Forbidden for unprivileged user.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/subscribe");
+    $this->assertResponse(403, 'Forbidden to privileged user without token.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_{$nid}_"))));
+    $this->assertResponse(403, 'Forbidden to privileged user with wrong token.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_$nid"))));
+    $this->assertResponse(200, 'Accessible to privileged user.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/subscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_$nid"))));
+    $this->assertResponse(200, 'Accessible');
+    $this->assertNoPattern('/node-notify-subscribe-form/', 'Subscription form is not displayed for privileged user.');
+    $this->assertUrl("node/$nid", array(), 'Privileged user should be redirected back to node page.');
+    $this->assertTrue(node_notify_is_subscribed($nid, $this->privileged->uid), 'Privileged user is subscribed.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/unsubscribe");
+    $this->assertResponse(403, 'Forbidden to privileged user without token.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/unsubscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_subscribe_{$nid}_"))));
+    $this->assertResponse(403, 'Forbidden to privileged user with wrong token.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/unsubscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_unsubscribe_$nid"))));
+    $this->assertResponse(200, 'Accessible to privileged user.');
+
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->privileged);
+
+    $this->backdropGet("node/$nid/unsubscribe", array('query' => array('token' => $this->backdropGetToken("node_notify_unsubscribe_$nid"))));
+    $this->assertUrl("node/$nid", array(), 'Privileged user should be redirected back to node page.');
+    $this->assertPattern('/Unsubscribed from/', 'Privileged user should see "Unsubscribe" message.');
+    $this->assertFalse(node_notify_is_subscribed($nid, $this->privileged->uid), 'Privileged user is unsubscribed.');
+
+    $this->backdropLogout();
+  }
+
+  /**
+   * Subscription widget type.
+   *
+   * Anonymous user should see text field to input email address on node
+   * form. Registered user should see checkbox.
+   */
+  protected function testNodeNotifyNodeFormFieldType() {
+    $type = $this->type->type;
+    $nid = $this->node->nid;
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array("create $type content", 'subscribe to node'));
+    cache_clear_all();
+    $this->enableContentType($this->type);
+
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertFieldByXpath(
+      "//input[@type='checkbox' and @id='edit-node-notify-subscribe']", NULL,
+      'Checkbox for registerd user.'
+    );
+
+    $this->backdropLogout();
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertFieldByXpath(
+      "//input[@type='text' and @id='edit-node-notify-subscribe']", NULL,
+      'Text field for anonymous user.'
+    );
+  }
+
+  /**
+   * Subscription field/checkbox value on node form.
+   *
+   * - Show different labels for checkbox on node form when author or
+   *   administrator is editing node created by registered user.
+   * - Anonymous user sees no widget when editing node.
+   * - User without "administer node subscriptions" sees no widget.
+   */
+  protected function testNodeNotifyNodeFormFieldValue() {
+    $type = $this->type->type;
+    $nid = $this->node->nid;
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array("edit any $type content", 'subscribe to node'));
+    cache_clear_all();
+    $this->enableContentType($this->type);
+
+    $this->backdropLogin($this->privileged);
+    node_notify_subscribe($nid, $this->privileged->uid);
+    $this->backdropGet("node/$nid/edit");
+    $this->assertFieldByXpath(
+      "//input[@type='checkbox' and @id='edit-node-notify-subscribe']", '1',
+      'Checkbox checked for author.'
+    );
+    $this->assertText(
+      t('Receive comment notifications by email'),
+      'Different label if editing is done by the author.'
+    );
+    $this->backdropLogout();
+
+    $this->backdropLogin($this->admin);
+    $this->backdropGet("node/$nid/edit");
+    $this->assertFieldByXpath(
+      "//input[@type='checkbox' and @id='edit-node-notify-subscribe']", '1',
+      'Checkbox checked for admin.'
+    );
+    $this->assertText(
+      t('Author receives comment notifications by email'),
+      'Different label if editing is done not by the author.'
+    );
+
+    $this->backdropLogout();
+    $this->backdropGet("node/$nid/edit");
+    $this->assertNoFieldById('edit-node-notify-subscribe', NULL,
+      'No field displayed for anonymous user when editing existing node.'
+    );
+
+    $tmp_user = $this->backdropCreateUser(array("edit any $type content"));
+
+    $this->backdropLogin($tmp_user);
+    $this->backdropGet("node/$nid/edit");
+    $this->assertNoFieldById('edit-node-notify-subscribe', NULL,
+      'No field displayed for user with no "administer node subscription" permission when editing existing node.'
+    );
+  }
+
+  /**
+   * Test that "ticked by default" feature works.
+   */
+  protected function testNodeNotifyNodeFormDefaultValue() {
+    $this->enableContentType($this->type);
+    $this->setDefaltValueForType($this->type, FALSE);
+
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertFieldByXpath(
+      "//input[@type='checkbox' and @id='edit-node-notify-subscribe' and not(@checked='checked')]", NULL,
+      'Subscription checkbox not checked.'
+    );
+
+    $this->setDefaltValueForType($this->type, TRUE);
+    $this->backdropGet('node/add/' . $this->type->type);
+    $this->assertFieldByXpath(
+      "//input[@type='checkbox' and @id='edit-node-notify-subscribe' and @checked='checked']", NULL,
+      'Subscription checkbox checked by default.'
+    );
+  }
+
+  /**
+   * Node Notify notifications.
+   *
+   * - Denied when anonymous has no 'subscribe to node' permission.
+   * - Skipped when comment and node author is the same.
+   * - Postponed until comment is published.
+   * - Sent to anonymous with right permissions.
+   */
+  protected function testNodeNotifyNotifications() {
+    $type = $this->type->type;
+    $nid = $this->node->nid;
+    $this->enableContentType($this->type);
+    $email = $this->getRandomEmail();
+
+    // This skips permission checking.
+    node_notify_subscribe($nid, 0, $email);
+    node_notify_subscribe($nid, $this->privileged->uid);
+
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet("node/$nid");
+    $data = $this->postComment($this->node, $this->randomName(), $this->randomName());
+
+    $note = node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertTrue($note->notified == NODE_NOTIFY_DENIED, 'Notification marked as denied.');
+
+    $note = node_notify_get_notification($data['id'], $nid, $this->privileged->uid);
+    $this->assertTrue($note->notified == NODE_NOTIFY_SKIPPED, 'Notification skipped -- subscriber is commenter.');
+
+    $this->backdropLogout();
+
+    $node_type = node_type_get_type($this->node->type);
+    $node_type->settings['comment_anonymous'] = 1;
+    node_type_save($node_type);
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('post comments'));
+    cache_clear_all();
+    $this->backdropGet("node/$nid");
+    $data = $this->postComment($this->node, $this->randomName(), $this->randomName(), array('mail' => $email, 'name' => $this->randomName()), NULL, FALSE);
+    $notification = node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertFalse((bool) $notification, 'Notification does not exist -- comment is not published.');
+
+    $this->backdropLogin($this->admin);
+    // $this->backdropGet('admin/content/comment/approval');
+    $this->backdropPost('admin/content/comment/approval', array(
+      'comments[' . $data['id'] . ']' => TRUE,
+      'operation' => 'publish',
+    ), t('Update'));
+    $this->backdropLogout();
+
+    $notification = node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertTrue((bool) $notification, 'Notification exists -- comment was published.');
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('skip comment approval'));
+    $this->backdropGet("node/$nid");
+    $data = $this->postComment($this->node, $this->randomName(), $this->randomName(), array('mail' => $email, 'name' => $this->randomName()));
+    $notification = node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertTrue($notification->notified == NODE_NOTIFY_SKIPPED, 'Notification skipped -- subscribe is commenter (anonymous).');
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('subscribe to node', 'access content'));
+    cache_clear_all();
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet("node/$nid");
+    $data = $this->postComment($this->node, $this->randomName(), $this->randomName());
+    $note = node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertTrue($note->notified == NODE_NOTIFY_SENT, 'Notification marked as sent.');
+    $this->assertMail('to', $email, "Notification mail sent to anonymous subscriber.");
+  }
+
+  protected function testNodeNotifyXSS() {
+    db_delete('watchdog');
+
+    $nid = $this->node->nid;
+    $this->enableContentType($this->type);
+    $email = '<script>alert("XSS");</script>';
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array('subscribe to node', 'access content'));
+    cache_clear_all();
+
+    // This skips permission checking.
+    node_notify_subscribe($nid, 0, $email);
+    node_notify_subscribe($nid, $this->privileged->uid);
+
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet("node/$nid");
+    $data = $this->postComment($this->node, '<script>alert("XSS");</script>', '<script>alert("XSS");</script>', NULL, NULL, FALSE);
+    $this->backdropLogout();
+
+    // Send notifications.
+    node_notify_get_notification($data['id'], $nid, 0, $email);
+    $this->assertMailNoString('subject', '<script>alert("XSS");</script>');
+    $this->assertMailNoString('body', '<script>alert("XSS");</script>');
+
+    node_notify_get_notification($data['id'], $nid, $this->privileged->uid);
+    $this->assertMailNoString('subject', '<script>alert("XSS");</script>');
+    $this->assertMailNoString('body', '<script>alert("XSS");</script>');
+
+    // Check watchdog.
+    $this->backdropLogin($this->admin);
+    $this->backdropGet("node/$nid/subscriptions");
+    $this->assertNoRaw('<script>alert("XSS");</script>', 'XSS is filtered out at node subscriptions page.');
+
+    // Check if there's XSS in the watchdog log.
+    $query = db_select('watchdog', 'w');
+    $result = $query
+      ->fields('w', array('wid'))
+      ->execute();
+    foreach ($result as $dblog) {
+      $this->backdropGet("admin/reports/event/{$dblog->wid}");
+      $this->assertNoRaw('<script>alert("XSS");</script>', "No XSS is in watchdog {$dblog->wid}.");
+    }
+
+    $this->backdropLogout();
+
+
+
+  }
+
+  /**
+   * Display no subscription widget when node is authored by anonymous user.
+   */
+  protected function testNodeNotifyIssue3() {
+    $type = $this->type->type;
+    $nid = $this->node->nid;
+
+    $this->node->uid = 0;
+    node_save($this->node);
+
+    user_role_grant_permissions(BACKDROP_ANONYMOUS_ROLE, array(
+      "edit any $type content",
+      'subscribe to node',
+      'administer node subscriptions',
+    ));
+    cache_clear_all();
+
+    $this->enableContentType($this->type);
+    $this->backdropLogout();
+
+    $this->backdropGet("node/$nid/edit");
+    $this->assertNoFieldById('edit-node-notify-subscribe', NULL,
+      'No field displayed for anonymous user when editing existing node by anonymous user.'
+    );
+  }
+
+  /**
+   * Cron clean up of expired notifications.
+   */
+  protected function testNodeNotifyCron() {
+    $this->enableContentType($this->type);
+
+    node_notify_subscribe($this->node->nid, $this->privileged->uid);
+    node_notify_cron();
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Subscription exists.');
+
+    config_set('node_notify.settings', 'node_notify_expires', '+1 day');
+    node_notify_cron();
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Subscription still exists - cron not enabled.');
+
+    config_set('node_notify.settings', 'node_notify_cron', TRUE);
+    node_notify_cron();
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Subscription still exists - subscription active.');
+
+    $this->backdropLogin($this->privileged);
+    $this->postComment($this->node, $this->randomName(), $this->randomName());
+    $count = db_select('node_notify_notification')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Notification created.');
+
+    node_notify_unsubscribe($this->node->nid, $this->privileged->uid);
+    node_notify_cron();
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 0, 'Subscription removed.');
+    $count = db_select('node_notify_notification')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 0, 'Notification removed.');
+  }
+
+  /**
+   * Remove subscription when node or user is removed.
+   */
+  protected function testNodeNotifyUserAndNodeHooks() {
+    $this->enableContentType($this->type);
+    node_notify_subscribe($this->node->nid, $this->unprivileged->uid);
+
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Subscription exists.');
+
+    user_delete($this->unprivileged->uid);
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 0, 'Subscription removed.');
+
+    node_notify_subscribe($this->node->nid, $this->privileged->uid);
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Another subscription created.');
+
+    $this->backdropLogin($this->privileged);
+    $this->postComment($this->node, 'Subject', 'Comment body');
+    $count = db_select('node_notify_notification')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 1, 'Notification exists.');
+
+    node_delete($this->node->nid);
+    $count = db_select('node_notify_subscription')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 0, 'Another subscription removed.');
+
+    $count = db_select('node_notify_notification')->countQuery()->execute()->fetchColumn();
+    $this->assertTrue($count == 0, 'Notification removed.');
+  }
+
+  /**
+   * Test for issue #1950050.
+   */
+  protected function testNodeNotifyUserSubscriptionsTab() {
+    $testuser = $this->backdropCreateUser(array(
+      'access content',
+      'subscribe to node',
+    ));
+
+    $user_url = 'user/' . $testuser->uid;
+    $user_subscriptions = $user_url . '/subscriptions';
+
+    $this->backdropLogin($this->unprivileged);
+    $this->backdropGet($user_url);
+    $this->assertText(t('Access denied'), 'Access denied to user page');
+    $this->backdropGet($user_subscriptions);
+    $this->assertText(t('Access denied'), 'Access denied to user subscriptions');
+
+    $this->backdropLogout();
+    $this->backdropLogin($this->privileged);
+    $this->backdropGet($user_url);
+    $this->assertText(
+      $testuser->name,
+      'Access granted to user page for user with "access user profiles" permission.'
+    );
+    $this->backdropGet($user_subscriptions);
+    $this->assertText(
+      t('Access denied'),
+      'Access denied to user subscriptions for user with "access user profiles" permission.'
+    );
+
+    $this->backdropLogout();
+    $this->backdropLogin($this->admin);
+    $this->backdropGet($user_url);
+    $this->assertText($testuser->name, 'Access granted to user page');
+    $this->backdropGet($user_subscriptions);
+    $this->assertText(t('No subscriptions yet.'), 'Access granted to user subscriptions');
+  }
+
+  /**
+   * Generate random email address with example.com as domain part.
+   *
+   * @return string
+   *   Random email address.
+   */
+  protected function getRandomEmail() {
+    return $this->randomName() . '@example.com';
+  }
+
+  /**
+   * Creates node_notify_type content type.
+   *
+   * @return object
+   *   Content type object.
+   */
+  protected function createContentType() {
+    $settings = array(
+      'type' => 'node_notify_type',
+      'title_label' => 'Title',
+      'body_label' => 'Body',
+      'settings' => array(
+        'comment_subject_field' => TRUE,
+      ),
+    );
+    $content_type = $this->backdropCreateContentType($settings);
+    return $content_type;
+  }
+
+  /**
+   * Enables subscriptions on content type.
+   *
+   * @param object $type
+   *   Content type object.
+   */
+  protected function enableContentType($type) {
+    $values = config_get('node_notify.settings', 'node_notify_enabled_types');
+    $values[$type->type] = $type->type;
+    config_set('node_notify.settings', 'node_notify_enabled_types', $values);
+  }
+
+  /**
+   * Set default value of subscription for content type.
+   *
+   * @param object $type
+   *   Content type object.
+   * @param bool $value
+   *   Default value.
+   */
+  protected function setDefaltValueForType($type, $value) {
+    $values = config_get('node_notify.settings', 'node_notify_enabled_by_default');
+    $values[$type->type] = $value;
+    config_set('node_notify.settings', 'node_notify_enabled_by_default', $values);
+  }
+
+  /**
+   * Disables any enabled content types.
+   */
+  protected function disableContentTypes() {
+    config_set('node_notify.settings', 'node_notify_enabled_types', array());
+  }
+
+  /**
+   * Post a comment on given node.
+   *
+   * Copied from Comment Notify test case and slightly modified.
+   *
+   * @param object $node
+   *   Node to post on or NULL to use current page.
+   * @param string $subject
+   *   Subject of a comment.
+   * @param string $comment
+   *   Comment text.
+   * @param array $notify
+   *   Parameters for Comment Notify.
+   * @param array $contact
+   *   Comment contact details (name, mail).
+   *
+   * @return array
+   *   If comment was posted, associative array with id, subject, and comment
+   *   keys.
+   */
+  protected function postComment($node, $subject, $comment, $notify = NULL, $contact = NULL, $assert_comment_visible = TRUE) {
+    $langcode = LANGUAGE_NONE;
+    $edit = array();
+    $edit['subject'] = $subject;
+    $edit['comment_body[' . $langcode . '][0][value]'] = $comment;
+
+    if ($notify !== NULL && is_array($notify)) {
+      $edit += $notify;
+    }
+
+    if ($contact !== NULL && is_array($contact)) {
+      $edit += $contact;
+    }
+
+    $url = $node ? 'node/' . $node->nid : NULL;
+    $this->backdropPost($url, $edit, t('Save'));
+
+    $match = array();
+    // Get comment ID.
+    preg_match('/#comment-([^"]+)/', $this->getURL(), $match);
+
+    // Get comment.
+    if (!empty($match[1])) {
+      if ($assert_comment_visible) {
+        if ($subject) {
+          $this->assertText($subject, 'Comment subject posted.');
+        }
+        $this->assertText($comment, 'Comment body posted.');
+      }
+      $this->assertTrue((!empty($match) && !empty($match[1])), t('Comment id found.'));
+    }
+
+    if (isset($match[1])) {
+      return array(
+        'id' => $match[1],
+        'subject' => $subject,
+        'comment' => $comment,
+      );
+    }
+  }
+
+  /**
+   * Asserts that the most recently sent e-mail message hasn't the substring in it.
+   *
+   * @param $field_name
+   *   Name of field or message property to assert: subject, body, id, ...
+   * @param $string
+   *   String to search for.
+   *
+   * @return
+   *   TRUE on pass, FALSE on fail.
+   */
+  protected function assertMailNoString($field_name, $string) {
+    $mails = $this->backdropGetMails();
+    $mail = end($mails);
+    $found = strpos($mail[$field_name], $string) !== FALSE;
+    return $this->assertFalse($found, t('Text not found in @field of email message: "@string".', array('@field' => $field_name, '@string' => $string)));
+  }
+  /**
+   * Generate a token for the currently logged in user.
+   *
+   * The original method is buggy, see https://www.backdrop.org/node/1555862.
+   */
+  protected function backdropGetToken($value = '') {
+    return backdrop_hmac_base64($value, $this->session_id . backdrop_get_private_key() . backdrop_get_hash_salt());
+  }
+}

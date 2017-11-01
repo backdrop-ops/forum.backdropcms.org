@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @file
+ * Alters Node Notify module functionality for use on Backdrop.org.
+ */
+
+
+/**
+* Implementation of hook_menu_alter().
+**/
+function borg_flag_notify_menu_alter(&$items) {
+  // Hide the user page tabs provided by Node Notify module.
+  $items['node/%node/subscriptions']['access callback'] = FALSE;
+  $items['user/%user/subscriptions']['title'] = t('Email settings');
+}
+
+/**
+* Implementation of hook_preprocess_node().
+**/
+function borg_flag_notify_preprocess_node(&$variables) {
+  // Hide the node links provided by Node Notify module.
+  if (isset($variables['content']['links']['node']['#links']['subscribe'])) {
+    unset($variables['content']['links']['node']['#links']['subscribe']);
+  }
+  elseif (isset($variables['content']['links']['node']['#links']['unsubscribe'])) {
+    unset($variables['content']['links']['node']['#links']['unsubscribe']);
+  }
+}
+
+/**
+* Implementation of hook_flag_flag().
+**/
+function borg_flag_notify_flag_flag($flag, $content_id, $account, $flagging) {
+  if ($flag->name == 'follow') {
+    node_notify_subscribe($content_id, $account->uid);
+  }
+  elseif ($flag->name == 'follow_category') {
+    // Subscribe the user to all nodes in this category.
+    $topics = node_load_multiple(taxonomy_select_nodes($content_id, FALSE));
+    foreach ($topics as $topic) {
+      node_notify_subscribe($topic->nid, $account->uid);
+    }
+  }
+}
+
+/**
+* Implementation of hook_flag_unflag().
+**/
+function borg_flag_notify_flag_unflag($flag, $content_id, $account, $flagging) {
+  static $unflag = TRUE;
+  if ($unflag) {
+    $unflag = FALSE;
+    if ($flag->name == 'follow') {
+      node_notify_unsubscribe($content_id, $account->uid);
+    }
+    elseif ($flag->name == 'follow_category') {
+      // Unsubscribe the user from all nodes in this category.
+      $topics = node_load_multiple(taxonomy_select_nodes($content_id, FALSE));
+      foreach ($topics as $topic) {
+        node_notify_unsubscribe($topic->nid, $account->uid);
+      }
+    }
+  }
+}
+
+/**
+* Implementation of hook_node_notify_subscribe().
+**/
+function borg_flag_notify_node_notify_subscribe($nid, $uid, $email) {
+  $flag = flag_get_flag('follow');
+
+  if ($flag && !$flag->is_flagged($nid)) {
+    $account = user_load($uid);
+    $flag->flag('flag', $nid, $account); 
+  }
+}
+
+/**
+* Implementation of hook_node_notify_unsubscribe().
+**/
+function borg_flag_notify_node_notify_unsubscribe($nid, $uid, $email) {
+  $flag = flag_get_flag('follow');
+
+  if ($flag && $flag->is_flagged($nid)) {
+    $account = user_load($uid);
+    $flag->flag('unflag', $nid, $account); 
+  }
+}
+
+/**
+* Implementation of hook_block_info().
+**/
+function borg_flag_notify_block_info() {
+  $blocks['follow_forum_category'] = array(
+    'info' => t('Follow forum category'),
+    'description' => t('Provides a Flag to follow a forum category.'),
+  );
+
+  return $blocks;
+}
+
+
+/**
+* Implementation of hook_block_view().
+**/
+function borg_flag_notify_block_view($delta = '', $settings = array(), $contexts = array()) {
+  $block = array();
+
+  switch ($delta) {
+    case 'follow_forum_category':
+      // This block will be available on taxonomy term pages (forum categories)
+      // and also on node pages (forum topics) so we need to get the $tid first.
+      $tid = NULL;
+      if ($item = menu_get_item()) {
+        if (isset($item['path']) && $item['path'] == 'taxonomy/term/%') {
+          $tid = $item['map'][2];
+        }
+        elseif ($node = menu_get_object()) {
+          if (isset($node->type) && $node->type == 'forum_topic') {
+            $forum_field = field_get_items('node', $node, 'field_forums');
+            if ($forum_field) {
+              $reset = reset($forum_field);
+              $tid = $reset['tid'];
+            }
+          }
+        }
+      }
+      if ($tid) {
+        $block['subject'] = '';
+        $block['content'] = flag_create_link('follow_category', $tid);
+      }
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_comment_insert().
+ */
+function borg_flag_notify_comment_insert($comment) {
+  // Subscribe a user if he leaves a comment.
+  node_notify_subscribe($comment->nid, $comment->uid);
+}

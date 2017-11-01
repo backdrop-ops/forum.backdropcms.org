@@ -1,0 +1,8 @@
+{
+    "_config_name": "node_notify.settings",
+    "node_notify_enabled_types": [],
+    "node_notify_enabled_by_default": [],
+    "node_notify_cron": "FALSE",
+    "node_notify_expires": "-1 month",
+    "node_notify_log": "FALSE"
+}
