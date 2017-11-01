@@ -70,7 +70,30 @@ article.comment ul.links.inline {
   padding: 0.5em 0.5em;
   background: #dee2ea;
 }
-article.node-forum-topic .links.inline li {
+article.node-forum-topic .links.inline li, .forum-forbidden {
   padding: 0.5em 0.5em;
   background: #dee2ea;
 }
+.new-topic span {
+  padding: 4px 8px;
+  color: #555;
+  border: 2px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  background-color: #fff;
+  border-radius: 10px;
+  width: auto;
+  -webkit-transition: background-color .5s;
+  -moz-transition: background-color .5s;
+  -ms-transition: background-color .5s;
+  -o-transition: background-color .5s;
+  transition: background-color .5s;
+  float: right;
+  margin-top: 20px;
+}
+.new-topic span:hover {
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+

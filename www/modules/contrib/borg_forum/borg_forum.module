@@ -107,6 +107,10 @@ function borg_forum_block_info() {
     'info' => t('Branding'),
     'description' => t('Backdrop CMS logomark and wordmark.'),
   );
+  $blocks['new_forum_button'] = array(
+    'info' => t('New forum button'),
+    'description' => t('New forum button.'),
+  );
 
   return $blocks;
 }
@@ -130,8 +134,61 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
       $block['subject'] = NULL;
       $block['content'] = $output;
       break;
+    case 'new_forum_button':
+      // This block will be available on taxonomy term pages (forum categories)
+      // and also on node pages (forum topics) so we get the $tid to pass it to 
+      // the link.
+      $tid = NULL;
+      if ($item = menu_get_item()) {
+        if (isset($item['path']) && $item['path'] == 'taxonomy/term/%') {
+          $tid = $item['map'][2];
+        }
+        elseif ($node = menu_get_object()) {
+          if (isset($node->type) && $node->type == 'forum_topic') {
+            $forum_field = field_get_items('node', $node, 'field_forums');
+            if ($forum_field) {
+              $reset = reset($forum_field);
+              $tid = $reset['tid'];
+            }
+          }
+        }
+      }
+      $add_link = 'node/add/forum-topic/' . $tid;
+      $destination = array('destination' => $add_link);
+
+
+      if (user_is_logged_in()) {
+        $link = l(t('New topic'), $add_link);
+        $output = '<div class ="new-topic"><span>' . $link . '</span></div>';
+     }
+      else {
+        $link = t('<a href="@login">Log in</a> or <a href="@register">register</a> to add new topics', array('@login' => url('user/login', array('query' => $destination)), '@register' => url('user/register', array('query' => $destination))));
+        $output = '<div class ="forum-forbidden"><span>' . $link . '</span></div>';
+      }
+
+      $block['subject'] = NULL;
+      $block['content'] = $output;
+      break;
   }
 
   return $block;
 }
 
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form().
+ */
+function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field_forums'])) {
+    $langcode = $form['field_forums']['#language'];
+    // Make the vocabulary required for 'real' forum-nodes.
+    $form['field_forums'][$langcode]['#required'] = TRUE;
+    $form['field_forums'][$langcode]['#multiple'] = FALSE;
+    if (empty($form['field_forums'][$langcode]['#default_value'])) {
+      // If there is no default forum already selected, try to get the forum
+      // ID from the URL (e.g., if we are on a page like node/add/forum/2, we
+      // expect "2" to be the ID of the forum that was requested).
+      $requested_forum_id = arg(3);
+      $form['field_forums'][$langcode]['#default_value'] = is_numeric($requested_forum_id) ? $requested_forum_id : '';
+    }
+  }
+}
