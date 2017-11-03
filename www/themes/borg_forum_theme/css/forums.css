@@ -96,4 +96,9 @@ article.node-forum-topic .links.inline li, .forum-forbidden {
   border-color: #adadad;
 }
 
-
+.block-views-accepted-answer-block {
+  padding: 20px;
+  border: 2px solid #d7d7d7;
+  background-color: #efefef;
+  margin-top: 1em;
+}
