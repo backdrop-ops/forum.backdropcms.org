@@ -88,12 +88,24 @@ article.node-forum-topic .links.inline li, .forum-forbidden {
   -ms-transition: background-color .5s;
   -o-transition: background-color .5s;
   transition: background-color .5s;
-  float: right;
   margin-top: 20px;
 }
 .new-topic span:hover {
   background-color: #ebebeb;
   border-color: #adadad;
 }
-
-
+.block-borg-forum-new-forum-button, .block-borg-flag-notify-follow-forum-category {
+  width: 100%;
+  float: left;
+}
+.block-borg-flag-notify-follow-forum-category {
+  margin-top: 20px;
+}
+@media (min-width: 34em) { /* 544px */
+  .new-topic span {
+    float: right;
+  }
+  .flag-follow-category {
+    float: right;
+  }
+}
