@@ -163,25 +163,27 @@ function borg_flag_notify_node_insert($node) {
   $users = flag_get_entity_flags('taxonomy_term', $node->field_forums[$node->langcode][0]['tid'], 'follow_category');
   // Subscribe them to the node.
   foreach ($users as $uid => $data) {
-    node_notify_subscribe($node->nid, $uid);
+    if ($uid != $node->uid) {
+      node_notify_subscribe($node->nid, $uid);
 
-    // Let the user know. We cant use Node Notify APIs because this is a new
-    // node, not a comment.
-    $user = user_load($uid);
-    $mail = $user->mail;
-    $language = user_preferred_language($user);
+      // Let the user know. We cant use Node Notify APIs because this is a new
+      // node, not a comment.
+      $user = user_load($uid);
+      $mail = $user->mail;
+      $language = user_preferred_language($user);
 
-    $message = backdrop_mail('borg_flag_notify', 'node_notification', $mail, $language, array(
-      'subject' => token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT, array(
-        'node' => $node,
-      )),
-      'body' => filter_xss_admin(token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY, array(
-        'node' => $node,
-        'user' => $user,
-      ), array(
-        'sanitize' => FALSE,
-      ))),
-    ));
+      $message = backdrop_mail('borg_flag_notify', 'node_notification', $mail, $language, array(
+        'subject' => token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT, array(
+          'node' => $node,
+        )),
+        'body' => filter_xss_admin(token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY, array(
+          'node' => $node,
+          'user' => $user,
+        ), array(
+          'sanitize' => FALSE,
+        ))),
+      ));
+    }
   }
 }
 
