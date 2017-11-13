@@ -111,6 +111,10 @@ function borg_forum_block_info() {
     'info' => t('New forum button'),
     'description' => t('New forum button.'),
   );
+  $blocks['comment_form_block'] = array(
+    'info' => t('Comment form block'),
+    'description' => t('Comment form block.'),
+  );
 
   return $blocks;
 }
@@ -122,53 +126,64 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
   $block = array();
 
   switch ($delta) {
-    case 'branding':
-      $options = array('attributes' => array('class' => array('site-name')));
-      $output = l(t('backdrop forums'), '', $options);
+  case 'branding':
+    $options = array('attributes' => array('class' => array('site-name')));
+    $output = l(t('backdrop forums'), '', $options);
 
-      $uri = backdrop_get_path('module', 'borg_forum') . '/images/logo.png';
-      $image = theme('image', array('uri' => $uri, 'alt' => t('Backdrop CMS Logo')));
-      $options = array('html' => TRUE, 'attributes' => array('class' => array('logo'), 'title' => t('Backdrop CMS Forums')));
-      $output .= l($image, '', $options);
+    $uri = backdrop_get_path('module', 'borg_forum') . '/images/logo.png';
+    $image = theme('image', array('uri' => $uri, 'alt' => t('Backdrop CMS Logo')));
+    $options = array('html' => TRUE, 'attributes' => array('class' => array('logo'), 'title' => t('Backdrop CMS Forums')));
+    $output .= l($image, '', $options);
 
-      $block['subject'] = NULL;
-      $block['content'] = $output;
-      break;
-    case 'new_forum_button':
-      // This block will be available on taxonomy term pages (forum categories)
-      // and also on node pages (forum topics) so we get the $tid to pass it to 
-      // the link.
-      $tid = NULL;
-      if ($item = menu_get_item()) {
-        if (isset($item['path']) && $item['path'] == 'taxonomy/term/%') {
-          $tid = $item['map'][2];
-        }
-        elseif ($node = menu_get_object()) {
-          if (isset($node->type) && $node->type == 'forum_topic') {
-            $forum_field = field_get_items('node', $node, 'field_forums');
-            if ($forum_field) {
-              $reset = reset($forum_field);
-              $tid = $reset['tid'];
-            }
+    $block['subject'] = NULL;
+    $block['content'] = $output;
+    break;
+  case 'new_forum_button':
+    // This block will be available on taxonomy term pages (forum categories)
+    // and also on node pages (forum topics) so we get the $tid to pass it to 
+    // the link.
+    $tid = NULL;
+    if ($item = menu_get_item()) {
+      if (isset($item['path']) && $item['path'] == 'taxonomy/term/%') {
+        $tid = $item['map'][2];
+      }
+      elseif ($node = menu_get_object()) {
+        if (isset($node->type) && $node->type == 'forum_topic') {
+          $forum_field = field_get_items('node', $node, 'field_forums');
+          if ($forum_field) {
+            $reset = reset($forum_field);
+            $tid = $reset['tid'];
           }
         }
       }
-      $add_link = 'node/add/forum-topic/' . $tid;
-      $destination = array('destination' => $add_link);
+    }
+    $add_link = 'node/add/forum-topic/' . $tid;
+    $destination = array('destination' => $add_link);
 
 
-      if (user_is_logged_in()) {
-        $link = l(t('New topic'), $add_link);
-        $output = '<div class ="new-topic"><span>' . $link . '</span></div>';
-     }
-      else {
-        $link = t('<a href="@login">Log in</a> or <a href="@register">register</a> to add new topics', array('@login' => url('user/login', array('query' => $destination)), '@register' => url('user/register', array('query' => $destination))));
-        $output = '<div class ="forum-forbidden"><span>' . $link . '</span></div>';
+    if (user_is_logged_in()) {
+      $link = l(t('New topic'), $add_link);
+      $output = '<div class ="new-topic"><span>' . $link . '</span></div>';
+    }
+    else {
+      $link = t('<a href="@login">Log in</a> or <a href="@register">register</a> to add new topics', array('@login' => url('user/login', array('query' => $destination)), '@register' => url('user/register', array('query' => $destination))));
+      $output = '<div class ="forum-forbidden"><span>' . $link . '</span></div>';
+    }
+
+    $block['subject'] = NULL;
+    $block['content'] = $output;
+    break;
+  case 'comment_form_block':
+    if ($node = menu_get_object()) {
+      // Make sure comments aren't closed.
+      if (($node->comment !== 0) && (arg(2) == NULL)) {
+        // Render the comments and comment form (access checks, etc. are done
+        // by comment_node_page_additions()).
+        $block['subject'] = t('Comments');
+        $block['content'] = backdrop_render(commentsblock_static_comments($node->nid, false, $node));
       }
-
-      $block['subject'] = NULL;
-      $block['content'] = $output;
-      break;
+    }
+    break;
   }
 
   return $block;
@@ -192,3 +207,36 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 }
+
+/**
+ * Implements hook_comment_view_alter().
+ *
+ * This will make room for your custom comment view or block by removing the regular
+ * comment listing from the node body.
+ *
+ * @todo the unset is not a good solution? maybe difficulties with other modules?
+ */
+
+function borg_forum_node_view_alter(&$build) {
+  commentsblock_static_comments($build['#node']->nid, $build, $build['#node']);
+  $node = menu_get_object();
+  unset($node->comments);
+}
+
+/**
+ * For sake of performance, save comments in a static variable.
+ */
+function commentsblock_static_comments($nid, $build, $node = false) {
+  $comments = &backdrop_static(__FUNCTION__);
+  
+  if (isset($build['comments'])) {
+    $comments[$nid]['comments'] = $build['comments'];
+  } else {
+    if (!isset($comments[$nid])) {
+      $comments[$nid]['comments'] = comment_node_page_additions($node);
+    }
+	
+    return $comments[$nid];
+  }
+}
+

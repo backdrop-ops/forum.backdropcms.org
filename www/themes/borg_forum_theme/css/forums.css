@@ -94,6 +94,25 @@ article.node-forum-topic .links.inline li, .forum-forbidden {
   background-color: #ebebeb;
   border-color: #adadad;
 }
+.block-views-helpful-answer-block {
+  padding: 20px;
+  border: 2px solid #d7d7d7;
+  margin-top: 1em;
+}
+.block-views-helpful-answer-block .views-row {
+  padding: 20px;
+  background-color: #f7f7f7;
+  margin-top: 1em;
+}
+.block-views-accepted-answer-block {
+  padding: 20px;
+  border: 2px solid #d7d7d7;
+  background-color: #f7f7f7;
+  margin-top: 1em;
+}
+.block-views-accepted-answer-block h2, .block-views-helpful-answer-block h2 {
+  margin-top: 0;
+}
 .block-borg-forum-new-forum-button, .block-borg-flag-notify-follow-forum-category {
   width: 100%;
   float: left;
