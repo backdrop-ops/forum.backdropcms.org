@@ -1,0 +1,9 @@
+# files dir
+www/files
+
+# local settings.local.php
+settings.local.php
+
+# bups
+*.gz
+*.zip
