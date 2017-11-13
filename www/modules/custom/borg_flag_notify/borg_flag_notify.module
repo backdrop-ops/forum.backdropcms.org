@@ -6,6 +6,18 @@
  */
 
 
+define('BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT', 'New forum topic "[node:title]"');
+define('BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY', '[node:body]
+----
+
+You can view the discussion at the following url
+[node:url]
+
+You are receiving this email because you are following this forum category.
+
+[site:name] team
+[site:url]');
+
 /**
 * Implementation of hook_menu_alter().
 **/
@@ -141,4 +153,44 @@ function borg_flag_notify_block_view($delta = '', $settings = array(), $contexts
 function borg_flag_notify_comment_insert($comment) {
   // Subscribe a user if he leaves a comment.
   node_notify_subscribe($comment->nid, $comment->uid);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function borg_flag_notify_node_insert($node) {
+  // Find users who have flagged this category.
+  $users = flag_get_entity_flags('taxonomy_term', $node->field_forums[$node->langcode][0]['tid'], 'follow_category');
+  // Subscribe them to the node.
+  foreach ($users as $uid => $data) {
+    if ($uid != $node->uid) {
+      node_notify_subscribe($node->nid, $uid);
+
+      // Let the user know. We cant use Node Notify APIs because this is a new
+      // node, not a comment.
+      $user = user_load($uid);
+      $mail = $user->mail;
+      $language = user_preferred_language($user);
+
+      $message = backdrop_mail('borg_flag_notify', 'node_notification', $mail, $language, array(
+        'subject' => token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT, array(
+          'node' => $node,
+        )),
+        'body' => filter_xss_admin(token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY, array(
+          'node' => $node,
+          'user' => $user,
+        ), array(
+          'sanitize' => FALSE,
+        ))),
+      ));
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function borg_flag_notify_mail($key, &$message, $params) {
+  $message['subject'] = $params['subject'];
+  $message['body'][] = $params['body'];
 }
