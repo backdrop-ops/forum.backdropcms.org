@@ -1,0 +1,182 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Honeypot module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function honeypot_schema() {
+  $schema['honeypot_user'] = array(
+    'description' => 'Table that stores failed attempts to submit a form.',
+    'fields' => array(
+      'uid' => array(
+        'description' => 'Foreign key to {users}.uid; uniquely identifies a Drupal user to whom this ACL data applies.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'hostname' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'Hostname of user that that triggered honeypot.',
+      ),
+      'timestamp' => array(
+        'description' => 'Date/time when the form submission failed, as Unix timestamp.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      'uid' => array('uid'),
+      'timestamp' => array('timestamp'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function honeypot_install() {
+  // Create CSS file.
+  honeypot_create_css(config_get('honeypot.settings', 'element_name'));
+
+  if (!backdrop_is_cli()) {
+    $t = get_t();
+    backdrop_set_message($t("Honeypot installed successfully. Please !link to protect your forms from spam bots.", array(
+      '!link' => l($t('configure Honeypot'), 'admin/config/content/honeypot'),
+    )));
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function honeypot_uninstall() {
+  // Delete 'honeypot' directory from public file directory.
+  file_unmanaged_delete_recursive('public://honeypot');
+}
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function honeypot_update_last_removed() {
+  return 7004;
+}
+
+/**
+ * @defgroup updates-7.x-to-1.x Updates from 7.x to 1.x
+ * @{
+ * Update functions from Drupal 7.x to Backdrop CMS 1.x.
+ */
+
+/**
+ * Move honeypot settings from variables to config.
+ */
+
+function honeypot_update_1000() {
+  // Migrate variables to config.
+  $config = config('honeypot.settings');
+  $config->set('protect_all_forms', update_variable_get('honeypot_protect_all_forms', 0));
+  $config->set('expire', update_variable_get('honeypot_expire', 300));
+  $config->set('log', update_variable_get('honeypot_log', 1));
+  $config->set('element_name', update_variable_get('honeypot_element_name', 'url'));
+  $config->set('time_limit', update_variable_get('honeypot_time_limit', 5));
+  $config->set('unprotected_forms', array(
+    'user_login',
+    'user_login_block',
+    'search_form',
+    'search_block_form',
+    'views_exposed_form',
+    'honeypot_admin_form'
+  ));
+
+  $form_settings = array();
+  $result = db_query('SELECT * FROM {variable} WHERE name LIKE  :name', array(':name' => '%honeypot_form_%'));
+  foreach ($result as $row) {
+    $form_settings[$row->name] = unserialize($row->value);
+  }
+  $config->set('form_settings', $form_settings);
+
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('honeypot_protect_all_forms');
+  update_variable_del('honeypot_expire');
+  update_variable_del('honeypot_log');
+  update_variable_del('honeypot_element_name');
+  update_variable_del('honeypot_time_limit');
+
+  foreach($form_settings as $k => $v) {
+    update_variable_del($k);
+  }
+}
+
+/**
+ * Ensure a css file is created
+ */
+function honeypot_update_1001() {
+  backdrop_load('module', 'honeypot');
+  module_load_include('inc', 'honeypot', 'honeypot.admin');
+  honeypot_create_css(config_get('honeypot.settings', 'element_name'));
+}
+
+/**
+ * Adds the 'hostname' column to the {honeypot_user} table.
+ */
+function honeypot_update_1002() {
+  if (!db_field_exists('honeypot_user', 'hostname')) {
+    $schema = honeypot_schema();
+    $spec = $schema['honeypot_user']['fields']['hostname'];
+    $spec['initial'] = '';
+    db_add_field('honeypot_user', 'hostname', $spec);
+  }
+}
+
+/**
+ * Transfer previous honeypot trigger info from {flood} to {honeypot_user}.
+ */
+function honeypot_update_1003() {
+  // Move all 'honeypot' events, which are honeypot captures for anonymous
+  // users, to the {honeypot_user}-table, since the latter now supports
+  // tracking based on ip/hostname for anonymous users.
+  $query = db_select('flood', 'f')
+    ->condition('event', 'honeypot');
+  $query->addExpression('0', 'uid');
+  $query->addField('f', 'identifier', 'hostname');
+  $query->addField('f', 'timestamp');
+  db_insert('honeypot_user')
+    ->from($query)
+    ->execute();
+
+  // Clean up the flood table by removing our events, since we are no longer
+  // relying on the flood mechanism to track anonymous honeypot captures.
+  flood_clear_event('honeypot');
+}
+
+/**
+ * Issue #9: update unprotected_forms list to include more forms found in Backdrop.
+ */
+
+function honeypot_update_1004() {
+  $config = config('honeypot.settings');
+  $config->set('unprotected_forms', array(
+    'user_login',
+    'user_login_block',
+    'search_form',
+    'search_block_form',
+    'views_exposed_form',
+    'honeypot_admin_form'
+  ));
+  $config->save();
+}
+
+/*
+ * @} End of "defgroup updates-7.x-to-1.x"
+ * The next series of updates should start at 2000.
+ */
