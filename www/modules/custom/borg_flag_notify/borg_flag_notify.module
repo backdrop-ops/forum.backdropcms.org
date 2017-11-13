@@ -194,3 +194,17 @@ function borg_flag_notify_mail($key, &$message, $params) {
   $message['subject'] = $params['subject'];
   $message['body'][] = $params['body'];
 }
+
+/**
+ * Implementation of hook_flag().
+ */
+function borg_flag_notify_flag($action, $flag, $content_id, $account) {
+  // If a user flags an "accepted" comment, unflag any others he had accepted before.
+  if ($action == 'flag' && $flag->name == 'accepted') {
+    $query = "SELECT * FROM {flag_content} WHERE fid = :fid AND uid IN(:uid, 0) ORDER BY timestamp DESC";
+    $result = db_query($query, array(':fid' => $flag->fid, ':uid' => $account->uid));
+    while ($row = $result->fetchObject()) {
+      flag('unflag', $flag->name, $row->content_id, $account);
+    }
+  }
+}
