@@ -237,9 +237,7 @@
                         "ui_name": "",
                         "operator": "in",
                         "value": {
-                            "forum_custom": "forum_custom",
-                            "forum": "forum",
-                            "question": "question"
+                            "forum_topic": "forum_topic"
                         },
                         "group": "1",
                         "exposed": false,
@@ -292,8 +290,23 @@
                         "ui_name": "",
                         "label": "flag",
                         "required": 1,
-                        "flag": "frequently_asked_question",
+                        "flag": "faq",
                         "user_scope": "any"
+                    }
+                },
+                "empty": {
+                    "area": {
+                        "id": "area",
+                        "table": "views",
+                        "field": "area",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "",
+                        "empty": true,
+                        "content": "<p>There are no frequently asked questions yet, but as they come in the most common ones can be found easily, here.</p>\r\n",
+                        "format": "filtered_html",
+                        "tokenize": 0
                     }
                 }
             }

@@ -18,7 +18,7 @@
         "edit terms in forums_custom",
         "delete terms in forums_custom",
         "administer users",
-        "flag frequently_asked_question",
-        "unflag frequently_asked_question"
+        "flag faq",
+        "unflag faq"
     ]
 }

@@ -26,7 +26,10 @@
             "default",
             "a531c13d-be06-4a61-9302-2acfbc883f62"
         ],
-        "sidebar": [],
+        "sidebar": [
+            "5486d381-698f-407b-a715-216f45ff14d6",
+            "24a72804-5cd2-46ea-aa00-f4f366c55885"
+        ],
         "bottom": [],
         "footer": [
             "cd4d033d-3f67-4191-8655-85ee758877c0"
@@ -175,6 +178,52 @@
                         }
                     }
                 ]
+            }
+        },
+        "5486d381-698f-407b-a715-216f45ff14d6": {
+            "plugin": "borg_forum:new_forum_button",
+            "data": {
+                "module": "borg_forum",
+                "delta": "new_forum_button",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "5486d381-698f-407b-a715-216f45ff14d6",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "24a72804-5cd2-46ea-aa00-f4f366c55885": {
+            "plugin": "borg_flag_notify:follow_forum_category",
+            "data": {
+                "module": "borg_flag_notify",
+                "delta": "follow_forum_category",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "24a72804-5cd2-46ea-aa00-f4f366c55885",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {

@@ -97,7 +97,12 @@
         "use flag import",
         "edit terms in forums",
         "delete terms in forums",
-        "flag frequently_asked_question",
-        "unflag frequently_asked_question"
+        "flag faq",
+        "unflag faq",
+        "administer node notify",
+        "administer node subscriptions",
+        "subscribe to node",
+        "administer honeypot",
+        "bypass honeypot protection"
     ]
 }
