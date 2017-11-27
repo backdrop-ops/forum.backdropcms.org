@@ -1,0 +1,21 @@
+{
+    "_config_name": "image_captcha.settings",
+    "image_allowed_chars": "aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456789",
+    "code_length": 5,
+    "rtl_support": 0,
+    "background_color": "#ffffff",
+    "foreground_color": "#000000",
+    "foreground_color_randomness": 100,
+    "file_format": 1,
+    "distortion_amplitude": 0,
+    "bilinear_interpolation": 0,
+    "dot_noise": 0,
+    "line_noise": 0,
+    "noise_level": 5,
+    "font_token": "BUILTIN",
+    "font_size": 30,
+    "character_spacing": 1.2,
+    "fonts": {
+        "BUILTIN": "BUILTIN"
+    }
+}
