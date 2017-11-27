@@ -1,0 +1,216 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the CAPTCHA module.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function captcha_schema() {
+  // Table for the CAPTCHA sessions.
+  $schema['captcha_sessions'] = array(
+    'description' => 'Stores the data about CAPTCHA sessions (solution, IP address, timestamp, ...).',
+    'fields' => array(
+      'csid' => array(
+        'description' => 'CAPTCHA session ID.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'token' => array(
+        'description' => 'One time CAPTCHA token.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => FALSE,
+      ),
+      'uid' => array(
+        'description' => "User's {users}.uid.",
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sid' => array(
+        'description' => "Session ID of the user.",
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'ip_address' => array(
+        'description' => 'IP address of the visitor.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ),
+      'timestamp' => array(
+        'description' => 'A Unix timestamp indicating when the challenge was generated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'form_id' => array(
+        'description' => 'The form_id of the form where the CAPTCHA is added to.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'solution' => array(
+        'description' => 'Solution of the challenge.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Status of the CAPTCHA session (unsolved, solved, ...)',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'attempts' => array(
+        'description' => 'The number of attempts.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('csid'),
+    'indexes' => array(
+      'csid_ip' => array('csid', 'ip_address'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements of hook_requirements().
+ */
+function captcha_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'runtime' && config_get('captcha.settings', 'enable_stats')) {
+    // Show the wrong response counter in the status report.
+    $requirements['captcha_wrong_response_counter'] = array(
+      'title' => $t('CAPTCHA'),
+      'value' => format_plural(
+        config_get('captcha.settings', 'wrong_response_counter'),
+        'Already 1 blocked form submission',
+        'Already @count blocked form submissions'
+      ),
+      'severity' => REQUIREMENT_INFO,
+    );
+  }
+  return $requirements;
+}
+
+/**
+ * Implements of hook_install().
+ */
+function captcha_install() {
+  $t = get_t();
+
+  // Be friendly to your users: what to do after install?
+  backdrop_set_message($t('You can now <a href="!captcha_admin">configure the CAPTCHA module</a> for your site.',
+    array('!captcha_admin' => url('admin/config/people/captcha'))), 'status');
+
+  // Explain to users that page caching may be disabled.
+  if (config_get('system.core', 'cache') != 0) {
+    backdrop_set_message($t('Note that the CAPTCHA module disables <a href="!performance_admin">page caching</a> of pages that include a CAPTCHA challenge.',
+      array('!performance_admin' => url('admin/config/development/performance'))), 'warning');
+  }
+}
+
+/**
+ * Implements of hook_uninstall().
+ */
+function captcha_uninstall() {
+  backdrop_uninstall_schema('captcha');
+}
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function captcha_update_last_removed() {
+  return 7000;
+}
+
+/**
+ * @defgroup updates-7.x-to-1.x Updates from 7.x to 1.x
+ * @{
+ * Update functions from Drupal 7.x to Backdrop CMS 1.x.
+ */
+
+/**
+ * Move captcha settings from variables to config.
+ */
+function captcha_update_1000() {
+  // Migrate variables to config.
+  $config = config('captcha.settings');
+  $config->set('enable_stats', update_variable_get('captcha_enable_stats', 0));
+  $config->set('log_wrong_responses', update_variable_get('captcha_log_wrong_responses', 0));
+  $config->set('default_validation', update_variable_get('captcha_default_validation', 1));
+  $config->set('add_captcha_description', update_variable_get('captcha_add_captcha_description', 1));
+  $config->set('allow_on_admin_pages', update_variable_get('captcha_allow_on_admin_pages', 0));
+  $config->set('persistence', update_variable_get('captcha_persistence', 1));
+  $config->set('wrong_response_counter', update_variable_get('captcha_wrong_response_counter', 0));
+  $config->set('default_challenge_on_nonlisted_forms', update_variable_get('captcha_default_challenge_on_nonlisted_forms', 0));
+  $config->set('captcha_default_challenge', update_variable_get('captcha_default_challenge', 'captcha/Math'));
+  $config->set('administration_mode', update_variable_get('captcha_administration_mode', 0));
+
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('captcha_enable_stats');
+  update_variable_del('captcha_wrong_response_counter');
+  update_variable_del('captcha_log_wrong_responses');
+  update_variable_del('captcha_placement_map_cache');
+  update_variable_del('captcha_default_validation');
+  update_variable_del('captcha_add_captcha_description');
+  update_variable_del('captcha_allow_on_admin_pages');
+  update_variable_del('captcha_default_challenge_on_nonlisted_forms');
+  update_variable_del('captcha_default_challenge');
+  update_variable_del('captcha_administration_mode');
+  update_variable_del('captcha_persistence');
+}
+
+/**
+ * Add captcha points as an empty array to config if it doesn't exist.
+ */
+function captcha_update_1001() {
+  $config = config('captcha.settings');
+  $captcha_points = $config->get('captcha_points');
+  if (!$captcha_points) {
+    $config->set('captcha_points', array(
+    ));
+    $config->save();
+  }
+}
+
+/**
+ * Increase the Session Id field size.
+ */
+function captcha_update_1002() {
+  $schema = captcha_schema();
+
+  db_change_field('captcha_sessions', 'sid', 'sid', array(
+    'description' => "Session ID of the user.",
+    'type' => 'varchar',
+    'length' => 128,
+    'not null' => TRUE,
+    'default' => '',
+  ));
+}
+
+/**
+ * Add disable_catpcha setting.
+ */
+function captcha_update_1003() {
+  config_set('captcha.settings', 'disable_captcha', FALSE);
+}
+
+/**
+ * @} End of "defgroup updates-7.x-to-1.x"
+ * The next series of updates should start at 2000.
+ */
