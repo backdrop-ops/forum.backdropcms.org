@@ -1,0 +1,12 @@
+name = reCAPTCHA
+description = Protect your website from spam and abuse while letting real people pass through with ease.
+backdrop = 1.x
+type = module
+package = Spam control
+dependencies[] = captcha
+configure = admin/config/people/captcha/recaptcha
+
+; Added by Backdrop CMS packaging script on 2017-10-20
+project = recaptcha
+version = 1.x-2.2.4
+timestamp = 1508514490

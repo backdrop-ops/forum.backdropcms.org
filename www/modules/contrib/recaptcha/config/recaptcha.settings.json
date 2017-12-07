@@ -1,0 +1,10 @@
+{
+    "_config_name": "recaptcha.settings",
+    "site_key": "",
+    "secret_key": "",
+    "theme": "light",
+    "type": "image",
+    "size": "",
+    "tabindex": 0,
+    "noscript": 0
+}

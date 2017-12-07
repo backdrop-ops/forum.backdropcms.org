@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Installation file for reCAPTCHA module.
+ */
+
+/**
+ * Implements of hook_install().
+ */
+function recaptcha_install() {
+  $t = get_t();
+
+  // Be friendly to your users: what to do after install?
+  backdrop_set_message($t('You can now <a href="!recaptcha_admin">configure the reCAPTCHA module</a> for your site.',
+    array('!recaptcha_admin' => url('admin/config/people/captcha/recaptcha'))), 'status');
+}
+
+/**
+ * Move recaptcha settings from variables to config.
+ */
+function recaptcha_update_1000() {
+  // Migrate variables to config.
+  $config = config('recaptcha.settings');
+  $config->set('site_key', update_variable_get('recaptcha_site_key', ''));
+  $config->set('private_key', update_variable_get('recaptcha_private_key', ''));
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('recaptcha_site_key');
+  update_variable_del('recaptcha_private_key');
+}
+
+/**
+ * Rename private_key to secret_key and add new variable defaults
+ */
+function recaptcha_update_1001() {
+  $config = config('recaptcha.settings');
+
+  // Renamed variable
+  $private_key = $config->get('private_key');
+  $config->set('secret_key', $private_key);
+  $config->clear('private_key');
+
+  // Set defaults for new variables
+  $config->set('theme', 'light');
+  $config->set('type', 'image');
+  $config->set('size', '');
+  $config->set('tabindex', 0);
+  $config->set('noscript', 0);
+  $config->save();
+}
