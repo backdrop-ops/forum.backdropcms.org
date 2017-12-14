@@ -6,6 +6,7 @@
     "permissions": [
         "access content",
         "access comments",
-        "use text format filtered_html"
+        "use text format filtered_html",
+        "search content"
     ]
 }

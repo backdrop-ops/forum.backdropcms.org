@@ -14,5 +14,5 @@
     "node_notify_expires": "-1 month",
     "node_notify_log": 1,
     "node_notify_template_subject": "New comment on \"[comment:node:title]\" by [comment:author]",
-    "node_notify_template_body": "Hi [subscriber:name],\r\n\r\n[comment:author] has commented on: \"[comment:node:title]\"\r\n\r\n----\r\n[comment:title]\r\n\r\n[comment:body]\r\n----\r\n\r\nYou can view the comment at the following url\r\n[comment:url]\r\n\r\nYou can stop receiving emails when someone replies to this post,\r\nby going to [subscription:unsubscribe-url]\r\n\r\n-- [site:name] team\r\n[site:url]"
+    "node_notify_template_body": "Hi [subscriber:name],\r\n\r\n[comment:author] has commented on: \"[comment:node:title]\"\r\n\r\n----\r\n\r\n[comment:body]\r\n\r\n----\r\n\r\nYou can view the comment at the following url\r\n[comment:url]\r\n\r\nYou can stop receiving emails when someone replies to this post,\r\nby going to [subscription:unsubscribe-url]\r\n\r\n-- [site:name] team\r\n[site:url]"
 }

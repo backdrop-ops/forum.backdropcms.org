@@ -1,0 +1,301 @@
+{
+    "_config_name": "layout.layout.forum_topic",
+    "path": "node/%",
+    "name": "forum_topic",
+    "title": "Forum topic",
+    "description": null,
+    "module": null,
+    "weight": 0,
+    "storage": 1,
+    "layout_template": "moscone_flipped",
+    "disabled": false,
+    "settings": {
+        "title": "",
+        "title_display": "default",
+        "title_block": null
+    },
+    "positions": {
+        "header": [
+            "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
+            "5d77dcfb-6c6d-4916-9f09-9d28375749ca"
+        ],
+        "top": [
+            "abbf1d44-0987-4d0a-a72c-446c5da08ce2"
+        ],
+        "content": [
+            "190ed22c-dc7e-40de-af00-0c4111519281",
+            "b7a2edc0-e7e4-42b2-b908-8f01c23d2529",
+            "409a7024-5cab-4562-a000-cbb242ac4c26",
+            "e91f6de2-bbec-45a1-8700-a15ddb81de24"
+        ],
+        "sidebar": [
+            "18e7ee72-6b80-4599-b709-9bbd78a16d78",
+            "e5c2668b-f55c-40dc-b54a-74c3b86d1991"
+        ],
+        "bottom": [],
+        "footer": [
+            "51d37868-530d-48fe-ae51-81911d23e7e9"
+        ],
+        "title": []
+    },
+    "content": {
+        "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9": {
+            "plugin": "borg_forum:branding",
+            "data": {
+                "module": "borg_forum",
+                "delta": "branding",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "5d77dcfb-6c6d-4916-9f09-9d28375749ca": {
+            "plugin": "system:main-menu",
+            "data": {
+                "module": "system",
+                "delta": "main-menu",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "style": "dropdown",
+                        "level": 1,
+                        "depth": 0
+                    },
+                    "contexts": []
+                },
+                "uuid": "5d77dcfb-6c6d-4916-9f09-9d28375749ca",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "abbf1d44-0987-4d0a-a72c-446c5da08ce2": {
+            "plugin": "system:breadcrumb",
+            "data": {
+                "module": "system",
+                "delta": "breadcrumb",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "current": 1
+                    },
+                    "contexts": []
+                },
+                "uuid": "abbf1d44-0987-4d0a-a72c-446c5da08ce2",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "190ed22c-dc7e-40de-af00-0c4111519281": {
+            "plugin": "system:main",
+            "data": {
+                "module": "system",
+                "delta": "main",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "190ed22c-dc7e-40de-af00-0c4111519281",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "b7a2edc0-e7e4-42b2-b908-8f01c23d2529": {
+            "plugin": "views:accepted_answer-block",
+            "data": {
+                "module": "views",
+                "delta": "accepted_answer-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "11",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "b7a2edc0-e7e4-42b2-b908-8f01c23d2529",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "409a7024-5cab-4562-a000-cbb242ac4c26": {
+            "plugin": "views:helpful_answer-block",
+            "data": {
+                "module": "views",
+                "delta": "helpful_answer-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "409a7024-5cab-4562-a000-cbb242ac4c26",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "e91f6de2-bbec-45a1-8700-a15ddb81de24": {
+            "plugin": "borg_forum:comment_form_block",
+            "data": {
+                "module": "borg_forum",
+                "delta": "comment_form_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "e91f6de2-bbec-45a1-8700-a15ddb81de24",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "18e7ee72-6b80-4599-b709-9bbd78a16d78": {
+            "plugin": "borg_forum:new_forum_button",
+            "data": {
+                "module": "borg_forum",
+                "delta": "new_forum_button",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "18e7ee72-6b80-4599-b709-9bbd78a16d78",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "e5c2668b-f55c-40dc-b54a-74c3b86d1991": {
+            "plugin": "borg_flag_notify:follow_forum_category",
+            "data": {
+                "module": "borg_flag_notify",
+                "delta": "follow_forum_category",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "e5c2668b-f55c-40dc-b54a-74c3b86d1991",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "51d37868-530d-48fe-ae51-81911d23e7e9": {
+            "plugin": "system:powered-by",
+            "data": {
+                "module": "system",
+                "delta": "powered-by",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "51d37868-530d-48fe-ae51-81911d23e7e9",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

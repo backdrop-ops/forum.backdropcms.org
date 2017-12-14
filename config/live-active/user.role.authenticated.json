@@ -30,6 +30,9 @@
         "flag follow_category",
         "unflag follow_category",
         "flag abusive_post",
-        "unflag abusive_post"
+        "unflag abusive_post",
+        "subscribe to node",
+        "search content",
+        "change own username"
     ]
 }

@@ -54,7 +54,8 @@
                 {
                     "name": "j",
                     "items": [
-                        "Styles"
+                        "Styles",
+                        "RemoveFormat"
                     ]
                 }
             ]

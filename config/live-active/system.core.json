@@ -62,7 +62,7 @@
     "theme_default": "borg_forum_theme",
     "theme_debug": 0,
     "user_admin_role": "administrator",
-    "user_cancel_method": "user_cancel_block",
+    "user_cancel_method": "user_cancel_delete",
     "user_email_verification": 1,
     "user_email_match": 1,
     "user_login_method": "username_or_email",

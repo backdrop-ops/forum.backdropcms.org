@@ -3,7 +3,7 @@
     "protect_all_forms": 1,
     "expire": 300,
     "log": 0,
-    "element_name": "url",
+    "element_name": "homepage",
     "time_limit": "0",
     "unprotected_forms": [
         "user_login",

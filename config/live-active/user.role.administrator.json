@@ -29,9 +29,6 @@
         "access content",
         "view own unpublished content",
         "view any unpublished content",
-        "view revisions",
-        "revert revisions",
-        "delete revisions",
         "create page content",
         "edit own page content",
         "edit any page content",
@@ -58,7 +55,6 @@
         "access site in maintenance mode",
         "view the administration theme",
         "access site reports",
-        "block IP addresses",
         "administer taxonomy",
         "edit terms in tags",
         "delete terms in tags",
@@ -103,6 +99,16 @@
         "administer node subscriptions",
         "subscribe to node",
         "administer honeypot",
-        "bypass honeypot protection"
+        "bypass honeypot protection",
+        "administer CAPTCHA settings",
+        "skip CAPTCHA",
+        "administer recaptcha",
+        "flag archived",
+        "unflag archived",
+        "edit own forum_topic content",
+        "edit any forum_topic content",
+        "delete own forum_topic content",
+        "delete any forum_topic content",
+        "assign roles"
     ]
 }

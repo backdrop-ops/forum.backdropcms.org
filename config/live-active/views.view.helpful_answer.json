@@ -14,7 +14,14 @@
             "display_options": {
                 "query": {
                     "type": "views_query",
-                    "options": []
+                    "options": {
+                        "disable_sql_rewrite": 0,
+                        "distinct": 1,
+                        "pure_distinct": 0,
+                        "slave": 0,
+                        "query_comment": "",
+                        "query_tags": []
+                    }
                 },
                 "access": {
                     "type": "perm",
@@ -53,6 +60,17 @@
                         "required": 1,
                         "flag": "helpful",
                         "user_scope": "any"
+                    },
+                    "flag_count_rel": {
+                        "id": "flag_count_rel",
+                        "table": "comment",
+                        "field": "flag_count_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "counter",
+                        "required": 1,
+                        "flag": "helpful"
                     }
                 },
                 "fields": {
@@ -193,6 +211,49 @@
                             "operator": false
                         },
                         "group": 1
+                    },
+                    "comment_count": {
+                        "id": "comment_count",
+                        "table": "node_comment_statistics",
+                        "field": "comment_count",
+                        "relationship": "nid",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": ">",
+                        "value": {
+                            "min": "",
+                            "max": "",
+                            "value": "3"
+                        },
+                        "group": "1",
+                        "exposed": false,
+                        "expose": {
+                            "operator_id": false,
+                            "label": "",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "",
+                            "identifier": "",
+                            "required": false,
+                            "remember": false,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated"
+                            }
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        }
                     }
                 },
                 "sorts": {
@@ -201,6 +262,19 @@
                         "table": "comment",
                         "field": "created",
                         "order": "DESC"
+                    },
+                    "count": {
+                        "id": "count",
+                        "table": "flag_counts",
+                        "field": "count",
+                        "relationship": "flag_count_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "DESC",
+                        "exposed": false,
+                        "expose": {
+                            "label": ""
+                        }
                     }
                 },
                 "title": "Most helpful answers",
