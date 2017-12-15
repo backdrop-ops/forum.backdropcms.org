@@ -94,6 +94,45 @@
                         "expose": {
                             "operator": false
                         }
+                    },
+                    "flagged": {
+                        "id": "flagged",
+                        "table": "flagging",
+                        "field": "flagged",
+                        "relationship": "flag_content_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "=",
+                        "value": "0",
+                        "group": "1",
+                        "exposed": false,
+                        "expose": {
+                            "operator_id": false,
+                            "label": "",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "",
+                            "identifier": "",
+                            "required": false,
+                            "remember": false,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated"
+                            }
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        }
                     }
                 },
                 "style_options": {
@@ -288,6 +327,18 @@
                         "ui_name": "",
                         "label": "author",
                         "required": 0
+                    },
+                    "flag_content_rel": {
+                        "id": "flag_content_rel",
+                        "table": "node",
+                        "field": "flag_content_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "archived",
+                        "required": 0,
+                        "flag": "archived",
+                        "user_scope": "any"
                     }
                 },
                 "group_by": 1,

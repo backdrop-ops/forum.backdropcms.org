@@ -1,12 +1,12 @@
 {
-    "_config_name": "layout.layout.default",
-    "path": "",
-    "name": "default",
-    "title": "Default Layout",
+    "_config_name": "layout.layout.forum_topic",
+    "path": "node/%",
+    "name": "forum_topic",
+    "title": "Forum topic",
     "description": null,
-    "module": "layout",
+    "module": null,
     "weight": 0,
-    "storage": 2,
+    "storage": 1,
     "layout_template": "moscone_flipped",
     "disabled": false,
     "settings": {
@@ -16,28 +16,30 @@
     },
     "positions": {
         "header": [
-            "50117bd7-18bd-4b6d-9729-41225f251f97",
-            "13b2f325-af26-40bb-8c61-97fe1d93f19f"
+            "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
+            "5d77dcfb-6c6d-4916-9f09-9d28375749ca"
         ],
         "top": [
-            "09f11b4e-877e-45ab-9000-a4c6254faa04"
+            "abbf1d44-0987-4d0a-a72c-446c5da08ce2"
         ],
         "content": [
-            "default",
-            "a531c13d-be06-4a61-9302-2acfbc883f62"
+            "190ed22c-dc7e-40de-af00-0c4111519281",
+            "b7a2edc0-e7e4-42b2-b908-8f01c23d2529",
+            "409a7024-5cab-4562-a000-cbb242ac4c26",
+            "e91f6de2-bbec-45a1-8700-a15ddb81de24"
         ],
         "sidebar": [
-            "5486d381-698f-407b-a715-216f45ff14d6",
-            "24a72804-5cd2-46ea-aa00-f4f366c55885"
+            "18e7ee72-6b80-4599-b709-9bbd78a16d78",
+            "e5c2668b-f55c-40dc-b54a-74c3b86d1991"
         ],
         "bottom": [],
         "footer": [
-            "cd4d033d-3f67-4191-8655-85ee758877c0"
+            "51d37868-530d-48fe-ae51-81911d23e7e9"
         ],
         "title": []
     },
     "content": {
-        "50117bd7-18bd-4b6d-9729-41225f251f97": {
+        "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9": {
             "plugin": "borg_forum:branding",
             "data": {
                 "module": "borg_forum",
@@ -49,7 +51,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "50117bd7-18bd-4b6d-9729-41225f251f97",
+                "uuid": "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -60,7 +62,7 @@
                 }
             }
         },
-        "13b2f325-af26-40bb-8c61-97fe1d93f19f": {
+        "5d77dcfb-6c6d-4916-9f09-9d28375749ca": {
             "plugin": "system:main-menu",
             "data": {
                 "module": "system",
@@ -76,7 +78,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "13b2f325-af26-40bb-8c61-97fe1d93f19f",
+                "uuid": "5d77dcfb-6c6d-4916-9f09-9d28375749ca",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -87,7 +89,7 @@
                 }
             }
         },
-        "09f11b4e-877e-45ab-9000-a4c6254faa04": {
+        "abbf1d44-0987-4d0a-a72c-446c5da08ce2": {
             "plugin": "system:breadcrumb",
             "data": {
                 "module": "system",
@@ -101,7 +103,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "09f11b4e-877e-45ab-9000-a4c6254faa04",
+                "uuid": "abbf1d44-0987-4d0a-a72c-446c5da08ce2",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -112,7 +114,7 @@
                 }
             }
         },
-        "default": {
+        "190ed22c-dc7e-40de-af00-0c4111519281": {
             "plugin": "system:main",
             "data": {
                 "module": "system",
@@ -124,7 +126,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "default",
+                "uuid": "190ed22c-dc7e-40de-af00-0c4111519281",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -135,19 +137,19 @@
                 }
             }
         },
-        "a531c13d-be06-4a61-9302-2acfbc883f62": {
-            "plugin": "views:categories-block",
+        "b7a2edc0-e7e4-42b2-b908-8f01c23d2529": {
+            "plugin": "views:accepted_answer-block",
             "data": {
                 "module": "views",
-                "delta": "categories-block",
+                "delta": "accepted_answer-block",
                 "settings": {
-                    "link_to_view": null,
+                    "link_to_view": 0,
                     "more_link": false,
                     "use_pager": false,
                     "pager_id": 0,
-                    "items_per_page": "50",
+                    "items_per_page": "11",
                     "offset": 0,
-                    "path": "forums",
+                    "path": null,
                     "fields_override": null,
                     "title_display": "default",
                     "title": "",
@@ -155,9 +157,10 @@
                     "block_settings": [],
                     "contexts": [],
                     "allowed": [],
-                    "path_override": false
+                    "path_override": false,
+                    "exposed": []
                 },
-                "uuid": "a531c13d-be06-4a61-9302-2acfbc883f62",
+                "uuid": "b7a2edc0-e7e4-42b2-b908-8f01c23d2529",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -165,22 +168,67 @@
                             "classes": ""
                         }
                     }
-                },
-                "conditions": [
-                    {
-                        "plugin": "path",
-                        "data": {
-                            "settings": {
-                                "visibility_setting": "1",
-                                "paths": "forum-two",
-                                "load_condition_nojs": "Load condition"
-                            }
-                        }
-                    }
-                ]
+                }
             }
         },
-        "5486d381-698f-407b-a715-216f45ff14d6": {
+        "409a7024-5cab-4562-a000-cbb242ac4c26": {
+            "plugin": "views:helpful_answer-block",
+            "data": {
+                "module": "views",
+                "delta": "helpful_answer-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "409a7024-5cab-4562-a000-cbb242ac4c26",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "e91f6de2-bbec-45a1-8700-a15ddb81de24": {
+            "plugin": "borg_forum:comment_form_block",
+            "data": {
+                "module": "borg_forum",
+                "delta": "comment_form_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "e91f6de2-bbec-45a1-8700-a15ddb81de24",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "18e7ee72-6b80-4599-b709-9bbd78a16d78": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
                 "module": "borg_forum",
@@ -192,7 +240,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "5486d381-698f-407b-a715-216f45ff14d6",
+                "uuid": "18e7ee72-6b80-4599-b709-9bbd78a16d78",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -203,7 +251,7 @@
                 }
             }
         },
-        "24a72804-5cd2-46ea-aa00-f4f366c55885": {
+        "e5c2668b-f55c-40dc-b54a-74c3b86d1991": {
             "plugin": "borg_flag_notify:follow_forum_category",
             "data": {
                 "module": "borg_flag_notify",
@@ -215,7 +263,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "24a72804-5cd2-46ea-aa00-f4f366c55885",
+                "uuid": "e5c2668b-f55c-40dc-b54a-74c3b86d1991",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -226,7 +274,7 @@
                 }
             }
         },
-        "cd4d033d-3f67-4191-8655-85ee758877c0": {
+        "51d37868-530d-48fe-ae51-81911d23e7e9": {
             "plugin": "system:powered-by",
             "data": {
                 "module": "system",
@@ -238,7 +286,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "cd4d033d-3f67-4191-8655-85ee758877c0",
+                "uuid": "51d37868-530d-48fe-ae51-81911d23e7e9",
                 "style": {
                     "plugin": "default",
                     "data": {

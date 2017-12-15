@@ -288,9 +288,7 @@
                         "ui_name": "",
                         "operator": "in",
                         "value": {
-                            "forum_custom": "forum_custom",
-                            "forum": "forum",
-                            "question": "question"
+                            "forum_topic": "forum_topic"
                         },
                         "group": "1",
                         "exposed": false,
