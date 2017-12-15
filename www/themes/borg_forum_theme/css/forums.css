@@ -59,17 +59,23 @@ article.comment {
   border: 2px solid #d7d7d7;
   margin-bottom: 1em;
 }
+article.node footer,
 article.comment footer {
   background-color: #f7f7f7;
   padding: .5em 1em;
 }
+article.node.view-mode-full footer {
+  max-width: 100%;
+}
 article.comment footer a.permalink {
   float: right;
 }
+article.node footer .user-picture,
 article.comment footer .user-picture {
   float: left;
   margin-right: 15px;
 }
+article.node footer .user-picture img,
 article.comment footer .user-picture img {
   border-radius: 50%;
   background: #ffffff;
@@ -81,6 +87,7 @@ article.comment h3 {
 article.comment .content {
   padding: 1em;
 }
+article.node .submitted,
 article.comment .submitted {
   display: inline-block;
   font-size: 0.9em;
@@ -88,6 +95,7 @@ article.comment .submitted {
   line-height: 40px;
   margin: 0;
 }
+article.node .has-picture .submitted,
 article.comment .has-picture .submitted {
   height: 100px;
   line-height: 100px;
@@ -106,9 +114,8 @@ article.node-forum-topic .links li,
 }
 article.node-forum-topic ul.links {
   margin: 0;
-  border-top: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
-  padding: .75em 0;
+  padding: 0 0 .75em 0;
   list-style-type: none;
 }
 article.node ul.links li {
