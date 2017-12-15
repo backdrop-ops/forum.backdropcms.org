@@ -4,7 +4,7 @@
     "name": "Forum topic",
     "base": "node_content",
     "module": "node",
-    "description": "This is a custom content type.",
+    "description": "Forum topics appear in one of the predefined Forum categories.",
     "help": "",
     "modified": true,
     "disabled": false,
