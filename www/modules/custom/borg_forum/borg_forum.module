@@ -162,7 +162,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
 
 
     if (user_is_logged_in()) {
-      $link = l(t('New topic'), $add_link);
+      $link = l(t('New topic'), $add_link, array('attributes' => array('class' => array('button'))));
       $output = '<div class ="new-topic"><span>' . $link . '</span></div>';
     }
     else {
