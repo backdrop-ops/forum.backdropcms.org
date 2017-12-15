@@ -3,9 +3,9 @@
     "field_name": "field_forums",
     "entity_type": "node",
     "bundle": "forum_topic",
-    "label": "Forums",
+    "label": "Forum",
     "widget": {
-        "weight": "4",
+        "weight": 0,
         "type": "options_select",
         "module": "options",
         "active": 1,
@@ -22,10 +22,9 @@
     "display": {
         "default": {
             "label": "above",
-            "type": "taxonomy_term_reference_link",
-            "settings": [],
-            "module": "taxonomy",
-            "weight": 3
+            "type": "hidden",
+            "weight": "3",
+            "settings": []
         }
     }
 }

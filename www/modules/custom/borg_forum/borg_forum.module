@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Provides additional functions for Backdrop.org discussion forums.
+ * Provides additional functions for Backdrop.org discussion forum.
  */
 
 
@@ -61,7 +61,7 @@ function borg_forum_node_view(Node $node, $view_mode, $langcode) {
   if ($node->type == 'forum_topic') {
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), NULL);
-    $breadcrumb[] = l(t('Forums'), 'forums');
+    $breadcrumb[] = l(t('Forum'), 'forums');
     $field_forums = field_get_items('node', $node, 'field_forums');
     if ($field_forums) {
       $data = reset($field_forums);
@@ -69,7 +69,7 @@ function borg_forum_node_view(Node $node, $view_mode, $langcode) {
       $breadcrumb[] = l($data->name, $data->path['alias']);
     }
     backdrop_set_breadcrumb($breadcrumb);
-    
+
   }
 }
 
@@ -84,7 +84,7 @@ function borg_forum_views_pre_render(&$view) {
 
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), NULL);
-    $breadcrumb[] = l(t('Forums'), 'forums');
+    $breadcrumb[] = l(t('Forum'), 'forums');
     if ($parents) {
       foreach ($parents as $parent) {
         $breadcrumb[] = l($parent->name, 'forums/' . $parent->tid);
@@ -128,11 +128,11 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
   switch ($delta) {
   case 'branding':
     $options = array('attributes' => array('class' => array('site-name')));
-    $output = l(t('backdrop forums'), '', $options);
+    $output = l(t('backdrop forum'), '', $options);
 
     $uri = backdrop_get_path('module', 'borg_forum') . '/images/logo.png';
     $image = theme('image', array('uri' => $uri, 'alt' => t('Backdrop CMS Logo')));
-    $options = array('html' => TRUE, 'attributes' => array('class' => array('logo'), 'title' => t('Backdrop CMS Forums')));
+    $options = array('html' => TRUE, 'attributes' => array('class' => array('logo'), 'title' => t('Backdrop CMS Forum')));
     $output .= l($image, '', $options);
 
     $block['subject'] = NULL;
@@ -140,7 +140,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
     break;
   case 'new_forum_button':
     // This block will be available on taxonomy term pages (forum categories)
-    // and also on node pages (forum topics) so we get the $tid to pass it to 
+    // and also on node pages (forum topics) so we get the $tid to pass it to
     // the link.
     $tid = NULL;
     if ($item = menu_get_item()) {
@@ -228,14 +228,14 @@ function borg_forum_node_view_alter(&$build) {
  */
 function commentsblock_static_comments($nid, $build, $node = false) {
   $comments = &backdrop_static(__FUNCTION__);
-  
+
   if (isset($build['comments'])) {
     $comments[$nid]['comments'] = $build['comments'];
   } else {
     if (!isset($comments[$nid])) {
       $comments[$nid]['comments'] = comment_node_page_additions($node);
     }
-	
+
     return $comments[$nid];
   }
 }

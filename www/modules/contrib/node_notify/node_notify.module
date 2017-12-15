@@ -196,6 +196,7 @@ function node_notify_config_info() {
     'label' => t('Module name settings'),
     'group' => t('Configuration'),
   );
+  return $prefixes;
 }
 
 /**
@@ -355,7 +356,7 @@ function node_notify_node_update($node) {
 function node_notify_node_delete($node) {
   db_query(
     'DELETE FROM {node_notify_notification}
-      WHERE sid IN (SELECT sid FROM {node_notify_subscription} WHERE nid = :nid)',  
+      WHERE sid IN (SELECT sid FROM {node_notify_subscription} WHERE nid = :nid)',
     array(':nid' => $node->nid)
   );
   db_delete('node_notify_subscription')
@@ -427,7 +428,7 @@ function node_notify_comment_delete($comment) {
 function node_notify_user_delete($account) {
   db_query(
     'DELETE FROM {node_notify_notification}
-      WHERE sid IN (SELECT sid FROM {node_notify_subscription} WHERE uid = :uid)',  
+      WHERE sid IN (SELECT sid FROM {node_notify_subscription} WHERE uid = :uid)',
     array(':uid' => $account->uid)
   );
   db_delete('node_notify_subscription')
@@ -605,7 +606,7 @@ function _node_notify_processed_by_comment_notify($comment, $uid, $email) {
         WHERE c.nid = :nid
           AND c.status = :status
           AND cn.notify = :notify
-          AND ((u.uid = 0 AND c.mail = :mail) OR (u.uid = :uid AND u.uid > 0))',  
+          AND ((u.uid = 0 AND c.mail = :mail) OR (u.uid = :uid AND u.uid > 0))',
       array(
       ':nid' => $comment->nid,
       ':status' => COMMENT_PUBLISHED,
@@ -626,7 +627,7 @@ function _node_notify_processed_by_comment_notify($comment, $uid, $email) {
      INNER JOIN {node} n ON cnu.uid = n.uid
           WHERE cnu.uid = :uid
             AND cnu.node_notify = 1
-            AND n.nid = :nid',  
+            AND n.nid = :nid',
         array(
         ':uid' => $uid,
         ':nid' => $comment->nid,
@@ -647,7 +648,7 @@ function _node_notify_processed_by_comment_notify($comment, $uid, $email) {
           AND c.cid <> :cid
           AND c.status = :status
           AND cn.notify = :notify
-          AND ((u.uid = 0 AND c.mail = :mail) OR u.uid = :uid)',  
+          AND ((u.uid = 0 AND c.mail = :mail) OR u.uid = :uid)',
       array(
       ':cid' => $comment->cid,
       ':nid' => $comment->nid,
@@ -822,8 +823,8 @@ function node_notify_get_notification($cid, $nid, $uid, $email = '') {
     ->fields('n', array('sid', 'cid', 'notified'))
     ->condition('cid', $cid);
   $query->innerJoin(
-    'node_notify_subscription', 's',  
-    '(s.sid = n.sid AND s.nid = :nid AND s.uid = :uid AND s.email = :email)',  
+    'node_notify_subscription', 's',
+    '(s.sid = n.sid AND s.nid = :nid AND s.uid = :uid AND s.email = :email)',
     array(':nid' => $nid, ':uid' => $uid, ':email' => $email)
   );
   return $query->execute()->fetchObject();

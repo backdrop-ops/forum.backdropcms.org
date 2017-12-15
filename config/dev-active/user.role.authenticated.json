@@ -25,6 +25,14 @@
         "edit own forum_custom content",
         "create question content",
         "edit own question content",
-        "edit own comments"
+        "edit own comments",
+        "create forum_topic content",
+        "flag follow_category",
+        "unflag follow_category",
+        "flag abusive_post",
+        "unflag abusive_post",
+        "subscribe to node",
+        "search content",
+        "change own username"
     ]
 }
