@@ -1,0 +1,207 @@
+{
+    "_config_name": "layout.layout.forum",
+    "path": "forums",
+    "name": "forum",
+    "title": "Forum list",
+    "description": null,
+    "module": null,
+    "weight": 0,
+    "storage": 1,
+    "layout_template": "moscone_flipped",
+    "disabled": false,
+    "settings": {
+        "title": "",
+        "title_display": "default",
+        "title_block": null
+    },
+    "positions": {
+        "header": [
+            "17d31612-556c-466f-9700-cae6c8517c12",
+            "4d786595-fdb6-4afe-a800-e2671b905688"
+        ],
+        "top": [
+            "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
+        ],
+        "content": [
+            "3b2245c6-1566-4f76-b001-1a3fb41146e5"
+        ],
+        "sidebar": [
+            "7b1642e9-245e-4cab-8009-9d0e444ebd3e",
+            "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826"
+        ],
+        "bottom": [],
+        "footer": [
+            "7959062a-2095-431c-aa07-077beecf731f"
+        ],
+        "title": []
+    },
+    "content": {
+        "17d31612-556c-466f-9700-cae6c8517c12": {
+            "plugin": "borg_forum:branding",
+            "data": {
+                "module": "borg_forum",
+                "delta": "branding",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "17d31612-556c-466f-9700-cae6c8517c12",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "4d786595-fdb6-4afe-a800-e2671b905688": {
+            "plugin": "system:main-menu",
+            "data": {
+                "module": "system",
+                "delta": "main-menu",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "style": "dropdown",
+                        "level": 1,
+                        "depth": 0
+                    },
+                    "contexts": []
+                },
+                "uuid": "4d786595-fdb6-4afe-a800-e2671b905688",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "05ae7ae6-0566-44c9-8300-bfb1b45875a7": {
+            "plugin": "layout:custom_block",
+            "data": {
+                "module": "layout",
+                "delta": "custom_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "Welcome to the Backdrop CMS Forum",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "content": "<h4>Here, all questions are answered with dignity and respect.</h4>\r\n",
+                    "format": "filtered_html"
+                },
+                "uuid": "05ae7ae6-0566-44c9-8300-bfb1b45875a7",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "3b2245c6-1566-4f76-b001-1a3fb41146e5": {
+            "plugin": "system:main",
+            "data": {
+                "module": "system",
+                "delta": "main",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "3b2245c6-1566-4f76-b001-1a3fb41146e5",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "7b1642e9-245e-4cab-8009-9d0e444ebd3e": {
+            "plugin": "borg_forum:new_forum_button",
+            "data": {
+                "module": "borg_forum",
+                "delta": "new_forum_button",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "7b1642e9-245e-4cab-8009-9d0e444ebd3e",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826": {
+            "plugin": "borg_flag_notify:follow_forum_category",
+            "data": {
+                "module": "borg_flag_notify",
+                "delta": "follow_forum_category",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "7959062a-2095-431c-aa07-077beecf731f": {
+            "plugin": "system:powered-by",
+            "data": {
+                "module": "system",
+                "delta": "powered-by",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "7959062a-2095-431c-aa07-077beecf731f",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
     "_config_name": "system.date",
-    "first_day": 0,
+    "first_day": "0",
     "default_country": "US",
     "default_timezone": "America/Los_Angeles",
     "user_timezone_configurable": 1,
@@ -14,12 +14,12 @@
         },
         "medium": {
             "label": "Medium Date",
-            "pattern": "D, m/d/Y - g:ia",
+            "pattern": "D, M d, Y - g:ia",
             "module": "system"
         },
         "short": {
             "label": "Short Date",
-            "pattern": "m/d/Y - g:ia",
+            "pattern": "M d 'y - g:ia",
             "module": "system"
         },
         "html_datetime": {
@@ -64,5 +64,8 @@
             "module": "system",
             "hidden": 1
         }
-    }
+    },
+    "user_configurable_timezones": 1,
+    "user_empty_timezone_message": 1,
+    "user_default_timezone": "2"
 }

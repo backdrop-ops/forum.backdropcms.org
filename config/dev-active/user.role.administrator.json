@@ -109,6 +109,9 @@
         "edit any forum_topic content",
         "delete own forum_topic content",
         "delete any forum_topic content",
-        "assign roles"
+        "assign roles",
+        "access devel information",
+        "execute php code",
+        "switch users"
     ]
 }

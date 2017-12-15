@@ -8,7 +8,7 @@
     "weight": 0,
     "storage": 2,
     "layout_template": "boxton",
-    "disabled": false,
+    "disabled": true,
     "settings": {
         "title": "Welcome to Backdrop",
         "title_display": "none",
@@ -124,7 +124,9 @@
                     "title": "",
                     "style": "default",
                     "block_settings": [],
-                    "contexts": []
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false
                 },
                 "uuid": "578243cf-a4c8-46ad-9504-04aaf4ec9ccc",
                 "style": {
