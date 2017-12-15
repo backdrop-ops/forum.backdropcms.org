@@ -4,15 +4,19 @@
  * Contains styles for forums.
  ******************************************************************************/
 
-.l-top {
-  margin-bottom: 50px;
-}
-
 .l-top, .l-bottom, body.front .l-top, body.front .l-bottom {
   background-color: #f7f7f7;
   border-bottom: 2px solid #d7d7d7;
   border-top: 2px solid #d7d7d7;
   padding: 1.5em 0;
+}
+.l-top {
+  margin-bottom: 50px;
+  border-top: 0;
+}
+body.front .l-top {
+  text-align: center;
+  padding-bottom: 50px;
 }
 article.node.view-mode-full {
   text-align: left;
@@ -53,46 +57,94 @@ table td {
 }
 article.comment {
   border: 2px solid #d7d7d7;
-  padding: 1em;
   margin-bottom: 1em;
+}
+article.comment footer {
+  background-color: #f7f7f7;
+  padding: .5em 1em;
+}
+article.comment footer a.permalink {
+  float: right;
+}
+article.comment footer .user-picture {
+  float: left;
+  margin-right: 15px;
+}
+article.comment footer .user-picture img {
+  border-radius: 50%;
+  background: #ffffff;
+  margin: 0 auto;
 }
 article.comment h3 {
   margin: 0;
 }
+article.comment .content {
+  padding: 1em;
+}
 article.comment .submitted {
+  display: inline-block;
   font-size: 0.9em;
-  font-style: italic;
-  margin-top: 0;
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+}
+article.comment .has-picture .submitted {
+  height: 100px;
+  line-height: 100px;
 }
 article.comment ul.links.inline {
-  float: right;
+  display: block;
+  text-align: right;
   margin: 0 -0.125em 0 0;
   padding: 0.5em 0.5em;
-  background: #dee2ea;
+  background-color: #f7f7f7;
+  border-right: 2px solid #ccc;
 }
-article.node-forum-topic .links.inline li, .forum-forbidden {
+article.node-forum-topic .links li,
+.forum-forbidden {
   padding: 0.5em 0.5em;
-  background: #dee2ea;
 }
+article.node-forum-topic ul.links {
+  margin: 0;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  padding: .75em 0;
+  list-style-type: none;
+}
+article.node ul.links li {
+  padding: 5px 10px;
+  max-width: 100%;
+}
+article.comment ul.links {
+  margin: 0;
+  padding: 5px;
+}
+li.comment-add,
+li.comment-reply {
+  background-color: #F0F4D2;
+}
+li.flag-follow,
+li.flag-helpful {
+  background-color: #FCF9DE;
+}
+li.flag-abusive-post,
+li.flag-abusive {
+  background-color: #F9EDEC;
+}
+li.flag-accepted {
+  background-color: #E5ECFF;
+}
+li.flag-faq,
+li.flag-archived {
+  background-color: #f7f7f7;
+}
+
 .new-topic span {
-  padding: 4px 8px;
-  color: #555;
-  border: 2px solid #ccc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  background-color: #fff;
-  border-radius: 10px;
-  width: auto;
-  -webkit-transition: background-color .5s;
-  -moz-transition: background-color .5s;
-  -ms-transition: background-color .5s;
-  -o-transition: background-color .5s;
-  transition: background-color .5s;
   margin-top: 20px;
 }
-.new-topic span:hover {
-  background-color: #ebebeb;
-  border-color: #adadad;
+.new-topic span a.button {
+  margin-right: 0;
+  margin-bottom: 0;
 }
 .block-views-helpful-answer-block {
   padding: 20px;
@@ -107,7 +159,7 @@ article.node-forum-topic .links.inline li, .forum-forbidden {
 .block-views-accepted-answer-block {
   padding: 20px;
   border: 2px solid #d7d7d7;
-  background-color: #f7f7f7;
+  background-color: #E5ECFF;
   margin-top: 1em;
 }
 .block-views-accepted-answer-block h2, .block-views-helpful-answer-block h2 {
@@ -127,4 +179,12 @@ article.node-forum-topic .links.inline li, .forum-forbidden {
   .flag-follow-category {
     float: right;
   }
+}
+
+th {
+  border-bottom: 2px solid #d7d7d7;
+}
+tr.even,
+tr.odd {
+  background-color: #f7f7f7;
 }
