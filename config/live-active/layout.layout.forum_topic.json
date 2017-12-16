@@ -34,7 +34,9 @@
         ],
         "bottom": [],
         "footer": [
-            "51d37868-530d-48fe-ae51-81911d23e7e9"
+            "51d37868-530d-48fe-ae51-81911d23e7e9",
+            "e87600c0-a788-461c-ac00-e81f892e0568",
+            "0a08e328-eb41-48ff-8900-f22076dee394"
         ],
         "title": []
     },
@@ -292,6 +294,64 @@
                     "data": {
                         "settings": {
                             "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "e87600c0-a788-461c-ac00-e81f892e0568": {
+            "plugin": "on_the_web:social_links",
+            "data": {
+                "module": "on_the_web",
+                "delta": "social_links",
+                "settings": {
+                    "title_display": "custom",
+                    "title": "Stay connected",
+                    "style": "default",
+                    "block_settings": {
+                        "services": {
+                            "display": "auto",
+                            "enabled": {
+                                "youtube": "youtube",
+                                "facebook": "facebook",
+                                "twitter": "twitter"
+                            }
+                        }
+                    },
+                    "contexts": []
+                },
+                "uuid": "e87600c0-a788-461c-ac00-e81f892e0568",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "0a08e328-eb41-48ff-8900-f22076dee394": {
+            "plugin": "block:newsletter",
+            "data": {
+                "module": "block",
+                "delta": "newsletter",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "delta": "newsletter",
+                        "reusable": true
+                    },
+                    "contexts": []
+                },
+                "uuid": "0a08e328-eb41-48ff-8900-f22076dee394",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
                         }
                     }
                 }

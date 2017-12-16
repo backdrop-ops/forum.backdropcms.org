@@ -1,12 +1,12 @@
 {
-    "_config_name": "layout.layout.default",
-    "path": "",
-    "name": "default",
-    "title": "Default Layout",
+    "_config_name": "layout.layout.forum",
+    "path": "forums",
+    "name": "forum",
+    "title": "Forum list",
     "description": null,
-    "module": "layout",
+    "module": null,
     "weight": 0,
-    "storage": 2,
+    "storage": 1,
     "layout_template": "moscone_flipped",
     "disabled": false,
     "settings": {
@@ -16,30 +16,30 @@
     },
     "positions": {
         "header": [
-            "50117bd7-18bd-4b6d-9729-41225f251f97",
-            "13b2f325-af26-40bb-8c61-97fe1d93f19f"
+            "17d31612-556c-466f-9700-cae6c8517c12",
+            "4d786595-fdb6-4afe-a800-e2671b905688"
         ],
         "top": [
-            "09f11b4e-877e-45ab-9000-a4c6254faa04"
+            "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
         ],
         "content": [
-            "default",
-            "a531c13d-be06-4a61-9302-2acfbc883f62"
+            "3b2245c6-1566-4f76-b001-1a3fb41146e5"
         ],
         "sidebar": [
-            "5486d381-698f-407b-a715-216f45ff14d6",
-            "24a72804-5cd2-46ea-aa00-f4f366c55885"
+            "7b1642e9-245e-4cab-8009-9d0e444ebd3e",
+            "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826"
         ],
         "bottom": [],
         "footer": [
-            "cd4d033d-3f67-4191-8655-85ee758877c0",
-            "53760ea0-b67a-416d-b100-0b87fb1c5787",
-            "d1a88ac2-5470-469a-8a00-fbce978f1fdf"
+            "7959062a-2095-431c-aa07-077beecf731f",
+            "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
+            "91a8c391-0c50-49bf-8000-bebfbf390ff2",
+            "e8e63592-a767-452f-aa0c-12736ef39a05"
         ],
         "title": []
     },
     "content": {
-        "50117bd7-18bd-4b6d-9729-41225f251f97": {
+        "17d31612-556c-466f-9700-cae6c8517c12": {
             "plugin": "borg_forum:branding",
             "data": {
                 "module": "borg_forum",
@@ -51,7 +51,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "50117bd7-18bd-4b6d-9729-41225f251f97",
+                "uuid": "17d31612-556c-466f-9700-cae6c8517c12",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -62,7 +62,7 @@
                 }
             }
         },
-        "13b2f325-af26-40bb-8c61-97fe1d93f19f": {
+        "4d786595-fdb6-4afe-a800-e2671b905688": {
             "plugin": "system:main-menu",
             "data": {
                 "module": "system",
@@ -72,16 +72,13 @@
                     "title": "",
                     "style": "default",
                     "block_settings": {
-                        "menu_name": "main-menu",
                         "style": "dropdown",
-                        "level": "1",
-                        "depth": "0",
-                        "expand_all": 0,
-                        "toggle": 1
+                        "level": 1,
+                        "depth": 0
                     },
                     "contexts": []
                 },
-                "uuid": "13b2f325-af26-40bb-8c61-97fe1d93f19f",
+                "uuid": "4d786595-fdb6-4afe-a800-e2671b905688",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -92,21 +89,21 @@
                 }
             }
         },
-        "09f11b4e-877e-45ab-9000-a4c6254faa04": {
-            "plugin": "system:breadcrumb",
+        "05ae7ae6-0566-44c9-8300-bfb1b45875a7": {
+            "plugin": "layout:custom_block",
             "data": {
-                "module": "system",
-                "delta": "breadcrumb",
+                "module": "layout",
+                "delta": "custom_block",
                 "settings": {
                     "title_display": "default",
-                    "title": "",
+                    "title": "Welcome to the Backdrop CMS Forum",
                     "style": "default",
-                    "block_settings": {
-                        "current": 1
-                    },
-                    "contexts": []
+                    "block_settings": [],
+                    "contexts": [],
+                    "content": "<h4>Here, all questions are answered with dignity and respect.</h4>\r\n",
+                    "format": "filtered_html"
                 },
-                "uuid": "09f11b4e-877e-45ab-9000-a4c6254faa04",
+                "uuid": "05ae7ae6-0566-44c9-8300-bfb1b45875a7",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -117,7 +114,7 @@
                 }
             }
         },
-        "default": {
+        "3b2245c6-1566-4f76-b001-1a3fb41146e5": {
             "plugin": "system:main",
             "data": {
                 "module": "system",
@@ -129,7 +126,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "default",
+                "uuid": "3b2245c6-1566-4f76-b001-1a3fb41146e5",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -140,52 +137,7 @@
                 }
             }
         },
-        "a531c13d-be06-4a61-9302-2acfbc883f62": {
-            "plugin": "views:categories-block",
-            "data": {
-                "module": "views",
-                "delta": "categories-block",
-                "settings": {
-                    "link_to_view": null,
-                    "more_link": false,
-                    "use_pager": false,
-                    "pager_id": 0,
-                    "items_per_page": "50",
-                    "offset": 0,
-                    "path": "forums",
-                    "fields_override": null,
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": [],
-                    "allowed": [],
-                    "path_override": false
-                },
-                "uuid": "a531c13d-be06-4a61-9302-2acfbc883f62",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                },
-                "conditions": [
-                    {
-                        "plugin": "path",
-                        "data": {
-                            "settings": {
-                                "visibility_setting": "1",
-                                "paths": "forum-two",
-                                "load_condition_nojs": "Load condition"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        "5486d381-698f-407b-a715-216f45ff14d6": {
+        "7b1642e9-245e-4cab-8009-9d0e444ebd3e": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
                 "module": "borg_forum",
@@ -197,7 +149,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "5486d381-698f-407b-a715-216f45ff14d6",
+                "uuid": "7b1642e9-245e-4cab-8009-9d0e444ebd3e",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -208,7 +160,7 @@
                 }
             }
         },
-        "24a72804-5cd2-46ea-aa00-f4f366c55885": {
+        "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826": {
             "plugin": "borg_flag_notify:follow_forum_category",
             "data": {
                 "module": "borg_flag_notify",
@@ -220,7 +172,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "24a72804-5cd2-46ea-aa00-f4f366c55885",
+                "uuid": "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -231,7 +183,7 @@
                 }
             }
         },
-        "cd4d033d-3f67-4191-8655-85ee758877c0": {
+        "7959062a-2095-431c-aa07-077beecf731f": {
             "plugin": "system:powered-by",
             "data": {
                 "module": "system",
@@ -243,7 +195,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "cd4d033d-3f67-4191-8655-85ee758877c0",
+                "uuid": "7959062a-2095-431c-aa07-077beecf731f",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -254,14 +206,14 @@
                 }
             }
         },
-        "53760ea0-b67a-416d-b100-0b87fb1c5787": {
+        "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67": {
             "plugin": "on_the_web:social_links",
             "data": {
                 "module": "on_the_web",
                 "delta": "social_links",
                 "settings": {
                     "title_display": "custom",
-                    "title": "Stay connected",
+                    "title": "Stay Connected",
                     "style": "default",
                     "block_settings": {
                         "services": {
@@ -275,7 +227,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "53760ea0-b67a-416d-b100-0b87fb1c5787",
+                "uuid": "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -286,27 +238,57 @@
                 }
             }
         },
-        "d1a88ac2-5470-469a-8a00-fbce978f1fdf": {
+        "91a8c391-0c50-49bf-8000-bebfbf390ff2": {
             "plugin": "block:newsletter",
             "data": {
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {
                     "title_display": "default",
-                    "title": "",
                     "style": "default",
                     "block_settings": {
                         "delta": "newsletter",
                         "reusable": true
                     },
-                    "contexts": []
+                    "contexts": [],
+                    "title": ""
                 },
-                "uuid": "d1a88ac2-5470-469a-8a00-fbce978f1fdf",
+                "uuid": "91a8c391-0c50-49bf-8000-bebfbf390ff2",
                 "style": {
                     "plugin": "default",
                     "data": {
                         "settings": {
                             "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "e8e63592-a767-452f-aa0c-12736ef39a05": {
+            "plugin": "menu:menu-footer-menu",
+            "data": {
+                "module": "menu",
+                "delta": "menu-footer-menu",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "menu_name": "menu-footer-menu",
+                        "style": "top_only",
+                        "level": "1",
+                        "depth": "0",
+                        "expand_all": 0,
+                        "toggle": 0
+                    },
+                    "contexts": []
+                },
+                "uuid": "e8e63592-a767-452f-aa0c-12736ef39a05",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
                         }
                     }
                 }
