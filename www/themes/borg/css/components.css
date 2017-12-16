@@ -811,6 +811,9 @@ a.feed-icon {
   margin: 0 5px;
   color: #007CBA;
 }
+.block-on-the-web-social-links a i:first-child {
+  margin-left: 0;
+}
 .block-on-the-web-social-links a:hover i {
   color: #000;
 }
