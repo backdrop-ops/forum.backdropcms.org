@@ -557,19 +557,22 @@ function borg_menu_link(array $variables) {
  */
 function borg_on_the_web_image($variables) {
   if ($variables['service'] == 'twitter') {
-    return '<i class="fa fa-twitter-square"></i><span class="element-invisible">Backdrop CMS on Twitter</span>';
+    return '<i class="fa fa-twitter-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Twitter</span>';
   }
   if ($variables['service'] == 'facebook') {
-    return '<i class="fa fa-facebook-square"></i><span class="element-invisible">Backdrop CMS on Facebook</span>';
-  }
-  if ($variables['service'] == 'google') {
-    return '<i class="fa fa-google-plus-square"></i><span class="element-invisible">Backdrop CMS on Google Plus</span>';
+    return '<i class="fa fa-facebook-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Facebook</span>';
   }
   if ($variables['service'] == 'youtube') {
-    return '<i class="fa fa-youtube-square"></i><span class="element-invisible">Backdrop CMS on YouTube</span>';
+    return '<i class="fa fa-youtube-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on YouTube</span>';
+  }
+  if ($variables['service'] == 'linkedin') {
+    return '<i class="fa fa-linkedin-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Google Plus</span>';
+  }
+  if ($variables['service'] == 'google') {
+    return '<i class="fa fa-google-plus-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Google Plus</span>';
   }
   if ($variables['service'] == 'rss') {
-    return '<i class="fa fa-rss-square"></i><span class="element-invisible">Latest News from Backdrop CMS</span>';
+    return '<i class="fa fa-rss-square" aria-hidden="true"></i><span class="element-invisible">Latest News from Backdrop CMS</span>';
   }
 }
 
