@@ -644,3 +644,15 @@ function borg_github_info($variables) {
 
   return $list . $clone;
 }
+
+/**
+ * Overrides theme_system_powered_by().
+ */
+function borg_system_powered_by() {
+  $output = '<div class="drop-lounging"></div>';
+  $output .= '<span>';
+  $output .= t('Powered by <a href="@poweredby">Backdrop CMS</a>', array('@poweredby' => 'https://backdropcms.org'));
+  $output .= '</span>';
+
+  return $output;
+}

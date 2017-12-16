@@ -809,10 +809,10 @@ a.feed-icon {
   font-size: 35px;
   line-height: 35px;
   margin: 0 5px;
-  color: rgb(151, 151, 151);
+  color: #27ACE2;
 }
 .block-on-the-web-social-links a:hover i {
-  color: #007CBA;
+  color: #000;
 }
 
 /*******************************************************************************
@@ -854,20 +854,56 @@ a.feed-icon {
 .block-block-3 {
   margin-bottom: 5px;
 }
-.block-block-3 #mce-EMAIL {
+.block #mce-EMAIL {
   margin-right: 5px;
+  width: 100%;
+}
+
+/*******************************************************************************
+ * Footer Menu
+ ******************************************************************************/
+.l-footer .block-menu {
+  position: absolute;
+  bottom: -62px;
+  right: 0;
+  width: 50%;
+}
+.l-footer .block-menu ul {
+  margin: 0;
+  padding: 0;
+}
+.l-footer .block-menu li {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: .5em 1em;
 }
 
 /*******************************************************************************
  * Powered by Backdrop block.
  ******************************************************************************/
 .block-system-powered-by {
-  font-size: 14px;
-  color: #979797;
+  position: absolute;
+  bottom: -62px;
+  left: 2.9375rem;
+}
+.block-system-powered-by span {
+  display: block;
+  padding: .5em 0;
 }
 .block-system-powered-by a {
-   color: #007cba;
+   color: #000;
 }
+.drop-lounging {
+  box-sizing: content-box;
+  content: '';
+  width: 175px;
+  height: 107px;
+  margin: 0;
+  background: transparent url(../images/drop-lounging.png) top left no-repeat;
+  background-size: 100%;
+}
+
 
 /*******************************************************************************
  * Site contact form.
