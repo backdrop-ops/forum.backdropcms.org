@@ -862,17 +862,20 @@ a.feed-icon {
 /*******************************************************************************
  * Footer Menu
  ******************************************************************************/
-.l-footer .block-menu {
+.l-footer .block-menu,
+.l-footer .block-menu-menu-footer-menu {
   position: absolute;
   bottom: -62px;
   right: 0;
   width: 50%;
 }
-.l-footer .block-menu ul {
+.l-footer .block-menu ul,
+.l-footer .block-menu-menu-footer-menu ul {
   margin: 0;
   padding: 0;
 }
-.l-footer .block-menu li {
+.l-footer .block-menu li,
+.l-footer .block-menu-menu-footer-menu li {
   display: inline-block;
   list-style-type: none;
   margin: 0;
