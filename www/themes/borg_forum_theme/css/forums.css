@@ -153,13 +153,13 @@ article.comment h3 {
   margin: 0;
 }
 article.comment .content {
-  padding: 1em;
+  padding: 0 1em;
 }
 article.comment ul.links.inline {
   display: block;
   text-align: right;
   margin: 0;
-  padding: 5px;
+  padding: 10px;
   background-color: #f7f7f7;
   border-radius: 8px;
   margin-right: 1px;
@@ -259,10 +259,12 @@ article.node-forum-topic ul.links li {
   border: 2px solid #d7d7d7;
   background-color: #E5ECFF;
   margin-top: 1em;
+  max-width: 656px;
 }
 .block-views-accepted-answer-block h2,
 .block-views-helpful-answer-block h2 {
   margin-top: 0;
+  margin-bottom: .5em;
 }
 .block-borg-forum-new-forum-button,
 .block-borg-flag-notify-follow-forum-category {
