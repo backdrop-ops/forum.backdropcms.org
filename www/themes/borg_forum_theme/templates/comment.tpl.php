@@ -15,6 +15,7 @@
     <?php if ($new): ?>
       <mark class="new"><?php print $new; ?></mark>
     <?php endif; ?>
+    <div class="arrow-down"></div>
   </footer>
 
   <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
