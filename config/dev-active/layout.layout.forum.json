@@ -34,7 +34,7 @@
             "7959062a-2095-431c-aa07-077beecf731f",
             "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
             "91a8c391-0c50-49bf-8000-bebfbf390ff2",
-            "661940c6-a72b-43fb-8221-33b53d4ae356"
+            "e8e63592-a767-452f-aa0c-12736ef39a05"
         ],
         "title": []
     },
@@ -264,17 +264,17 @@
                 }
             }
         },
-        "661940c6-a72b-43fb-8221-33b53d4ae356": {
-            "plugin": "system:user-menu",
+        "e8e63592-a767-452f-aa0c-12736ef39a05": {
+            "plugin": "menu:menu-footer-menu",
             "data": {
-                "module": "system",
-                "delta": "user-menu",
+                "module": "menu",
+                "delta": "menu-footer-menu",
                 "settings": {
                     "title_display": "default",
                     "title": "",
                     "style": "default",
                     "block_settings": {
-                        "menu_name": "user-menu",
+                        "menu_name": "menu-footer-menu",
                         "style": "top_only",
                         "level": "1",
                         "depth": "0",
@@ -283,7 +283,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "661940c6-a72b-43fb-8221-33b53d4ae356",
+                "uuid": "e8e63592-a767-452f-aa0c-12736ef39a05",
                 "style": {
                     "plugin": "default",
                     "data": {
