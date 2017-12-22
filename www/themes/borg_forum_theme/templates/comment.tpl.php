@@ -12,10 +12,10 @@
     <?php print $permalink; ?>
     <?php print $user_picture; ?>
     <p class="submitted">
-      <?php if ($new): ?>
-        <mark class="new"><?php print $new; ?></mark>
-      <?php endif; ?>
       <?php print $submitted; ?>
+      <?php if ($new): ?>
+        <mark class="new"><?php print $new; ?>!</mark>
+      <?php endif; ?>
     </p>
     <div class="arrow-down"></div>
   </footer>

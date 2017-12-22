@@ -278,3 +278,8 @@ tr.even,
 tr.odd {
   background-color: #f7f7f7;
 }
+
+mark {
+  background-color: #FCF9DE;
+  padding: 0 5px;
+}
