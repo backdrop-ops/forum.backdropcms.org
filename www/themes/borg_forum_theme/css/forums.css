@@ -224,7 +224,6 @@ article.comment .submitted {
   article.comment .submitted {
     padding: 0;
     line-height: 40px;
-    padding-top: 25px;
   }
   article.node .has-picture .submitted,
   article.comment .has-picture .submitted {
