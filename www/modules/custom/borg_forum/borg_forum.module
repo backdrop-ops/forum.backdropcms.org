@@ -233,10 +233,46 @@ function commentsblock_static_comments($nid, $build, $node = false) {
     $comments[$nid]['comments'] = $build['comments'];
   } else {
     if (!isset($comments[$nid])) {
-      $comments[$nid]['comments'] = comment_node_page_additions($node);
+      $comments[$nid]['comments'] = borg_comment_node_page_additions($node);
     }
 
     return $comments[$nid];
   }
 }
 
+/**
+ * Copy of core comment_node_page_additions() to select the correct
+ * pager.
+ */
+function borg_comment_node_page_additions(Node $node) {
+  $node_type = node_type_get_type($node->type);
+
+  $additions = array(
+    'comments' => array(),
+    'comment_form' => array(),
+  );
+
+  // Only attempt to render comments if the node has visible comments.
+  // Unpublished comments are not included in $node->comment_count, so show
+  // comments unconditionally if the user is an administrator.
+  if ((!empty($node->comment_count) && user_access('access comments')) || user_access('administer comments')) {
+    $mode = $node_type->settings['comment_mode'];
+    $comments_per_page = $node_type->settings['comment_per_page'];
+    if ($cids = comment_get_thread($node, $mode, $comments_per_page)) {
+      $comments = comment_load_multiple($cids);
+      comment_prepare_thread($comments);
+      $build = comment_view_multiple($comments, $node);
+      $build['pager']['#theme'] = 'pager';
+      $build['pager']['#element'] = 1;
+      $additions['comments'] = $build;
+    }
+  }
+
+  // Append comment form if needed.
+  if (user_access('post comments') && $node->comment == COMMENT_NODE_OPEN && ($node_type->settings['comment_form_location'] == COMMENT_FORM_BELOW)) {
+    $comment = entity_create('comment', array('nid' => $node->nid));
+    $additions['comment_form'] = backdrop_get_form("comment_node_{$node->type}_form", $comment);
+  }
+
+  return $additions;
+}
