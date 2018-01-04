@@ -278,32 +278,31 @@ function borg_comment_node_page_additions(Node $node) {
 }
 
 /**
- * Implements hook__menu_alter().
+ * Implements hook_menu_alter().
  */
 function borg_forum_menu_alter(&$items) {
   $items['comment/%']['page callback'] = 'borg_forum_comment_permalink';
 }
 
 /**
- * Copy of core comment_permalink() to select the correct
- * pager.
+ * Menu callback override for permalink 'comment/%' paths.
+ *
+ * Core permalink implementations call comment_permalink() which in turn invokes
+ * menu_default_route_handler(), which renders the node without the layout 
+ * system, which breaks display of the forum comments block.
  */
 function borg_forum_comment_permalink($cid) {
   if (($comment = comment_load($cid)) && ($node = node_load($comment->nid))) {
-
     // Find the current display page for this comment.
     $page = comment_get_display_page($comment->cid, $node->type);
 
-    // Set $_GET['q'] and $_GET['page'] ourselves so that the node callback
-    // behaves as it would when visiting the page directly.
-    $_GET['q'] = 'node/' . $node->nid;
-    // Set the correct pager id.
-    $_GET['page'] = '0,' . $page;
+    // Redirect using the correct pager ID and the selected comment anchor.
+    $options = array(
+      'query' => array('page' => '0,' . $page),
+      'fragment' => 'comment-' . $comment->cid,
+    );
 
-    // Return the node view, this will show the correct comment in context.
-    // We drop menu_default_route_handler() so that our comments block
-    // will render.
-    return menu_execute_active_handler('node/' . $node->nid);
+    backdrop_goto('node/' . $node->nid, $options);
   }
   return MENU_NOT_FOUND;
 }
