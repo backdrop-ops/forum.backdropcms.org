@@ -41,7 +41,7 @@
   color: #d23600;
 }
 .menu-dropdown a.disabled {
-  color: #bbbbbb;
+  color: #999;
 }
 .menu-dropdown a span.sub-arrow {
   position: absolute;
@@ -111,13 +111,23 @@
   .menu-dropdown a:active,
   .menu-dropdown a.highlighted {
     color: #fff;
+    padding: .5em 1em;
     padding-right: 1em;
+    border-bottom: 2px solid #000;
+  }
+  .menu-dropdown a.active-trail,
+  .menu-dropdown a.active,
+  .menu-dropdown a:hover,
+  .menu-dropdown a:focus,
+  .menu-dropdown a:active,
+  .menu-dropdown a.highlighted {
+    border-bottom: 2px solid #fff;
   }
   .menu-dropdown a.disabled {
-    color: #bbbbbb;
+    color: #999;
   }
   .js .menu-dropdown li.has-children > a:hover,
-  .menu-dropdown li.has-children > a {
+  .js .menu-dropdown li.has-children > a {
     padding-right: 28px;
   }
   .menu-dropdown a span.sub-arrow {
@@ -143,9 +153,12 @@
     border-top: 0;
   }
   .js .menu-dropdown ul {
-    padding: 5px 0;
-    background-color: #696969;
+    padding: 0;
     padding-left: 0;
+    background-color: #696969;
+  }
+  .js .menu-dropdown ul li {
+    float: none;
   }
   .menu-dropdown ul a,
   .menu-dropdown ul a:hover,
@@ -157,11 +170,13 @@
     color: #fff;
     background-color: #696969;
   }
+  .menu-dropdown ul a.active,
+  .menu-dropdown ul a.active-trail,
   .menu-dropdown ul a:hover,
   .menu-dropdown ul a:focus,
   .menu-dropdown ul a:active,
   .menu-dropdown ul a.highlighted {
-    background: #eeeeee;
+    background-color: #808080;
   }
   .menu-dropdown ul a.disabled {
     background: white;

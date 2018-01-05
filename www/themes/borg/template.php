@@ -13,7 +13,7 @@
  * Modify the user edit form for usability++
  */
 function borg_form_user_profile_form_alter(&$form, &$form_state) {
-  drupal_add_js('core/misc/vertical-tabs.js');
+  backdrop_add_js('core/misc/vertical-tabs.js');
   $account_fieldset = array(
     '#type'         => 'fieldset',
     '#title'        => t('Change Email or Password'),
@@ -100,14 +100,20 @@ $(window).load(function() {
     backdrop_add_js($script, array('type' => 'inline'));
   }
 
+  $path = backdrop_get_path('theme', 'borg');
   if (arg(0) == 'modules' || arg(0) == 'themes' || arg(0) == 'layouts') {
     $variables['classes'][] = 'project-search';
-
-    $path = backdrop_get_path('theme', 'borg');
     backdrop_add_css($path . '/css/project-search.css');
   }
   elseif (arg(0) == 'showcase') {
     $variables['classes'][] = 'showcase';
+  }
+  elseif (arg(0) == 'support') {
+    $variables['classes'][] = 'support';
+    if (arg(1) == 'services') {
+      $variables['classes'][] = 'services';
+      backdrop_add_css($path . '/css/services.css');
+    }
   }
 
   if (module_exists('admin_bar') && user_access('admin_bar')) {
@@ -273,6 +279,20 @@ function borg_preprocess_views_view_grid(&$variables) {
     }
   }
   $variables['classes'][] = 'container-fluid';
+}
+
+/**
+ * Prepare variables for node template
+ */
+function borg_preprocess_header(&$variables){
+  $variables['greeting'] = '';
+  global $user;
+  if ($user->uid) {
+    $variables['greeting'] = t('Hi !name!', array('!name'  => theme('username', array('account' => $user))));
+  }
+  $uri = backdrop_get_path('theme', 'borg') . '/images/logo.png';
+  $variables['logo'] = theme('image', array('uri' => $uri, 'alt' => t('Backdrop CMS Logo')));
+  $variables['site_name'] = t('backdrop');
 }
 
 /**
@@ -550,30 +570,6 @@ function borg_menu_link(array $variables) {
 
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . backdrop_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
-}
-
-/**
- * Overrides theme_on_the_web_image().
- */
-function borg_on_the_web_image($variables) {
-  if ($variables['service'] == 'twitter') {
-    return '<i class="fa fa-twitter-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Twitter</span>';
-  }
-  if ($variables['service'] == 'facebook') {
-    return '<i class="fa fa-facebook-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Facebook</span>';
-  }
-  if ($variables['service'] == 'youtube') {
-    return '<i class="fa fa-youtube-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on YouTube</span>';
-  }
-  if ($variables['service'] == 'linkedin') {
-    return '<i class="fa fa-linkedin-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Google Plus</span>';
-  }
-  if ($variables['service'] == 'google') {
-    return '<i class="fa fa-google-plus-square" aria-hidden="true"></i><span class="element-invisible">Backdrop CMS on Google Plus</span>';
-  }
-  if ($variables['service'] == 'rss') {
-    return '<i class="fa fa-rss-square" aria-hidden="true"></i><span class="element-invisible">Latest News from Backdrop CMS</span>';
-  }
 }
 
 /**
