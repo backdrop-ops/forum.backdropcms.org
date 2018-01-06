@@ -546,14 +546,19 @@ function borg_menu_tree__user_menu($variables) {
   $variables['attributes']['class'][] = 'closed';
 
   global $user;
-  if ($user->uid) {
-    $greeting = t('Hi @name!', array('@name'  => $user->name));
-  }
 
   $output  = '<nav class="borg-greeting">';
   $output .= '  <ul class="borg-user-menu">';
   $output .= '    <li class=top>';
-  $output .= '      <a href="#" id="greeting" class="greeting">' . $greeting . '</a>';
+
+  if ($user->uid) {
+    $greeting = t('Hi @name!', array('@name'  => $user->name));
+    $output .= '      <a href="#" id="greeting" class="greeting">' . $greeting . '</a>';
+  }
+  else {
+    $output .= '      <a href="#" id="greeting" class="greeting">' . t('Welcome!') . '</a>';
+  }
+
   $output .= '      <ul' . backdrop_attributes($variables['attributes']) . '>' . $variables['tree'] . '</ul>';
   $output .= '    </li>';
   $output .= '  </ul>';
