@@ -4,25 +4,120 @@
  * Contains specific styles for common HTML components.
  ******************************************************************************/
 
-.block-borg-blocks-branding {
-  float: left;
-}
 a.site-name {
   display: block;
-  font-size: 2.125rem;/* 34px */
+  font-size: 2.125rem; /* 34px */
   font-weight: 200;
   letter-spacing: -.04em;
   float: left;
 }
-.logo {
+a.logo {
   display: block;
   float: left;
   width: 40px;
   box-sizing: border-box;
   margin-left: 10px;
 }
-.field-name-body a {
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  a.logo {
+    _margin-right: 50px;
+  }
+}
+
+/*******************************************************************************
+ * Account Menu
+ ******************************************************************************/
+.borg-greeting {
+  text-align: right;
+  padding-right: 15px;
+}
+.borg-greeting ul.borg-user-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+.borg-greeting li {
+  margin: 0;
+  padding: 0;
+}
+.borg-greeting li.top {
+  position: relative;
+}
+.borg-greeting li.top a.greeting {
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 5px 5px 23px;
+  background: transparent url(../images/cog.png) 0 2px no-repeat;
+  background-size: 14px;
+}
+.borg-greeting li.top a.greeting:hover {
   text-decoration: underline;
+}
+.borg-greeting ul.menu-tree {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  z-index: 999;
+  background-color: #696969;
+}
+.borg-greeting ul.menu-tree.closed {
+  display: none;
+}
+.borg-greeting ul.menu-tree li {
+  list-style: none;
+}
+.borg-greeting ul.menu-tree a {
+  display: block;
+  padding: 3px 10px;
+  border-bottom: 1px solid #000;
+}
+.borg-greeting ul.menu-tree a:hover {
+  background-color: #808080;
+}
+.borg-greeting a.icon {
+  display: inline-block;
+  margin: 0 0 0 10px;
+  padding: 5px;
+  color: rgba(255,255,255,.45);
+}
+.borg-greeting a.icon:last-child {
+  padding-right: 0;
+}
+.borg-greeting a.icon:hover {
+  color: #fff;
+}
+
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .borg-greeting a.icon {
+    display: none;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .borg-greeting a.icon {
+    display: inline-block;
+  }
+}
+
+/*******************************************************************************
+ * Main menu at mobile width
+ ******************************************************************************/
+@media all and (max-width: 48em) { /* 768px @ 16px font size  -- MD */
+  .block-system-main-menu ul.menu {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 250px;
+  }
+}
+@media all and (max-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-system-main-menu ul.menu {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 100vw;
+  }
 }
 
 /*******************************************************************************
@@ -31,6 +126,10 @@ a.site-name {
 #admin-bar li {
   /* Undo the margin we add in base.css. */
   margin: 0;
+}
+#admin-bar .admin-bar-search input {
+  line-height: 16px;
+  height: auto;
 }
 
 /*******************************************************************************
@@ -46,6 +145,7 @@ ul.primary {
   padding: 0 0 0 .5em; /* LTR */
   white-space: nowrap;
   box-sizing: border-box;
+  overflow: hidden;
 }
 ul.primary li {
   display: inline;
@@ -95,7 +195,22 @@ ul.secondary a {
   text-decoration: none;
 }
 ul.secondary a.active {
-  border-bottom: 4px solid #999;
+  border-bottom: 4px solid #7D7D7D;
+}
+
+/******************************************************************************
+ * Breadcrumb
+ ******************************************************************************/
+.block-system-breadcrumb li {
+  margin-right: .33em;
+}
+.block-system-breadcrumb li a {
+  margin-right: .33em;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-system-breadcrumb li span {
+    white-space: nowrap;
+  }
 }
 
 /*******************************************************************************
@@ -109,64 +224,11 @@ ul.secondary a.active {
 }
 
 /*******************************************************************************
- * Code blocks
- ******************************************************************************/
-div.codeblock pre {
-  border: 1px solid #E8E6E5;
-  background-color: #f7f7f7;
-}
-
-/*******************************************************************************
  * Inline links
  ******************************************************************************/
 ul.inline li:first-child {
   padding-left: 0;
 }
-
-/*******************************************************************************
- * Main menu
- ******************************************************************************/
-
- /* Main menu at mobile width */
- @media all and (max-width: 48em) {
-   .block-system-main-menu {
-     padding-top: 12px;
-     padding-bottom: 20px;
-   }
-   .block-system-main-menu .menu-toggle-button {
-     float: right;
-   }
-   .block-system-main-menu ul {
-     margin-top: 50px;
-   }
-   .block-system-main-menu a:hover {
-     text-decoration: underline;
-   }
- }
-
- /* Main menu at full width */
- @media all and (min-width: 48em) {
-   .block-system-main-menu {
-     float: right;
-   }
-   .block-system-main-menu ul {
-     list-style-type: none;
-     margin: 0;
-     padding-top: 5px;
-   }
-   .block-system-main-menu li {
-     display: inline-block;
-     margin-left: 20px;
-     padding-bottom: 4px;
-     border-bottom: 2px solid #000;
-   }
-   .block-system-main-menu li:hover {
-     border-bottom: 2px solid #aaa;
-   }
-   .block-system-main-menu li.active {
-     border-bottom: 2px solid #fff;
-   }
- }
 
 /*******************************************************************************
  * Handbook menu
@@ -352,25 +414,38 @@ body.front .block-block-4 a.button {
 }
 
 /*******************************************************************************
- * Nodes
+ * Body links
  ******************************************************************************/
-article.node footer .arrow-down {
-  display: none;
+.field-name-body a {
+  text-decoration: underline;
 }
-article.node.view-mode-full {
+
+/*******************************************************************************
+ * All Nodes - Full view mode
+ ******************************************************************************/
+article {
   text-align: center;
 }
-article.node.view-mode-full footer,
-article.node.view-mode-full .content {
+article footer,
+article .content {
   text-align: left;
   max-width: 700px;
+}
+article .content {
   padding-bottom: 15px; /* for proper tags placement */
 }
 
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
-  article.node.view-mode-full .content {
+  article .content {
     padding-bottom: 30px; /* for proper tags placement */
   }
+}
+
+/*******************************************************************************
+ * All Nodes - Teaser view mode
+ ******************************************************************************/
+article.view-mode-teaser footer p {
+  margin-bottom: 0;
 }
 
 /*******************************************************************************
@@ -378,6 +453,160 @@ article.node.view-mode-full .content {
  ******************************************************************************/
 article .content .field {
   padding: 5px 0;
+}
+
+/*******************************************************************************
+ * All entity inline links
+ ******************************************************************************/
+article ul.links.inline {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  max-width: 700px;
+}
+article ul.links.inline li {
+  padding: 5px 15px;
+  border-radius: 15px;
+  display: inline-block;
+  white-space: nowrap;
+  margin: 4px 8px 4px 0;
+  border: 1px solid #d7d7d7;
+  -webkit-box-shadow: 0 10px 10px -10px #E8E6E5;
+      -moz-box-shadow: 0 10px 10px -10px #E8E6E5;
+           box-shadow: 0 10px 10px -10px #E8E6E5;
+}
+article ul.links.inline li:last-child {
+  margin-right: 0;
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  article ul.links.inline {
+    padding-top:  35px;
+  }
+  article ul.links.inline li {
+    margin: 8px 15px 8px 0;
+  }
+}
+
+/*******************************************************************************
+ * Comment inline links
+ ******************************************************************************/
+article.comment ul.links.inline {
+  text-align: right;
+  padding: 10px;
+}
+
+/*******************************************************************************
+ * All entity footers
+ ******************************************************************************/
+article footer {
+  font-size: 0.875rem; /* 14px */
+  background-color: #f7f7f7;
+  border: 1px solid #E8E6E5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 35px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+article footer img {
+  display: inline-block;
+  float: left;
+  margin-right: 15px;
+  max-width: 75px;
+  max-height: 75px;
+  border-radius: 50%;
+  background: #fff;
+}
+article footer .submitted {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0;
+}
+article footer .user-picture {
+  float: left;
+  margin-right: 15px;
+}
+article footer .user-picture img img {
+  border-radius: 50%;
+  background: #ffffff;
+  margin: 0 auto;
+}
+article footer .arrow-down {
+  display: none;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #E8E6E5;
+  position: absolute;
+  bottom: -20px;
+  left: 33.5px;
+}
+article footer .arrow-down:after {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #f7f7f7;
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: -20px;
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  article footer {
+    margin-bottom: 55px;
+  }
+  article footer img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  article footer .submitted {
+    padding: 0;
+    line-height: 40px;
+  }
+  article footer.has-picture .submitted {
+    line-height: 100px;
+  }
+  article footer .arrow-down {
+    display: block;
+    left: 45px;
+  }
+}
+
+/*******************************************************************************
+ * All Comments
+ ******************************************************************************/
+article.comment {
+  border: 2px solid #E8E6E5;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  max-width: 700px;
+}
+article.comment .content {
+  padding: 0 1em;
+}
+
+/*******************************************************************************
+ * Comment footers
+ ******************************************************************************/
+article.comment footer {
+  border: 0;
+}
+article.comment footer .arrow-down {
+  border-left: 0;
+  border-right: 0;
+}
+article.comment footer a.permalink {
+  position: absolute;
+  right: 15px;
 }
 
 /*******************************************************************************
@@ -390,12 +619,6 @@ article.node-post.view-mode-teaser {
 }
 article.node-post.view-mode-teaser h2 {
   margin: 0 0 15px 0;
-}
-article.node-post.view-mode-teaser footer {
-  font-size: 0.875rem; /* 14px */
-}
-article.node-post.view-mode-teaser footer p {
-  margin-bottom: 0;
 }
 article.node-post.view-mode-teaser ul.links.inline {
   margin-bottom: 1em;
@@ -420,70 +643,11 @@ body.node-type-post .block-system-main article {
   margin: 0 auto;
 }
 
-article.node-post.view-mode-full footer {
-  background-color: #f7f7f7;
-  border: 1px solid #E8E6E5;
-  border-radius: 10px;
-  padding: 10px 15px;
-  margin-bottom: 55px;
-  display: table;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-}
-article.node-post.view-mode-full footer img {
-  display: inline-block;
-  float: left;
-  margin-right: 15px;
-  max-width: 75px;
-  max-height: 75px;
-  border-radius: 50%;
-  background: #fff;
-}
-@media (min-width: 34em) { /* 544px */
-  article.node-post.view-mode-full footer img {
-    max-width: 100px;
-    max-height: 100px;
-  }
-}
-article.node-post.view-mode-full footer p {
-  display: table-cell;
-  vertical-align: middle;
-  margin: 0;
-}
-article.node-post.view-mode-full footer .arrow-down {
-  display: block;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #E8E6E5;
-  position: absolute;
-  bottom: -20px;
-  left: 33.5px;
-}
-@media (min-width: 34em) { /* 544px */
-  article.node-post.view-mode-full footer .arrow-down {
-    left: 45px;
-  }
-}
-article.node-post.view-mode-full footer .arrow-down:after {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #f7f7f7;
-  content: "";
-  position: absolute;
-  bottom: 2px;
-  left: -20px;
-}
 article.node-post.view-mode-full .content {
   border-bottom: 2px solid #E8E6E5;
   margin-bottom: 30px;
   position: relative;
 }
-
 article.node-post .field-name-body {
   padding-bottom: 30px;
 }
@@ -716,7 +880,7 @@ ol.flex-control-paging > li:before {
 }
 .block-formblock-supporter .form-file {
   font-size: 1rem; /* 16px */
-  color: #999999;
+  color: #7D7D7D;
   border: none;
   vertical-align: middle;
   width: 100%;
@@ -827,9 +991,17 @@ a.feed-icon {
   color: #f74425;
 }
 
+#social-field-wrapper .description {
+  padding: .25em 0 .25em 0;
+  color: #7D7D7D;
+}
+
 /*******************************************************************************
  * On The Web social media links block.
  ******************************************************************************/
+.block-on-the-web-social-links {
+  padding-bottom: 30px;
+}
 .block-on-the-web-social-links a i {
   margin: 0 2px;
   color: #007CBA;
@@ -839,6 +1011,24 @@ a.feed-icon {
 }
 .block-on-the-web-social-links a:hover i {
   color: #000;
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-on-the-web-social-links {
+    padding-bottom: 0;
+  }
+}
+
+/*******************************************************************************
+ * Newsletter block.
+ ******************************************************************************/
+.block-block-newsletter {
+  padding-bottom: 40px;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-block-newsletter {
+    padding-bottom: 0;
+  }
 }
 
 /*******************************************************************************
@@ -1097,6 +1287,16 @@ body.user-form .page-title {
   #user-register-form .form-item label {
     display: block;
   }
+}
+
+/*******************************************************************************
+ * Input format selection
+ ******************************************************************************/
+.filter-wrapper {
+  padding: 0.5em;
+}
+.filter-wrapper label {
+  display: block;
 }
 
 /*******************************************************************************
