@@ -1,8 +1,8 @@
 {
     "_config_name": "on_the_web.settings",
-    "type": "image",
+    "type": "font",
     "size": "sm",
-    "sitename": 1,
+    "sitename": "1",
     "target": 1,
     "twitter_page": "https://twitter.com/backdropcms",
     "twitter_weight": "-10",
@@ -31,5 +31,9 @@
     "friendfeed_page": "",
     "friendfeed_weight": "-1",
     "rss_page": "https://backdropcms.org/news/rss.xml",
-    "rss_weight": "-5"
+    "rss_weight": "-5",
+    "github_page": "",
+    "github_weight": "-10",
+    "lastfm_page": "",
+    "lastfm_weight": "-10"
 }
