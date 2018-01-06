@@ -1,7 +1,8 @@
 <?php
 /**
  * @file
- * Default theme implementation for comments.
+ * Theme implementation for comments.
+ * Adds a has-picture class to the footer tag, removes the title.
  */
 ?>
 <article class="<?php print implode(' ', $classes); ?> clearfix"<?php print backdrop_attributes($attributes); ?>>
