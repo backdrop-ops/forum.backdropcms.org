@@ -1,11 +1,11 @@
 {
-    "_config_name": "layout.layout.profile",
-    "path": "user/%",
-    "name": "profile",
-    "title": "Your Profile",
+    "_config_name": "layout.layout.my_profile",
+    "path": "user",
+    "name": "my_profile",
+    "title": "My Profile",
     "description": null,
     "module": null,
-    "weight": 0,
+    "weight": -1,
     "storage": 1,
     "layout_template": "boxton",
     "disabled": false,
@@ -16,28 +16,26 @@
     },
     "positions": {
         "header": [
-            "ba6b6f28-3c5b-4388-be30-4880b15b0766",
-            "d9691596-6eec-4042-af00-f34a5fcd442a",
-            "407af605-2aa3-4fa9-8403-3e16c4100736"
+            "a0f963aa-a944-4489-bc00-cba0fa7da1e9",
+            "bef73860-72c2-4b90-ae00-a08a0ead59cd",
+            "da27bf39-6bad-42b4-8100-cd1cd77d1843"
         ],
         "top": [
-            "bb1a3ffe-37e5-484c-b501-1a1c3e9385bd"
+            "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35"
         ],
         "content": [
-            "c6f8dc7a-f568-4efa-9f0f-155691ec6a0a",
-            "1a898f6a-69ea-47a2-8902-2dbfeb111412"
+            "5186540a-7f4c-4403-9400-aad89955dd6a",
+            "761e539d-4dab-44bd-8055-851f87a803aa"
         ],
-        "bottom": [],
         "footer": [
-            "9d9d2ca5-cae2-4d42-a407-7fff9c785fa9",
-            "5dfa99dc-f5f6-4ca7-ba00-e4f88ac92d98",
-            "94767022-f521-43e2-8c28-408bcdff2e0b",
-            "d84c49da-b7ed-49cf-8300-ddcec1cc3b7e"
-        ],
-        "title": []
+            "e5a98417-ce74-4e9b-915b-91c8244e53af",
+            "d5775ad0-a70a-438e-b957-877029a55a71",
+            "07eda4ec-4017-4984-9600-e28380a46458",
+            "7ad1831b-f1b3-421b-b860-9617c50c87b7"
+        ]
     },
     "content": {
-        "ba6b6f28-3c5b-4388-be30-4880b15b0766": {
+        "a0f963aa-a944-4489-bc00-cba0fa7da1e9": {
             "plugin": "borg_forum:branding",
             "data": {
                 "module": "borg_forum",
@@ -49,7 +47,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "ba6b6f28-3c5b-4388-be30-4880b15b0766",
+                "uuid": "a0f963aa-a944-4489-bc00-cba0fa7da1e9",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -60,7 +58,7 @@
                 }
             }
         },
-        "d9691596-6eec-4042-af00-f34a5fcd442a": {
+        "bef73860-72c2-4b90-ae00-a08a0ead59cd": {
             "plugin": "system:user-menu",
             "data": {
                 "module": "system",
@@ -79,7 +77,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "d9691596-6eec-4042-af00-f34a5fcd442a",
+                "uuid": "bef73860-72c2-4b90-ae00-a08a0ead59cd",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -90,7 +88,7 @@
                 }
             }
         },
-        "407af605-2aa3-4fa9-8403-3e16c4100736": {
+        "da27bf39-6bad-42b4-8100-cd1cd77d1843": {
             "plugin": "system:main-menu",
             "data": {
                 "module": "system",
@@ -109,7 +107,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "407af605-2aa3-4fa9-8403-3e16c4100736",
+                "uuid": "da27bf39-6bad-42b4-8100-cd1cd77d1843",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -120,7 +118,7 @@
                 }
             }
         },
-        "bb1a3ffe-37e5-484c-b501-1a1c3e9385bd": {
+        "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35": {
             "plugin": "system:breadcrumb",
             "data": {
                 "module": "system",
@@ -134,7 +132,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "bb1a3ffe-37e5-484c-b501-1a1c3e9385bd",
+                "uuid": "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -145,7 +143,7 @@
                 }
             }
         },
-        "c6f8dc7a-f568-4efa-9f0f-155691ec6a0a": {
+        "5186540a-7f4c-4403-9400-aad89955dd6a": {
             "plugin": "system:main",
             "data": {
                 "module": "system",
@@ -157,7 +155,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "c6f8dc7a-f568-4efa-9f0f-155691ec6a0a",
+                "uuid": "5186540a-7f4c-4403-9400-aad89955dd6a",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -168,11 +166,11 @@
                 }
             }
         },
-        "1a898f6a-69ea-47a2-8902-2dbfeb111412": {
-            "plugin": "views:my_discussions-block_1",
+        "761e539d-4dab-44bd-8055-851f87a803aa": {
+            "plugin": "views:my_discussions-block",
             "data": {
                 "module": "views",
-                "delta": "my_discussions-block_1",
+                "delta": "my_discussions-block",
                 "settings": {
                     "link_to_view": 0,
                     "more_link": false,
@@ -191,7 +189,7 @@
                     "path_override": false,
                     "exposed": []
                 },
-                "uuid": "1a898f6a-69ea-47a2-8902-2dbfeb111412",
+                "uuid": "761e539d-4dab-44bd-8055-851f87a803aa",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -202,7 +200,7 @@
                 }
             }
         },
-        "9d9d2ca5-cae2-4d42-a407-7fff9c785fa9": {
+        "e5a98417-ce74-4e9b-915b-91c8244e53af": {
             "plugin": "system:powered-by",
             "data": {
                 "module": "system",
@@ -214,7 +212,7 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "9d9d2ca5-cae2-4d42-a407-7fff9c785fa9",
+                "uuid": "e5a98417-ce74-4e9b-915b-91c8244e53af",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -225,7 +223,7 @@
                 }
             }
         },
-        "5dfa99dc-f5f6-4ca7-ba00-e4f88ac92d98": {
+        "d5775ad0-a70a-438e-b957-877029a55a71": {
             "plugin": "on_the_web:social_links",
             "data": {
                 "module": "on_the_web",
@@ -246,7 +244,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "5dfa99dc-f5f6-4ca7-ba00-e4f88ac92d98",
+                "uuid": "d5775ad0-a70a-438e-b957-877029a55a71",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -257,7 +255,7 @@
                 }
             }
         },
-        "94767022-f521-43e2-8c28-408bcdff2e0b": {
+        "07eda4ec-4017-4984-9600-e28380a46458": {
             "plugin": "block:newsletter",
             "data": {
                 "module": "block",
@@ -272,7 +270,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "94767022-f521-43e2-8c28-408bcdff2e0b",
+                "uuid": "07eda4ec-4017-4984-9600-e28380a46458",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -283,7 +281,7 @@
                 }
             }
         },
-        "d84c49da-b7ed-49cf-8300-ddcec1cc3b7e": {
+        "7ad1831b-f1b3-421b-b860-9617c50c87b7": {
             "plugin": "menu:menu-footer-menu",
             "data": {
                 "module": "menu",
@@ -302,7 +300,7 @@
                     },
                     "contexts": []
                 },
-                "uuid": "d84c49da-b7ed-49cf-8300-ddcec1cc3b7e",
+                "uuid": "7ad1831b-f1b3-421b-b860-9617c50c87b7",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -313,5 +311,18 @@
                 }
             }
         }
-    }
+    },
+    "conditions": [
+        {
+            "plugin": "user_role",
+            "data": {
+                "settings": {
+                    "roles": [
+                        "authenticated"
+                    ],
+                    "load_condition_nojs": "Load condition"
+                }
+            }
+        }
+    ]
 }
