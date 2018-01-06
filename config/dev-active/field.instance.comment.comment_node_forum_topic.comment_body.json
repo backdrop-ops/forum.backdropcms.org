@@ -5,10 +5,10 @@
     "entity_type": "comment",
     "bundle": "comment_node_forum_topic",
     "settings": {
-        "text_processing": 1,
+        "text_processing": "1",
         "user_register_form": false
     },
-    "required": true,
+    "required": 1,
     "display": {
         "default": {
             "label": "hidden",
@@ -23,11 +23,12 @@
     "default_value": null,
     "default_value_function": null,
     "widget": {
-        "type": "text_textarea",
-        "settings": {
-            "rows": 5
-        },
         "weight": 0,
-        "module": "text"
+        "type": "text_textarea",
+        "module": "text",
+        "active": 1,
+        "settings": {
+            "rows": "10"
+        }
     }
 }
