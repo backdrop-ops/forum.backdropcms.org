@@ -128,7 +128,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
   switch ($delta) {
   case 'branding':
     $options = array('attributes' => array('class' => array('site-name')));
-    $output = l(t('backdrop forum'), '', $options);
+    $output = l(t('forum'), '', $options);
 
     $uri = backdrop_get_path('module', 'borg_forum') . '/images/logo.png';
     $image = theme('image', array('uri' => $uri, 'alt' => t('Backdrop CMS Logo')));
@@ -288,7 +288,7 @@ function borg_forum_menu_alter(&$items) {
  * Menu callback override for permalink 'comment/%' paths.
  *
  * Core permalink implementations call comment_permalink() which in turn invokes
- * menu_default_route_handler(), which renders the node without the layout 
+ * menu_default_route_handler(), which renders the node without the layout
  * system, which breaks display of the forum comments block.
  */
 function borg_forum_comment_permalink($cid) {
