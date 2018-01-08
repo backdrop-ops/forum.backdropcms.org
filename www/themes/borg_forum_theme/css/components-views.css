@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * components-views.scss
+ *
+ * Contains styles for views components.
+ ******************************************************************************/
+
+/******************************************************************************
+ * Helpful answers view -  block
+ ******************************************************************************/
+.block-views-helpful-answer-block {
+  padding: 20px;
+  border: 2px solid #d7d7d7;
+  border-radius: 10px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  max-width: 656px;
+}
+.block-views-helpful-answer-block .views-row {
+  padding: 20px;
+  background-color: #f7f7f7;
+  margin-top: 1em;
+}
+.block-views-accepted-answer-block {
+  padding: 20px;
+  border: 2px solid #d7d7d7;
+  border-radius: 10px;
+  background-color: #E5ECFF;
+  margin-top: 1em;
+  max-width: 656px;
+}
+.block-views-accepted-answer-block h2,
+.block-views-helpful-answer-block h2 {
+  margin-top: 0;
+  margin-bottom: .5em;
+}
+.block-borg-forum-new-forum-button,
+.block-borg-flag-notify-follow-forum-category {
+  margin-top: 20px;
+  text-align: center;
+}

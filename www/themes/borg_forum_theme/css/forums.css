@@ -4,6 +4,10 @@
  * Contains styles for forums.
  ******************************************************************************/
 
+/******************************************************************************
+ * Layout overrides
+ ******************************************************************************/
+
 .l-top,
 .l-bottom,
 body.front .l-top,
@@ -18,15 +22,31 @@ body.front .l-bottom {
   padding: 1.5em 1em 1em 1em;
 }
 body.front .l-top {
-  text-align: center;
   padding-bottom: 50px;
 }
 
 /******************************************************************************
- * Header block
+ * Home page - page title
  ******************************************************************************/
-.block-system-header h1 {
-  font-size: 2em;
+body.front .page-title {
+  font-weight: normal;
+}
+
+/******************************************************************************
+ * Home page - welcome block
+ ******************************************************************************/
+body.front .block-layout-custom-block h2 {
+  font-size: 1.625rem;
+  line-height: 1.2;
+  color: #444b53; /* soft black */
+  font-weight: 300; /* light */
+  margin: 0 0 1em 0;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  body.front .block-layout-custom-block h2 {
+    font-size: 2.125rem;
+    margin: .5em 0;
+  }
 }
 
 /******************************************************************************
@@ -46,6 +66,9 @@ table td {
   padding: 1em;
 }
 
+/******************************************************************************
+ * Views tables
+ ******************************************************************************/
 .views-table .views-field-name p {
   font-size: 0.9em;
   font-style: italic;
@@ -53,39 +76,8 @@ table td {
 }
 
 /******************************************************************************
- * Comment Link Colors
+ * Add topic button
  ******************************************************************************/
-
-li.comment-add,
-li.comment-reply {
-  background-color: #F0F4D2;
-}
-li.flag-follow,
-li.flag-helpful {
-  background-color: #FCF9DE;
-}
-li.flag-abusive-post,
-li.flag-abusive {
-  background-color: #F9EDEC;
-}
-li.flag-accepted {
-  background-color: #E5ECFF;
-}
-li.flag-faq,
-li.flag-archived {
-  background-color: #f7f7f7;
-}
-
-/******************************************************************************
- * Node - Forum Topic
- ******************************************************************************/
-article.node-forum-topic {
-  margin-bottom: 50px;
-}
-.forum-forbidden {
-  padding: 0.5em 0.5em;
-}
-
 .new-topic span {
   margin-top: 20px;
 }
@@ -94,39 +86,33 @@ article.node-forum-topic {
   margin-bottom: 0;
 }
 
-/******************************************************************************
- * Helpful answer block
+/*******************************************************************************
+ * All inline links
  ******************************************************************************/
-.block-views-helpful-answer-block {
-  padding: 20px;
-  border: 2px solid #d7d7d7;
-  border-radius: 10px;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  max-width: 656px;
+article ul.links.inline {
+  text-align: left;
 }
-.block-views-helpful-answer-block .views-row {
-  padding: 20px;
-  background-color: #f7f7f7;
-  margin-top: 1em;
+article.comment ul.links.inline {
+  text-align: right;
 }
-.block-views-accepted-answer-block {
-  padding: 20px;
-  border: 2px solid #d7d7d7;
-  border-radius: 10px;
+
+/******************************************************************************
+ * Comment & Flag Link Colors
+ ******************************************************************************/
+li.comment-add a,
+li.comment-reply a {
+  background-color: #F0F4D2;
+}
+li.flag-follow a,
+li.flag-helpful a {
+  background-color: #FCF9DE;
+}
+li.flag-abusive-post a,
+li.flag-abusive a {
+  background-color: #F9EDEC;
+}
+li.flag-accepted a {
   background-color: #E5ECFF;
-  margin-top: 1em;
-  max-width: 656px;
-}
-.block-views-accepted-answer-block h2,
-.block-views-helpful-answer-block h2 {
-  margin-top: 0;
-  margin-bottom: .5em;
-}
-.block-borg-forum-new-forum-button,
-.block-borg-flag-notify-follow-forum-category {
-  margin-top: 20px;
-  text-align: center;
 }
 
 /******************************************************************************

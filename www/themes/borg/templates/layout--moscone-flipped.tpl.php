@@ -75,10 +75,10 @@
       <?php print $action_links; ?>
 
       <div class="l-middle row">
-        <main class="l-content col-md-9" role="main" aria-label="<?php print t('Main content'); ?>">
+        <main class="l-content col-md-8" role="main" aria-label="<?php print t('Main content'); ?>">
           <?php print $content['content']; ?>
         </main>
-        <div class="l-sidebar l-sidebar-first col-md-3">
+        <div class="l-sidebar l-sidebar-first col-md-4">
           <?php print $content['sidebar']; ?>
         </div>
       </div><!-- /.l-middle -->

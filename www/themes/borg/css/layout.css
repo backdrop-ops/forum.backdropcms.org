@@ -4,30 +4,6 @@
  * Contains styles relating to layout. Any adjustment of margins/padding/widths,
  * etc. should be in the layouts/double_fixed/double-fixed.css file!
  ******************************************************************************/
-.page-title {
-  font-size: 45px;
-  letter-spacing: -.04em;
-}
-@media (min-width: 34em) { /* 544px */
-  .page-title {
-    font-size: 64px;
-  }
-}
-@media (min-width: 62em) { /* 992px */
-  .l-page-title {
-    padding-top: 75px;
-  }
-}
-body.front .page-title {
-  font-size: 400%;
-  padding-bottom: 18px;
-  border-bottom: 2px solid #969696;
-  margin-bottom: 30px;
-}
-
-.l-messages {
-  text-align: left;
-}
 
 /*******************************************************************************
  * Header.
@@ -102,12 +78,37 @@ body.front .page-title {
     width: 18%;
   }
   .l-header .block-system-user-menu {
-    width: 17%;
+    width: 15%;
   }
   .l-header .block-system-main-menu {
     text-align: center;
-    width: 65%;
+    width: 67%;
   }
+}
+
+/*******************************************************************************
+ * Page title.
+ ******************************************************************************/
+.page-title {
+  font-size: 45px;
+  letter-spacing: -.04em;
+}
+@media (min-width: 34em) { /* 544px */
+  .page-title {
+    font-size: 64px;
+  }
+}
+@media (min-width: 62em) { /* 992px */
+  .l-page-title {
+    padding-top: 75px;
+  }
+}
+
+/*******************************************************************************
+ * Messages.
+ ******************************************************************************/
+.l-messages {
+  text-align: left;
 }
 
 /*******************************************************************************
@@ -117,9 +118,6 @@ main {
   position: relative;
 }
 
-/*******************************************************************************
- * Main content
- ******************************************************************************/
 .l-content {
   /* Hide overflow to allow blocks to stretch to 100% width, such as the
      homepage supporter form. */
@@ -169,9 +167,14 @@ main {
   color: #000;
 }
 .l-footer a:hover {
-  color: #007CBA;
+  text-decoration: underline;
 }
 
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .l-footer {
+    margin-top: 150px;
+  }
+}
 
 /*******************************************************************************
  * XL containers get more breathing room.
@@ -183,3 +186,40 @@ main {
   }
 }
 
+/*******************************************************************************
+ * All pages with header image on wrapper.
+ ******************************************************************************/
+.l-wrapper.has-background {
+  background-size: 100%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  margin-left: -5px;
+  margin-right: -5px;
+  position: relative;
+  padding-top: 100px;
+}
+
+@media (min-width: 26em) {
+  .l-wrapper.has-background {
+    padding-top: 150px;
+  }
+}
+@media (min-width: 48em) {
+  .l-wrapper.has-background {
+    padding-top: 175px;
+  }
+}
+@media (min-width: 62em) {
+  .l-wrapper.has-background {
+    padding-top: 200px;
+  }
+}
+@media (min-width: 75em) {
+  .l-wrapper.has-background {
+    padding-top: 250px;
+  }
+}
+
+.l-wrapper.has-background .l-wrapper-inner {
+  background-color: #fff;
+}
