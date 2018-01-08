@@ -4,30 +4,6 @@
  * Contains styles relating to layout. Any adjustment of margins/padding/widths,
  * etc. should be in the layouts/double_fixed/double-fixed.css file!
  ******************************************************************************/
-.page-title {
-  font-size: 45px;
-  letter-spacing: -.04em;
-}
-@media (min-width: 34em) { /* 544px */
-  .page-title {
-    font-size: 64px;
-  }
-}
-@media (min-width: 62em) { /* 992px */
-  .l-page-title {
-    padding-top: 75px;
-  }
-}
-body.front .page-title {
-  font-size: 400%;
-  padding-bottom: 18px;
-  border-bottom: 2px solid #969696;
-  margin-bottom: 30px;
-}
-
-.l-messages {
-  text-align: left;
-}
 
 /*******************************************************************************
  * Header.
@@ -102,12 +78,37 @@ body.front .page-title {
     width: 18%;
   }
   .l-header .block-system-user-menu {
-    width: 17%;
+    width: 15%;
   }
   .l-header .block-system-main-menu {
     text-align: center;
-    width: 65%;
+    width: 67%;
   }
+}
+
+/*******************************************************************************
+ * Page title.
+ ******************************************************************************/
+.page-title {
+  font-size: 45px;
+  letter-spacing: -.04em;
+}
+@media (min-width: 34em) { /* 544px */
+  .page-title {
+    font-size: 64px;
+  }
+}
+@media (min-width: 62em) { /* 992px */
+  .l-page-title {
+    padding-top: 75px;
+  }
+}
+
+/*******************************************************************************
+ * Messages.
+ ******************************************************************************/
+.l-messages {
+  text-align: left;
 }
 
 /*******************************************************************************
@@ -117,9 +118,6 @@ main {
   position: relative;
 }
 
-/*******************************************************************************
- * Main content
- ******************************************************************************/
 .l-content {
   /* Hide overflow to allow blocks to stretch to 100% width, such as the
      homepage supporter form. */
@@ -172,6 +170,11 @@ main {
   color: #007CBA;
 }
 
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .l-footer {
+    margin-top: 150px;
+  }
+}
 
 /*******************************************************************************
  * XL containers get more breathing room.
@@ -181,5 +184,135 @@ main {
     padding-right: 2.9375rem;
     padding-left: 2.9375rem;
   }
+}
+
+/*******************************************************************************
+ * All pages with header image on wrapper.
+ ******************************************************************************/
+.l-wrapper.has-background {
+  background-size: 100%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  margin-left: -5px;
+  margin-right: -5px;
+  position: relative;
+  padding-top: 100px;
+}
+
+@media (min-width: 26em) {
+  .l-wrapper.has-background {
+    padding-top: 150px;
+  }
+}
+@media (min-width: 48em) {
+  .l-wrapper.has-background {
+    padding-top: 175px;
+  }
+}
+@media (min-width: 62em) {
+  .l-wrapper.has-background {
+    padding-top: 200px;
+  }
+}
+@media (min-width: 75em) {
+  .l-wrapper.has-background {
+    padding-top: 250px;
+  }
+}
+
+.l-wrapper.has-background .l-wrapper-inner {
+  background-color: #fff;
+}
+
+/*******************************************************************************
+ * News page overrides
+ ******************************************************************************/
+.layout--double-fixed-inner-rev .l-sidebar-inner h2 {
+  font-size: 2.375rem; /* 38px */
+  margin: 0 0 .5em 0;
+}
+@media (min-width: 850px) {
+  .layout--double-fixed-inner-rev .l-sidebar-inner .block {
+    margin-left: 25px;
+    margin-bottom: 25px;
+  }
+}
+
+/*******************************************************************************
+ * Showcase page overrides
+ ******************************************************************************/
+.showcase .l-top {
+  border-bottom: 2px solid #D4D6D6;
+  padding-top: 25px;
+  padding-bottom: 15px;
+}
+.showcase .l-wrapper {
+  background-color: #F7F7F7;
+  padding-top: 25px;
+  padding-bottom: 15px;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .showcase .l-top,
+  .showcase .l-wrapper  {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .showcase .l-top,
+  .showcase .l-wrapper  {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+@media (min-width: 75em) { /* 1200px @ 16px font size -- XL */
+  .showcase .l-top,
+  .showcase .l-wrapper  {
+    padding-top: 100px;
+    padding-bottom: 75px;
+  }
+}
+.showcase .l-top h2 {
+  font-weight: 300; /* Light */
+  color: #5A5D5E;
+}
+.showcase .l-footer {
+  margin-top: 0;
+}
+
+/*******************************************************************************
+ * Page title centered
+ * - Supporters page
+ * - Contact page
+ ******************************************************************************/
+body.contact .page-title,
+body.support-supporters .page-title,
+body.support-services-contractors .page-title {
+  text-align: center;
+}
+
+/*******************************************************************************
+ * Bottom region dark gray.
+ * - Home page
+ * - Resources page
+ * - Support page
+ ******************************************************************************/
+body.front .l-bottom,
+body.support .l-bottom,
+body.support-services .l-bottom,
+body.node-1621 .l-bottom {
+  margin-top: 100px;
+  border-top: 3px solid #E8E6E5;
+  background-color: #F7F7F7;
+  padding-bottom: 5px;
+}
+body.front .l-footer,
+body.support-services .l-footer,
+body.node-1621 .l-footer {
+  margin-top: 0;
+}
+
+body.support-services-contractors .l-footer {
+  margin-top: 100px;
 }
 

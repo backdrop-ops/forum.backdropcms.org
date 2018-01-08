@@ -89,39 +89,27 @@ function borg_preprocess_page(&$variables) {
   // Add FontAwesome.
   backdrop_add_js('https://use.fontawesome.com/baf3c35582.js', array('type' => 'external'));
 
-  // Add Flexslider to the front page only.
-  if (backdrop_is_front_page()) {
-    $path = backdrop_get_path('theme', 'borg');
-    backdrop_add_css($path . '/css/flexslider.css');
-    backdrop_add_js($path . '/js/jquery.flexslider.js');
-    $script = "
-$(window).load(function() {
-  $('.flexslider').flexslider();
-});";
-    backdrop_add_js($script, array('type' => 'inline'));
-  }
-
-  $path = backdrop_get_path('theme', 'borg');
-  if (arg(0) == 'modules' || arg(0) == 'themes' || arg(0) == 'layouts') {
-    $variables['classes'][] = 'project-search';
-    backdrop_add_css($path . '/css/project-search.css');
-  }
-  elseif (arg(0) == 'showcase') {
-    $variables['classes'][] = 'showcase';
-  }
-  elseif (arg(0) == 'support') {
-    $variables['classes'][] = 'support';
-    if (arg(1) == 'services') {
-      $variables['classes'][] = 'services';
-      backdrop_add_css($path . '/css/services.css');
-    }
-  }
-
+  // Add a body class based on the admin bar.
   if (module_exists('admin_bar') && user_access('admin_bar')) {
     $variables['classes'][] = 'admin-bar';
   }
 
-  if (arg(0) == 'user') {
+  $path = backdrop_get_path('theme', 'borg');
+
+  // Add Flexslider to the front page only.
+  if (backdrop_is_front_page()) {
+    backdrop_add_css($path . '/css/page-front.css');
+  }
+  elseif (arg(0) == 'support') {
+    if (arg(1) == 'services') {
+      backdrop_add_css($path . '/css/page-services.css');
+    }
+  }
+  elseif (arg(0) == 'modules' || arg(0) == 'themes' || arg(0) == 'layouts') {
+    $variables['classes'][] = 'project-search';
+    backdrop_add_css($path . '/css/page-project-search.css');
+  }
+  elseif (arg(0) == 'user') {
     if (arg(1) == 'login') {
       $variables['classes'][] = 'user-form';
       $variables['classes'][] = 'user-login';
@@ -135,13 +123,30 @@ $(window).load(function() {
       $variables['classes'][] = 'user-password';
     }
     elseif (is_numeric(arg(1)) && ! arg(2)) {
-      $variables['classes'][] = 'account-page';
+      $variables['classes'][] = 'profile-page';
+      backdrop_add_css($path . '/css/page-profile.css');
     }
     else {
       global $user;
       if ($user->uid == 0 && !arg(1)) {
         $variables['classes'][] = 'user-form';
         $variables['classes'][] = 'user-login';
+      }
+    }
+  }
+
+  // Add a node class based on the node ID...
+  if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+    $variables['classes'][] = 'node-' . arg(1);
+  }
+
+  // ...or add body classes based on args.
+  elseif (arg(0)) {
+    $variables['classes'][] = arg(0);
+    if (arg(1)) {
+      $variables['classes'][] = arg(0) . '-' . arg(1);
+      if (arg(2)) {
+        $variables['classes'][] = arg(0) . '-' . arg(1) . '-' . arg(2);
       }
     }
   }
@@ -210,33 +215,38 @@ function borg_preprocess_views_exposed_form(&$variables) {
  * @see node.tpl.php
  */
 function borg_preprocess_node(&$variables){
-  // Change the submitted by language for all nodes.
-  $variables['submitted'] = t('Posted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
-
-  // For news posts, change the username to a real name.
-  if ($variables['node']->type == 'post') {
-    // Change the submitted by language.
-    $author = user_load($variables['node']->uid);
+  // For blog posts.
+  if ($variables['type'] == 'post') {
+    // Load the author.
+    $author = user_load($variables['uid']);
     $lang = $author->langcode;
+    // Change the username to a real name.
     if (!empty($author->field_name[$lang])) {
       $variables['name'] = l($author->field_name[$lang][0]['safe_value'], 'user/' . $author->uid);
     }
-  }
-
-  // For blog posts, add a picture.
-  if ($variables['type'] == 'post' && $variables['view_mode'] == 'full') {
     // Get the profile photo.
-    $author = user_load($variables['uid']);
-    $langcode = $author->langcode;
-    $variables['user_picture'] = theme('image_style', array('style_name' => 'headshot_small', 'uri' => $author->field_photo[$langcode][0]['uri']));
+    $uri = $author->field_photo[$lang][0]['uri'];
+    $variables['user_picture'] = theme('image_style', array(
+      'style_name' => 'headshot_small', 'uri' => $uri));
   }
 
-  // For project nodes...
+  // Change the submitted by language for all nodes.
+  $variables['submitted'] = t('Posted by !username on !datetime', array(
+    '!username' => $variables['name'], '!datetime' => $variables['date']));
+
+  // Get the theme location.
+  $path = backdrop_get_path('theme', 'borg');
+
+  // For project nodes include a special stylesheet.
   if (($variables['type'] == 'core') || substr($variables['type'], 0, 8) == 'project_'){
-    $path = backdrop_get_path('theme', 'borg');
     unset($variables['content']['project_release_downloads']['#prefix']);
     $variables['classes'][] = 'node-project';
-    backdrop_add_css($path . '/css/project-styles.css');
+    backdrop_add_css($path . '/css/node-project.css');
+  }
+
+  // For showcase nodes include a special stylesheet.
+  if ($variables['type'] == 'showcase') {
+    backdrop_add_css($path . '/css/node-showcase.css');
   }
 }
 
@@ -591,6 +601,13 @@ function borg_menu_link(array $variables) {
         $element['#attributes']['class'][] = 'active';
       }
     }
+  }
+
+  if ($menu_name === 'main-menu' && ($element['#href'] == 'https://forum.backdropcms.org' ||
+      $element['#href'] == 'https://api.backdropcms.org')) {
+    $title = check_plain($element['#title']);
+    $element['#title'] = $title . ' <i class="fa fa-external-link" aria-hidden="true"></i>';
+    $element['#localized_options']['html'] = TRUE;
   }
 
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
