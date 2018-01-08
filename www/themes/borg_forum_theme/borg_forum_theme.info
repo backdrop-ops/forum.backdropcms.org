@@ -4,5 +4,11 @@ version = 1.x
 backdrop = 1.x
 base theme = borg
 
+; Base stylesheets overriden:
+stylesheets[screen][] = css/layout-pages.css
+stylesheets[screen][] = css/components-nodes.css
+stylesheets[screen][] = css/components-views.css
+
 ; Custom stylesheets to be added:
 stylesheets[screen][] = css/forums.css
+
