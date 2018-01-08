@@ -25,6 +25,8 @@ We do not recommend that these files be overridden in a sub-theme:
 
 We do recommend that these files are overridden in a sub-theme:
 
+* layout-pages.css - contains page-specific overrides to general styles for
+    pages that only exist on the backdropcms.org site.
 * components-blocks.css - contains styles for blocks that only exist on the
     backdropcms.org site.
 * components-views.css - contains styles for views that only exist on the
