@@ -30,6 +30,8 @@
             "e91f6de2-bbec-45a1-8700-a15ddb81de24"
         ],
         "sidebar": [
+            "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09",
+            "bc0b693b-01b4-4b47-9604-042dd9a3c54e",
             "18e7ee72-6b80-4599-b709-9bbd78a16d78",
             "e5c2668b-f55c-40dc-b54a-74c3b86d1991"
         ],
@@ -252,6 +254,74 @@
                     "contexts": []
                 },
                 "uuid": "e91f6de2-bbec-45a1-8700-a15ddb81de24",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09": {
+            "plugin": "views:recent_topics-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_topics-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "5",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "bc0b693b-01b4-4b47-9604-042dd9a3c54e": {
+            "plugin": "views:recent_comments-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_comments-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "5",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "bc0b693b-01b4-4b47-9604-042dd9a3c54e",
                 "style": {
                     "plugin": "default",
                     "data": {
