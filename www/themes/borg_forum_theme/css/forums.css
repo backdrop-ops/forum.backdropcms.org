@@ -22,7 +22,9 @@ body.front .l-bottom {
   padding: 1.5em 1em 1em 1em;
 }
 body.front .l-top {
+  background-color: #f7f7f7;
   padding-bottom: 50px;
+  margin-bottom: 75px;
 }
 
 /******************************************************************************

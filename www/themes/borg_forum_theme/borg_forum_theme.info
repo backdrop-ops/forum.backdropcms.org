@@ -9,6 +9,9 @@ stylesheets[screen][] = css/layout-pages.css
 stylesheets[screen][] = css/components-nodes.css
 stylesheets[screen][] = css/components-views.css
 
+; Base stylesheets removed:
+stylesheets[screen][] = css/page-front.css
+
 ; Custom stylesheets to be added:
 stylesheets[screen][] = css/forums.css
 

@@ -35,6 +35,20 @@
 }
 .block-borg-forum-new-forum-button,
 .block-borg-flag-notify-follow-forum-category {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
+}
+
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-borg-forum-new-forum-button,
+  .block-borg-flag-notify-follow-forum-category {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .block-borg-forum-new-forum-button,
+  .block-borg-flag-notify-follow-forum-category {
+    margin-top: 45px;
+  }
 }
