@@ -1,12 +1,11 @@
 {
     "_config_name": "search.settings",
-    "search_active_modules": [
-        "node",
-        "user"
-    ],
+    "search_active_modules": {
+        "node": "node"
+    },
     "search_and_or_limit": 7,
     "search_default_module": "node",
-    "search_cron_limit": 100,
+    "search_cron_limit": "100",
     "search_overlap_cjk": 1,
     "search_minimum_word_size": 3,
     "search_tag_weights": {
@@ -23,5 +22,11 @@
         "em": 3,
         "a": 10
     },
-    "search_embedded_form_submitted": 0
+    "search_embedded_form_submitted": 0,
+    "node_rank_comments": "3",
+    "node_rank_relevance": "5",
+    "node_rank_sticky": "0",
+    "node_rank_promote": "0",
+    "node_rank_recent": "1",
+    "transliteration": 0
 }

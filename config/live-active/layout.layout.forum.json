@@ -10,9 +10,9 @@
     "layout_template": "moscone_flipped",
     "disabled": false,
     "settings": {
-        "title": "",
-        "title_display": "default",
-        "title_block": null
+        "title": "Backdrop CMS Forum",
+        "title_display": "custom",
+        "title_block": "1f4e71d0-18c7-4746-8c00-c941e8f97ac1"
     },
     "positions": {
         "header": [
@@ -21,6 +21,7 @@
             "488bc697-04da-4606-b301-0147ac6d7e76"
         ],
         "top": [
+            "6824ed26-b90d-4a55-ac0a-109da7149ff4",
             "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
         ],
         "content": [
@@ -123,6 +124,32 @@
                 }
             }
         },
+        "6824ed26-b90d-4a55-ac0a-109da7149ff4": {
+            "plugin": "system:page_components:title",
+            "data": {
+                "module": "system",
+                "delta": "page_components",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "title_tag": "h1",
+                    "title_classes": "page-title",
+                    "tab_type": "both"
+                },
+                "uuid": "6824ed26-b90d-4a55-ac0a-109da7149ff4",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
         "05ae7ae6-0566-44c9-8300-bfb1b45875a7": {
             "plugin": "layout:custom_block",
             "data": {
@@ -130,12 +157,12 @@
                 "delta": "custom_block",
                 "settings": {
                     "title_display": "default",
-                    "title": "Welcome to the Backdrop CMS Forum",
+                    "title": "",
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h4>Here, all questions are answered with dignity and respect.</h4>\r\n",
-                    "format": "filtered_html"
+                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n",
+                    "format": "full_html"
                 },
                 "uuid": "05ae7ae6-0566-44c9-8300-bfb1b45875a7",
                 "style": {
