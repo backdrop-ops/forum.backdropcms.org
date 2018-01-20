@@ -7,7 +7,7 @@
     "module": "layout",
     "weight": 0,
     "storage": 2,
-    "layout_template": "moscone_flipped",
+    "layout_template": "boxton",
     "disabled": false,
     "settings": {
         "title": "",
@@ -25,13 +25,14 @@
         ],
         "content": [
             "default",
-            "a531c13d-be06-4a61-9302-2acfbc883f62"
+            "a531c13d-be06-4a61-9302-2acfbc883f62",
+            "ec150984-6c03-44d9-9107-075cdc5c2bae"
         ],
-        "sidebar": [
-            "5486d381-698f-407b-a715-216f45ff14d6",
-            "24a72804-5cd2-46ea-aa00-f4f366c55885"
+        "bottom": [
+            "33f27dc1-af7c-46be-af00-e596f277b275",
+            "79eeff5e-9761-4243-a119-25fc72286611",
+            "5486d381-698f-407b-a715-216f45ff14d6"
         ],
-        "bottom": [],
         "footer": [
             "cd4d033d-3f67-4191-8655-85ee758877c0",
             "53760ea0-b67a-416d-b100-0b87fb1c5787",
@@ -217,6 +218,97 @@
                 ]
             }
         },
+        "ec150984-6c03-44d9-9107-075cdc5c2bae": {
+            "plugin": "borg_forum:new_forum_button",
+            "data": {
+                "module": "borg_forum",
+                "delta": "new_forum_button",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "ec150984-6c03-44d9-9107-075cdc5c2bae",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "33f27dc1-af7c-46be-af00-e596f277b275": {
+            "plugin": "views:recent_comments-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_comments-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "33f27dc1-af7c-46be-af00-e596f277b275",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "79eeff5e-9761-4243-a119-25fc72286611": {
+            "plugin": "views:recent_topics-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_topics-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "79eeff5e-9761-4243-a119-25fc72286611",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
         "5486d381-698f-407b-a715-216f45ff14d6": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
@@ -234,30 +326,7 @@
                     "plugin": "default",
                     "data": {
                         "settings": {
-                            "classes": ""
-                        }
-                    }
-                }
-            }
-        },
-        "24a72804-5cd2-46ea-aa00-f4f366c55885": {
-            "plugin": "borg_flag_notify:follow_forum_category",
-            "data": {
-                "module": "borg_flag_notify",
-                "delta": "follow_forum_category",
-                "settings": {
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": []
-                },
-                "uuid": "24a72804-5cd2-46ea-aa00-f4f366c55885",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
+                            "classes": "col-sm-12"
                         }
                     }
                 }
