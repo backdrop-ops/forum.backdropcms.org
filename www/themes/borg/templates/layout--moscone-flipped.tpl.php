@@ -3,26 +3,10 @@
  * @file
  * Template for the Moscone Flipped layout.
  *
- * *** CHANGES: moved top region to outside l-wrapper for full-width.
- *
- * Variables:
- * - $title: The page title, for use in the actual HTML content.
- * - $messages: Status and error messages. Should be displayed prominently.
- * - $tabs: Tabs linking to any sub-pages beneath the current page
- *   (e.g., the view and edit tabs when displaying a node.)
- * - $action_links: Array of actions local to the page, such as 'Add menu' on
- *   the menu administration interface.
- * - $classes: Array of CSS classes to be added to the layout wrapper.
- * - $attributes: Array of additional HTML attributes to be added to the layout
- *     wrapper. Flatten using backdrop_attributes().
- * - $content: An array of content, each item in the array is keyed to one
- *   region of the layout. This layout supports the following sections:
- *   - $content['header']
- *   - $content['top']
- *   - $content['content']
- *   - $content['sidebar']
- *   - $content['bottom']
- *   - $content['footer']
+ * *** CHANGES: ***
+ * - Moved messages just below page title.
+ * - Moved top region to above title, outside .l-wraopper.
+ * - Added a div with the "row" class to both header and footer.
  */
 ?>
 <div class="layout--moscone-flipped <?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
@@ -41,7 +25,7 @@
   <?php endif; ?>
 
   <?php if (!empty($content['top'])): ?>
-  <div class="l-top">
+    <div class="l-top">
       <div class="l-top-inner container container-fluid">
         <?php print $content['top']; ?>
       </div>
@@ -51,12 +35,6 @@
   <div <?php print backdrop_attributes($wrap_attributes); ?>> <!-- .l-wrapper !-->
     <div class="l-wrapper-inner container container-fluid">
 
-      <?php if ($messages): ?>
-        <div class="l-messages" role="status" aria-label="<?php print t('Status messages'); ?>">
-          <?php print $messages; ?>
-        </div>
-      <?php endif; ?>
-
       <div class="l-page-title">
         <a id="main-content"></a>
         <?php print render($title_prefix); ?>
@@ -65,6 +43,12 @@
         <?php endif; ?>
         <?php print render($title_suffix); ?>
       </div>
+
+      <?php if ($messages): ?>
+        <div class="l-messages" role="status" aria-label="<?php print t('Status messages'); ?>">
+          <?php print $messages; ?>
+        </div>
+      <?php endif; ?>
 
       <?php if ($tabs): ?>
         <nav class="tabs" role="tablist" aria-label="<?php print t('Admin content navigation tabs.'); ?>">

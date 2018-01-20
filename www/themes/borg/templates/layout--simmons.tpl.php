@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Template for the Moscone layout.
+ * Template for the Simmons layout.
  *
  * *** CHANGES: ***
  * - Moved messages just below page title.
@@ -9,7 +9,7 @@
  * - Added a div with the "row" class to both header and footer.
  */
 ?>
-<div class="layout--moscone <?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
+<div class="layout--simmons <?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   </div>
@@ -32,7 +32,7 @@
     </div>
   <?php endif; ?>
 
-  <div <?php print backdrop_attributes($wrap_attributes); ?>> <!-- .l-wrapper !-->
+  <div class="l-wrapper">
     <div class="l-wrapper-inner container container-fluid">
 
       <div class="l-page-title">
@@ -59,22 +59,56 @@
       <?php print $action_links; ?>
 
       <div class="l-middle row">
-        <main class="l-content col-md-8 col-md-push-4" role="main" aria-label="<?php print t('Main content'); ?>">
+        <main class="l-content col-md-6 col-md-push-3" role="main" aria-label="<?php print t('Main content'); ?>">
           <?php print $content['content']; ?>
         </main>
-        <div class="l-sidebar l-sidebar-first col-md-4 col-md-pull-8">
+        <div class="l-sidebar l-sidebar-first col-md-3 col-md-pull-6">
           <?php print $content['sidebar']; ?>
+        </div>
+        <div class="l-sidebar l-sidebar-second col-md-3">
+          <?php print $content['sidebar2']; ?>
         </div>
       </div><!-- /.l-middle -->
 
+      <?php if ($content['third1'] || $content['third2'] || $content['third3']): ?>
+        <div class="l-thirds row">
+          <div class="l-thirds-region col-md-4">
+            <?php print $content['third1']; ?>
+          </div>
+          <div class="l-thirds-region col-md-4">
+            <?php print $content['third2']; ?>
+          </div>
+          <div class="l-thirds-region col-md-4">
+            <?php print $content['third3']; ?>
+          </div>
+        </div><!-- /.l-thirds -->
+      <?php endif; ?>
+
+      <?php if ($content['quarter1'] || $content['quarter2'] || $content['quarter3'] || $content['quarter4']): ?>
+        <div class="l-quarters row">
+          <div class="l-quarters-region col-md-3">
+            <?php print $content['quarter1']; ?>
+          </div>
+          <div class="l-quarters-region col-md-3">
+            <?php print $content['quarter2']; ?>
+          </div>
+          <div class="l-quarters-region col-md-3">
+            <?php print $content['quarter3']; ?>
+          </div>
+          <div class="l-quarters-region col-md-3">
+            <?php print $content['quarter4']; ?>
+          </div>
+        </div><!-- /.l-quarters -->
+      <?php endif; ?>
+
+      <?php if (!empty($content['bottom'])): ?>
+        <div class="l-bottom">
+          <?php print $content['bottom']; ?>
+        </div>
+      <?php endif; ?>
+
     </div><!-- /.l-wrapper-inner -->
   </div><!-- /.l-wrapper -->
-
-  <?php if (!empty($content['bottom'])): ?>
-    <div class="l-bottom">
-      <?php print $content['bottom']; ?>
-    </div>
-  <?php endif; ?>
 
   <?php if ($content['footer']): ?>
     <footer class="l-footer"  role="footer">
@@ -85,4 +119,4 @@
       </div>
     </footer>
   <?php endif; ?>
-</div><!-- /.layout--moscone -->
+</div><!-- /.layout--simmons -->

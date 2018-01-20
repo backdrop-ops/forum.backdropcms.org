@@ -168,20 +168,6 @@ ul.secondary a.active {
 }
 
 /*******************************************************************************
- * Full Width blocks
- ******************************************************************************/
-div.full-width {
-  margin-left: calc(50% - 50vw);
-  width: 100vw;
-
-  background-color: #F7F7F7;
-  border-top: 2px solid #E8E6E5;
-  border-bottom: 2px solid #E8E6E5;
-  margin-top: 50px;
-  margin-bottom: 100px;
-}
-
-/*******************************************************************************
  * All Nodes - Full view mode
  ******************************************************************************/
 article {
@@ -577,7 +563,6 @@ a.feed-icon {
   padding-bottom: 30px;
 }
 .block-on-the-web-social-links a i {
-  margin: 0 2px;
   color: #007CBA;
 }
 .block-on-the-web-social-links a i:first-child {
@@ -590,6 +575,17 @@ a.feed-icon {
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
   .block-on-the-web-social-links {
     padding-bottom: 0;
+  }
+  .block-on-the-web-social-links a i.fa-2x {
+    font-size: 1.66em;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .block-on-the-web-social-links a i {
+    margin: 0 2px;
+  }
+  .block-on-the-web-social-links a i.fa-2x {
+    font-size: 2em;
   }
 }
 
@@ -1180,6 +1176,35 @@ div.addressfield-container-inline::after {
 }
 
 /*******************************************************************************
+ * All Sidebar Links
+ ******************************************************************************/
+.l-sidebar a:hover {
+   text-decoration: underline;
+}
+.l-sidebar h2 a:hover,
+.l-sidebar h3 a:hover,
+.l-sidebar h4 a:hover,
+.l-sidebar h5 a:hover,
+.l-sidebar h6 a:hover {
+   text-decoration: none;
+   color: #000;
+}
+
+/*******************************************************************************
+ * All Sidebar Blocks Headings
+ ******************************************************************************/
+.l-sidebar .block:first-child h2.block-title {
+    margin-top: 0;
+}
+
+/*******************************************************************************
+ * All Sidebar Views Headings
+ ******************************************************************************/
+.l-sidebar .view h4 {
+   margin-bottom: .25em;
+}
+
+/*******************************************************************************
  * All Views exposed forms
  ******************************************************************************/
 .views-exposed-form {
@@ -1320,15 +1345,6 @@ a.button-small {
   .form-actions input {
     margin-right: 15px;
   }
-}
-
-/*******************************************************************************
- * Subtext
- ******************************************************************************/
-.subtext {
-  font-size: 80%;
-  font-weight: 400;
-  color: #969595;
 }
 
 /*******************************************************************************
