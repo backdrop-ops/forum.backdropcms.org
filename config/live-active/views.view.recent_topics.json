@@ -379,6 +379,16 @@
                     "title": {
                         "link_to_node": 1
                     }
+                },
+                "allow": {
+                    "items_per_page": "items_per_page",
+                    "use_pager": 0,
+                    "offset": 0,
+                    "link_to_view": 0,
+                    "more_link": 0,
+                    "path_override": 0,
+                    "exposed_form": 0,
+                    "fields_override": 0
                 }
             }
         }
