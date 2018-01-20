@@ -5,6 +5,57 @@
  ******************************************************************************/
 
 /******************************************************************************
+ * Categories view
+ ******************************************************************************/
+.view-categories .views-field-nid,
+.view-categories .views-field-cid,
+.view-categories .views-field-last-comment {
+  display: none;
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .view-categories .views-field-last-comment {
+    display: table-cell;
+    white-space: nowrap;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .view-categories .views-field-nid,
+  .view-categories .views-field-cid {
+    display: table-cell;
+  }
+}
+
+/******************************************************************************
+ * Taxonomy view
+ ******************************************************************************/
+.view-taxonomy-term .views-field-subject,
+.view-taxonomy-term .views-field-last-comment-timestamp {
+  display: none;
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .view-taxonomy-term .views-field-last-comment-timestamp {
+    display: table-cell;
+    white-space: nowrap;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .view-taxonomy-term .views-field-subject {
+    display: table-cell;
+  }
+}
+
+/******************************************************************************
+ * Recent views
+ ******************************************************************************/
+.view-recent-comments h4,
+.view-recent-topics h4 {
+  margin-bottom: .25em;
+  font-weight: 400;
+}
+
+/******************************************************************************
  * Helpful answers view -  block
  ******************************************************************************/
 .block-views-helpful-answer-block {
@@ -35,7 +86,7 @@
 }
 .block-borg-forum-new-forum-button,
 .block-borg-flag-notify-follow-forum-category {
-  margin-top: 15px;
+  margin: 15px 0;
   text-align: center;
 }
 
@@ -43,12 +94,12 @@
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
   .block-borg-forum-new-forum-button,
   .block-borg-flag-notify-follow-forum-category {
-    margin-top: 30px;
+    margin: 30px 0;
   }
 }
 @media (min-width: 62em) { /* 992px @ 16px font size -- LG */
   .block-borg-forum-new-forum-button,
   .block-borg-flag-notify-follow-forum-category {
-    margin-top: 45px;
+    margin: 45px 0;
   }
 }

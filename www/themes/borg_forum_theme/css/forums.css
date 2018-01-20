@@ -17,6 +17,10 @@ body.front .l-bottom {
   border-top: 2px solid #E8E6E5;
   padding: 1.5em 0;
 }
+.l-bottom,
+body.front .l-bottom {
+  border-bottom: 0;
+}
 .l-top {
   border-top: 0;
   padding: 1.5em 1em 1em 1em;
@@ -27,18 +31,32 @@ body.front .l-top {
   margin-bottom: 75px;
 }
 
+/******************************************************************************
+ * Sidebar Headings
+ ******************************************************************************/
+
 .l-sidebar h2.block-title {
-  font-weight: 400;
+  font-weight: 400; /* Normal */
 }
 .l-sidebar h4 {
-  font-weight: 400;
+  font-weight: 400; /* Normal */
+}
+
+/******************************************************************************
+ * Bottomstuff.
+ ******************************************************************************/
+.l-bottom .col-sm-6 {
+  text-align: center;
+}
+.l-bottom h2.block-title {
+  font-weight: 400; /* Normal */
 }
 
 /******************************************************************************
  * Home page - page title
  ******************************************************************************/
 body.front .page-title {
-  font-weight: normal;
+  font-weight: 400; /* Normal */
 }
 
 /******************************************************************************
@@ -48,7 +66,7 @@ body.front .block-layout-custom-block h2 {
   font-size: 1.625rem;
   line-height: 1.2;
   color: #444b53; /* soft black */
-  font-weight: 300; /* light */
+  font-weight: 300; /* Light */
   margin: 0 0 1em 0;
 }
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
@@ -64,15 +82,17 @@ body.front .block-layout-custom-block h2 {
 table {
   width: 100%;
 }
-th {
-  border-bottom: 2px solid #d7d7d7;
-}
 tr.even,
 tr.odd {
   background-color: #f7f7f7;
 }
 table td {
-  padding: 1em;
+  padding: 1em .5em;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  table td {
+    padding: 1em;
+  }
 }
 
 /******************************************************************************
