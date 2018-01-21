@@ -5,7 +5,8 @@
  *
  * *** CHANGES: ***
  * - Moved messages just below page title.
- * - Moved top region to above title, outside .l-wraopper.
+ * - Moved top region to above title, outside .l-wrapper.
+ * - Moved bottom region to above footer, outside .l-wrapper.
  * - Added a div with the "row" class to both header and footer.
  */
 ?>
@@ -67,7 +68,11 @@
 
   <?php if (!empty($content['bottom'])): ?>
     <div class="l-bottom">
-      <?php print $content['bottom']; ?>
+        <div class="l-bottom-inner">
+          <div class="row">
+            <?php print $content['bottom']; ?>
+          </div>
+        </div>
     </div>
   <?php endif; ?>
 
