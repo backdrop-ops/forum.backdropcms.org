@@ -2,12 +2,12 @@
     "_config_name": "layout.layout.forum",
     "path": "forums",
     "name": "forum",
-    "title": "Forum list",
+    "title": "Home page (forum list)",
     "description": null,
     "module": null,
     "weight": 0,
     "storage": 1,
-    "layout_template": "moscone_flipped",
+    "layout_template": "boxton",
     "disabled": false,
     "settings": {
         "title": "Backdrop CMS Forum",
@@ -25,13 +25,14 @@
             "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
         ],
         "content": [
-            "3b2245c6-1566-4f76-b001-1a3fb41146e5"
+            "3b2245c6-1566-4f76-b001-1a3fb41146e5",
+            "7b1642e9-245e-4cab-8009-9d0e444ebd3e"
         ],
-        "sidebar": [
-            "7b1642e9-245e-4cab-8009-9d0e444ebd3e",
-            "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826"
+        "bottom": [
+            "ad4adc27-36d1-4509-b500-e4957498fa1b",
+            "5bd49fc4-692d-4926-8c47-7198c2edc874",
+            "c06c1fba-45e7-43c2-9900-c5c462b957f8"
         ],
-        "bottom": [],
         "footer": [
             "7959062a-2095-431c-aa07-077beecf731f",
             "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
@@ -221,11 +222,79 @@
                 }
             }
         },
-        "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826": {
-            "plugin": "borg_flag_notify:follow_forum_category",
+        "ad4adc27-36d1-4509-b500-e4957498fa1b": {
+            "plugin": "views:recent_topics-block",
             "data": {
-                "module": "borg_flag_notify",
-                "delta": "follow_forum_category",
+                "module": "views",
+                "delta": "recent_topics-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "ad4adc27-36d1-4509-b500-e4957498fa1b",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "5bd49fc4-692d-4926-8c47-7198c2edc874": {
+            "plugin": "views:recent_comments-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_comments-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "5bd49fc4-692d-4926-8c47-7198c2edc874",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "c06c1fba-45e7-43c2-9900-c5c462b957f8": {
+            "plugin": "borg_forum:new_forum_button",
+            "data": {
+                "module": "borg_forum",
+                "delta": "new_forum_button",
                 "settings": {
                     "title_display": "default",
                     "title": "",
@@ -233,12 +302,12 @@
                     "block_settings": [],
                     "contexts": []
                 },
-                "uuid": "cacf8d69-9bb5-44c0-bf09-9ff7c9a69826",
+                "uuid": "c06c1fba-45e7-43c2-9900-c5c462b957f8",
                 "style": {
                     "plugin": "default",
                     "data": {
                         "settings": {
-                            "classes": ""
+                            "classes": "col-sm-12"
                         }
                     }
                 }

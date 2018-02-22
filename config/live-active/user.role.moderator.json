@@ -34,6 +34,7 @@
         "view the administration theme",
         "assign roles",
         "access user profiles",
-        "change own username"
+        "change own username",
+        "use text format filtered_html"
     ]
 }
