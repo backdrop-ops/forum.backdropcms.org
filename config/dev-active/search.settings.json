@@ -28,5 +28,7 @@
     "node_rank_sticky": "0",
     "node_rank_promote": "0",
     "node_rank_recent": "1",
-    "transliteration": 0
+    "transliteration": 0,
+    "_config_static": true,
+    "search_logging": true
 }
