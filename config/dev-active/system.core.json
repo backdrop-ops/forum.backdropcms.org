@@ -94,5 +94,6 @@
     },
     "site_logo_upload": "",
     "site_favicon_upload": "",
-    "path_pattern": "accounts/[user:name]"
+    "path_pattern": "accounts/[user:name]",
+    "x_frame_options": "SAMEORIGIN"
 }
