@@ -1,7 +1,7 @@
 {
     "_config_name": "filter.format.filtered_html",
     "format": "filtered_html",
-    "name": "Filtered HTML",
+    "name": "Standard",
     "weight": 0,
     "editor": "ckeditor",
     "editor_settings": {

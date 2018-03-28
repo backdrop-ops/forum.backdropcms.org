@@ -1,7 +1,7 @@
 {
     "_config_name": "filter.format.full_html",
     "format": "full_html",
-    "name": "Full HTML",
+    "name": "HTML code",
     "weight": 1,
     "editor": "",
     "filters": {

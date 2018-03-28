@@ -16,7 +16,7 @@
     },
     "positions": {
         "header": [
-            "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
+            "ff6a1e4c-a5b6-44d4-a508-0810348379b5",
             "a40f6365-83c1-4cf9-9100-ab14da2c51d9",
             "5d77dcfb-6c6d-4916-9f09-9d28375749ca"
         ],
@@ -45,19 +45,24 @@
         "title": []
     },
     "content": {
-        "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9": {
-            "plugin": "borg_forum:branding",
+        "ff6a1e4c-a5b6-44d4-a508-0810348379b5": {
+            "plugin": "system:header",
             "data": {
-                "module": "borg_forum",
-                "delta": "branding",
+                "module": "system",
+                "delta": "header",
                 "settings": {
                     "title_display": "default",
                     "title": "",
                     "style": "default",
-                    "block_settings": [],
+                    "block_settings": {
+                        "menu": "",
+                        "logo": 1,
+                        "site_name": 1,
+                        "site_slogan": 0
+                    },
                     "contexts": []
                 },
-                "uuid": "e9f259ef-3de5-49a0-9d00-b6a8ed7f6ca9",
+                "uuid": "ff6a1e4c-a5b6-44d4-a508-0810348379b5",
                 "style": {
                     "plugin": "default",
                     "data": {
