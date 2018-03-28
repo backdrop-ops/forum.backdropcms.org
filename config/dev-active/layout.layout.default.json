@@ -16,7 +16,7 @@
     },
     "positions": {
         "header": [
-            "50117bd7-18bd-4b6d-9729-41225f251f97",
+            "e2c497f8-cb2e-404a-a300-0b27ddd797ef",
             "e3400ad1-cc87-4ac4-a400-f19bcff57738",
             "13b2f325-af26-40bb-8c61-97fe1d93f19f"
         ],
@@ -29,8 +29,8 @@
             "ec150984-6c03-44d9-9107-075cdc5c2bae"
         ],
         "bottom": [
-            "33f27dc1-af7c-46be-af00-e596f277b275",
             "79eeff5e-9761-4243-a119-25fc72286611",
+            "33f27dc1-af7c-46be-af00-e596f277b275",
             "5486d381-698f-407b-a715-216f45ff14d6"
         ],
         "footer": [
@@ -42,19 +42,24 @@
         "title": []
     },
     "content": {
-        "50117bd7-18bd-4b6d-9729-41225f251f97": {
-            "plugin": "borg_forum:branding",
+        "e2c497f8-cb2e-404a-a300-0b27ddd797ef": {
+            "plugin": "system:header",
             "data": {
-                "module": "borg_forum",
-                "delta": "branding",
+                "module": "system",
+                "delta": "header",
                 "settings": {
                     "title_display": "default",
                     "title": "",
                     "style": "default",
-                    "block_settings": [],
+                    "block_settings": {
+                        "menu": "",
+                        "logo": 1,
+                        "site_name": 1,
+                        "site_slogan": 0
+                    },
                     "contexts": []
                 },
-                "uuid": "50117bd7-18bd-4b6d-9729-41225f251f97",
+                "uuid": "e2c497f8-cb2e-404a-a300-0b27ddd797ef",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -241,40 +246,6 @@
                 }
             }
         },
-        "33f27dc1-af7c-46be-af00-e596f277b275": {
-            "plugin": "views:recent_comments-block",
-            "data": {
-                "module": "views",
-                "delta": "recent_comments-block",
-                "settings": {
-                    "link_to_view": 0,
-                    "more_link": false,
-                    "use_pager": false,
-                    "pager_id": 0,
-                    "items_per_page": "3",
-                    "offset": 0,
-                    "path": null,
-                    "fields_override": null,
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": [],
-                    "allowed": [],
-                    "path_override": false,
-                    "exposed": []
-                },
-                "uuid": "33f27dc1-af7c-46be-af00-e596f277b275",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": "col-sm-6"
-                        }
-                    }
-                }
-            }
-        },
         "79eeff5e-9761-4243-a119-25fc72286611": {
             "plugin": "views:recent_topics-block",
             "data": {
@@ -299,6 +270,40 @@
                     "exposed": []
                 },
                 "uuid": "79eeff5e-9761-4243-a119-25fc72286611",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "33f27dc1-af7c-46be-af00-e596f277b275": {
+            "plugin": "views:recent_comments-block",
+            "data": {
+                "module": "views",
+                "delta": "recent_comments-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "3",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "33f27dc1-af7c-46be-af00-e596f277b275",
                 "style": {
                     "plugin": "default",
                     "data": {
