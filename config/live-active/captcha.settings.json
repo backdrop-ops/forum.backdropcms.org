@@ -13,6 +13,11 @@
     "wrong_response_counter": 0,
     "log_wrong_responses": 0,
     "captcha_points": {
+        "user_password": {
+            "form_id": "user_password",
+            "module": "captcha",
+            "captcha_type": "Math"
+        },
         "user_register_form": {
             "form_id": "user_register_form",
             "module": "recaptcha",

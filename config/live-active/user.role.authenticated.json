@@ -33,6 +33,7 @@
         "unflag abusive_post",
         "subscribe to node",
         "search content",
-        "change own username"
+        "change own username",
+        "access user profiles"
     ]
 }
