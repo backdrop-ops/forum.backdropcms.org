@@ -84,5 +84,5 @@ All Backdrop code is Copyright 2001 - 2016 by the original authors.
 
 Backdrop also includes works under different copyright notices that are
 distributed according to the terms of the GNU General Public License or a
-compatible license. These individual works may have specific copyright
+compatible license. These individual works may have specific copyright 
 information noted within their source code files or directories.
