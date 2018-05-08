@@ -1,12 +1,11 @@
-name = Google Analytics Lite
-description = Logs site Statistics to the Google Analytics service by adding a Javascript tracking code to every page.
-core = 8.x
+name = Google Analytics
+description = Adds a Google Analytics JavaScript tracking code to every page.
+backdrop = 1.x
 package = Statistics
-configure = admin/config/statistics/googleanalytics
+type = module
+configure = admin/config/system/googleanalytics
 
-; Information added by drupal.org packaging script on 2013-09-30
-version = "8.x-1.x-dev"
-core = "8.x"
-project = "googleanalytics"
-datestamp = "1380581128"
-
+; Added by Backdrop CMS packaging script on 2018-04-12
+project = googleanalytics
+version = 1.x-2.1.2
+timestamp = 1523580850
