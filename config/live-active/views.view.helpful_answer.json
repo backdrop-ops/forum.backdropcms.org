@@ -56,7 +56,7 @@
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "flag",
+                        "label": "helpful",
                         "required": 1,
                         "flag": "helpful",
                         "user_scope": "any"
@@ -71,6 +71,18 @@
                         "label": "counter",
                         "required": 1,
                         "flag": "helpful"
+                    },
+                    "flag_content_rel_1": {
+                        "id": "flag_content_rel_1",
+                        "table": "comment",
+                        "field": "flag_content_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "accepted",
+                        "required": 0,
+                        "flag": "accepted",
+                        "user_scope": "any"
                     }
                 },
                 "fields": {
@@ -225,6 +237,51 @@
                             "max": "",
                             "value": "3"
                         },
+                        "group": "1",
+                        "exposed": false,
+                        "expose": {
+                            "operator_id": false,
+                            "label": "",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "",
+                            "identifier": "",
+                            "required": false,
+                            "remember": false,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated"
+                            }
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        }
+                    },
+                    "flagged": {
+                        "id": "flagged",
+                        "table": "flagging",
+                        "field": "flagged",
+                        "relationship": "flag_content_rel"
+                    },
+                    "flagged_1": {
+                        "id": "flagged_1",
+                        "table": "flagging",
+                        "field": "flagged",
+                        "relationship": "flag_content_rel_1",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "=",
+                        "value": "0",
                         "group": "1",
                         "exposed": false,
                         "expose": {
