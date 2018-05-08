@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Drupal Module: Google Analytics Lite
+ *
+ * Adds the Google Analytics tracking code to the site.
+ *
+ * @author: Frank Anderson <http://drupal.org/user/249517>
+ */
+
+function googleanalytics_page_build(&$page) {
+  $config = config('googleanalytics.settings');
+  $googleanalytics_tracking_id = $config->get('trackingId');
+
+  // Seems like the attached isn't working, possibly because this is in-line code
+  // $page['#attached']['js'][$script] = array('every_page' => TRUE);
+
+  drupal_add_js(_googleanalytics_get_code($googleanalytics_tracking_id),
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function googleanalytics_menu() {
+  $items['admin/config/statistics/googleanalytics'] = array(
+    'title' => 'Google Analytics Lite settings',
+    'description' => 'Google Analytics Integration Settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('googleanalytics_admin_settings'),
+    'file' => 'googleanalytics.admin.inc',
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/*
+ * Utility function returns google analytics javascript code
+ */
+
+function _googleanalytics_get_code($tracking_id) {
+  $code = "<script type=\"text/javascript\">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '$tracking_id']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>";
+
+  return $code;
+}
