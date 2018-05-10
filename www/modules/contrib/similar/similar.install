@@ -1,0 +1,83 @@
+<?php
+/**
+ * @file
+ * Installation functions for Similar entries module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Add FULLTEXT index to MySQL MyISAM tables.
+ * Module does not support InnoDB or PostgreSQL, so no changes for it.
+ * Individual field tables are indexed in hook_cron() if they exist.
+ * It is called here at install to perform the initial creation of indices.
+ * require_once is used because module_load_include() is not accessible
+ * during hook_install(). See #1257940 for more information.
+ */
+function similar_install() {
+  include_once dirname(__FILE__) . '/similar.module';
+  db_query('ALTER TABLE {node} ENGINE = MYISAM');
+  db_query('ALTER TABLE {node} ADD FULLTEXT `similar` (`title`)');
+  if (db_table_exists('field_data_body')) {
+    db_query('ALTER TABLE {field_data_body} ENGINE = MYISAM');
+    db_query('ALTER TABLE {field_data_body} ADD FULLTEXT `similar` (`body_value`)');
+  }
+  similar_index_fields();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function similar_uninstall() {
+  db_drop_index('node', 'similar');
+  if (db_table_exists('field_data_body') && db_index_exists('field_data_body', 'similar')) {
+    db_drop_index('field_data_body', 'similar');
+  }
+  $indices = config_get('similar.settings', 'similar_indices');
+  foreach ($indices as $field => $info) {
+    if (db_table_exists($info['table']) && db_index_exists($info['table'], $info['index'])) {
+      db_drop_index($info['table'], $info['index']);
+    }
+  }
+}
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function similar_update_last_removed() {
+  // We've removed the 1.x-1.x version of mymodule, including database updates.
+  // For the 1.x-2.x version of the module, the next update function would be
+  // mymodule_update_1200().
+  return 7202;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function similar_update_dependencies() {
+  // This needs to run before views are moved to config in views_update_1001().
+  $dependencies['views'][1001] = array(
+    'similar' => 1000,
+  );
+  return $dependencies;
+}
+
+/**
+ * Copy of update 7203 since it's not included in the latest stable D7 release.
+ *
+ * @see similar_update_dependencies().
+ */
+function similar_update_1000() {
+  $view_in_db = db_query("SELECT COUNT(*) FROM {views_view} WHERE name = 'Similar Entries'")->fetchField();
+  if ($view_in_db) {
+    db_query("UPDATE {views_view} SET name = 'similar_entries' WHERE name = 'Similar Entries'");
+  }
+}
+
+/**
+ * Update the similar indicies from variables to config.
+ */
+function similar_update_1001() {
+  config_set('similar.settings', 'similar_indices', update_variable_get('similar_indices', array()));
+  variable_del('similar_indices');
+}
