@@ -69,7 +69,7 @@
  * Helpful answers view -  block
  ******************************************************************************/
 .block-views-helpful-answer-block {
-  padding: 20px;
+  padding: 10px 20px;
   border: 2px solid #d7d7d7;
   border-radius: 10px;
   margin-top: 1em;
@@ -79,7 +79,10 @@
 .block-views-helpful-answer-block .views-row {
   padding: 20px;
   background-color: #f7f7f7;
-  margin-top: 1em;
+  margin-top: 15px;
+}
+.block-views-helpful-answer-block h3 {
+  margin-top: 0;
 }
 .block-views-accepted-answer-block {
   padding: 20px;
