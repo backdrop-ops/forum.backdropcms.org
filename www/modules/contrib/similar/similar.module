@@ -1,0 +1,175 @@
+<?php
+/**
+ * @file
+ * Provides similar content view based on relevancy scores.
+ */
+
+define('SIMILAR_INDICES', 'similar_indices');
+
+/**
+ * Implements hook_views_api().
+ */
+function similar_views_api() {
+  return array(
+    'api' => 2,
+    'path' => backdrop_get_path('module', 'similar') . '/views',
+  );
+}
+
+/**
+ * Implements hook_config_info().
+ */
+function similar_config_info() {
+  $prefixes['similar.settings'] = array(
+    'label' => t('Similar settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}
+
+/**
+ * Implements hook_autoload_info().
+ */
+function similar_autoload_info() {
+  return array(
+    'similar_handler_argument_nid' => 'views/similar_handler_argument_nid.inc',
+    'similar_handler_field_similarity' => 'views/similar_handler_field_similarity.inc',
+    'similar_handler_filter_similarity' => 'views/similar_handler_filter_similarity.inc',
+    'similar_handler_sort_similarity' => 'views/similar_handler_sort_similarity.inc',
+  );
+}
+
+/**
+ * Implements hook_cron().
+ */
+function similar_cron() {
+  similar_reset_indices();
+}
+
+/**
+ * Clears all Similar Entries indices.
+ */
+function similar_reset_indices() {
+  $indices = similar_get_indices();
+  if (!empty($indices)) {
+    foreach ($indices as $field => $info) {
+      if ((isset($info['table'])) && (isset($info['index']))) {
+        if (db_table_exists($info['table']) && db_index_exists($info['table'], $info['index'])) {
+          db_drop_index($info['table'], $info['index']);
+        }
+      }
+    }
+  }
+  $config = config('similar.settings');
+  $config->clear('similar_indices');
+  $config->save();
+  similar_index_fields();
+}
+
+/**
+ * Indexes fields defined by Field module.
+ *
+ * Loop through each field and get field information about text
+ * fields before passing data to the indexing function.
+ */
+function similar_index_fields() {
+  if (module_exists('field')) {
+    // Get all text columns defined for fields in the database.
+    foreach (field_info_fields() as $field => $info) {
+      if ($info['type'] == 'text' || $info['type'] == 'text_long') {
+        $table = key($info['storage']['details']['sql'][FIELD_LOAD_CURRENT]);
+        $column = $info['storage']['details']['sql'][FIELD_LOAD_CURRENT][$table]['value'];
+        similar_index($field, $table, $column, array('label' => $info['field_name']));
+      }
+    }
+  }
+}
+
+/**
+ * Adds FULLTEXT index to a single field in the database.
+ *
+ * @param string $field
+ *   The machine-name of the field being indexed.
+ * @param string $table
+ *   The table that contains the field to be indexed.
+ * @param string $column
+ *   The name of the column to index.
+ * @param array $info
+ *   An optional array of information to store in Similar Entries settings.
+ *
+ * @return bool
+ *   FALSE if the index already exists or the field does not exist.
+ *   TRUE otherwise.
+ */
+function similar_index($field, $table, $column, $info = array()) {
+  // Return FALSE if the field doesn't exist.
+  $index = "similar_$field";
+  if (!db_table_exists($table) || !db_field_exists($table, $column)) {
+    return FALSE;
+  }
+
+  if (!db_index_exists($table, $index)) {
+    db_query("ALTER TABLE {" . $table . "} ENGINE = MYISAM");
+    db_query("ALTER TABLE {" . $table . "} ADD FULLTEXT `$index` (`$column`)");
+  }
+
+  // Add data to the info array for storage in similar indices variable.
+  $info += array('index' => $index);
+  return _similar_save_index($field, $table, $column, $info);
+}
+
+/**
+ * Saves an index.
+ *
+ * @param string $field
+ *   The machine-name of the field being indexed.
+ * @param string $table
+ *   The table to which the indexed field belongs.
+ * @param string $column
+ *   The indexed table column.
+ * @param array $info
+ *   Information to save about the indexed field.
+ *   - table: The table name.
+ *   - field: The field name.
+ *   - index: The index name.
+ *   - label: The human-readable field label.
+ *
+ * @return bool
+ *   A boolean value indicating whether the index was saved.
+ */
+function _similar_save_index($field, $table, $column, $info) {
+  // Return FALSE if the index name is not set in index info.
+  if (!isset($info['index'])) {
+    return FALSE;
+  }
+
+  $info += array('table' => $table, 'column' => $column);
+  $indices = config_get('similar.settings', 'similar_indices');
+  $indices[$field] = $info;
+  config_set('similar.settings', 'similar_indices', $indices);
+
+  return TRUE;
+}
+
+/**
+ * Returns data about what fields are currently indexed.
+ *
+ * Indexed tables are fields are stored in a Drupal variable. Something
+ * to do is look into ways to reset the variable upon reasonable events
+ * like a field module install/uninstall or a cache clearance.
+ *
+ * @param string|null $field
+ *   An optional string identifying a specific field's index info to return.
+ *
+ * @return array|false
+ *   An array of sub-arrays where the key is a table name and the value
+ *   is an array of fields which are currently indexed in the table.
+ *   Returns FALSE if the requested field index does not exist.
+ */
+function similar_get_indices($field = NULL) {
+  $indices = &backdrop_static(__FUNCTION__);
+  if (!isset($indices)) {
+    $indices = config_get('similar.settings', 'similar_indices');
+  }
+  return $field === NULL ? $indices : (isset($indices[$field]) ? $indices[$field] : FALSE);
+}

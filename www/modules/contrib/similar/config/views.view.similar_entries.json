@@ -1,0 +1,130 @@
+{
+    "_config_name": "views.view.similar_entries",
+    "name": "similar_entries",
+    "description": "Provides links to similar content based on relevancy scores using in FULLTEXT searches.",
+    "tag": "default",
+    "disabled": false,
+    "base_table": "node",
+    "human_name": "Similar Entries",
+    "core": "0",
+    "display": {
+        "default": {
+            "display_title": "Master",
+            "display_plugin": "default",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": {
+                        "query_comment": false
+                    }
+                },
+                "title": "Similar",
+                "access": {
+                    "type": "none"
+                },
+                "cache": {
+                    "type": "time",
+                    "results_lifespan": 21600,
+                    "output_lifespan": 21600
+                },
+                "exposed_form": {
+                    "type": "basic"
+                },
+                "pager": {
+                    "type": "some",
+                    "options": {
+                        "items_per_page": 8
+                    }
+                },
+                "sorts": [],
+                "arguments": {
+                    "nid": {
+                        "id": "nid",
+                        "table": "similar_entries",
+                        "field": "nid",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "default_action": "default",
+                        "exception": {
+                            "value": "all",
+                            "title_enable": 0,
+                            "title": "All"
+                        },
+                        "title_enable": 0,
+                        "title": "",
+                        "breadcrumb_enable": 0,
+                        "breadcrumb": "",
+                        "default_argument_type": "node",
+                        "default_argument_options": "",
+                        "default_argument_skip_url": 0,
+                        "summary_options": null,
+                        "summary": {
+                            "sort_order": "asc",
+                            "number_of_records": 0,
+                            "format": "default_summary"
+                        },
+                        "specify_validation": 0,
+                        "validate": {
+                            "type": "node",
+                            "fail": "access denied"
+                        },
+                        "validate_options": {
+                            "access_op": "view",
+                            "nid_type": "nid",
+                            "types": [],
+                            "access": 0
+                        },
+                        "break_phrase": 0,
+                        "not": false,
+                        "boolean_mode": 0,
+                        "rendered_content": 0,
+                        "rendered_view_mode": "full",
+                        "adjust_relevance": 1,
+                        "title_relevance": "1.4",
+                        "body_relevance": "0.8",
+                        "source_relevance": 1,
+                        "title_operator": "increase",
+                        "enable_custom_operators": 0,
+                        "custom_operators": "-not | -and | -a | -or | -the | -but | -therefore | -because | -can't | -can | -for | -until | -the | -of | -and | -to | -in | -is | -you | -that | -it | -he | -was | -on | -are | -as | -with | -his | -they | -I | -at | -be | -this | -have | -from | -one | -had | -by | -word | -but | -not | -what | -all | -were | -we | -when | -your | -said | -there | -use | -an | -each | -which | -she | -do | -how | -their | -if | -will | -up | -other | -about | -out | -many | -then | -them | -these | -so | -some | -her | -would | -make | -like | -him | -into | -time | -has | -look | -two | -more | -write | -go | -see | -no | -way | -could | -people | -my | -than | -first | -water | -been | -call | -who | -oil | -its | -now | -find",
+                        "include_fields": 0,
+                        "included_fields:field_city": "0",
+                        "included_fields:field_pograms": "0"
+                    }
+                },
+                "fields": {
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "label": "",
+                        "link_to_node": 1
+                    }
+                },
+                "filters": {
+                    "status": {
+                        "id": "status",
+                        "table": "node",
+                        "field": "status",
+                        "value": 1,
+                        "group": 0,
+                        "expose": {
+                            "operator": false
+                        }
+                    }
+                }
+            }
+        },
+        "block": {
+            "display_title": "Block",
+            "display_plugin": "block",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "block_caching": 4
+            }
+        }
+    }
+}
