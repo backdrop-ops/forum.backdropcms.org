@@ -1,6 +1,6 @@
 {
     "_config_name": "layout.layout.forum",
-    "path": "forums",
+    "path": "forum",
     "name": "forum",
     "title": "Home page (forum list)",
     "description": null,

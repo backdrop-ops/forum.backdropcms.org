@@ -462,7 +462,7 @@
                     "type": "views_query",
                     "options": []
                 },
-                "path": "forums",
+                "path": "forum",
                 "menu": {
                     "type": "normal",
                     "title": "Forums",

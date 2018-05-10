@@ -42,9 +42,12 @@
     "punctuation_greater_than": 0,
     "punctuation_slash": 0,
     "punctuation_back_slash": 0,
-    "node_pattern": "[node:content-type]/[node:title]",
+    "node_pattern": "",
     "taxonomy_term_pattern": "[term:vocabulary]/[term:name]",
     "user_pattern": "accounts/[user:name]",
     "node_page_pattern": "[node:title]",
-    "node_post_pattern": "posts/[node:title]"
+    "node_post_pattern": "posts/[node:title]",
+    "node_forum_topic_pattern": "forum/[node:title]",
+    "taxonomy_term_tags_pattern": "",
+    "taxonomy_term_forums_custom_pattern": ""
 }
