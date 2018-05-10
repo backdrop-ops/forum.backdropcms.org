@@ -121,20 +121,21 @@ ul.secondary a.active {
 /******************************************************************************
  * Breadcrumb
  ******************************************************************************/
-.block-system-breadcrumb li {
-  margin-right: .33em;
-}
-.block-system-breadcrumb li a {
-  margin-right: .33em;
-}
 nav.breadcrumb {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-bottom: 15px;
+}
+nav.breadcrumb li {
+  margin-right: .33em;
+}
+nav.breadcrumb li a {
+  margin-right: .33em;
 }
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
-  .block-system-breadcrumb li span {
-    white-space: nowrap;
+  nav.breadcrumb {
+    margin-bottom: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
