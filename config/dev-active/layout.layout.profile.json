@@ -21,7 +21,8 @@
             "407af605-2aa3-4fa9-8403-3e16c4100736"
         ],
         "top": [
-            "bb1a3ffe-37e5-484c-b501-1a1c3e9385bd"
+            "bb1a3ffe-37e5-484c-b501-1a1c3e9385bd",
+            "b0d6b944-91d4-4dc0-b349-737cce318551"
         ],
         "content": [
             "c6f8dc7a-f568-4efa-9f0f-155691ec6a0a",
@@ -144,7 +145,30 @@
                     "plugin": "default",
                     "data": {
                         "settings": {
-                            "classes": ""
+                            "classes": "col-md-8"
+                        }
+                    }
+                }
+            }
+        },
+        "b0d6b944-91d4-4dc0-b349-737cce318551": {
+            "plugin": "search:form",
+            "data": {
+                "module": "search",
+                "delta": "form",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "b0d6b944-91d4-4dc0-b349-737cce318551",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-md-4"
                         }
                     }
                 }

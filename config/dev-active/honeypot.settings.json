@@ -4,7 +4,7 @@
     "expire": 300,
     "log": 0,
     "element_name": "homepage",
-    "time_limit": "0",
+    "time_limit": "5",
     "unprotected_forms": [
         "user_login",
         "user_login_block",
@@ -26,5 +26,6 @@
         "honeypot_form_comment_node_forum_topic_form": 0,
         "honeypot_form_comment_node_page_form": 0,
         "honeypot_form_comment_node_post_form": 0
-    }
+    },
+    "use_js_for_cached_pages": 1
 }
