@@ -2,7 +2,7 @@
     "_config_name": "layout.layout.my_profile",
     "path": "user",
     "name": "my_profile",
-    "title": "My Profile",
+    "title": "Profile",
     "description": null,
     "module": null,
     "weight": -1,
@@ -21,7 +21,8 @@
             "da27bf39-6bad-42b4-8100-cd1cd77d1843"
         ],
         "top": [
-            "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35"
+            "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35",
+            "878d72d7-d567-4ed2-8502-2bfc001bcf08"
         ],
         "content": [
             "5186540a-7f4c-4403-9400-aad89955dd6a",
@@ -144,7 +145,30 @@
                     "plugin": "default",
                     "data": {
                         "settings": {
-                            "classes": ""
+                            "classes": "col-md-8"
+                        }
+                    }
+                }
+            }
+        },
+        "878d72d7-d567-4ed2-8502-2bfc001bcf08": {
+            "plugin": "search:form",
+            "data": {
+                "module": "search",
+                "delta": "form",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "878d72d7-d567-4ed2-8502-2bfc001bcf08",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-md-4"
                         }
                     }
                 }
