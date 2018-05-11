@@ -16,6 +16,9 @@
     <footer class="<?php if ($user_picture) { print 'has-picture'; } ?>">
       <?php print $user_picture; ?>
       <p class="submitted"><?php print $submitted; ?></p>
+      <?php if ($updated): ?>
+        <?php print $updated; ?>
+      <?php endif; ?>
       <div class="arrow-down"></div>
     </footer>
   <?php endif; ?>
