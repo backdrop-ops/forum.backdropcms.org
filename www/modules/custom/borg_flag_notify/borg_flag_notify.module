@@ -19,6 +19,50 @@ You are receiving this email because you are following this forum category.
 [site:url]');
 
 /**
+* Implementation of hook_form_FORM_ID_alter().
+**/
+function borg_flag_notify_form_node_notify_settings_form_alter(&$form, &$form_state, $form_id) {
+  $config = config('node_notify.settings');
+  $topic_notify_template_subject = $config->get('topic_notify_template_subject') ? $config->get('topic_notify_template_subject') : BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT;
+  $topic_notify_template_body = $config->get('topic_notify_template_body') ? $config->get('topic_notify_template_body') : BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY;
+
+  $form['node_notify_template']['#title'] = t('Comment notification template');
+  $token_types = array(
+    'node',
+    'comment',
+    'site',
+    'random',
+    'subscriber',
+    'subscription',
+  );
+  $form['topic_notify_template'] = array(
+    '#title' => t('Topic notification template'),
+    '#type' => 'fieldset',
+    'topic_notify_template_subject' => array(
+      '#title' => t('Subject'),
+      '#type' => 'textfield',
+      '#default_value' => $topic_notify_template_subject,
+      '#return_value' => 1,
+      '#token_types' => $token_types,
+      '#element_validate' => array('token_element_validate'),
+    ),
+    'topic_notify_template_body' => array(
+      '#title' => t('Body'),
+      '#type' => 'textarea',
+      '#default_value' => $topic_notify_template_body,
+      '#return_value' => 1,
+      '#token_types' => $token_types,
+      '#element_validate' => array('token_element_validate'),
+    ),
+    'topic_token_help' => array(
+      '#theme' => 'token_tree',
+      '#token_types' => $token_types,
+      '#global_types' => FALSE,
+    ),
+  );
+}
+
+/**
 * Implementation of hook_menu_alter().
 **/
 function borg_flag_notify_menu_alter(&$items) {
@@ -159,6 +203,7 @@ function borg_flag_notify_comment_insert($comment) {
  * Implements hook_node_insert().
  */
 function borg_flag_notify_node_insert($node) {
+  $config = config('node_notify.settings');
   // Find users who have flagged this category.
   $users = flag_get_entity_flags('taxonomy_term', $node->field_forums[$node->langcode][0]['tid'], 'follow_category');
   // Subscribe them to the node.
@@ -173,10 +218,10 @@ function borg_flag_notify_node_insert($node) {
       $language = user_preferred_language($user);
 
       $message = backdrop_mail('borg_flag_notify', 'node_notification', $mail, $language, array(
-        'subject' => token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_SUBJECT, array(
+        'subject' => token_replace($config->get('topic_notify_template_subject'), array(
           'node' => $node,
         )),
-        'body' => filter_xss_admin(token_replace(BORG_FLAG_NOTIFY_DEFAULT_NOTIFICATION_BODY, array(
+        'body' => filter_xss_admin(token_replace($config->get('topic_notify_template_body'), array(
           'node' => $node,
           'user' => $user,
         ), array(
