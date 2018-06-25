@@ -358,7 +358,19 @@
                             "classes": "col-sm-12"
                         }
                     }
-                }
+                },
+                "conditions": [
+                    {
+                        "plugin": "path",
+                        "data": {
+                            "settings": {
+                                "visibility_setting": "0",
+                                "paths": "node/add/*",
+                                "load_condition_nojs": "Load condition"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {
