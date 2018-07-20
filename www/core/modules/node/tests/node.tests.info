@@ -202,7 +202,13 @@ description = Tests the Views integration of node_revision table of node module.
 group = Node
 file = node_views_revision_relations.test
 
-; Added by Backdrop CMS packaging script on 2018-04-25
+[NodePublishScheduling]
+name = Node publishing states tests
+description = Tests the new node states for Draft, Publish Now and Schedule Publish Time.
+group = Node
+file = node.test
+
+; Added by Backdrop CMS packaging script on 2018-05-30
 project = backdrop
-version = 1.9.5
-timestamp = 1524677768
+version = 1.10.1
+timestamp = 1527703445
