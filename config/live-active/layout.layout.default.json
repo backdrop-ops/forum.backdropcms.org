@@ -31,8 +31,7 @@
         ],
         "bottom": [
             "79eeff5e-9761-4243-a119-25fc72286611",
-            "33f27dc1-af7c-46be-af00-e596f277b275",
-            "5486d381-698f-407b-a715-216f45ff14d6"
+            "33f27dc1-af7c-46be-af00-e596f277b275"
         ],
         "footer": [
             "cd4d033d-3f67-4191-8655-85ee758877c0",
@@ -267,7 +266,19 @@
                             "classes": ""
                         }
                     }
-                }
+                },
+                "conditions": [
+                    {
+                        "plugin": "path",
+                        "data": {
+                            "settings": {
+                                "visibility_setting": "0",
+                                "paths": "node/add/*",
+                                "load_condition_nojs": "Load condition"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "79eeff5e-9761-4243-a119-25fc72286611": {
@@ -336,41 +347,6 @@
                         }
                     }
                 }
-            }
-        },
-        "5486d381-698f-407b-a715-216f45ff14d6": {
-            "plugin": "borg_forum:new_forum_button",
-            "data": {
-                "module": "borg_forum",
-                "delta": "new_forum_button",
-                "settings": {
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": []
-                },
-                "uuid": "5486d381-698f-407b-a715-216f45ff14d6",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": "col-sm-12"
-                        }
-                    }
-                },
-                "conditions": [
-                    {
-                        "plugin": "path",
-                        "data": {
-                            "settings": {
-                                "visibility_setting": "0",
-                                "paths": "node/add/*",
-                                "load_condition_nojs": "Load condition"
-                            }
-                        }
-                    }
-                ]
             }
         },
         "cd4d033d-3f67-4191-8655-85ee758877c0": {
