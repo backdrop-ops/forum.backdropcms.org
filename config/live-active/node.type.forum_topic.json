@@ -26,7 +26,7 @@
             "main-menu": 0
         },
         "menu_parent": "main-menu:0",
-        "status_default": "1",
+        "status_default": 1,
         "promote_enabled": 0,
         "promote_default": 0,
         "sticky_enabled": 1,

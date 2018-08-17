@@ -4,7 +4,7 @@
     "name": "Post",
     "description": "Add a blog post, news article, or press release.",
     "settings": {
-        "status_default": true,
+        "status_default": 1,
         "promote_enabled": true,
         "promote_default": true,
         "sticky_enabled": true,
