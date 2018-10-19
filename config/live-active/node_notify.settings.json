@@ -13,8 +13,8 @@
     "node_notify_cron": 0,
     "node_notify_expires": "-1 month",
     "node_notify_log": 1,
-    "node_notify_template_subject": "New comment on \"[comment:node:title]\" by [comment:author]",
-    "node_notify_template_body": "[comment:author] has commented on: \"[comment:node:title]\"\r\n\r\n----\r\n\r\n[comment:body]\r\n\r\n----\r\n\r\nYou can view the comment at the following url\r\n[comment:url]\r\n\r\nYou can unsubscribe from notifications about this post by going to\r\n[subscription:unsubscribe-url]",
+    "node_notify_template_subject": "[comment:node:title] -- - Backdrop Forum",
+    "node_notify_template_body": "Posted by [comment:author]:\r\n\r\n[comment:body]\r\n\r\n----\r\n\r\nYou can view the comment at the following url\r\n[comment:url]\r\n\r\nYou can unsubscribe from notifications about this post by going to\r\n[subscription:unsubscribe-url]",
     "topic_notify_template_subject": "New post in forum topic \"[node:title]\"",
-    "topic_notify_template_body": "[node:body]\r\n----\r\n\r\nYou can view the complete discussion at the following url\r\n[node:url]\r\n\r\nYou are receiving this email because you subscribed to all posts this forum topic. You may unsubscribe here:\r\n[subscription:unsubscribe-url]"
+    "topic_notify_template_body": "[node:body]\r\n\r\n----\r\n\r\nYou can view the complete discussion at the following url\r\n[node:url]\r\n\r\nYou are receiving this email because you subscribed to all posts this forum topic. You may unsubscribe here:\r\n[subscription:unsubscribe-url]"
 }
