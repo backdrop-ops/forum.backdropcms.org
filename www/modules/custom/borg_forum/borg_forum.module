@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Provides additional functions for Backdrop.org discussion forum.
@@ -193,6 +192,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
  * Implements hook_form_BASE_FORM_ID_alter() for node_form().
  */
 function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
+  // Set the forum for the topic.
   if (isset($form['field_forums'])) {
     $langcode = $form['field_forums']['#language'];
     // Make the vocabulary required for 'real' forum-nodes.
@@ -206,6 +206,9 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['field_forums'][$langcode]['#default_value'] = is_numeric($requested_forum_id) ? $requested_forum_id : '';
     }
   }
+
+  // Disable node preview until https://github.com/backdrop-ops/forum.backdropcms.org/issues/68 is resolved.
+  $form['actions']['preview']['#access'] = FALSE;
 }
 
 /**
@@ -216,7 +219,6 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
  *
  * @todo the unset is not a good solution? maybe difficulties with other modules?
  */
-
 function borg_forum_node_view_alter(&$build) {
   commentsblock_static_comments($build['#node']->nid, $build, $build['#node']);
   $node = menu_get_object();
