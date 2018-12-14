@@ -206,9 +206,6 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['field_forums'][$langcode]['#default_value'] = is_numeric($requested_forum_id) ? $requested_forum_id : '';
     }
   }
-
-  // Disable node preview until https://github.com/backdrop-ops/forum.backdropcms.org/issues/68 is resolved.
-  $form['actions']['preview']['#access'] = FALSE;
 }
 
 /**
@@ -271,7 +268,8 @@ function borg_comment_node_page_additions(Node $node) {
   }
 
   // Append comment form if needed.
-  if (user_access('post comments') && $node->comment == COMMENT_NODE_OPEN && ($node_type->settings['comment_form_location'] == COMMENT_FORM_BELOW)) {
+  $menu = menu_get_item();
+  if (user_access('post comments') && $node->comment == COMMENT_NODE_OPEN && ($node_type->settings['comment_form_location'] == COMMENT_FORM_BELOW) && $menu['page_callback'] !== 'comment_reply') {
     $comment = entity_create('comment', array('nid' => $node->nid));
     $additions['comment_form'] = backdrop_get_form("comment_node_{$node->type}_form", $comment);
   }
