@@ -4,7 +4,6 @@
  * Provides additional functions for Backdrop.org discussion forum.
  */
 
-
 /**
  * Implements hook_autoload_info().
  */
@@ -68,7 +67,6 @@ function borg_forum_node_view(Node $node, $view_mode, $langcode) {
       $breadcrumb[] = l($data->name, $data->path['alias']);
     }
     backdrop_set_breadcrumb($breadcrumb);
-
   }
 }
 
@@ -137,6 +135,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
     $block['subject'] = NULL;
     $block['content'] = $output;
     break;
+
   case 'new_forum_button':
     // This block will be available on taxonomy term pages (forum categories)
     // and also on node pages (forum topics) so we get the $tid to pass it to
@@ -172,6 +171,7 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
     $block['subject'] = NULL;
     $block['content'] = $output;
     break;
+
   case 'comment_form_block':
     if ($node = menu_get_object()) {
       // Make sure comments aren't closed.
@@ -179,7 +179,8 @@ function borg_forum_block_view($delta = '', $settings = array(), $contexts = arr
         // Render the comments and comment form (access checks, etc. are done
         // by comment_node_page_additions()).
         $block['subject'] = t('Comments');
-        $block['content'] = backdrop_render(commentsblock_static_comments($node->nid, false, $node));
+        $comments = borg_forum_commentsblock_static_comments($node->nid, FALSE, $node);
+        $block['content'] = backdrop_render($comments);
       }
     }
     break;
@@ -217,7 +218,7 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
  * @todo the unset is not a good solution? maybe difficulties with other modules?
  */
 function borg_forum_node_view_alter(&$build) {
-  commentsblock_static_comments($build['#node']->nid, $build, $build['#node']);
+  borg_forum_commentsblock_static_comments($build['#node']->nid, $build, $build['#node']);
   $node = menu_get_object();
   unset($node->comments);
 }
@@ -225,7 +226,7 @@ function borg_forum_node_view_alter(&$build) {
 /**
  * For sake of performance, save comments in a static variable.
  */
-function commentsblock_static_comments($nid, $build, $node = false) {
+function borg_forum_commentsblock_static_comments($nid, $build, $node = false) {
   $comments = &backdrop_static(__FUNCTION__);
 
   if (isset($build['comments'])) {
