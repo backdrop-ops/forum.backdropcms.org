@@ -1,7 +1,9 @@
 Core patches
 ============
 
-- none
+- node: fix node preview:
+  https://github.com/backdrop/backdrop-issues/issues/3336
+  https://github.com/backdrop/backdrop/pull/2335.patch
 
 
 Contrib patches
