@@ -1,16 +1,14 @@
 Core patches
 ============
 
-- node: fix node preview:
-  https://github.com/backdrop/backdrop-issues/issues/3336
-  https://github.com/backdrop/backdrop/pull/2335.patch
+- none
 
 
 Contrib patches
 ===============
 
-node notify:
+node notify - allows config files to be sync'd
   https://github.com/backdrop-contrib/node_notify/issues/1
   https://github.com/backdrop-contrib/node_notify/pull/2
-  allows config files to be sync'd
+
 
