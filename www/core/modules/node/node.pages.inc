@@ -15,7 +15,7 @@
  */
 function node_page_edit(Node $node) {
   $type_name = node_type_get_name($node);
-  backdrop_set_title(t('<em>Edit @type</em> @title', array('@type' => $type_name, '@title' => $node->title)), PASS_THROUGH);
+  backdrop_set_title(t('Edit @type %title', array('@type' => $type_name, '%title' => $node->title)), PASS_THROUGH);
   return backdrop_get_form($node->type . '_node_form', $node);
 }
 
@@ -124,6 +124,7 @@ function node_form($form, &$form_state, Node $node) {
   $node_type = node_type_get_type($node->type);
 
   $status = $node->nid ? $node->status : $node_type->settings['status_default'];
+  $node_preview = $node_type->settings['node_preview'];
 
   // Check if we can retrieve a node from the tempstore.
   $node_tempstore_id = isset($form_state['node_tempstore_id']) ? $form_state['node_tempstore_id'] : node_build_tempstore_id();
@@ -402,7 +403,7 @@ function node_form($form, &$form_state, Node $node) {
   );
   $form['actions']['preview'] = array(
     '#type' => 'submit',
-    '#access' => (!form_get_errors()),
+    '#access' => (!form_get_errors() && $node_preview != BACKDROP_DISABLED),
     '#value' => t('Preview'),
     '#weight' => 6,
     '#submit' => array('node_form_preview'),
@@ -462,7 +463,6 @@ function node_form_preview($form, &$form_state) {
   if (isset($_GET['destination'])) {
     $_GET['destination'] = $form_state['redirect'];
   }
-  backdrop_set_message(t('This is a preview. All changes are stored temporarily. Click Save to make your changes permanent, or click "Back to content editing".'));
 }
 
 /**
@@ -641,6 +641,12 @@ function node_preview_banner_form(array $form, array $form_state, Node $node, $n
   // Get the view mode to render the preview in.
   $view_mode = empty($_GET['view_mode']) ? 'full' : $_GET['view_mode'];
 
+  // We render this message here instead of in node_form_preview() in order to
+  // make it persistent across page refreshes while still in preview mode, and
+  // also while switching to different display modes.
+  backdrop_set_message(t('This is a preview. Links within the page are disabled.'), 'warning', FALSE);
+  backdrop_set_message(t('<strong>Changes are stored temporarily</strong>. Click <em>Save</em> to make your changes permanent, or click <em>Back to content editing</em> to make additional changes.'), 'warning', FALSE);
+
   $form['node'] = array(
     '#type' => 'value',
     '#value' => $node,
@@ -668,8 +674,8 @@ function node_preview_banner_form(array $form, array $form_state, Node $node, $n
       'class' => array('node-preview-display-mode', 'preview-button'),
     )
   );
-  // This must be the first submit function so the 'onChange' event in
-  // calls it before any other submit.
+  // This must be the first submit function so the 'onChange' event calls it
+  // before any other submit.
   $form['view_mode_submit'] = array(
     '#type' => 'submit',
     '#name' => 'op',
