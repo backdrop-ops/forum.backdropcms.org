@@ -3,6 +3,7 @@
     "name": "Forum",
     "machine_name": "forums_custom",
     "description": "",
-    "hierarchy": "0",
-    "weight": 0
+    "hierarchy": 0,
+    "weight": 0,
+    "language": 0
 }

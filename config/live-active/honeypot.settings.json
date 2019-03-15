@@ -2,9 +2,9 @@
     "_config_name": "honeypot.settings",
     "protect_all_forms": 1,
     "expire": 300,
-    "log": 0,
-    "element_name": "homepage",
-    "time_limit": "5",
+    "log": 1,
+    "element_name": "phone_number",
+    "time_limit": "7",
     "unprotected_forms": [
         "user_login",
         "user_login_block",

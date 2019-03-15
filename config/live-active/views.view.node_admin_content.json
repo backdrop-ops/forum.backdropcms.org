@@ -3,7 +3,7 @@
     "name": "node_admin_content",
     "description": "Administrative listing for managing content.",
     "module": "node",
-    "storage": 4,
+    "storage": 2,
     "tag": "default",
     "disabled": false,
     "base_table": "node",
@@ -275,6 +275,108 @@
                     }
                 },
                 "filters": {
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "word",
+                        "value": "",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "title_op",
+                            "label": "Title contains",
+                            "description": "",
+                            "use_operator": 0,
+                            "operator": "title_op",
+                            "identifier": "title",
+                            "required": 0,
+                            "remember": 0,
+                            "multiple": false,
+                            "remember_roles": {
+                                "anonymous": 0,
+                                "authenticated": 0,
+                                "administrator": 0
+                            }
+                        },
+                        "is_grouped": false
+                    },
+                    "type": {
+                        "id": "type",
+                        "table": "node",
+                        "field": "type",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "in",
+                        "value": [],
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "type_op",
+                            "label": "Type",
+                            "description": "",
+                            "use_operator": 0,
+                            "operator": "type_op",
+                            "identifier": "type",
+                            "required": 0,
+                            "remember": 0,
+                            "multiple": 0,
+                            "remember_roles": {
+                                "anonymous": 0,
+                                "authenticated": 0,
+                                "administrator": 0
+                            },
+                            "reduce": 0
+                        },
+                        "is_grouped": false
+                    },
+                    "uid": {
+                        "id": "uid",
+                        "table": "node",
+                        "field": "uid",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "in",
+                        "value": "",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "uid_op",
+                            "label": "Author",
+                            "description": "",
+                            "use_operator": 0,
+                            "operator": "uid_op",
+                            "identifier": "uid",
+                            "required": 0,
+                            "remember": 0,
+                            "multiple": false,
+                            "remember_roles": {
+                                "authenticated": "authenticated",
+                                "anonymous": 0,
+                                "moderator": 0,
+                                "administrator": 0
+                            },
+                            "reduce": 0
+                        },
+                        "is_grouped": false,
+                        "group_info": {
+                            "label": "",
+                            "description": "",
+                            "identifier": "",
+                            "optional": true,
+                            "widget": "select",
+                            "multiple": false,
+                            "remember": 0,
+                            "default_group": "All",
+                            "default_group_multiple": [],
+                            "group_items": []
+                        }
+                    },
                     "status": {
                         "id": "status",
                         "table": "node",
@@ -304,65 +406,6 @@
                         },
                         "is_grouped": false
                     },
-                    "type": {
-                        "id": "type",
-                        "table": "node",
-                        "field": "type",
-                        "relationship": "none",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "operator": "in",
-                        "value": [],
-                        "group": "1",
-                        "exposed": true,
-                        "expose": {
-                            "operator_id": "type_op",
-                            "label": "Type",
-                            "description": "",
-                            "use_operator": 0,
-                            "operator": "type_op",
-                            "identifier": "type",
-                            "required": 0,
-                            "remember": 0,
-                            "multiple": 0,
-                            "remember_roles": {
-                                "anonymous": 0,
-                                "authenticated": 0,
-                                "administrator": 0
-                            },
-                            "reduce": 0
-                        },
-                        "is_grouped": false
-                    },
-                    "title": {
-                        "id": "title",
-                        "table": "node",
-                        "field": "title",
-                        "relationship": "none",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "operator": "word",
-                        "value": "",
-                        "group": "1",
-                        "exposed": true,
-                        "expose": {
-                            "operator_id": "title_op",
-                            "label": "Title contains",
-                            "description": "",
-                            "use_operator": 0,
-                            "operator": "title_op",
-                            "identifier": "title",
-                            "required": 0,
-                            "remember": 0,
-                            "multiple": false,
-                            "remember_roles": {
-                                "anonymous": 0,
-                                "authenticated": 0,
-                                "administrator": 0
-                            }
-                        },
-                        "is_grouped": false
-                    },
                     "status_extra": {
                         "id": "status_extra",
                         "table": "node",
@@ -372,7 +415,7 @@
                         "ui_name": "",
                         "operator": "=",
                         "value": "",
-                        "group": "1",
+                        "group": 1,
                         "exposed": false,
                         "is_grouped": false
                     }
@@ -492,6 +535,12 @@
                     },
                     "default": "changed",
                     "empty_table": 1
+                },
+                "filter_groups": {
+                    "operator": "AND",
+                    "groups": {
+                        "1": "AND"
+                    }
                 }
             }
         },
