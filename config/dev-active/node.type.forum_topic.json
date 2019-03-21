@@ -26,7 +26,7 @@
             "main-menu": 0
         },
         "menu_parent": "main-menu:0",
-        "status_default": "1",
+        "status_default": 1,
         "promote_enabled": 0,
         "promote_default": 0,
         "sticky_enabled": 1,
@@ -36,7 +36,9 @@
         "node_submitted": 1,
         "node_user_picture": 1,
         "language": 0,
-        "node_permissions": true
+        "node_permissions": true,
+        "hidden_path": "0",
+        "node_preview": "1"
     },
     "orig_type": "forum_topic"
 }

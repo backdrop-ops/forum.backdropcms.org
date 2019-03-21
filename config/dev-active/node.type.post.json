@@ -4,7 +4,7 @@
     "name": "Post",
     "description": "Add a blog post, news article, or press release.",
     "settings": {
-        "status_default": true,
+        "status_default": 1,
         "promote_enabled": true,
         "promote_default": true,
         "sticky_enabled": true,
@@ -26,7 +26,9 @@
         "menu_options": [],
         "menu_parent": "main-menu:0",
         "language": 0,
-        "node_permissions": true
+        "node_permissions": true,
+        "hidden_path": "0",
+        "node_preview": "1"
     },
     "base": "node_content",
     "module": "node",
