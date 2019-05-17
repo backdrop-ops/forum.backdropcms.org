@@ -1,5 +1,5 @@
 name = Backdrop ORG Forums
-description = The main theme for the Backdrop forum site.
+description = The Forum site has been asymiliated. This is a sub-theme of Borg.
 version = 1.x
 backdrop = 1.x
 base theme = borg
