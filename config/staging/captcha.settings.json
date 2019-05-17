@@ -9,9 +9,9 @@
     "description": "This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.",
     "default_validation": "1",
     "persistence": "1",
-    "enable_stats": 0,
-    "wrong_response_counter": 0,
-    "log_wrong_responses": 0,
+    "enable_stats": 1,
+    "wrong_response_counter": 8,
+    "log_wrong_responses": 1,
     "captcha_points": {
         "user_password": {
             "form_id": "user_password",
@@ -20,8 +20,8 @@
         },
         "user_register_form": {
             "form_id": "user_register_form",
-            "module": "recaptcha",
-            "captcha_type": "reCAPTCHA"
+            "module": "image_captcha",
+            "captcha_type": "Image"
         }
     }
 }

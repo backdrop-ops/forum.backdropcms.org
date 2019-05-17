@@ -23,6 +23,7 @@
         "menu_options": {
             "user-menu": 0,
             "management": 0,
+            "menu-footer-menu": 0,
             "main-menu": 0
         },
         "menu_parent": "main-menu:0",
@@ -37,7 +38,10 @@
         "node_user_picture": 1,
         "language": 0,
         "node_permissions": true,
-        "hidden_path": "0",
+        "hidden_path": 0,
+        "comment_close_enabled": 0,
+        "comment_close_days": "14",
+        "scheduling_enabled": 1,
         "node_preview": "1"
     },
     "orig_type": "forum_topic"

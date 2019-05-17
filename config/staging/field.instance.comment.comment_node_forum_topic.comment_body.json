@@ -1,7 +1,7 @@
 {
     "_config_name": "field.instance.comment.comment_node_forum_topic.comment_body",
     "field_name": "comment_body",
-    "label": "Comment",
+    "label": "Add a comment",
     "entity_type": "comment",
     "bundle": "comment_node_forum_topic",
     "settings": {

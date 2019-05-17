@@ -1,7 +1,7 @@
 {
     "_config_name": "user.role.administrator",
     "name": "administrator",
-    "label": "Administrator",
+    "label": "Developer",
     "weight": "3",
     "permissions": [
         "administer blocks",
@@ -115,6 +115,10 @@
         "switch users",
         "administer google analytics",
         "opt-in or out of tracking",
-        "use PHP for tracking visibility"
+        "use PHP for tracking visibility",
+        "administer akismet",
+        "bypass akismet protection",
+        "access akismet statistics",
+        "report to akismet"
     ]
 }

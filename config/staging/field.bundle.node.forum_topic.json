@@ -6,7 +6,13 @@
     "extra_fields": {
         "form": {
             "title": {
-                "weight": "1"
+                "weight": "2"
+            },
+            "akismet": {
+                "weight": "5"
+            },
+            "node_notify_subscribe": {
+                "weight": "4"
             }
         },
         "display": []
