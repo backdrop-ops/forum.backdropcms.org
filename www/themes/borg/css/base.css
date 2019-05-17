@@ -1,12 +1,8 @@
 /*******************************************************************************
- * base.scss
+ * base.css
  *
  * Contains base styles for HTML elements only.
  ******************************************************************************/
-
-body {
-  min-width: 300px;
-}
 
 html,
 body {
@@ -14,6 +10,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  min-width: 300px;
 }
 
 p {
