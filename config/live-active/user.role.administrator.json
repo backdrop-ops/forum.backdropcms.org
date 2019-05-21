@@ -119,6 +119,8 @@
         "administer akismet",
         "bypass akismet protection",
         "access akismet statistics",
-        "report to akismet"
+        "report to akismet",
+        "access dashboard",
+        "administer dashboard"
     ]
 }
