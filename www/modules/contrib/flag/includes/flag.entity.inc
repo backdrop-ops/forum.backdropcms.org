@@ -75,7 +75,7 @@ class Flagging extends Entity {
   /**
    * Implements EntityInterface::entityType().
    */
-  public static function entityType() {
+  public function entityType() {
     return 'flagging';
   }
 
