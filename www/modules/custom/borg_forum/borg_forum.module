@@ -38,7 +38,7 @@ function borg_forum_config_info() {
  * Stores last comment timestamps.
  */
 function borg_forum_last_comment_timestamp($tid) {
-  $cache = &backdrop_static(__FUNCTION__, '');
+  $cache = &backdrop_static(__FUNCTION__);
   if (isset($cache[$tid])) {
     return $cache[$tid];
   }
