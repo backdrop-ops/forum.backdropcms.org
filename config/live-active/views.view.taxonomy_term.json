@@ -449,7 +449,7 @@
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "Last comment time",
+                        "label": "Last comment",
                         "exclude": 0,
                         "alter": {
                             "alter_text": 0,
