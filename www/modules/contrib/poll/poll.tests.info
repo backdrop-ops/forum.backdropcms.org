@@ -1,0 +1,59 @@
+[PollCreateTestCase]
+name = Poll create
+description = Adds "more choices", previews and creates a poll.
+group = Poll
+file = poll.test
+
+[PollVoteTestCase]
+name = Poll vote
+description = Vote on a poll
+group = Poll
+file = poll.test
+
+[PollBlockTestCase]
+name = Block availability
+description = Check if the most recent poll block is available.
+group = Poll
+file = poll.test
+
+[PollJSAddChoice]
+name = Poll add choice
+description = Submits a POST request for an additional poll choice.
+group = Poll
+file = poll.test
+
+[PollVoteCheckHostname]
+name = User poll vote capability.
+description = Check that users and anonymous users from specified ip-address can only vote once.
+group = Poll
+file = poll.test
+
+[PollTokenReplaceTestCase]
+name = Poll token replacement
+description = Generates text using placeholders for dummy content to check poll token replacement.
+group = Poll
+file = poll.test
+
+[PollExpirationTestCase]
+name = Poll expiration
+description = Test the poll auto-expiration logic.
+group = Poll
+file = poll.test
+
+[PollDeleteChoiceTestCase]
+name = Poll choice deletion
+description = Test the poll choice deletion logic.
+group = Poll
+file = poll.test
+
+[PollTranslateTestCase]
+name = Poll translation
+description = Test the poll translation logic.
+group = Poll
+file = poll.test
+
+
+; Added by Backdrop CMS packaging script on 2019-09-18
+project = poll
+version = 1.x-1.0.1
+timestamp = 1568829491
