@@ -44,7 +44,7 @@ Once you've downloaded the code and database move the database file the project 
 * Start Lando
   * `lando start`
 * Import the DB
-  * `lando.dev db-import forum-November-9-2019-100706-sanatized.sql.gz`
+  * `lando db-import forum-November-9-2019-100706-sanatized.sql.gz`
     * Change the date to reflect your file
 
 Working on an Issue
