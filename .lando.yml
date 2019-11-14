@@ -6,13 +6,12 @@ config:
   php: '7.2'
   via: nginx
   webroot: www
-  backdrush: stable
+  backdrush: 1.0.0
   xdebug: true
 
 services:
   database:
-    type: mariadb
-    portforward: 3308
+    type: mariadb:10.3
 tooling:
   drush:
     service: appserver
