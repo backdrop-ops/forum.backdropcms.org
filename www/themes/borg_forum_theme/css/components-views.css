@@ -61,8 +61,26 @@
  ******************************************************************************/
 .view-recent-comments h4,
 .view-recent-topics h4 {
-  margin-bottom: .25em;
+  margin: .75em 0;
   font-weight: 400;
+}
+
+.view-recent-comments .views-row,
+.view-recent-topics .views-row {
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.view-recent-comments h4 {
+  margin-top: .5em;
+}
+.view-recent-comments .views-row {
+  border-radius: 15px;
+}
+.view-recent-comments p {
+  margin-top: 0;
 }
 
 /******************************************************************************
