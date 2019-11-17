@@ -167,12 +167,18 @@
                     "caption": "",
                     "summary": "",
                     "columns": {
+                        "flagged_1": "flagged_1",
                         "flagged": "flagged",
                         "title": "title",
                         "subject": "subject",
                         "last_comment_timestamp": "last_comment_timestamp"
                     },
                     "info": {
+                        "flagged_1": {
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
                         "flagged": {
                             "align": "",
                             "separator": "",
@@ -186,21 +192,21 @@
                             "empty_column": 0
                         },
                         "subject": {
-                            "sortable": 0,
+                            "sortable": 1,
                             "default_sort_order": "asc",
                             "align": "",
                             "separator": "",
                             "empty_column": 0
                         },
                         "last_comment_timestamp": {
-                            "sortable": 0,
-                            "default_sort_order": "asc",
+                            "sortable": 1,
+                            "default_sort_order": "desc",
                             "align": "",
                             "separator": "",
                             "empty_column": 0
                         }
                     },
-                    "default": "-1",
+                    "default": "last_comment_timestamp",
                     "empty_table": 0
                 },
                 "fields": {
