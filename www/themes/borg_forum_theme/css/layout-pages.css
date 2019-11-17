@@ -21,3 +21,15 @@
 .l-messages {
   padding-top: 15px;
 }
+
+/*******************************************************************************
+ * Change header alignment
+ ******************************************************************************/
+.l-header .block-system-main-menu {
+  width: 30%;
+}
+
+.l-top-inner .row {
+  padding-left: 15px;
+  padding-right: 15px;
+}
