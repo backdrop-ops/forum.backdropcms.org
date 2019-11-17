@@ -1,0 +1,86 @@
+<?php
+/**
+ * @file
+ * Contains database schema for the Mentions module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function mentions_schema() {
+  $schema['mentions'] = array(
+    'fields' => array(
+      'mid' => array(
+        'description' => 'The primary identifier for a mention.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'auid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'mid' => array(
+        'mid',
+      ),
+    ),
+    'primary key' => array('mid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function mentions_update_last_removed() {
+  return 7100;
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function mentions_update_1000() {
+  $config = config('mentions .settings');
+  $config->set('mentions', update_variable_get('mentions', mentions_defaults()));
+  update_variable_del('mentions');
+}
+
+/**
+ * Implements hook_install().
+ */
+function mentions_install() {
+  config_set('mentions.settings', 'mentions', mentions_defaults());
+}
