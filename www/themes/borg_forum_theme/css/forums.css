@@ -36,6 +36,35 @@ body.front .l-top {
 .block-system-header {
   margin: 0 auto;
 }
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-system-header {
+    margin: 0 15px;
+  }
+}
+
+/******************************************************************************
+ * Borg Greeting icons
+ ******************************************************************************/
+.borg-greeting a.icon {
+  margin-left: 5px;
+}
+.borg-greeting .fa-2x {
+  font-size: 1.5em;
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .borg-greeting li.top a.greeting {
+    line-height: 2.5em;
+    background-position: 0 10px;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .borg-greeting .fa-2x {
+    font-size: 2em;
+  }
+  .borg-greeting a.icon {
+    margin-left: 10px;
+  }
+}
 
 /******************************************************************************
  * Sidebar Headings
