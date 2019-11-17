@@ -35,6 +35,8 @@
         "search content",
         "change own username",
         "access user profiles",
-        "edit own forum_topic content"
+        "edit own forum_topic content",
+        "delete own forum_topic content",
+        "view files"
     ]
 }

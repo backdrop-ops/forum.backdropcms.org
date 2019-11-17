@@ -35,6 +35,7 @@
         "assign roles",
         "access user profiles",
         "change own username",
-        "use text format filtered_html"
+        "use text format filtered_html",
+        "view files"
     ]
 }
