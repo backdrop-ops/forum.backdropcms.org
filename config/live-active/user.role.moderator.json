@@ -36,6 +36,11 @@
         "access user profiles",
         "change own username",
         "use text format filtered_html",
-        "view files"
+        "view files",
+        "create poll content",
+        "edit own poll content",
+        "edit any poll content",
+        "delete own poll content",
+        "inspect all votes"
     ]
 }
