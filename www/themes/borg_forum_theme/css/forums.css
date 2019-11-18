@@ -36,6 +36,36 @@ body.front .l-top {
 .block-system-header {
   margin: 0 auto;
 }
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .block-system-header {
+    margin: 0 15px;
+  }
+}
+
+/******************************************************************************
+ * Borg Greeting icons
+ ******************************************************************************/
+.borg-greeting a.icon {
+  margin-left: 5px;
+}
+.borg-greeting .fa-2x {
+  font-size: 1.5em;
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .borg-greeting .fa-2x {
+    font-size: 2em;
+  }
+  .borg-greeting a.icon {
+    margin-left: 10px;
+  }
+}
+
+/******************************************************************************
+ * Main Menu font size
+ ******************************************************************************/
+ul.menu-dropdown a {
+  font-size: 1.25rem; /* 20px */
+}
 
 /******************************************************************************
  * Sidebar Headings
@@ -79,15 +109,6 @@ body.front .block-layout-custom-block h2 {
     font-size: 2.125rem;
     margin: .5em 0;
   }
-}
-
-/******************************************************************************
- * Views tables
- ******************************************************************************/
-.views-table .views-field-name p {
-  font-size: 0.9em;
-  font-style: italic;
-  margin-top: 0;
 }
 
 /******************************************************************************

@@ -23,6 +23,14 @@
   .view-categories .views-field-nid,
   .view-categories .views-field-cid {
     display: table-cell;
+    font-size: 1.125rem; /* 18px */
+  }
+  .view-categories .views-field-name a {
+    font-size: 1.125rem; /* 18px */
+  }
+  .view-categories .views-field-name p {
+    font-style: italic;
+    margin-top: 0.25em;
   }
 }
 
