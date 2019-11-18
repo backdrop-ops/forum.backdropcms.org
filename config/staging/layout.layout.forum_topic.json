@@ -170,7 +170,7 @@
                         "search": {
                             "label": "Search",
                             "label_hide": 1,
-                            "placeholder": "",
+                            "placeholder": "Search",
                             "button_text": "Search"
                         }
                     },

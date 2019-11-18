@@ -144,8 +144,8 @@
                     "block_settings": {
                         "search": {
                             "label": "Search",
-                            "label_hide": 0,
-                            "placeholder": "",
+                            "label_hide": 1,
+                            "placeholder": "Search",
                             "button_text": "Search"
                         }
                     },
