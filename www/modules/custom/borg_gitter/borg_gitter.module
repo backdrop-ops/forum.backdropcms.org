@@ -15,7 +15,7 @@ function borg_gitter_node_insert($node) {
     $token = $settings['gitter_token'];
     $authorization = 'Authorization: Bearer ' . $token;
     $url = 'https://api.gitter.im/v1/rooms/5639adc616b6c7089cb96941/chatMessages';
-    $message = "A new post is on the forum: **$node->title**: https://forum.backdropcms.org/{$node->path['alias']}\n\n Pitching in on the forum is a great way to feel good and contribute to the Backrop Community.\n\n :smile: :heart: :smile:";
+    $message = "New forum post: **$node->title**: https://forum.backdropcms.org/{$node->path['alias']}\n\n Pitching in on the forum is a great way to feel good and contribute to the Backrop Community. :smile: :heart: :smile:";
     $payload = [
       'text' => $message,
     ];
