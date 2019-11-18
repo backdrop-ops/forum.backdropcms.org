@@ -152,6 +152,14 @@
         "delete own video files",
         "delete any video files",
         "download own video files",
-        "download any video files"
+        "download any video files",
+        "vote on polls",
+        "cancel own vote",
+        "inspect all votes",
+        "create poll content",
+        "edit own poll content",
+        "edit any poll content",
+        "delete own poll content",
+        "delete any poll content"
     ]
 }
