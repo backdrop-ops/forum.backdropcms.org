@@ -23,13 +23,54 @@
 }
 
 /*******************************************************************************
- * Change header alignment
+ * Change header spacing
  ******************************************************************************/
+.l-header .block-borg-forum-branding {
+  width: 65%;
+}
 .l-header .block-system-main-menu {
-  width: 30%;
+  width: 34%;
 }
 
-.l-top-inner .row {
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .l-header .block-borg-forum-branding {
+    width: 33%;
+  }
+  .l-header .block-system-user-menu {
+    width: 33%;
+  }
+  .l-header .block-system-main-menu {
+    width: 34%;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .l-header .block-borg-forum-branding {
+    width: 60%;
+  }
+  .l-header .block-system-user-menu {
+    width: 40%;
+  }
+  .l-header .block-system-main-menu {
+    width: 100%;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .l-header .block-borg-blocks-branding,
+  .l-header .block-borg-forum-branding {
+    width: 25%;
+  }
+  .l-header .block-system-user-menu {
+    width: 25%;
+  }
+  .l-header .block-system-main-menu {
+    width: 50%;
+  }
+}
+
+/*******************************************************************************
+ * Fix padding on columns in top-inner area.
+ ******************************************************************************/
+.l-top-inner .row .block {
   padding-left: 15px;
   padding-right: 15px;
 }
