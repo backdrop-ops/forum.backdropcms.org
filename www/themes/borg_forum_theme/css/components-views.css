@@ -41,9 +41,6 @@
 .view-taxonomy-term .views-field-last-comment-timestamp {
   display: none;
 }
-.view-taxonomy-term .views-field-title a {
-  display: block;
-}
 .view-taxonomy-term .views-field-title span.accepted {
   background-color: #E5ECFF;
   padding: 0 10px;

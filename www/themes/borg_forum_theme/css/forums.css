@@ -181,3 +181,7 @@ mark {
   background-color: #FCF9DE;
   padding: 0 5px;
 }
+
+.marker {
+  color: #b50000;
+}
