@@ -4,6 +4,7 @@
     "name": "my_profile",
     "title": "Profile",
     "description": null,
+    "renderer_name": "standard",
     "module": null,
     "weight": -1,
     "storage": 1,
@@ -160,7 +161,14 @@
                     "title_display": "none",
                     "title": "",
                     "style": "default",
-                    "block_settings": [],
+                    "block_settings": {
+                        "search": {
+                            "label": "Search",
+                            "label_hide": 1,
+                            "placeholder": "",
+                            "button_text": "Search"
+                        }
+                    },
                     "contexts": []
                 },
                 "uuid": "878d72d7-d567-4ed2-8502-2bfc001bcf08",
