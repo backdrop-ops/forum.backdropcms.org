@@ -22,7 +22,7 @@
             "488bc697-04da-4606-b301-0147ac6d7e76"
         ],
         "top": [
-            "eee2d822-0437-4d7e-982d-4553f95dbfa8"
+            "58408462-51b5-4c13-9c49-7375a4229e0f"
         ],
         "content": [
             "6824ed26-b90d-4a55-ac0a-109da7149ff4",
@@ -132,31 +132,31 @@
                 }
             }
         },
-        "eee2d822-0437-4d7e-982d-4553f95dbfa8": {
+        "58408462-51b5-4c13-9c49-7375a4229e0f": {
             "plugin": "search:form",
             "data": {
                 "module": "search",
                 "delta": "form",
                 "settings": {
-                    "title_display": "none",
+                    "title_display": "default",
                     "title": "",
                     "style": "default",
                     "block_settings": {
                         "search": {
-                            "label": "",
-                            "label_hide": 1,
+                            "label": "Search",
+                            "label_hide": 0,
                             "placeholder": "",
                             "button_text": "Search"
                         }
                     },
                     "contexts": []
                 },
-                "uuid": "eee2d822-0437-4d7e-982d-4553f95dbfa8",
+                "uuid": "58408462-51b5-4c13-9c49-7375a4229e0f",
                 "style": {
                     "plugin": "default",
                     "data": {
                         "settings": {
-                            "classes": "col-md-6 .container-fluid"
+                            "classes": "col-md-6 container-fluid"
                         }
                     }
                 }
