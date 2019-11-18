@@ -4,6 +4,7 @@
     "name": "default",
     "title": "Default Layout",
     "description": null,
+    "renderer_name": "standard",
     "module": "layout",
     "weight": 0,
     "storage": 2,
@@ -164,7 +165,14 @@
                     "title_display": "none",
                     "title": "",
                     "style": "default",
-                    "block_settings": [],
+                    "block_settings": {
+                        "search": {
+                            "label": "Search",
+                            "label_hide": 1,
+                            "placeholder": "Search",
+                            "button_text": "Search"
+                        }
+                    },
                     "contexts": []
                 },
                 "uuid": "eca1d63a-acb9-4187-a500-f9f92c66f3f2",

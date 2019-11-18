@@ -26,6 +26,7 @@
             "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
         ],
         "content": [
+            "0262b9d7-4aec-4cca-a600-ca87465edeca",
             "3b2245c6-1566-4f76-b001-1a3fb41146e5",
             "7b1642e9-245e-4cab-8009-9d0e444ebd3e"
         ],
@@ -172,6 +173,36 @@
                     "format": "full_html"
                 },
                 "uuid": "05ae7ae6-0566-44c9-8300-bfb1b45875a7",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "0262b9d7-4aec-4cca-a600-ca87465edeca": {
+            "plugin": "search:form",
+            "data": {
+                "module": "search",
+                "delta": "form",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "search": {
+                            "label": "Search all forum topics",
+                            "label_hide": 0,
+                            "placeholder": "",
+                            "button_text": "Search"
+                        }
+                    },
+                    "contexts": []
+                },
+                "uuid": "0262b9d7-4aec-4cca-a600-ca87465edeca",
                 "style": {
                     "plugin": "default",
                     "data": {
