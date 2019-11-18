@@ -1,0 +1,6 @@
+type = module
+name = Gitter integration
+description = Post new forum questions to the backdrop-issues gitter channel.
+backdrop = 1.x
+package = Forum
+
