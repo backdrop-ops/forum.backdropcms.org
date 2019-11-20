@@ -20,7 +20,6 @@
         "use text format filtered_html",
         "use text format full_html",
         "administer image styles",
-        "use installer browser",
         "administer menu",
         "bypass node access",
         "administer content types",
