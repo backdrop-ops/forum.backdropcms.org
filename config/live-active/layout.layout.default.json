@@ -26,6 +26,7 @@
             "eca1d63a-acb9-4187-a500-f9f92c66f3f2"
         ],
         "content": [
+            "1a6fd8a3-bd6c-44e1-ab12-18897e37bb6b",
             "default",
             "a531c13d-be06-4a61-9302-2acfbc883f62",
             "ec150984-6c03-44d9-9107-075cdc5c2bae"
@@ -181,6 +182,40 @@
                     "data": {
                         "settings": {
                             "classes": "col-md-4"
+                        }
+                    }
+                }
+            }
+        },
+        "1a6fd8a3-bd6c-44e1-ab12-18897e37bb6b": {
+            "plugin": "views:taxonomy_term_data-block",
+            "data": {
+                "module": "views",
+                "delta": "taxonomy_term_data-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": "1",
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": []
+                },
+                "uuid": "1a6fd8a3-bd6c-44e1-ab12-18897e37bb6b",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
                         }
                     }
                 }
