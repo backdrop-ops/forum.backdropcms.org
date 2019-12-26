@@ -154,13 +154,20 @@ small {
 pre {
   overflow: hidden;
   overflow-x: scroll;
-  background-color: #F7F7F7;
+  background-color: #EEEEEE;
   padding: 15px;
   margin: 10px 0;
 }
 code {
   font-family: Menlo, Consolas, "Andale Mono", "Lucida Console", "Nimbus Mono L", "DejaVu Sans Mono", monospace, "Courier New";
   font-size: 0.857em;
+  background-color: #EEEEEE;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+}
+pre code {
+  background-color: transparent;
+  padding: 0;
 }
 
 dt,
