@@ -41,6 +41,8 @@
         "edit own poll content",
         "edit any poll content",
         "delete own poll content",
-        "inspect all votes"
+        "inspect all votes",
+        "administer akismet",
+        "access akismet statistics"
     ]
 }
