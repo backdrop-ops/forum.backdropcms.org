@@ -6,7 +6,7 @@ config:
   php: '7.2'
   via: nginx
   webroot: www
-  backdrush: 1.0.0
+  backdrush: 1.x-1.x
   xdebug: true
 
 services:
