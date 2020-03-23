@@ -414,8 +414,8 @@
                     "title_display": "default",
                     "style": "default",
                     "block_settings": {
-                        "description": "",
                         "delta": "newsletter",
+                        "description": "",
                         "reusable": true
                     },
                     "contexts": [],
