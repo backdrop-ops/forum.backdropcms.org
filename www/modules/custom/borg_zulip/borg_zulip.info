@@ -1,0 +1,6 @@
+type = module
+name = Zulip integration
+description = Post new forum questions to the Backdrop zulip stream.
+backdrop = 1.x
+package = Forum
+

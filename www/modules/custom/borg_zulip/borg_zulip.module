@@ -1,0 +1,44 @@
+<?php
+/**
+ * @file
+ * Post new forum questions to the Forum stream in Backdrop zulip. 
+ */
+
+/**
+ * Implements hook_node_insert().
+ */
+function borg_zulip_node_insert($node) {
+  if ($node->type == 'forum_topic') {
+    // Save the node so path properties get created.
+      // @todo this might cause problems. Can we do this another way?
+    $node->save();
+    global $settings;
+    $token = $settings['zulip_key'];
+    $url = 'https://backdrop.zulipchat.com/api/v1/messages';
+    $message = 
+      "New forum post: **[$node->title](https://forum.backdropcms.org/{$node->path['alias']})**. 
+      Feedback, assistance, comments, etc. welcome. Jump in! :smile: :heart:";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "type=stream&to=Forum&subject=Forum&content=$message");
+    curl_setopt($ch, CURLOPT_USERPWD, "forumbot-bot@zulipchat.com:$token");
+    $headers = array();
+    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+      watchdog(
+        'borg_zulip',
+        curl_error($ch),
+        array(),
+        WATCHDOG_NOTICE,
+        NULL
+      );
+    }
+    curl_close($ch);
+  }
+}
