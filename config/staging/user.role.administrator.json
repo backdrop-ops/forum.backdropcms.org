@@ -159,6 +159,7 @@
         "edit own poll content",
         "edit any poll content",
         "delete own poll content",
-        "delete any poll content"
+        "delete any poll content",
+        "administer flexible templates"
     ]
 }
