@@ -97,5 +97,7 @@
     "path_pattern": "accounts/[user:name]",
     "x_frame_options": "SAMEORIGIN",
     "form_cache_expiration": 21600,
-    "log_date_format": "M d 'y - g:ia"
+    "log_date_format": "M d 'y - g:ia",
+    "user_password_reject_weak": false,
+    "user_password_strength_threshold": 50
 }
