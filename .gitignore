@@ -4,6 +4,14 @@ www/files
 # local settings.local.php
 settings.local.php
 
-# bups
+# Backups.
 *.gz
 *.zip
+*.sql
+*.sql.gz
+*.tgz
+*.tar
+*.tar.gz
+
+# Ignore env vars.
+.env
