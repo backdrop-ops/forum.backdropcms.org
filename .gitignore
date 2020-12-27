@@ -2,7 +2,7 @@
 www/files
 
 # local settings.local.php
-settings.local.php
+www/settings.local.php
 
 # Backups.
 *.gz
