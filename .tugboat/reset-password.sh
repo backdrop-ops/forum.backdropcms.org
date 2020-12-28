@@ -2,14 +2,14 @@
 <?php
 /**
  * Reset User 1's password.
+ *
+ * NOTE: This script MUST be run from Backdrop's root directory.
  */
 
 // Bootstrap Backdrop.
-define('BACKDROP_ROOT', getenv('TUGBOAT_ROOT') . '/www');
-echo "root: " . BACKDROP_ROOT . "\n";
+define('BACKDROP_ROOT', getcwd());
 require_once BACKDROP_ROOT . '/core/includes/bootstrap.inc';
-$bootstrap = backdrop_bootstrap(BACKDROP_BOOTSTRAP_FULL);
-echo "Bootstrap: $bootstrap\n";
+backdrop_bootstrap(BACKDROP_BOOTSTRAP_FULL);
 
 // Reset password.
 $password = file_get_contents(getenv('TUGBOAT_ROOT') . '/.tugboat/password');
