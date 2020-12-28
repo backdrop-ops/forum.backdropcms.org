@@ -25,7 +25,7 @@ services:
         # Generate and store a random password for the admin user.
         - openssl rand -hex 6 > $TUGBOAT_ROOT/.tugboat/password
         # Replace the files directory.
-        - rm -r $TUGBOAT_ROOT/www/files && cp -r $TUGBOAT_ROOT/files $TUGBOAT_ROOT/www
+        - rm -rf $TUGBOAT_ROOT/www/files && cp -r $TUGBOAT_ROOT/files $TUGBOAT_ROOT/www
         # Update config.
         - rm $TUGBOAT_ROOT/config/live-active/*.json
         - cp $TUGBOAT_ROOT/config/staging/*.json $TUGBOAT_ROOT/config/live-active
