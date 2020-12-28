@@ -2,7 +2,6 @@ services:
   php:
     image: tugboatqa/php:7.2-apache
     default: true
-    depends: mariadb
     commands:
       init:
         # Install PHP 'zip' extension to allow installing Backdrop modules.
