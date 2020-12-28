@@ -26,7 +26,6 @@ services:
         # Generate and store a random password for the admin user.
         - openssl rand -hex 6 > $TUGBOAT_ROOT/.tugboat/password
         # Import the sanitized database.
-        - mysqladmin -f drop tugboat && mysqladmin create tugboat
         - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql
         # Replace the files directory.
         - rm -r $TUGBOAT_ROOT/www/files && cp -r $TUGBOAT_ROOT/files $TUGBOAT_ROOT/www
