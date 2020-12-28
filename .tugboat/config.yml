@@ -26,7 +26,7 @@ services:
         # Replace the files directory.
         - rm -rf $TUGBOAT_ROOT/www/files && cp -r $TUGBOAT_ROOT/files $TUGBOAT_ROOT/www
         # Update config.
-        - rm $TUGBOAT_ROOT/config/live-active/*.json
+        - rm -f $TUGBOAT_ROOT/config/live-active/*.json
         - cp $TUGBOAT_ROOT/config/staging/*.json $TUGBOAT_ROOT/config/live-active
         # Set appropriate file permissions/ownership.
         - chown -R www-data:www-data $TUGBOAT_ROOT/www
