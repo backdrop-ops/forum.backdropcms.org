@@ -2,6 +2,7 @@ services:
   php:
     image: tugboatqa/php:7.2-apache
     default: true
+    depends: mariadb
     commands:
       init:
         # Install PHP 'zip' extension to allow installing Backdrop modules.
@@ -14,10 +15,8 @@ services:
         - cp $TUGBOAT_ROOT/.tugboat/settings.local.php $TUGBOAT_ROOT/www/settings.local.php
         # Generate a unique hash_salt to secure the site.
         - echo "\$settings['hash_salt'] = '$(openssl rand -hex 32)';" >> $TUGBOAT_ROOT/www/settings.local.php
-        # Download a copy of the latest database & files directory.
-        - php $TUGBOAT_ROOT/scripts/pull-db-files.php --database
-        - gunzip forum-latest-sanitized.sql.gz
-        - php $TUGBOAT_ROOT/scripts/pull-db-files.php --files
+        # Download a copy of the latest files directory.
+        - wget --http-user=$SANITIZE_USER --http-password=$SANITIZE_PASS -c https://sanitize.backdropcms.org/forum.backdropcms.org/files_backups/forum-files-latest.tar.gz
         - tar -xzf forum-files-latest.tar.gz && rm forum-files-latest.tar.gz
       build:
         # Delete previous comments in the PR.
@@ -37,13 +36,15 @@ services:
         - cd $TUGBOAT_ROOT/.tugboat && ./post-comment.sh
   mariadb:
     image: tugboatqa/mariadb:latest
-    depends: php
     commands:
       init:
         # Configure database for UTF-8: https://api.backdropcms.org/database-configuration#utf8mb4
         - echo "[mysqld]\ninnodb_large_prefix=true\ninnodb_file_format=barracuda\ninnodb_file_per_table=true" >> /etc/mysql/conf.d/utf8mb.conf
+        # Download a copy of the latest database.
+        - wget --http-user=$SANITIZE_USER --http-password=$SANITIZE_PASS -c https://sanitize.backdropcms.org/forum.backdropcms.org/sanitized/forum-latest-sanitized.sql.gz
+        - gunzip forum-latest-sanitized.sql.gz
       build:
         # Drop and re-create the database (needed when rebuilding/reinstalling).
         - mysqladmin -f drop tugboat && mysqladmin create tugboat
         # Import the sanitized database.
-        - mysql -u tugboat -ptugboat tugboat < $TUGBOAT_ROOT/forum-latest-sanitized.sql
+        - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql
