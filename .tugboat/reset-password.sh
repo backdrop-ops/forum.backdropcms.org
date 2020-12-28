@@ -4,11 +4,12 @@
  * Reset User 1's password.
  */
 
+echo "Test\n";
+
 // Bootstrap Backdrop.
 define('BACKDROP_ROOT', getenv('TUGBOAT_ROOT') . '/www');
 require_once BACKDROP_ROOT . '/core/includes/bootstrap.inc';
 backdrop_bootstrap(BACKDROP_BOOTSTRAP_FULL);
-print("Installed: " . backdrop_bootstrap_is_installed() . "\n");
 
 // Reset password.
 $password = file_get_contents(getenv('TUGBOAT_ROOT') . '/.tugboat/password');
