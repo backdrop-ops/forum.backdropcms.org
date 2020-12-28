@@ -25,8 +25,6 @@ services:
         - cd $TUGBOAT_ROOT/.tugboat && ./delete-comments.sh
         # Generate and store a random password for the admin user.
         - openssl rand -hex 6 > $TUGBOAT_ROOT/.tugboat/password
-        # Import the sanitized database.
-        - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql
         # Replace the files directory.
         - rm -r $TUGBOAT_ROOT/www/files && cp -r $TUGBOAT_ROOT/files $TUGBOAT_ROOT/www
         # Update config.
@@ -40,7 +38,13 @@ services:
         - cd $TUGBOAT_ROOT/.tugboat && ./post-comment.sh
   mariadb:
     image: tugboatqa/mariadb:latest
+    depends: php
     commands:
       init:
         # Configure database for UTF-8: https://api.backdropcms.org/database-configuration#utf8mb4
         - echo "[mysqld]\ninnodb_large_prefix=true\ninnodb_file_format=barracuda\ninnodb_file_per_table=true" >> /etc/mysql/conf.d/utf8mb.conf
+      build:
+        # Drop and re-create the database (needed when rebuilding/reinstalling).
+        - mysqladmin -f drop tugboat && mysqladmin create tugboat
+        # Import the sanitized database.
+        - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql
