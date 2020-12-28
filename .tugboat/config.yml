@@ -46,4 +46,4 @@ services:
         # Drop and re-create the database (needed when rebuilding/reinstalling).
         - mysqladmin -f drop tugboat && mysqladmin create tugboat
         # Import the sanitized database.
-        - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql
+        - mysql -u tugboat -ptugboat tugboat < $TUGBOAT_ROOT/forum-latest-sanitized.sql
