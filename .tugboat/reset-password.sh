@@ -6,6 +6,7 @@
 
 // Bootstrap Backdrop.
 define('BACKDROP_ROOT', getenv('TUGBOAT_ROOT') . '/www');
+echo "root: " . BACKDROP_ROOT . "\n";
 require_once BACKDROP_ROOT . '/core/includes/bootstrap.inc';
 $bootstrap = backdrop_bootstrap(BACKDROP_BOOTSTRAP_FULL);
 echo "Bootstrap: $bootstrap\n";
