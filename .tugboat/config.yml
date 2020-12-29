@@ -32,7 +32,7 @@ services:
         - chown -R www-data:www-data $TUGBOAT_ROOT/www
         - find $TUGBOAT_ROOT/www/files $TUGBOAT_ROOT/www/layouts $TUGBOAT_ROOT/www/modules $TUGBOAT_ROOT/www/themes -type d -exec chmod 2775 {} \;
         - find $TUGBOAT_ROOT/www/files $TUGBOAT_ROOT/www/layouts $TUGBOAT_ROOT/www/modules $TUGBOAT_ROOT/www/themes -type f -exec chmod 0664 {} \;
-        # Reset the password for User 1.
+        # Reset the password for User 1 (run script from Backdrop root dir).
         - cd $TUGBOAT_ROOT/www && $TUGBOAT_ROOT/.tugboat/reset-password.sh
         # Post a comment in the PR.
         - cd $TUGBOAT_ROOT/.tugboat && ./post-comment.sh
@@ -46,7 +46,7 @@ services:
         - wget --http-user=$SANITIZE_USER --http-password=$SANITIZE_PASS -c https://sanitize.backdropcms.org/forum.backdropcms.org/sanitized/forum-latest-sanitized.sql.gz
         - gunzip forum-latest-sanitized.sql.gz
       build:
-        # Drop and re-create the database (needed when rebuilding/reinstalling).
+        # Drop and re-create the database.
         - mysqladmin -f drop tugboat && mysqladmin create tugboat
         # Import the sanitized database.
         - mysql -u tugboat -ptugboat tugboat < forum-latest-sanitized.sql

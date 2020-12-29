@@ -7,7 +7,7 @@
 $password = file_get_contents(getenv('TUGBOAT_ROOT') . '/.tugboat/password');
 $comment = 'Tugboat has finished building a preview for this pull request!
 Website: ' . getenv('TUGBOAT_DEFAULT_SERVICE_URL') . '
-Username: admin
+Username: drop
 Password: ' . $password;
 
 // Post comment to GitHub.
