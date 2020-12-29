@@ -1,14 +1,13 @@
-# Backdrop recipe
 name: forum
 recipe: backdrop
-
+env_file:
+  - .env
 config:
   php: '7.2'
   via: nginx
   webroot: www
   backdrush: 1.x-1.x
   xdebug: true
-
 services:
   database:
     type: mariadb:10.3
@@ -16,3 +15,18 @@ tooling:
   drush:
     service: appserver
     cmd: drush --root=/app/www --uri=https://forum.lndo.site
+  pull-db:
+    service: appserver
+    description: 'Get the latest DB from forum.backdropcms.org'
+    cmd:
+      - appserver: php /app/scripts/pull-db-files.php --database
+      - database: /helpers/sql-import.sh forum-latest-sanitized.sql.gz
+      - appserver: rm -f forum-latest-sanitized.sql.gz
+  pull-files:
+    service: appserver
+    description: 'Get the latest files from forum.backdropcms.org'
+    cmd:
+      - php /app/scripts/pull-db-files.php --files
+      - tar -xzf forum-files-latest.tar.gz
+      - rm -r www/files/ && mv files/ www/
+      - rm -f forum-files-latest.tar.gz
