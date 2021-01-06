@@ -1,0 +1,9 @@
+/**
+ * @file
+ * Custom styling for the CKEditor on the Backdrop Forum.
+ */
+
+.cke_combopanel__format,
+.cke_combopanel__styles {
+  width: 20em !important;
+}
