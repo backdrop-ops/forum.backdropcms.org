@@ -209,7 +209,7 @@
                         "ui_name": "",
                         "label": "",
                         "empty": 0,
-                        "content": "<p>These FAQs (Frequently Asked Questions) are questions that users have asked in the forum. Moderators have decided that these questions (and their answers) will likely benefit lots of users, and have added them here for easier access.</p>\r\n",
+                        "content": "<p>These FAQs (Frequently Asked Questions) have been asked by users in the forum, and have been selected by moderators for inclusion on this page.</p>\r\n",
                         "format": "filtered_html",
                         "tokenize": 0
                     }
