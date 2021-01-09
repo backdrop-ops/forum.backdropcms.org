@@ -450,7 +450,7 @@ function akismet_data_delete_form_submit($form, &$form_state) {
   $entity = $akismet_form['entity'];
   $id = $data['post_id'];
 
-  if (!empty($form_state['values']['akismet']['feedback'])) {
+  if ($uids && !empty($form_state['values']['akismet']['feedback'])) {
     if (akismet_data_report($entity, $id, $form_state['values']['akismet']['feedback'])) {
       backdrop_set_message(t('The content was successfully reported as inappropriate.'));
     }
