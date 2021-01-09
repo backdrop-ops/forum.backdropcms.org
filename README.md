@@ -37,10 +37,10 @@ Working on an Issue
     * Replace briefDescriptor w/ a description of your issue (no spaces)
   * Do your work on your branch
   * Add and commit your files
-  * PUsh up yor branch
+  * Push up your branch
     * `git push origin ISSUENUMBER/briefDescription`
   * Submit a PR via the GitHub web UI
   * Link your PR in the original issue
     * Label the issue as `has PR`
-    * Request review by commenting on the issue and at tagging the person(s)
+    * Request review by commenting on the issue and 'at' tagging the person(s)
       that started the issue
