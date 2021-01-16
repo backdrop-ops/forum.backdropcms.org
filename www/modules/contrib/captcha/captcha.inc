@@ -3,6 +3,7 @@
 /**
  * @file
  * General CAPTCHA functionality and helper functions.
+ */
 
 /**
  * Helper function for adding/updating a CAPTCHA point.
@@ -255,6 +256,39 @@ function _captcha_get_description($lang_code = NULL) {
 }
 
 /**
+ * Get the error message as configured on the general CAPTCHA settings page.
+ *
+ * If the locale module is enabled, the error message will be returned
+ * for the current language the page is rendered for. This language
+ * can optionally been overridden with the $lang_code argument.
+ *
+ * @param string|null $lang_code
+ *   an optional language code to get the description for.
+ *
+ * @return string
+ *   String with (localized) error message.
+ */
+function _captcha_get_error_message($lang_code = NULL) {
+  // If no language code is given: use the language of the current page.
+  global $language;
+  $config = config('captcha.settings');
+  $lang_code = isset($lang_code) ? $lang_code : $language->langcode;
+  // The hardcoded but localizable default.
+  $default = t('The answer you entered for the CAPTCHA was not correct.', array(), array('langcode' => $lang_code));
+  // Look up the configured error message or fall back on the (localized) default.
+  if (module_exists('locale')) {
+    $message = $config->get('error_message_' . $lang_code);
+  }
+  else {
+    $message = $config->get('error_message');
+  }
+  if (empty($message)) {
+    $message = $default;
+  }
+  return filter_xss_admin($message);
+}
+
+/**
  * Parse or interpret the given captcha_type.
  *
  * @param string $captcha_type
@@ -344,7 +378,7 @@ function _captcha_get_captcha_placement($form_id, $form) {
       if (count($buttons)) {
         // Pick first button.
         // TODO: make this more sophisticated? Use cases needed.
-        $placement = $buttons[0];
+        $placement = (isset($buttons[count($buttons) - 1])) ? $buttons[count($buttons) - 1] : $buttons[0];
       }
       else {
         // Use NULL when no buttons were found.

@@ -87,6 +87,7 @@ abstract class CaptchaBaseWebTestCase extends BackdropWebTestCase {
     // Enable comment subject.
     config_set('node.type.page', 'settings.comment_subject_field', TRUE);
 
+    config_set('system.core', 'user_register', 'visitors');
   }
 
   /**
@@ -241,6 +242,8 @@ class CaptchaTestCase extends CaptchaBaseWebTestCase {
     // Set a CAPTCHA on login form
     captcha_set_form_id_setting('user_login', 'captcha/Math');
 
+    backdrop_flush_all_caches();
+
     // Check if there is a CAPTCHA on the login form (look for the title).
     $this->backdropGet('user/login');
     $this->assertCaptchaPresence(TRUE);
@@ -393,7 +396,6 @@ class CaptchaAdminTestCase extends CaptchaBaseWebTestCase {
   function testAdminAccess() {
     $this->backdropLogin($this->normal_user);
     $this->backdropGet(self::CAPTCHA_ADMIN_PATH);
-    file_put_contents('tmp.simpletest.html', $this->backdropGetContent());
     $this->assertText(t('Access denied'), 'Normal users should not be able to access the CAPTCHA admin pages', 'CAPTCHA');
 
     $this->backdropLogin($this->admin_user);
@@ -780,9 +782,13 @@ class CaptchaPersistenceTestCase extends CaptchaBaseWebTestCase {
     // We also have to do this after all usage of the CAPTCHA admin form
     // (because posting the CAPTCHA admin form would set the CAPTCHA to 'none').
     captcha_set_form_id_setting('user_login', 'captcha/Test');
+    backdrop_flush_all_caches();
+
     $this->backdropGet('user/login');
     $this->assertCaptchaPresence(TRUE);
     captcha_set_form_id_setting('user_register_form', 'captcha/Test');
+    backdrop_flush_all_caches();
+
     $this->backdropGet('user/register');
     $this->assertCaptchaPresence(TRUE);
   }

@@ -12,7 +12,7 @@ files[] = image_captcha.admin.inc
 files[] = image_captcha.user.inc
 files[] = image_captcha.test
 
-; Added by Backdrop CMS packaging script on 2017-09-09
+; Added by Backdrop CMS packaging script on 2020-05-01
 project = captcha
-version = 1.x-1.5.0
-timestamp = 1504992045
+version = 1.x-1.7.0
+timestamp = 1588340410

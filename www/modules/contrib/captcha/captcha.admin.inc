@@ -22,7 +22,7 @@ function _captcha_available_challenge_types($add_special_options = TRUE) {
     $captcha_types['none'] = t('- No challenge -');
     $captcha_types['default'] = t('Default challenge type');
   }
-  // We do our own version of Drupal's module_invoke_all() here because
+  // We do our own version of Backdrop's module_invoke_all() here because
   // we want to build an array with custom keys and values.
   foreach (module_implements('captcha') as $module) {
     $result = call_user_func_array($module . '_captcha', array('list'));
@@ -46,11 +46,16 @@ function captcha_admin_settings() {
   // Use JavaScript for some added usability on admin form.
   backdrop_add_js(backdrop_get_path('module', 'captcha') . '/captcha.js');
 
+  // Load languages for configurable texts.
+  if (module_exists('locale')) {
+    $langs = language_list(FALSE, TRUE);
+  }
+
   // Configuration of which forms to protect, with what challenge.
   $form['captcha_form_protection'] = array(
     '#type' => 'fieldset',
     '#title' => t('Form protection'),
-    '#description' => t("Select the challenge type you want for each of the listed forms (identified by their so called <em>form_id</em>'s). You can easily add arbitrary forms with the textfield at the bottom of the table or with the help of the option <em>Add CAPTCHA administration links to forms</em> below."),
+    '#description' => t("Select the challenge type you want for each of the listed forms (identified by their so called <em>form_id</em> or <em>base_form_id</em>). You can easily add arbitrary forms with the textfield at the bottom of the table or with the help of the option <em>Add CAPTCHA administration links to forms</em> below."),
   );
   $form['captcha_form_protection']['captcha_default_challenge'] = array(
     '#type' => 'select',
@@ -135,7 +140,7 @@ function captcha_admin_settings() {
   );
 
   // Button for clearing the CAPTCHA placement cache.
-  // Based on Drupal core's "Clear all caches" (performance settings page).
+  // Based on Backdrop core's "Clear all caches" (performance settings page).
   $form['captcha_form_protection']['captcha_placement_caching'] = array(
     '#type' => 'item',
     '#title' => t('CAPTCHA placement caching'),
@@ -147,6 +152,32 @@ function captcha_admin_settings() {
     '#submit' => array('captcha_clear_captcha_placement_cache_submit'),
   );
 
+  // Textfield(s) for editing the error message.
+  if (module_exists('locale')) {
+    $form['captcha_error_messages'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Error message'),
+      '#description' => t('Message displayed when the CAPTCHA has not been solved. An empty entry will reset the error message to default.'),
+    );
+    foreach ($langs as $lang_code => $lang_name) {
+      $form['captcha_error_messages']['captcha_error_message_' . $lang_code] = array(
+        '#type' => 'textfield',
+        '#title' => t('For language %lang_name (code %lang_code)', array('%lang_name' => $lang_name, '%lang_code' => $lang_code)),
+        '#default_value' => _captcha_get_error_message($lang_code),
+        '#maxlength' => 256,
+      );
+    }
+  }
+  else {
+    $form['captcha_error_message'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Error message'),
+      '#description' => t('Message displayed when the CAPTCHA has not been solved. An empty entry will reset the error message to default.'),
+      '#default_value' => _captcha_get_error_message(),
+      '#maxlength' => 256,
+    );
+  }
+
   // Configuration option for adding a CAPTCHA description.
   $form['captcha_add_captcha_description'] = array(
     '#type' => 'checkbox',
@@ -156,7 +187,6 @@ function captcha_admin_settings() {
   );
   // Textfield(s) for the CAPTCHA description.
   if (module_exists('locale')) {
-    $langs = language_list(FALSE, TRUE);
     $form['captcha_descriptions'] = array(
       '#type' => 'fieldset',
       '#title' => t('CAPTCHA description'),
@@ -283,11 +313,56 @@ function captcha_admin_settings_submit($form, &$form_state) {
   $config->set('default_challenge', $form_state['values']['captcha_default_challenge']);
   $config->set('default_challenge_on_nonlisted_forms', $form_state['values']['captcha_default_challenge_on_nonlisted_forms']);
 
+  // Load languages for configurable texts.
+  if (module_exists('locale')) {
+    $langs = language_list(FALSE, TRUE);
+  }
+
+  // Process CAPTCHA points.
+  if (isset($form_state['values']['captcha_form_id_overview']['captcha_captcha_points'])) {
+    // Load existing data.
+    $captcha_points = captcha_get_captcha_points();
+    foreach ($form_state['values']['captcha_form_id_overview']['captcha_captcha_points'] as $captcha_point_form_id => $data) {
+      captcha_set_form_id_setting($captcha_point_form_id, $data['captcha_type']);
+    }
+  }
+
+  // Add new CAPTCHA point?
+  $captcha_point_form_id = $form_state['values']['captcha_form_id_overview']['captcha_new_captcha_point']['form_id'];
+  if (!empty($captcha_point_form_id)) {
+    $captcha_type = $form_state['values']['captcha_form_id_overview']['captcha_new_captcha_point']['captcha_type'];
+    captcha_set_form_id_setting($captcha_point_form_id, $captcha_type);
+    backdrop_set_message(t('Added CAPTCHA point.'), 'status');
+  }
+
+  // Error message.
+  if (module_exists('locale')) {
+    foreach ($langs as $lang_code => $lang_name) {
+      $description = $form_state['values']['captcha_error_message_' . $lang_code];
+      if ($description) {
+        $config->set('error_message_' . $lang_code, $description);
+      }
+      else {
+        $config->clear('error_message_' . $lang_code);
+        backdrop_set_message(t('Reset of error message for language %language.', array('%language' => $lang_name)), 'status');
+      }
+    }
+  }
+  else {
+    $description = $form_state['values']['captcha_error_message'];
+    if ($description) {
+      $config->set('error_message', $description);
+    }
+    else {
+      $config->clear('error_message');
+      backdrop_set_message(t('Reset of error message.'), 'status');
+    }
+  }
+
   // CAPTCHA description stuff.
   $config->set('add_captcha_description', $form_state['values']['captcha_add_captcha_description']);
   // Save (or reset) the CAPTCHA descriptions.
   if (module_exists('locale')) {
-    $langs = language_list(FALSE, TRUE);
     foreach ($langs as $lang_code => $lang_name) {
       $description = $form_state['values']["captcha_description_$lang_code"];
       if ($description) {
@@ -380,7 +455,7 @@ function captcha_point_admin_form($form, $form_state, $captcha_point_form_id = N
     $form['captcha_point_form_id'] = array(
       '#type' => 'textfield',
       '#title' => t('Form ID'),
-      '#description' => t('The Drupal form_id of the form to add the CAPTCHA to.'),
+      '#description' => t('The Backdrop form_id or base_form_id of the form to add the CAPTCHA to.'),
       '#value' => check_plain($captcha_point_form_id),
       '#disabled' => TRUE,
     );
@@ -394,7 +469,7 @@ function captcha_point_admin_form($form, $form_state, $captcha_point_form_id = N
     $form['captcha_point_form_id'] = array(
       '#type' => 'textfield',
       '#title' => t('Form ID'),
-      '#description' => t('The Drupal form_id of the form to add the CAPTCHA to.'),
+      '#description' => t('The Backdrop form_id or base_form_id of the form to add the CAPTCHA to.'),
     );
   }
   // Select widget for CAPTCHA type.

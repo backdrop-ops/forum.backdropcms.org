@@ -158,6 +158,7 @@ function captcha_update_1000() {
   $config->set('default_challenge_on_nonlisted_forms', update_variable_get('captcha_default_challenge_on_nonlisted_forms', 0));
   $config->set('captcha_default_challenge', update_variable_get('captcha_default_challenge', 'captcha/Math'));
   $config->set('administration_mode', update_variable_get('captcha_administration_mode', 0));
+  $config->set('error_message', update_variable_get('captcha_error_message', 'The answer you entered for the CAPTCHA was not correct.'));
 
   $config->save();
 
@@ -173,6 +174,7 @@ function captcha_update_1000() {
   update_variable_del('captcha_default_challenge');
   update_variable_del('captcha_administration_mode');
   update_variable_del('captcha_persistence');
+  update_variable_del('captcha_error_message');
 }
 
 /**
