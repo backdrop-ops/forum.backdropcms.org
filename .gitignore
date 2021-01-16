@@ -13,5 +13,8 @@ www/settings.local.php
 *.tar
 *.tar.gz
 
+# Ignore development modules
+www/modules/contrib/devel
+
 # Ignore env vars.
 .env
