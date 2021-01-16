@@ -1,4 +1,8 @@
 # Ignore the dev-active directory
 dev-active/*.json
+dev-active/.htaccess
+
+# Ignore dev config copied to stage directory on locals
+staging/devel.settings.json
 
 
