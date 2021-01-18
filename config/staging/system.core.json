@@ -99,5 +99,6 @@
     "form_cache_expiration": 21600,
     "log_date_format": "M d 'y - g:ia",
     "user_password_reject_weak": false,
-    "user_password_strength_threshold": 50
+    "user_password_strength_threshold": 50,
+    "config_sync_clear_staging": 1
 }
