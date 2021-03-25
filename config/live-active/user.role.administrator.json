@@ -160,6 +160,7 @@
         "edit any poll content",
         "delete own poll content",
         "delete any poll content",
-        "administer flexible templates"
+        "administer flexible templates",
+        "administer smtp module"
     ]
 }
