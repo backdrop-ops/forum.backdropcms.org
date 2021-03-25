@@ -1,9 +1,7 @@
 Core patches
 ============
 
-Search: Fix exposed filters for views
-  https://github.com/backdrop/backdrop-issues/issues/4444
-  https://github.com/backdrop/backdrop/pull/3170.patch
+* None
 
 
 Contrib patches
