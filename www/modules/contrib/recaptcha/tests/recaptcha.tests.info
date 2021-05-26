@@ -4,7 +4,7 @@ description = Test basic functionality of reCAPTCHA module.
 group = ReCaptcha
 file = recaptcha.test
 
-; Added by Backdrop CMS packaging script on 2017-10-20
+; Added by Backdrop CMS packaging script on 2021-02-03
 project = recaptcha
-version = 1.x-2.2.4
-timestamp = 1508514490
+version = 1.x-2.2.6
+timestamp = 1612391257

@@ -13,8 +13,8 @@ possible answers, and let your users vote. Poll then keeps a running tally of
 the results.
 
 When you create a poll at Content >> Add content >> Poll, you can also specify
-the "base" vote counts (how many votes an item has at the start) and decide how
-long the voting will run.
+the "base" vote counts (how many votes an item has at the start), set different
+color for each item and decide how long the voting will run.
 
 The poll items at path `/poll` allows you to see all of the current polls, vote
 on them (if they haven't already) and view the results.
@@ -38,8 +38,8 @@ complete text.
 Maintainers
 -----------
 
-Seeking maintainers
-
 Ported by docwilmot (https://github.com/docwilmot/)
+
+Maintained by [Alan Mels](https://github.com/alanmels)
 
 Poll module was originally a core Drupal module.

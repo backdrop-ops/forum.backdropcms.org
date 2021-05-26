@@ -72,6 +72,14 @@ function poll_schema() {
         'default' => 0,
         'description' => 'The total number of votes this choice has received by all users.',
       ),
+      'color' => array(
+        'type' => 'varchar',
+        'length' => 7,
+        'not null' => TRUE,
+        'default' => '#000000',
+        'description' => 'The color-code for the choice progress bar.',
+        'translatable' => TRUE,
+      ),
       'weight' => array(
         'type' => 'int',
         'not null' => TRUE,
@@ -154,18 +162,36 @@ function poll_schema() {
 function poll_install() {
   $poll_node_type = array(
     'type' => 'poll',
-    'name' => t('Poll'),
+    'name' => st('Poll'),
     'base' => 'poll',
-    'description' => t('A <em>poll</em> is a question with a set of possible responses. A <em>poll</em>, once created, automatically provides a simple running count of the number of votes received for each response.'),
+    'description' => st('A <em>poll</em> is a question with a set of possible responses. A <em>poll</em>, once created, automatically provides a simple running count of the number of votes received for each response.'),
     'custom' => 1,
     'modified' => 1,
     'locked' => 0,
     'is_new' => TRUE,
     'settings' => array(
       'promote_enabled' => FALSE,
+      "comment_enabled" => TRUE,
     ),
   );
 
   $poll_node_type = node_type_set_defaults($poll_node_type);
   node_type_save($poll_node_type);
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function poll_update_1100() {
+  if (!db_field_exists('poll_choice', 'color')) {
+    $color = array(
+      'type' => 'varchar',
+      'length' => 7,
+      'not null' => TRUE,
+      'default' => '#000000',
+      'description' => 'The color-code for the choice progress bar.',
+      'translatable' => TRUE,
+    );
+    db_add_field('poll_choice', 'color', $color);
+  }
 }

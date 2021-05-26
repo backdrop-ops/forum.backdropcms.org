@@ -12,6 +12,12 @@ function recaptcha_admin_settings() {
   $config = config('recaptcha.settings');
 
   $form = array();
+
+  $help = t('Google <a href="@url">reCAPTCHA</a> is a free service to protect your website from spam and abuse. reCAPTCHA uses an advanced risk analysis engine and adaptive CAPTCHAs to keep automated software from engaging in abusive activities on your site. It does this while letting your valid users pass through with ease.', array('@url' => 'https://www.google.com/recaptcha'));
+  $form['help'] = array(
+    '#type' => 'help',
+    '#markup' => $help,
+  );
   $form['recaptcha_general_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('General settings'),

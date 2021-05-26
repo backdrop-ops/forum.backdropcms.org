@@ -18,9 +18,10 @@
  *
  * @ingroup themeable
  */
+ 
 ?>
 <div class="poll">
-  <?php print $results; ?>
+    <?php print $results; ?>
   <div class="total">
     <?php print t('Total votes: @votes', array('@votes' => $votes)); ?>
   </div>

@@ -7,11 +7,6 @@
   margin: 1px 0;
   background-color: #ddd;
 }
-.poll .bar .foreground {
-  background-color: #000;
-  height: 1em;
-  float: left; /* LTR */
-}
 .poll .links {
   text-align: center;
 }
@@ -29,9 +24,11 @@
   margin: 0 auto;
   display: table;
 }
-.poll .vote-form .choices .title {
+.poll .title {
   font-weight: bold;
+  margin-bottom: 15px;
 }
+
 .node-form #edit-poll-more {
   margin: 0;
 }
@@ -48,4 +45,10 @@ td.poll-chtext {
 }
 td.poll-chvotes .form-text {
   width: 85%;
+}
+#poll-choice-wrapper input[type="color"] {
+    height: 35px;
+    width: 35px;
+    padding: 0px;
+    cursor: pointer;
 }

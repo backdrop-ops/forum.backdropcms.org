@@ -19,7 +19,7 @@
 
 <div class="text"><?php print $title; ?></div>
 <div class="bar">
-  <div style="width: <?php print $percentage; ?>%;" class="foreground"></div>
+  <div style="float: left; height: 1em; background-color: <?php print $color ? $color : '#000000'; ?>; width: <?php print $percentage; ?>%;"></div>
 </div>
 <div class="percent">
   <?php print $percentage; ?>%

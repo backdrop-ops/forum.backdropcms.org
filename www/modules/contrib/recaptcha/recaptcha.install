@@ -24,11 +24,23 @@ function recaptcha_update_1000() {
   $config = config('recaptcha.settings');
   $config->set('site_key', update_variable_get('recaptcha_site_key', ''));
   $config->set('private_key', update_variable_get('recaptcha_private_key', ''));
+  $config->set('secret_key', update_variable_get('recaptcha_secret_key', ''));
+  $config->set('theme', update_variable_get('recaptcha_theme', 'light'));
+  $config->set('type', update_variable_get('recaptcha_type', 'image'));
+  $config->set('size', update_variable_get('recaptcha_size', ''));
+  $config->set('tabindex', update_variable_get('recaptcha_tabindex', 0));
+  $config->set('noscript', update_variable_get('recaptcha_noscript', 0));
   $config->save();
 
   // Delete variables.
   update_variable_del('recaptcha_site_key');
   update_variable_del('recaptcha_private_key');
+  update_variable_del('recaptcha_secret_key');
+  update_variable_del('recaptcha_theme');
+  update_variable_del('recaptcha_type');
+  update_variable_del('recaptcha_size');
+  update_variable_del('recaptcha_tabindex');
+  update_variable_del('recaptcha_noscript');
 }
 
 /**
@@ -36,6 +48,11 @@ function recaptcha_update_1000() {
  */
 function recaptcha_update_1001() {
   $config = config('recaptcha.settings');
+
+  // If secret key variable already exists then don't set any defaults.
+  if ($config->get('secret_key') !== NULL) {
+    return;
+  }
 
   // Renamed variable
   $private_key = $config->get('private_key');

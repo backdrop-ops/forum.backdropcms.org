@@ -53,11 +53,11 @@ function poll_votes($node) {
   backdrop_set_title($node->title);
 
   $header[] = array(
-    'data' => t('Visitor'),
+    'data' => t('Voter'),
     'field' => 'u.name',
   );
   $header[] = array(
-    'data' => t('Vote'),
+    'data' => t('Choice'),
     'field' => 'pc.chtext',
   );
   $header[] = array(

@@ -5,6 +5,9 @@
  * Tests for poll.module.
  */
 
+/**
+ * Class PollTestCase.
+ */
 class PollTestCase extends BackdropWebTestCase {
 
   /**
@@ -39,7 +42,7 @@ class PollTestCase extends BackdropWebTestCase {
     $edit['choice[new:0][chvotes]'] = $this->randomString(7);
     $this->backdropPost(NULL, $edit, t('Save'));
     $this->assertText(t('Negative values are not allowed.'));
-    $this->assertText(t('Vote count for new choice must be an number.'));
+    $this->assertText(t('Vote count for new choice must be a number.'));
 
     // Repeat steps for initializing the state of the internal browser.
     $this->backdropLogin($web_user);
@@ -55,12 +58,11 @@ class PollTestCase extends BackdropWebTestCase {
       }
     }
 
-    // if ($preview) {
-      // $this->backdropPost(NULL, $edit, t('Preview'));
-      // $this->assertPollChoiceOrder($choices, $index, TRUE);
-      // list($edit, $index) = $this->_pollGenerateEdit($title, $choices, $index);
-      // $this->clickLink('Back to content editing');
-    // }
+    if ($preview) {
+      $this->backdropPost(NULL, $edit, t('Preview'));
+      $this->assertPollChoiceOrder($choices, $index, TRUE);
+      list($edit, $index) = $this->_pollGenerateEdit($title, $choices, $index);
+    }
 
     $this->backdropPost(NULL, $edit, t('Save'));
     $node = $this->backdropGetNodeByTitle($title);
@@ -105,7 +107,9 @@ class PollTestCase extends BackdropWebTestCase {
     }
     return array($edit, count($already_submitted_choices) + count($new_choices));
   }
-
+  /**
+   * Function _generateChoices
+   */
   function _generateChoices($count = 7) {
     $choices = array();
     for ($i = 1; $i <= $count; $i++) {
@@ -128,7 +132,7 @@ class PollTestCase extends BackdropWebTestCase {
    * @param $preview
    *   (optional) Whether to also check the poll preview.
    *
-   * @see PollTestCase::_pollGenerateEdit()
+   * @see PollTestCase::_pollGenerateEdit().
    */
   function assertPollChoiceOrder(array $choices, $index = 0, $preview = FALSE) {
     $expected = array();
@@ -148,7 +152,7 @@ class PollTestCase extends BackdropWebTestCase {
     }
     ksort($expected);
 
-    // Verify DOM order of poll choices (i.e., #weight of form elements).
+    // Verify DOM order of poll choices (i.e. #weight of form elements).
     $elements = $this->xpath('//input[starts-with(@name, :prefix) and contains(@name, :suffix)]', array(
       ':prefix' => 'choice[chid:',
       ':suffix' => '][chtext]',
@@ -174,14 +178,18 @@ class PollTestCase extends BackdropWebTestCase {
       }
     }
   }
-
+  /**
+   * Function pollUpdate().
+   */
   function pollUpdate($nid, $title, $edit) {
     // Edit the poll node.
     $this->backdropPost('node/' . $nid . '/edit', $edit, t('Save'));
     $this->assertText(t('@type @title has been updated.', array('@type' => node_type_get_name('poll'), '@title' => $title)), 'Poll has been updated.');
   }
 }
-
+/**
+ * class PollCreateTestCase.
+ */
 class PollCreateTestCase extends PollTestCase {
   public static function getInfo() {
     return array(
@@ -190,11 +198,15 @@ class PollCreateTestCase extends PollTestCase {
       'group' => 'Poll'
     );
   }
-
+  /**
+   * function setUp().
+   */
   function setUp() {
     parent::setUp('poll');
   }
-
+  /**
+   * function testPollCreate().
+   */
   function testPollCreate() {
     $title = $this->randomName();
     $choices = $this->_generateChoices(7);
@@ -271,7 +283,7 @@ class PollCreateTestCase extends PollTestCase {
     $this->backdropLogin($vote_user);
     $vote_edit = array('choice' => '1');
     $this->backdropPost('node/' . $poll_nid, $vote_edit, t('Vote'));
-    $this->assertText('Your vote was recorded.', 'Your vote was recorded.');
+    $this->assertText('Your vote has been recorded.', 'Your vote has been recorded.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(isset($elements[0]), "'Cancel your vote' button appears.");
 
@@ -326,7 +338,7 @@ class PollVoteTestCase extends PollTestCase {
       'choice' => '1',
     );
     $this->backdropPost('node/' . $poll_nid, $edit, t('Vote'));
-    $this->assertText('Your vote was recorded.', 'Your vote was recorded.');
+    $this->assertText('Your vote has been recorded.', 'Your vote has been recorded.');
     $this->assertText('Total votes: 1', 'Vote count updated correctly.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(isset($elements[0]), "'Cancel your vote' button appears.");
@@ -342,7 +354,7 @@ class PollVoteTestCase extends PollTestCase {
 
     // Cancel a vote.
     $this->backdropPost('node/' . $poll_nid, array(), t('Cancel your vote'));
-    $this->assertText('Your vote was cancelled.', 'Your vote was cancelled.');
+    $this->assertText('Your vote has been cancelled.', 'Your vote has been cancelled.');
     $this->assertNoText('Cancel your vote', "Cancel vote button doesn't appear.");
 
     $this->backdropGet("node/$poll_nid/votes");
@@ -362,7 +374,7 @@ class PollVoteTestCase extends PollTestCase {
       'choice' => '1',
     );
     $this->backdropPost('node/' . $poll_nid, $edit, t('Vote'));
-    $this->assertText('Your vote was recorded.', 'Your vote was recorded.');
+    $this->assertText('Your vote has been recorded.', 'Your vote has been recorded.');
     $this->assertText('Total votes: 1', 'Vote count updated correctly.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(empty($elements), "'Cancel your vote' button does not appear.");
@@ -422,7 +434,7 @@ class PollBlockTestCase extends PollTestCase {
       'choice' => '1',
     );
     $this->backdropPost('user/' . $vote_user->uid, $edit, t('Vote'));
-    $this->assertText('Your vote was recorded.', 'Your vote was recorded.');
+    $this->assertText('Your vote has been recorded.', 'Your vote has been recorded.');
     $this->assertText('Total votes: 1', 'Vote count updated correctly.');
     $this->assertText('Older polls', 'Link to older polls appears.');
     $this->clickLink('Older polls');
@@ -497,7 +509,7 @@ class PollVoteCheckHostname extends PollTestCase {
     $this->backdropLogin($this->admin_user);
 
     // Allow anonymous users to vote on polls.
-    user_role_change_permissions(BACKDROP_ANONYMOUS_ROLE, array(
+    user_role_change_permissions(BACKDROP_ANONYMOUS_RID, array(
       'access content' => TRUE,
       'vote on polls' => TRUE,
       'cancel own vote' => TRUE,
@@ -533,7 +545,7 @@ class PollVoteCheckHostname extends PollTestCase {
 
     // User1 vote on Poll.
     $this->backdropPost('node/' . $this->poll_nid, $edit, t('Vote'));
-    $this->assertText(t('Your vote was recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user1->name)));
+    $this->assertText(t('Your vote has been recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user1->name)));
     $this->assertText(t('Total votes: @votes', array('@votes' => 1)), 'Vote count updated correctly.');
 
     // Check to make sure User1 cannot vote again.
@@ -554,7 +566,7 @@ class PollVoteCheckHostname extends PollTestCase {
 
     // Anonymous user vote on Poll.
     $this->backdropPost(NULL, $edit, t('Vote'));
-    $this->assertText(t('Your vote was recorded.'), 'Anonymous vote was recorded.');
+    $this->assertText(t('Your vote has been recorded.'), 'Anonymous vote was recorded.');
     $this->assertText(t('Total votes: @votes', array('@votes' => 2)), 'Vote count updated correctly.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(!empty($elements), "'Cancel your vote' button appears.");
@@ -572,7 +584,7 @@ class PollVoteCheckHostname extends PollTestCase {
 
     // User2 vote on poll.
     $this->backdropPost('node/' . $this->poll_nid, $edit, t('Vote'));
-    $this->assertText(t('Your vote was recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user2->name)));
+    $this->assertText(t('Your vote has been recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user2->name)));
     $this->assertText(t('Total votes: @votes', array('@votes' => 3)), 'Vote count updated correctly.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(empty($elements), "'Cancel your vote' button does not appear.");
@@ -593,7 +605,7 @@ class PollVoteCheckHostname extends PollTestCase {
     $this->backdropGet('node/' . $this->poll_nid);
     $this->assertEqual($this->backdropGetHeader('x-backdrop-cache'), 'MISS', 'Page was cacheable but was not in the cache.');
     $this->backdropPost(NULL, $edit, t('Vote'));
-    $this->assertText(t('Your vote was recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user2->name)));
+    $this->assertText(t('Your vote has been recorded.'), format_string('%user vote was recorded.', array('%user' => $this->web_user2->name)));
     $this->assertText(t('Total votes: @votes', array('@votes' => 4)), 'Vote count updated correctly.');
     $elements = $this->xpath('//input[@value="Cancel your vote"]');
     $this->assertTrue(!empty($elements), "'Cancel your vote' button appears.");
@@ -845,14 +857,14 @@ class PollTranslateTestCase extends PollTestCase {
     // Enable a second language.
     $this->backdropGet('admin/config/regional/language');
     $edit = array();
-    $edit['predefined_langcode'] = 'nl';
+    $edit['langcode'] = 'nl';
     $this->backdropPost('admin/config/regional/language/add', $edit, t('Add language'));
     $this->assertRaw(t('The language %language has been created and can now be used.', array('%language' => 'Dutch')), 'Language Dutch has been created.');
 
     // Set "Poll" content type to use multilingual support with translation.
     $this->backdropGet('admin/structure/types/manage/poll');
     $edit = array();
-    $edit['language'] = 2;
+    $edit['language_content_type'] = 2;
     $this->backdropPost('admin/structure/types/manage/poll', $edit, t('Save content type'));
     $this->assertRaw(t('The content type %type has been updated.', array('%type' => 'Poll')), 'Poll content type has been updated.');
 
