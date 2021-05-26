@@ -51,6 +51,33 @@ function captcha_admin_settings() {
     $langs = language_list(FALSE, TRUE);
   }
 
+  $short_help = '<p>' . t('CAPTCHA is a tool to fight automated submission by malicious users (spamming) of for example comments forms, user registration forms, guestbook forms, etc. You can extend the desired forms with an additional challenge, which should be easy for a human to solve correctly, but hard enough to keep automated scripts and spam bots out. "CAPTCHA" is an acronym for "Completely Automated Public Turing test to tell Computers and Humans Apart".') . '</p>';
+
+  $more_help = '<p>' . t('A CAPTCHA can be added to virtually each Backdrop form. Some default forms are already provided in the form list, but arbitrary forms can be easily added and managed when the option <em>Add CAPTCHA administration links to forms</em> is enabled.') . '</p>';
+  $more_help .= '<p>' . t('Users with the <em>Skip CAPTCHA</em> <a href="@perm">permission</a> won\'t be offered a challenge. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test a protected form, be sure to do it as a user without the <em>Skip CAPTCHA</em> permission (e.g. as anonymous user).', array('@perm' => url('admin/config/people/permissions', array('fragment' => 'module-captcha')))) . '</p>';
+  $more_help .= '<p>' . t('Note that the CAPTCHA module interacts with page caching (see <a href="!performancesettings">performance settings</a>). Because the challenge should be unique for each generated form, the caching of the page it appears on is prevented. Make sure that these forms do not appear on too many pages or you will lose much caching efficiency. For example, if you put a CAPTCHA on the user login block, which typically appears on each page for anonymous visitors, caching will practically be disabled. The comment submission forms are another example. In this case you should set the <em>Location of comment submission form</em> to <em>Display on separate page</em> in the comment settings of the relevant <a href="!contenttypes">content types</a> for better caching efficiency.',
+    array(
+      '!performancesettings' => url('admin/config/development/performance'),
+      '!contenttypes' => url('admin/structure/types'),
+    )
+  ) . '</p>';
+  $more_help .= '<p><em>' . t('CAPTCHA is a trademark of Carnegie Mellon University.') . '</em></p>';
+
+  $form['help'] = array(
+    '#type' => 'help',
+    '#markup' => $short_help,
+  );
+  $form['more_help'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('More help'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['more_help']['help'] = array(
+    '#type' => 'help',
+    '#markup' => $more_help,
+  );
+
   // Configuration of which forms to protect, with what challenge.
   $form['captcha_form_protection'] = array(
     '#type' => 'fieldset',

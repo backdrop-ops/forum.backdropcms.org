@@ -32,37 +32,12 @@ define('CAPTCHA_DEFAULT_VALIDATION_CASE_SENSITIVE', 0);
 define('CAPTCHA_DEFAULT_VALIDATION_CASE_INSENSITIVE', 1);
 
 /**
- * Implementation of hook_help().
- */
-function captcha_help($path, $arg) {
-  switch ($path) {
-    case 'admin/help#captcha':
-      $output = '<p>' . t('"CAPTCHA" is an acronym for "Completely Automated Public Turing test to tell Computers and Humans Apart". It is typically a challenge-response test to determine whether the user is human. The CAPTCHA module is a tool to fight automated submission by malicious users (spamming) of for example comments forms, user registration forms, guestbook forms, etc. You can extend the desired forms with an additional challenge, which should be easy for a human to solve correctly, but hard enough to keep automated scripts and spam bots out.') . '</p>';
-      $output .= '<p>' . t('Note that the CAPTCHA module interacts with page caching (see <a href="!performancesettings">performance settings</a>). Because the challenge should be unique for each generated form, the caching of the page it appears on is prevented. Make sure that these forms do not appear on too many pages or you will lose much caching efficiency. For example, if you put a CAPTCHA on the user login block, which typically appears on each page for anonymous visitors, caching will practically be disabled. The comment submission forms are another example. In this case you should set the <em>Location of comment submission form</em> to <em>Display on separate page</em> in the comment settings of the relevant <a href="!contenttypes">content types</a> for better caching efficiency.',
-        array(
-          '!performancesettings' => url('admin/config/development/performance'),
-          '!contenttypes' => url('admin/structure/types'),
-        )
-      ) . '</p>';
-      $output .= '<p>' . t('CAPTCHA is a trademark of Carnegie Mellon University.') . '</p>';
-      return $output;
-
-    case 'admin/config/people/captcha':
-    case 'admin/config/people/captcha/captcha':
-    case 'admin/config/people/captcha/captcha/settings':
-      $output = '<p>' . t('A CAPTCHA can be added to virtually each Backdrop form. Some default forms are already provided in the form list, but arbitrary forms can be easily added and managed when the option <em>Add CAPTCHA administration links to forms</em> is enabled.') . '</p>';
-      $output .= '<p>' . t('Users with the <em>Skip CAPTCHA</em> <a href="@perm">permission</a> won\'t be offered a challenge. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test a protected form, be sure to do it as a user without the <em>Skip CAPTCHA</em> permission (e.g. as anonymous user).', array('@perm' => url('admin/people/permissions'))) . '</p>';
-      return $output;
-  }
-}
-
-/**
 * Implements hook_config_info().
 */
 function captcha_config_info() {
   $prefixes['captcha.settings'] = array(
-    'label' => t('Settings'),
-    'group' => t('Captcha'),
+    'label' => t('Captcha'),
+    'group' => t('Configuration'),
   );
   return $prefixes;
 }

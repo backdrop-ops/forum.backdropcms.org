@@ -213,6 +213,76 @@ function captcha_update_1003() {
 }
 
 /**
+ * Migrate captcha points to config and remove table if it still exists.
+ */
+function captcha_update_1004() {
+  if (!db_table_exists('captcha_points')) {
+    return;
+  }
+
+  $config = config('captcha.settings');
+  $config_captcha_points = $config->get('captcha_points');
+
+  // If the config has more than one captcha point or if the default
+  // "user_register_form" is no longer set than assume it's been manually
+  // updated already.
+  if (count($config_captcha_points) > 1) {
+    return;
+  }
+  if ((count($config_captcha_points) == 1 && !isset($config_captcha_points['user_register_form']))) {
+    return;
+  }
+
+  $captcha_points = db_select('captcha_points', 'cp')
+    ->fields('cp')
+    ->execute()
+    ->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($captcha_points)) {
+    return;
+  }
+
+  foreach ($captcha_points as $captcha_point) {
+    $config->set('captcha_points.' . $captcha_point['form_id'], $captcha_point);
+  }
+  $config->save();
+
+  // Remove table
+  db_drop_table('captcha_points');
+}
+
+/**
+ * Convert descriptions and error messages for each language.
+ */
+function captcha_update_1005() {
+  // Missed description in previous updates.
+  $config = config('captcha.settings');
+  if ($config->get('description') === NULL || $config->get('description') == '') {
+    $config->set('description', update_variable_get('captcha_description', 'This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.'));
+  }
+
+  update_variable_del('captcha_description');
+
+  // upgrade the captcha_*_LANGCODE fields.
+  // @todo convert to using locale like all config should.
+  $langcodes = language_list(TRUE, TRUE);
+  foreach ($langcodes as $langcode => $name) {
+    if ($config->get('description_' . $langcode) === NULL || $config->get('description_' . $langcode) == '') {
+      $config->set('description_' . $langcode, update_variable_get('captcha_description_' . $langcode, $config->get('description')));
+    }
+
+    if ($config->get('error_message_' . $langcode) === NULL || $config->get('error_message_' . $langcode) == '') {
+      $config->set('error_message_' . $langcode, update_variable_get('captcha_error_message_' . $langcode, $config->get('error_message')));
+    }
+
+    update_variable_del('captcha_description_' . $langcode);
+    update_variable_del('captcha_error_message_' . $langcode);
+  }
+
+  $config->save();
+}
+
+/**
  * @} End of "defgroup updates-7.x-to-1.x"
  * The next series of updates should start at 2000.
  */
