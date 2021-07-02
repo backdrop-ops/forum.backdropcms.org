@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Post new forum questions to the Forum stream in Backdrop zulip. 
+ * Post new forum questions to the Forum stream in Backdrop zulip.
  */
 
 /**
@@ -12,13 +12,20 @@ function borg_zulip_node_insert($node) {
     // Save the node so path properties get created.
       // @todo this might cause problems. Can we do this another way?
     $node->save();
+
+    // Get summary of Body.
+    $body = $node->body[$node->langcode][0];
+    $summary = strip_tags(text_summary($body['value'], $body['format'], 300));
+
     global $settings;
     $token = $settings['zulip_key'];
     $url = 'https://backdrop.zulipchat.com/api/v1/messages';
-    $message = 
-      "New forum post: **[$node->title](https://forum.backdropcms.org/{$node->path['alias']})**. 
-      Feedback, assistance, comments, etc. welcome. Jump in! :smile: :heart:";
-    
+    $message =
+"New forum post: **[$node->title](https://forum.backdropcms.org/{$node->path['alias']})**.
+> $summary
+
+Feedback, assistance, comments, etc. welcome. Jump in! :smile: :heart:";
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -28,7 +35,7 @@ function borg_zulip_node_insert($node) {
     $headers = array();
     $headers[] = 'Content-Type: application/x-www-form-urlencoded';
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    
+
     $result = curl_exec($ch);
     if (curl_errno($ch)) {
       watchdog(
