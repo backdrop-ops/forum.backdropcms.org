@@ -1,4 +1,4 @@
-Forum: forum.backdropcms.org
+Forum: forum.backdropcms.org2
 ============================
 
 This is the repo for the Forum.BackdropCMS.org Forum.
