@@ -207,6 +207,30 @@ function borg_forum_form_node_form_alter(&$form, &$form_state, $form_id) {
       $form['field_forums'][$langcode]['#default_value'] = is_numeric($requested_forum_id) ? $requested_forum_id : '';
     }
   }
+
+  if ($form_id == 'forum_topic_node_form') {
+    // Prevent authenticated users from deleting their own forum topics if there
+    // are comments attached.
+    if (user_access('delete own forum_topic content') && !user_access('delete any forum_topic content')) {
+      if ($form['#entity']->comment_count > 0) {
+        unset($form['actions']['delete']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_delete_confirm().
+ */
+function borg_forum_form_node_delete_confirm_alter(&$form, &$form_state, $form_id) {
+  // Prevent authenticated users from accessing this form (and thereby deleting
+  // their own forum topics) if there are comments attached.
+  if (user_access('delete own forum_topic content') && !user_access('delete any forum_topic content')) {
+    if ($form['#node']->comment_count > 0) {
+      $form['#access'] = FALSE;
+      backdrop_set_title(t('Access denied'));
+    }
+  }
 }
 
 /**
