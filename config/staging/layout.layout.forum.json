@@ -43,6 +43,7 @@
         ],
         "title": []
     },
+    "contexts": [],
     "content": {
         "2318217f-ef7c-4160-9614-20f4f2a2b705": {
             "plugin": "system:header",
@@ -195,12 +196,14 @@
                     "block_settings": {
                         "search": {
                             "label": "Search all forum topics",
-                            "label_hide": 0,
-                            "placeholder": "",
+                            "label_hide": 1,
+                            "placeholder": "Search all forum topics",
                             "button_text": "Search"
                         }
                     },
-                    "contexts": []
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
                 },
                 "uuid": "0262b9d7-4aec-4cca-a600-ca87465edeca",
                 "style": {
