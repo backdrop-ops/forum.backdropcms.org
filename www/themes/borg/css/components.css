@@ -817,6 +817,9 @@ body.user-form .page-title {
 /*******************************************************************************
  * Login form
 *******************************************************************************/
+#user-login .help p {
+  font-size: 1.5rem; /* 24px */
+}
 #user-login .form-item {
   padding: 15px 0;
   margin: 0;
@@ -891,6 +894,9 @@ body.user-form .page-title {
 #user-register-form {
   max-width: 600px;
   margin: 0 auto;
+}
+#user-register-form .help p {
+  font-size: 1.5rem; /* 24px */
 }
 #user-register-form .form-item {
   padding: 15px 0;
