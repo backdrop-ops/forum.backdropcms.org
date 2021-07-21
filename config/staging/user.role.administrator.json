@@ -101,7 +101,6 @@
         "bypass honeypot protection",
         "administer CAPTCHA settings",
         "skip CAPTCHA",
-        "administer recaptcha",
         "flag archived",
         "unflag archived",
         "edit own forum_topic content",

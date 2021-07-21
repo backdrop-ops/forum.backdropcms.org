@@ -8,3 +8,5 @@ dependencies[] = comment
 package = Forum
 
 backdrop = 1.x
+
+stylesheets[screen][] = css/borg_forum.ckeditor.css
