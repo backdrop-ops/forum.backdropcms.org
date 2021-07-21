@@ -1,6 +1,6 @@
 {
     "_config_name": "honeypot.settings",
-    "protect_all_forms": 1,
+    "protect_all_forms": 0,
     "expire": 300,
     "log": 1,
     "element_name": "phone_number",
@@ -14,18 +14,20 @@
         "honeypot_settings_form"
     ],
     "form_settings": {
-        "honeypot_form_user_register_form": 0,
+        "honeypot_form_user_register_form": 1,
         "honeypot_form_user_pass": 0,
         "honeypot_form_user_profile_form": 0,
         "honeypot_form_contact_personal_form": 0,
         "honeypot_form_contact_site_form": 0,
         "honeypot_form_webforms": 0,
-        "honeypot_form_forum_topic_node_form": 0,
-        "honeypot_form_page_node_form": 0,
-        "honeypot_form_post_node_form": 0,
-        "honeypot_form_comment_node_forum_topic_form": 0,
-        "honeypot_form_comment_node_page_form": 0,
-        "honeypot_form_comment_node_post_form": 0
+        "honeypot_form_forum_topic_node_form": 1,
+        "honeypot_form_page_node_form": 1,
+        "honeypot_form_post_node_form": 1,
+        "honeypot_form_comment_node_forum_topic_form": 1,
+        "honeypot_form_comment_node_page_form": 1,
+        "honeypot_form_comment_node_post_form": 1,
+        "honeypot_form_poll_node_form": 1,
+        "honeypot_form_comment_node_poll_form": 1
     },
     "use_js_for_cached_pages": 1
 }
