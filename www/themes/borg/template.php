@@ -74,29 +74,6 @@ function borg_form_user_profile_form_alter(&$form, &$form_state) {
   $form['redirect']['#weight'] = 23;
 }
 
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function borg_form_user_register_form_alter(&$form, &$form_state) {
-  $help = t('Already have an account?') . ' ' . l(t('Log in instead'), 'user/login') . '.';
-  $form['login'] = array(
-    '#type' => 'help',
-    '#markup' => $help,
-    '#weight' => -100,
-  );
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function borg_form_user_login_alter(&$form, &$form_state) {
-  $help = t('Don\'t have an account yet?') . ' ' . l(t('Create one now'), 'user/register') . '.';
-  $form['login'] = array(
-    '#type' => 'help',
-    '#markup' => $help,
-    '#weight' => -100,
-  );
-}
 
 /*******************************************************************************
  * Preprocess functions: prepare variables for templates.

@@ -364,7 +364,6 @@ article footer .submitted {
   padding: 10px 0;
 }
 article footer .user-picture {
-  float: left;
   margin-right: 15px;
 }
 article footer .user-picture img img {
@@ -405,10 +404,16 @@ article footer .arrow-down:after {
   }
   article footer .submitted {
     padding: 0;
-    line-height: 40px;
   }
+  article footer.has-picture {
+    display: table;
+    min-height: 100px;
+  }
+  article footer.has-picture .user-picture,
   article footer.has-picture .submitted {
-    line-height: 100px;
+    display: table-cell;
+    vertical-align: middle;
+    min-height: 80px;
   }
   article footer .arrow-down {
     display: block;
@@ -418,6 +423,9 @@ article footer .arrow-down:after {
 @media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
   article.view-mode-full footer {
     margin-bottom: 50px;
+  }
+  article footer p.submitted {
+    font-size: 1.125em; /* relative size: 18px; */
   }
 }
 
@@ -817,9 +825,6 @@ body.user-form .page-title {
 /*******************************************************************************
  * Login form
 *******************************************************************************/
-#user-login .help p {
-  font-size: 1.5rem; /* 24px */
-}
 #user-login .form-item {
   padding: 15px 0;
   margin: 0;
@@ -894,9 +899,6 @@ body.user-form .page-title {
 #user-register-form {
   max-width: 600px;
   margin: 0 auto;
-}
-#user-register-form .help p {
-  font-size: 1.5rem; /* 24px */
 }
 #user-register-form .form-item {
   padding: 15px 0;
