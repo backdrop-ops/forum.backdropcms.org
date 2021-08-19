@@ -425,7 +425,7 @@ article footer .arrow-down:after {
     margin-bottom: 50px;
   }
   article footer p.submitted {
-    font-size: 1.125em; /* relative size: 18px; */
+    font-size: 1.125rem; /* relative size: 18px; */
   }
 }
 
