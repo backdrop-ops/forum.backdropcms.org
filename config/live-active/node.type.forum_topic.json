@@ -41,8 +41,10 @@
         "hidden_path": 0,
         "comment_close_enabled": 0,
         "comment_close_days": "14",
-        "scheduling_enabled": 0,
-        "node_preview": "1"
+        "scheduling_enabled": 1,
+        "node_preview": "1",
+        "menu_default": 0,
+        "node_submitted_format": "[node:created:medium] by [node:author]"
     },
     "orig_type": "forum_topic",
     "node_preview": "1"

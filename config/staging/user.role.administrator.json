@@ -160,6 +160,7 @@
         "delete own poll content",
         "delete any poll content",
         "administer flexible templates",
-        "administer smtp module"
+        "administer smtp module",
+        "protected from spambot scans"
     ]
 }

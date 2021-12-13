@@ -162,11 +162,19 @@
                     }
                 },
                 "sorts": {
-                    "created": {
-                        "id": "created",
-                        "table": "node",
-                        "field": "created",
-                        "order": "ASC"
+                    "last_comment_timestamp": {
+                        "id": "last_comment_timestamp",
+                        "table": "node_comment_statistics",
+                        "field": "last_comment_timestamp",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "DESC",
+                        "exposed": false,
+                        "expose": {
+                            "label": ""
+                        },
+                        "granularity": "second"
                     }
                 },
                 "title": "Frequently Asked Questions",
