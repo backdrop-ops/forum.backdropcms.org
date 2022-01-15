@@ -161,6 +161,8 @@
         "delete any poll content",
         "administer flexible templates",
         "administer smtp module",
-        "protected from spambot scans"
+        "protected from spambot scans",
+        "create terms in forums_custom",
+        "create terms in tags"
     ]
 }

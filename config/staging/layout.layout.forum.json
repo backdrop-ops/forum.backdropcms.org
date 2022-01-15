@@ -189,8 +189,8 @@
                 "module": "search",
                 "delta": "form",
                 "settings": {
-                    "title_display": "default",
-                    "title": "",
+                    "title_display": "custom",
+                    "title": "Search",
                     "style": "default",
                     "block_settings": {
                         "search": {
