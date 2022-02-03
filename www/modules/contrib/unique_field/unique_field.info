@@ -1,0 +1,11 @@
+name = Unique Field
+description = "Provides content validation requirement that a node's author, language, taxonomy terms, or other fields are unique."
+backdrop = 1.x
+type = module
+tags[] = Content
+dependencies[] = system (>=1.15.0)
+
+; Added by Backdrop CMS packaging script on 2021-01-16
+project = unique_field
+version = 1.x-1.0.1
+timestamp = 1610845059
