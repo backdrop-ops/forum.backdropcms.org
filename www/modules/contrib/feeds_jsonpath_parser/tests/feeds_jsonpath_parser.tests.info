@@ -1,0 +1,6 @@
+[FeedsJSONPathParserTestCase]
+name = JSONPath Parser
+description = Regression tests for Feeds JSONPath parser.
+group = Feeds JSONPath Parser
+file = feeds_jsonpath_parser.test
+

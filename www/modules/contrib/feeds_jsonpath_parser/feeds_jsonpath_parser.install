@@ -1,0 +1,65 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the Feeds JSONPath Parser
+ * module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function feeds_jsonpath_parser_enable() {
+  // Clear Feeds' plugin cache so that this plugin shows up.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function feeds_jsonpath_parser_requirements($phase) {
+  $requirements = array();
+
+  if ($phase !== 'runtime' && $phase !== 'install') {
+    return $requirements;
+  }
+
+  drupal_load('module', 'feeds_jsonpath_parser');
+
+  $t = get_t();
+  $requirements['feeds_jsonpath_parser']['title'] = $t('JSONPath library');
+  $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_OK;
+  $requirements['feeds_jsonpath_parser']['value'] = $t('Installed');
+
+  if (feeds_jsonpath_parser_load_library() === FALSE) {
+    $message = '';
+    // Lets make sure they know about the security issue here too, just in case
+    // they got by without running updates.
+    if (module_exists('libraries') && file_exists(libraries_get_path('jsonpath') . '/jsonpath.php')) {
+      $message = $t('To remain secure because of issues identified in <a href="https://www.drupal.org/sa-contrib-2019-083">SA-CONTRIB-2019-083</a>, you must remove goessner/jsonpath and replace it with flow/jsonpath.');
+    }
+    if ($phase === 'runtime' || (module_exists('libraries') && !file_exists(libraries_get_path('jsonpath') . '/src/Flow/JSONPath/JSONPath.php'))) {
+      $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_ERROR;
+      $requirements['feeds_jsonpath_parser']['description'] = $message . ' ' . $t('The <a href="@jsonpath">JSONPath</a> library is missing. Download <a href="@download">@download</a> and place the contents of JSONPath-@version in sites/all/libraries/jsonpath and enable the modules "libraries" and "xautoload".', array(
+        '@jsonpath' => 'https://github.com/FlowCommunications/JSONPath',
+        '@version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION,
+        '@download' => 'https://github.com/FlowCommunications/JSONPath/archive/' . FEEDS_JSONPATH_PARSER_LIBRARY_VERSION . '.tar.gz',
+      ));
+      $requirements['feeds_jsonpath_parser']['value'] = $t('Not installed');
+    }
+  }
+
+  if ($phase === 'install') {
+    unset($requirements['feeds_jsonpath_parser']['value']);
+  }
+
+  return $requirements;
+}
+
+/**
+ * Delete JSONPath Parser variables.
+ */
+function feeds_jsonpath_parser_update_1000() {
+  // Delete variables.
+  update_variable_del('feeds_jsonpath_library_dir');
+}
+
