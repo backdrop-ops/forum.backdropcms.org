@@ -1,0 +1,30 @@
+{
+    "_config_name": "field_validation.rule.node.feature.field_github_id.unique",
+    "_module": "field_validation",
+    "entity_type": "node",
+    "bundle": "feature",
+    "field_name": "field_github_id",
+    "rulename": "Unique",
+    "machine": "unique",
+    "validator": "field_validation_unique_validator",
+    "col": "value",
+    "error_message": "This field must be unique.",
+    "settings": {
+        "data": "bundle",
+        "per_user": 0,
+        "bypass": 0,
+        "roles": {
+            "anonymous": 0,
+            "authenticated": 0,
+            "moderator": 0,
+            "administrator": 0
+        },
+        "errors": 0,
+        "condition": 0,
+        "condition_wrapper": {
+            "condition_field": "",
+            "condition_operator": "equals",
+            "condition_value": ""
+        }
+    }
+}

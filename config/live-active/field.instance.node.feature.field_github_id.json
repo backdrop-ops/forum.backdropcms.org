@@ -1,0 +1,40 @@
+{
+    "_config_name": "field.instance.node.feature.field_github_id",
+    "field_name": "field_github_id",
+    "entity_type": "node",
+    "bundle": "feature",
+    "label": "GitHub ID",
+    "widget": {
+        "weight": "-2",
+        "type": "number",
+        "module": "number",
+        "active": 0,
+        "settings": []
+    },
+    "description": "",
+    "required": 0,
+    "deleted": 0,
+    "default_value": null,
+    "default_value_function": null,
+    "settings": {
+        "min": "",
+        "max": "",
+        "prefix": "",
+        "suffix": "",
+        "user_register_form": false
+    },
+    "display": {
+        "default": {
+            "label": "hidden",
+            "type": "number_integer",
+            "settings": {
+                "thousand_separator": "",
+                "decimal_separator": ".",
+                "scale": 0,
+                "prefix_suffix": true
+            },
+            "module": "number",
+            "weight": 2
+        }
+    }
+}
