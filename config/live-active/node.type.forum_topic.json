@@ -13,7 +13,7 @@
     "settings": {
         "comment_enabled": false,
         "comment_default": "2",
-        "comment_per_page": "50",
+        "comment_per_page": "100",
         "comment_mode": 1,
         "comment_anonymous": 0,
         "comment_subject_field": 0,
