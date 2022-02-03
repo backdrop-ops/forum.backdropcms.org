@@ -1,0 +1,12 @@
+<?php
+
+use Backdrop\xautoload\Tests\VirtualBackdrop\BackdropEnvironment;
+
+/**
+ * @param string $name
+ *
+ * @see libraries_load()
+ */
+function libraries_load($name) {
+  BackdropEnvironment::getInstance()->librariesLoad($name);
+}
