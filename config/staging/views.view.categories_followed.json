@@ -1,0 +1,379 @@
+{
+    "_config_name": "views.view.categories_followed",
+    "name": "categories_followed",
+    "description": "",
+    "tag": "default",
+    "disabled": false,
+    "base_table": "taxonomy_term_data",
+    "human_name": "Categories Followed",
+    "core": "1.20.3",
+    "display": {
+        "default": {
+            "display_title": "Master",
+            "display_plugin": "default",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "access": {
+                    "type": "perm",
+                    "perm": "access content"
+                },
+                "cache": {
+                    "type": "none"
+                },
+                "exposed_form": {
+                    "type": "basic"
+                },
+                "pager": {
+                    "type": "none",
+                    "options": {
+                        "items_per_page": ""
+                    }
+                },
+                "style_plugin": "table",
+                "row_plugin": "fields",
+                "fields": {
+                    "name_1": {
+                        "id": "name_1",
+                        "table": "users",
+                        "field": "name",
+                        "relationship": "uid",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Username",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_to_user": 1,
+                        "overwrite_anonymous": 0,
+                        "anonymous_text": "",
+                        "format_username": 1
+                    },
+                    "field_name": {
+                        "id": "field_name",
+                        "table": "field_data_field_name",
+                        "field": "field_name",
+                        "relationship": "uid",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Full name",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "click_sort_column": "value",
+                        "type": "text_default",
+                        "settings": [],
+                        "group_column": "value",
+                        "group_columns": [],
+                        "group_rows": true,
+                        "delta_limit": "all",
+                        "delta_offset": 0,
+                        "delta_reversed": false,
+                        "delta_first_last": false,
+                        "multi_type": "separator",
+                        "separator": ", ",
+                        "field_api_classes": 0
+                    },
+                    "name": {
+                        "id": "name",
+                        "table": "taxonomy_term_data",
+                        "field": "name",
+                        "label": "",
+                        "alter": {
+                            "alter_text": 0,
+                            "make_link": 0,
+                            "absolute": 0,
+                            "trim": 0,
+                            "word_boundary": 0,
+                            "ellipsis": 0,
+                            "strip_tags": 0,
+                            "html": 0
+                        },
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "link_to_taxonomy": 1
+                    },
+                    "uid": {
+                        "id": "uid",
+                        "table": "flagging",
+                        "field": "uid",
+                        "relationship": "flag_content_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "User uid",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_to_user": 1
+                    },
+                    "ops": {
+                        "id": "ops",
+                        "table": "flagging",
+                        "field": "ops",
+                        "relationship": "flag_content_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Flag link",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_type": ""
+                    }
+                },
+                "filters": {
+                    "vocabulary": {
+                        "id": "vocabulary",
+                        "table": "taxonomy_term_data",
+                        "field": "vocabulary",
+                        "value": {
+                            "forums_custom": "forums_custom"
+                        }
+                    }
+                },
+                "sorts": [],
+                "title": "Categories Followed",
+                "relationships": {
+                    "flag_content_rel": {
+                        "id": "flag_content_rel",
+                        "table": "taxonomy_term_data",
+                        "field": "flag_content_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "flag",
+                        "required": 1,
+                        "flag": "follow_category",
+                        "user_scope": "any"
+                    },
+                    "uid": {
+                        "id": "uid",
+                        "table": "flagging",
+                        "field": "uid",
+                        "relationship": "flag_content_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Flag user",
+                        "required": 0
+                    }
+                },
+                "style_options": {
+                    "grouping": [
+                        {
+                            "field": "name_1",
+                            "rendered": 1,
+                            "rendered_strip": 0
+                        }
+                    ],
+                    "row_class": "",
+                    "default_row_class": 1,
+                    "row_class_special": 1,
+                    "override": 1,
+                    "sticky": 0,
+                    "caption": "",
+                    "summary": "",
+                    "columns": {
+                        "name_1": "name_1",
+                        "field_name": "field_name",
+                        "name": "name",
+                        "uid": "uid"
+                    },
+                    "info": {
+                        "name_1": {
+                            "sortable": 0,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "field_name": {
+                            "sortable": 0,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "name": {
+                            "sortable": 0,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "uid": {
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        }
+                    },
+                    "default": "-1",
+                    "empty_table": 0
+                }
+            }
+        },
+        "page": {
+            "display_title": "Page",
+            "display_plugin": "page",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "path": "categories-followed"
+            }
+        }
+    }
+}
