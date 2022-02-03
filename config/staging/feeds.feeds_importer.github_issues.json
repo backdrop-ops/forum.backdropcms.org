@@ -44,7 +44,7 @@
             "plugin_key": "FeedsNodeProcessor",
             "config": {
                 "expire": "-1",
-                "author": 0,
+                "author": "1302",
                 "authorize": 0,
                 "mappings": [
                     {
@@ -73,7 +73,7 @@
                 ],
                 "insert_new": "1",
                 "update_existing": "2",
-                "update_non_existent": "unpublish",
+                "update_non_existent": "skip",
                 "input_format": "filtered_html",
                 "skip_hash_check": 0,
                 "bundle": "feature",
