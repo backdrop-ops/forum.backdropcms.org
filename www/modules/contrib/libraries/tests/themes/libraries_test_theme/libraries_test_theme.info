@@ -1,0 +1,9 @@
+name = Libraries test theme
+description = Tests that themes can provide and alter library information.
+backdrop = 1.x
+hidden = TRUE
+
+; Added by Backdrop CMS packaging script on 2019-04-05
+project = libraries
+version = 1.x-2.2.2
+timestamp = 1554491676
