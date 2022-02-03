@@ -49,5 +49,6 @@
     "node_post_pattern": "posts/[node:title]",
     "node_forum_topic_pattern": "forum/[node:title]",
     "taxonomy_term_tags_pattern": "",
-    "taxonomy_term_forums_custom_pattern": ""
+    "taxonomy_term_forums_custom_pattern": "",
+    "node_feature_pattern": "features/[node:title]"
 }

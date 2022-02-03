@@ -163,6 +163,13 @@
         "administer smtp module",
         "protected from spambot scans",
         "create terms in forums_custom",
-        "create terms in tags"
+        "create terms in tags",
+        "create feature content",
+        "edit own feature content",
+        "edit any feature content",
+        "delete own feature content",
+        "delete any feature content",
+        "flag feature_vote",
+        "unflag feature_vote"
     ]
 }
