@@ -13,7 +13,7 @@
     "title_label": "Issue title",
     "settings": {
         "comment_enabled": false,
-        "comment_default": "2",
+        "comment_default": "1",
         "comment_per_page": "50",
         "comment_mode": 1,
         "comment_anonymous": 0,

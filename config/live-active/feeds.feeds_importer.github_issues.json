@@ -82,9 +82,9 @@
         },
         "content_type": "",
         "update": 0,
-        "import_period": 1800,
+        "import_period": "43200",
         "expire_period": 3600,
-        "import_on_create": true,
-        "process_in_background": false
+        "import_on_create": 1,
+        "process_in_background": 0
     }
 }
