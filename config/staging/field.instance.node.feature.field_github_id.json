@@ -26,15 +26,9 @@
     "display": {
         "default": {
             "label": "hidden",
-            "type": "number_integer",
-            "settings": {
-                "thousand_separator": "",
-                "decimal_separator": ".",
-                "scale": 0,
-                "prefix_suffix": true
-            },
-            "module": "number",
-            "weight": 2
+            "type": "hidden",
+            "weight": "2",
+            "settings": []
         }
     }
 }

@@ -42,7 +42,7 @@
                 "pager": {
                     "type": "full",
                     "options": {
-                        "items_per_page": "50",
+                        "items_per_page": "100",
                         "offset": "0",
                         "id": "0",
                         "total_pages": "",
@@ -398,6 +398,35 @@
                             "group_items": []
                         }
                     },
+                    "status": {
+                        "id": "status",
+                        "table": "node",
+                        "field": "status",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "operator": "=",
+                        "value": "All",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "",
+                            "label": "Published",
+                            "description": "",
+                            "use_operator": false,
+                            "operator": "status_op",
+                            "identifier": "status",
+                            "required": 0,
+                            "remember": 0,
+                            "multiple": false,
+                            "remember_roles": {
+                                "anonymous": 0,
+                                "authenticated": 0,
+                                "administrator": 0
+                            }
+                        },
+                        "is_grouped": false
+                    },
                     "uid": {
                         "id": "uid",
                         "table": "node",
@@ -440,35 +469,6 @@
                             "default_group_multiple": [],
                             "group_items": []
                         }
-                    },
-                    "status": {
-                        "id": "status",
-                        "table": "node",
-                        "field": "status",
-                        "relationship": "none",
-                        "group_type": "group",
-                        "ui_name": "",
-                        "operator": "=",
-                        "value": "All",
-                        "group": 1,
-                        "exposed": true,
-                        "expose": {
-                            "operator_id": "",
-                            "label": "Published",
-                            "description": "",
-                            "use_operator": false,
-                            "operator": "status_op",
-                            "identifier": "status",
-                            "required": 0,
-                            "remember": 0,
-                            "multiple": false,
-                            "remember_roles": {
-                                "anonymous": 0,
-                                "authenticated": 0,
-                                "administrator": 0
-                            }
-                        },
-                        "is_grouped": false
                     },
                     "status_extra": {
                         "id": "status_extra",

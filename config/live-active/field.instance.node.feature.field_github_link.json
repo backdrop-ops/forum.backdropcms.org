@@ -40,11 +40,11 @@
     },
     "display": {
         "default": {
-            "label": "hidden",
+            "label": "inline",
             "type": "link_default",
+            "weight": "1",
             "settings": [],
-            "module": "link",
-            "weight": 1
+            "module": "link"
         }
     }
 }

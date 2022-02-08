@@ -1,11 +1,11 @@
 {
-    "_config_name": "field.instance.node.feature.field_github_id",
-    "field_name": "field_github_id",
+    "_config_name": "field.instance.node.feature.field_github_issue",
+    "field_name": "field_github_issue",
     "entity_type": "node",
     "bundle": "feature",
-    "label": "GitHub ID",
+    "label": "GitHub Issue #",
     "widget": {
-        "weight": "-2",
+        "weight": "-1",
         "type": "number",
         "module": "number",
         "active": 0,
@@ -25,10 +25,16 @@
     },
     "display": {
         "default": {
-            "label": "hidden",
-            "type": "hidden",
-            "weight": "2",
-            "settings": []
+            "label": "inline",
+            "type": "number_integer",
+            "weight": "3",
+            "settings": {
+                "thousand_separator": "",
+                "decimal_separator": ".",
+                "scale": 0,
+                "prefix_suffix": true
+            },
+            "module": "number"
         }
     }
 }
