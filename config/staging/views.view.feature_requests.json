@@ -35,14 +35,14 @@
                 "style_plugin": "table",
                 "row_plugin": "fields",
                 "fields": {
-                    "field_github_id": {
-                        "id": "field_github_id",
-                        "table": "field_data_field_github_id",
-                        "field": "field_github_id",
+                    "field_github_issue": {
+                        "id": "field_github_issue",
+                        "table": "field_data_field_github_issue",
+                        "field": "field_github_issue",
                         "relationship": "none",
                         "group_type": "group",
                         "ui_name": "",
-                        "label": "Issue #",
+                        "label": "GitHub Issue #",
                         "exclude": 0,
                         "alter": {
                             "alter_text": 0,
@@ -77,6 +77,72 @@
                         "element_label_type": "",
                         "element_label_class": "",
                         "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "click_sort_column": "value",
+                        "type": "number_integer",
+                        "settings": {
+                            "thousand_separator": "",
+                            "prefix_suffix": 1
+                        },
+                        "group_column": "value",
+                        "group_columns": [],
+                        "group_rows": true,
+                        "delta_limit": "all",
+                        "delta_offset": 0,
+                        "delta_reversed": false,
+                        "delta_first_last": false,
+                        "multi_type": "separator",
+                        "separator": ", ",
+                        "field_api_classes": 0
+                    },
+                    "field_github_id": {
+                        "id": "field_github_id",
+                        "table": "field_data_field_github_id",
+                        "field": "field_github_id",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "",
+                        "exclude": 1,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": false,
                         "element_wrapper_type": "",
                         "element_wrapper_class": "",
                         "element_default_classes": 1,
@@ -202,6 +268,65 @@
                         "empty_zero": 0,
                         "hide_alter_empty": 1,
                         "link_type": ""
+                    },
+                    "count": {
+                        "id": "count",
+                        "table": "flag_counts",
+                        "field": "count",
+                        "relationship": "flag_count_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Current Vote Count",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "set_precision": false,
+                        "precision": 0,
+                        "decimal": ".",
+                        "separator": ",",
+                        "format_plural": 0,
+                        "format_plural_singular": "1",
+                        "format_plural_plural": "@count",
+                        "prefix": "",
+                        "suffix": ""
                     }
                 },
                 "filters": {
@@ -313,24 +438,47 @@
                     }
                 },
                 "sorts": {
-                    "promote": {
-                        "id": "promote",
-                        "table": "node",
-                        "field": "promote",
-                        "relationship": "none",
+                    "count": {
+                        "id": "count",
+                        "table": "flag_counts",
+                        "field": "count",
+                        "relationship": "flag_count_rel",
                         "group_type": "group",
                         "ui_name": "",
                         "order": "DESC",
-                        "exposed": false,
+                        "exposed": true,
                         "expose": {
-                            "label": ""
+                            "label": "Vote Count",
+                            "order": "DESC"
                         }
                     },
-                    "created": {
-                        "id": "created",
+                    "field_github_issue_value": {
+                        "id": "field_github_issue_value",
+                        "table": "field_data_field_github_issue",
+                        "field": "field_github_issue_value",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "ASC",
+                        "exposed": true,
+                        "expose": {
+                            "label": "GitHub Issue #",
+                            "order": "ASC"
+                        }
+                    },
+                    "title": {
+                        "id": "title",
                         "table": "node",
-                        "field": "created",
-                        "order": "DESC"
+                        "field": "title",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "ASC",
+                        "exposed": true,
+                        "expose": {
+                            "label": "Title",
+                            "order": "ASC"
+                        }
                     }
                 },
                 "title": "Feature Requests",
@@ -346,6 +494,32 @@
                         "required": 0,
                         "flag": "feature_vote",
                         "user_scope": "current"
+                    },
+                    "flag_count_rel": {
+                        "id": "flag_count_rel",
+                        "table": "node",
+                        "field": "flag_count_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "counter",
+                        "required": 0,
+                        "flag": "feature_vote"
+                    }
+                },
+                "header": {
+                    "area": {
+                        "id": "area",
+                        "table": "views",
+                        "field": "area",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "",
+                        "empty": 0,
+                        "content": "<p>Welcome to the Backdrop CMS feature survey. This is your opportunity to help prioritize core features. We ask you to vote for 10 or less issues that you would most like to see included in future releases of Backdrop CMS. You can change your vote as often as you like. You must be logged in to vote.&nbsp;</p>\r\n\r\n<p>The results of this survey are advisory only.&nbsp;</p>\r\n",
+                        "format": "filtered_html",
+                        "tokenize": 0
                     }
                 }
             }
