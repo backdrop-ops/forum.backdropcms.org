@@ -43,6 +43,9 @@
         "delete own poll content",
         "inspect all votes",
         "administer akismet",
-        "access akismet statistics"
+        "access akismet statistics",
+        "flag feature_vote",
+        "unflag feature_vote",
+        "use text format markdown"
     ]
 }

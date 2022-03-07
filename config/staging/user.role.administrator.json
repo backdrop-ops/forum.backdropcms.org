@@ -171,6 +171,7 @@
         "delete any feature content",
         "flag feature_vote",
         "unflag feature_vote",
-        "administer feeds"
+        "administer feeds",
+        "use text format markdown"
     ]
 }

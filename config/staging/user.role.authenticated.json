@@ -39,6 +39,8 @@
         "delete own forum_topic content",
         "view files",
         "vote on polls",
-        "cancel own vote"
+        "cancel own vote",
+        "flag feature_vote",
+        "unflag feature_vote"
     ]
 }

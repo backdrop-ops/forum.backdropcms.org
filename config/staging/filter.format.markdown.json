@@ -1,0 +1,62 @@
+{
+    "_config_name": "filter.format.markdown",
+    "format": "markdown",
+    "name": "Markdown",
+    "editor": "",
+    "editor_settings": [],
+    "cache": true,
+    "status": 1,
+    "filters": {
+        "filter_image_caption": {
+            "status": 0,
+            "weight": 4,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_autop": {
+            "status": 0,
+            "weight": 0,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_url": {
+            "status": 0,
+            "weight": 0,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_htmlcorrector": {
+            "status": 1,
+            "weight": 10,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_html_escape": {
+            "status": 0,
+            "weight": -10,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_image_align": {
+            "status": 0,
+            "weight": 5,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_html": {
+            "status": 0,
+            "weight": -10,
+            "settings": {
+                "allowed_html": "<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h3> <h4> <h5> <p> <img> <figure> <figcaption>"
+            },
+            "module": "filter"
+        }
+    },
+    "roles": {
+        "moderator": "moderator",
+        "administrator": "administrator",
+        "anonymous": 0,
+        "authenticated": 0
+    },
+    "weight": 0
+}

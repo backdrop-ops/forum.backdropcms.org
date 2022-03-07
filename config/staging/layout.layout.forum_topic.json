@@ -6,7 +6,7 @@
     "description": null,
     "renderer_name": "standard",
     "module": null,
-    "weight": 0,
+    "weight": -1,
     "storage": 1,
     "layout_template": "moscone_flipped",
     "disabled": false,
@@ -46,6 +46,8 @@
         ],
         "title": []
     },
+    "contexts": [],
+    "relationships": [],
     "content": {
         "ff6a1e4c-a5b6-44d4-a508-0810348379b5": {
             "plugin": "system:header",
