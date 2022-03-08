@@ -32,6 +32,7 @@
             "e91f6de2-bbec-45a1-8700-a15ddb81de24"
         ],
         "sidebar": [
+            "4a1ed3c1-639d-412a-b800-a21c43543a23",
             "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09",
             "bc0b693b-01b4-4b47-9604-042dd9a3c54e",
             "18e7ee72-6b80-4599-b709-9bbd78a16d78",
@@ -293,6 +294,37 @@
                     "contexts": []
                 },
                 "uuid": "e91f6de2-bbec-45a1-8700-a15ddb81de24",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "4a1ed3c1-639d-412a-b800-a21c43543a23": {
+            "plugin": "node:content",
+            "data": {
+                "module": "node",
+                "delta": "content",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "Backdrop LIVE",
+                    "admin_description": "",
+                    "nid": 2307,
+                    "links": false,
+                    "leave_node_title": false,
+                    "link_node_title": false,
+                    "display_submitted": false,
+                    "view_mode": "full"
+                },
+                "uuid": "4a1ed3c1-639d-412a-b800-a21c43543a23",
                 "style": {
                     "plugin": "default",
                     "data": {

@@ -50,6 +50,12 @@
                 "allowed_html": "<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h3> <h4> <h5> <p> <img> <figure> <figcaption>"
             },
             "module": "filter"
+        },
+        "filter_markdown": {
+            "status": 1,
+            "weight": 0,
+            "module": "markdown",
+            "settings": []
         }
     },
     "roles": {

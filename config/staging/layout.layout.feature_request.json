@@ -30,7 +30,9 @@
             "6382ff04-bf50-44bd-8500-beb3edadea99",
             "9d4892f1-63ef-4c78-ad1f-31435741fb9b"
         ],
-        "sidebar": [],
+        "sidebar": [
+            "cc43651d-5532-41e9-b012-18c6bfd62ec7"
+        ],
         "bottom": [
             "b78cda3d-b2f9-4680-a500-f76d6cb1ccb9",
             "2d6a8dc4-90ad-4c2e-8d00-d9a01883bcb8"
@@ -289,6 +291,37 @@
                         }
                     }
                 ]
+            }
+        },
+        "cc43651d-5532-41e9-b012-18c6bfd62ec7": {
+            "plugin": "node:content",
+            "data": {
+                "module": "node",
+                "delta": "content",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "BackDrop LIVE",
+                    "admin_description": "",
+                    "nid": 2307,
+                    "links": false,
+                    "leave_node_title": false,
+                    "link_node_title": false,
+                    "display_submitted": false,
+                    "view_mode": "full"
+                },
+                "uuid": "cc43651d-5532-41e9-b012-18c6bfd62ec7",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
             }
         },
         "b78cda3d-b2f9-4680-a500-f76d6cb1ccb9": {

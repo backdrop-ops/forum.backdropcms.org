@@ -27,7 +27,8 @@
         ],
         "content": [
             "c6f8dc7a-f568-4efa-9f0f-155691ec6a0a",
-            "1a898f6a-69ea-47a2-8902-2dbfeb111412"
+            "1a898f6a-69ea-47a2-8902-2dbfeb111412",
+            "06705310-2fb0-4b7b-bb16-22751c797507"
         ],
         "bottom": [],
         "footer": [
@@ -38,6 +39,8 @@
         ],
         "title": []
     },
+    "contexts": [],
+    "relationships": [],
     "content": {
         "d471e0d3-0b5c-4fd0-9800-a420393e543a": {
             "plugin": "system:header",
@@ -229,6 +232,42 @@
                     "exposed": []
                 },
                 "uuid": "1a898f6a-69ea-47a2-8902-2dbfeb111412",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "06705310-2fb0-4b7b-bb16-22751c797507": {
+            "plugin": "views:my_favorite_feature_requests-block",
+            "data": {
+                "module": "views",
+                "delta": "my_favorite_feature_requests-block",
+                "settings": {
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": 10,
+                    "offset": 0,
+                    "path": null,
+                    "fields_override": null,
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "06705310-2fb0-4b7b-bb16-22751c797507",
                 "style": {
                     "plugin": "default",
                     "data": {
