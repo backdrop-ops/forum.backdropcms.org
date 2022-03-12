@@ -29,4 +29,7 @@ node notify - allows config files to be sync'd
   https://github.com/backdrop-contrib/node_notify/issues/1
   https://github.com/backdrop-contrib/node_notify/pull/2
 
+spambot - move to state system
+  https://github.com/backdrop-contrib/spambot/issues/4
+  https://github.com/backdrop-contrib/spambot/pull/5.patch
 
