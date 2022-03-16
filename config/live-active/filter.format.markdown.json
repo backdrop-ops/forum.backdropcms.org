@@ -9,43 +9,43 @@
     "filters": {
         "filter_image_caption": {
             "status": 0,
-            "weight": 4,
+            "weight": -45,
             "module": "filter",
             "settings": []
         },
         "filter_autop": {
             "status": 0,
-            "weight": 0,
+            "weight": -48,
             "module": "filter",
             "settings": []
         },
         "filter_url": {
-            "status": 0,
-            "weight": 0,
+            "status": 1,
+            "weight": -46,
             "module": "filter",
             "settings": []
         },
         "filter_htmlcorrector": {
             "status": 1,
-            "weight": 10,
+            "weight": -43,
             "module": "filter",
             "settings": []
         },
         "filter_html_escape": {
             "status": 0,
-            "weight": -10,
+            "weight": -50,
             "module": "filter",
             "settings": []
         },
         "filter_image_align": {
             "status": 0,
-            "weight": 5,
+            "weight": -44,
             "module": "filter",
             "settings": []
         },
         "filter_html": {
             "status": 0,
-            "weight": -10,
+            "weight": -49,
             "settings": {
                 "allowed_html": "<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h3> <h4> <h5> <p> <img> <figure> <figcaption>"
             },
@@ -53,7 +53,7 @@
         },
         "filter_markdown": {
             "status": 1,
-            "weight": 0,
+            "weight": -47,
             "module": "markdown",
             "settings": []
         }
