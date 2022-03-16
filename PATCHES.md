@@ -21,6 +21,10 @@ akismet - prevent fatal from bulk delete
   https://github.com/backdrop-contrib/akismet/issues/9
   https://github.com/backdrop-contrib/akismet/pull/10.patch
 
+feeds - prevent PHP notice
+  https://github.com/backdrop-contrib/feeds/issues/13
+  https://github.com/backdrop-contrib/feeds/pull/88.patch
+
 markdown - prevent PHP notice
   https://github.com/backdrop-contrib/markdown/issues/4
   https://github.com/backdrop-contrib/markdown/pull/7.patch
