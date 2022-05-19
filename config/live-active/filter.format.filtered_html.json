@@ -2,7 +2,7 @@
     "_config_name": "filter.format.filtered_html",
     "format": "filtered_html",
     "name": "Standard",
-    "weight": 0,
+    "weight": "-10",
     "editor": "ckeditor",
     "editor_settings": {
         "toolbar": [
@@ -187,18 +187,22 @@
                     }
                 ]
             }
-        }
+        },
+        "format_list": [
+            "p",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+        ],
+        "style_list": []
     },
     "filters": {
-        "filter_image_caption": {
-            "status": 1,
-            "weight": 4,
-            "module": "filter",
-            "settings": []
-        },
-        "filter_autop": {
-            "status": 1,
-            "weight": 2,
+        "filter_html_escape": {
+            "status": 0,
+            "weight": -10,
             "module": "filter",
             "settings": []
         },
@@ -210,24 +214,6 @@
             },
             "module": "filter"
         },
-        "filter_htmlcorrector": {
-            "status": 1,
-            "weight": 10,
-            "module": "filter",
-            "settings": []
-        },
-        "filter_html_escape": {
-            "status": 0,
-            "weight": -10,
-            "module": "filter",
-            "settings": []
-        },
-        "filter_image_align": {
-            "status": 1,
-            "weight": 4,
-            "module": "filter",
-            "settings": []
-        },
         "filter_html": {
             "status": 1,
             "weight": 1,
@@ -237,6 +223,30 @@
                 "filter_html_nofollow": 0
             },
             "module": "filter"
+        },
+        "filter_autop": {
+            "status": 1,
+            "weight": 2,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_image_caption": {
+            "status": 1,
+            "weight": 4,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_image_align": {
+            "status": 1,
+            "weight": 4,
+            "module": "filter",
+            "settings": []
+        },
+        "filter_htmlcorrector": {
+            "status": 1,
+            "weight": 10,
+            "module": "filter",
+            "settings": []
         }
     },
     "cache": true,

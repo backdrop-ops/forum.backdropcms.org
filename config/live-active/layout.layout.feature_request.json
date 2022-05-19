@@ -31,7 +31,7 @@
             "9d4892f1-63ef-4c78-ad1f-31435741fb9b"
         ],
         "sidebar": [
-            "cc43651d-5532-41e9-b012-18c6bfd62ec7"
+            "947bc1fd-4ebe-475e-a609-9bfa75776a75"
         ],
         "bottom": [
             "b78cda3d-b2f9-4680-a500-f76d6cb1ccb9",
@@ -293,27 +293,32 @@
                 ]
             }
         },
-        "cc43651d-5532-41e9-b012-18c6bfd62ec7": {
-            "plugin": "node:content",
+        "947bc1fd-4ebe-475e-a609-9bfa75776a75": {
+            "plugin": "views:feature_voters_all-block_1",
             "data": {
-                "module": "node",
-                "delta": "content",
+                "module": "views",
+                "delta": "feature_voters_all-block_1",
                 "settings": {
-                    "title_display": "none",
-                    "title": "",
+                    "link_to_view": 0,
+                    "more_link": false,
+                    "use_pager": false,
+                    "pager_id": 0,
+                    "items_per_page": 10,
+                    "offset": 0,
+                    "path": "feature-voters-all",
+                    "fields_override": null,
+                    "title_display": "custom",
+                    "title": "Votes:",
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "admin_label": "BackDrop LIVE",
-                    "admin_description": "",
-                    "nid": 2307,
-                    "links": false,
-                    "leave_node_title": false,
-                    "link_node_title": false,
-                    "display_submitted": false,
-                    "view_mode": "full"
+                    "allowed": [],
+                    "path_override": false,
+                    "exposed": [],
+                    "admin_label": "",
+                    "admin_description": ""
                 },
-                "uuid": "cc43651d-5532-41e9-b012-18c6bfd62ec7",
+                "uuid": "947bc1fd-4ebe-475e-a609-9bfa75776a75",
                 "style": {
                     "plugin": "default",
                     "data": {

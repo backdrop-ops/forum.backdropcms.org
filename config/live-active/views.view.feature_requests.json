@@ -632,7 +632,7 @@
                         "ui_name": "",
                         "label": "",
                         "empty": 0,
-                        "content": "<p>Welcome to the Backdrop CMS feature survey. This is your opportunity to help prioritize core features.&nbsp;The results of this survey will advise core developers as to what the community would find most valuable.</p>\r\n\r\n<p>We ask you to vote for 10 or less. These are features that you would most like to see included in future releases of Backdrop CMS. You can change your vote as often as you like. <strong>You must be logged in to vote</strong>.&nbsp;</p>\r\n",
+                        "content": "<p>Welcome to the Backdrop CMS feature survey. This is your opportunity to help prioritize core features.&nbsp;The results of this survey will advise core developers as to what the community would find most valuable.</p>\r\n\r\n<p>We ask you to vote for 10 or less. These are features that you would most like to see included in future releases of Backdrop CMS. You can change your vote as often as you like. <strong>You must be logged in to vote</strong>.&nbsp;</p>\r\n\r\n<p>All issues with the label \"type - feature request\" in the core issue queue should be eligible to be voted on.&nbsp;</p>\r\n",
                         "format": "filtered_html",
                         "tokenize": 0
                     }

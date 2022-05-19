@@ -183,11 +183,18 @@
                     }
                 },
                 "sorts": {
-                    "created": {
-                        "id": "created",
-                        "table": "node",
-                        "field": "created",
-                        "order": "DESC"
+                    "name": {
+                        "id": "name",
+                        "table": "users",
+                        "field": "name",
+                        "relationship": "uid",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "ASC",
+                        "exposed": false,
+                        "expose": {
+                            "label": ""
+                        }
                     }
                 },
                 "title": "Feature Voter All",
@@ -226,6 +233,224 @@
                     "options": []
                 },
                 "path": "feature-voters-all"
+            }
+        },
+        "block_1": {
+            "display_title": "Block",
+            "display_plugin": "block",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "arguments": {
+                    "nid": {
+                        "id": "nid",
+                        "table": "node",
+                        "field": "nid",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "default_action": "default",
+                        "exception": {
+                            "value": "all",
+                            "title_enable": 0,
+                            "title": "All"
+                        },
+                        "title_enable": 0,
+                        "title": "",
+                        "breadcrumb_enable": 0,
+                        "breadcrumb": "",
+                        "default_argument_type": "raw",
+                        "default_argument_options": {
+                            "index": "1",
+                            "use_alias": 0
+                        },
+                        "default_argument_skip_url": 0,
+                        "summary_options": {
+                            "base_path": "",
+                            "count": "1",
+                            "items_per_page": "25",
+                            "override": 0
+                        },
+                        "summary": {
+                            "sort_order": "asc",
+                            "number_of_records": "0",
+                            "format": "default_summary"
+                        },
+                        "specify_validation": 0,
+                        "validate": {
+                            "type": "none",
+                            "fail": "not found"
+                        },
+                        "validate_options": [],
+                        "break_phrase": 0,
+                        "not": 0
+                    }
+                },
+                "defaults": {
+                    "arguments": false,
+                    "fields": false
+                },
+                "block_description": "User Votes for Issue",
+                "fields": {
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Title",
+                        "exclude": 1,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 0,
+                            "ellipsis": 0,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_to_node": 1
+                    },
+                    "uid": {
+                        "id": "uid",
+                        "table": "flagging",
+                        "field": "uid",
+                        "relationship": "flag_content_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "User uid",
+                        "exclude": 1,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_to_user": 1
+                    },
+                    "name": {
+                        "id": "name",
+                        "table": "users",
+                        "field": "name",
+                        "relationship": "uid",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "Username",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "link_to_user": 1,
+                        "overwrite_anonymous": 0,
+                        "anonymous_text": "",
+                        "format_username": 1
+                    }
+                }
             }
         }
     }
