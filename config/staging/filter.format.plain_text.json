@@ -2,19 +2,31 @@
     "_config_name": "filter.format.plain_text",
     "format": "plain_text",
     "name": "Plain text",
-    "weight": 10,
+    "weight": "-7",
     "filters": {
         "filter_html_escape": {
             "weight": 0,
-            "status": 1
+            "status": 1,
+            "settings": [],
+            "module": "filter"
         },
         "filter_url": {
             "weight": 1,
-            "status": 1
+            "status": 1,
+            "settings": {
+                "filter_url_length": 72
+            },
+            "module": "filter"
         },
         "filter_autop": {
             "weight": 2,
-            "status": 1
+            "status": 1,
+            "settings": [],
+            "module": "filter"
         }
-    }
+    },
+    "status": 1,
+    "editor": null,
+    "editor_settings": [],
+    "cache": true
 }
