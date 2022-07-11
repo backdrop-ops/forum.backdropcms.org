@@ -32,6 +32,7 @@
             "e91f6de2-bbec-45a1-8700-a15ddb81de24"
         ],
         "sidebar": [
+            "b4f56fda-fb3a-4530-b506-6e3d6057b9ba",
             "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09",
             "bc0b693b-01b4-4b47-9604-042dd9a3c54e",
             "18e7ee72-6b80-4599-b709-9bbd78a16d78",
@@ -303,6 +304,33 @@
                 }
             }
         },
+        "b4f56fda-fb3a-4530-b506-6e3d6057b9ba": {
+            "plugin": "layout:custom_block",
+            "data": {
+                "module": "layout",
+                "delta": "custom_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "Atten: Backdrop LIVE ",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "content": "<h4 class=\"text-align-center\">July 15-16, 2022</h4>\r\n\r\n<p>An interactive online gathering of the Backdrop CMS community. Everyone is welcome. An excellent opportunity to ask questions and solve problems.&nbsp;</p>\r\n\r\n<p>Cost = Voluntary donation to Backdrop CMS</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
+                    "format": "filtered_html",
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "b4f56fda-fb3a-4530-b506-6e3d6057b9ba",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
         "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09": {
             "plugin": "views:recent_topics-block",
             "data": {
@@ -504,7 +532,7 @@
                 "module": "menu",
                 "delta": "menu-footer-menu",
                 "settings": {
-                    "title_display": "default",
+                    "title_display": "none",
                     "title": "",
                     "style": "default",
                     "block_settings": {
@@ -513,9 +541,12 @@
                         "level": "1",
                         "depth": "0",
                         "expand_all": 0,
+                        "clickdown": 0,
                         "toggle": 0
                     },
-                    "contexts": []
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
                 },
                 "uuid": "54d325e1-7aa2-4ea9-8b00-c34a126ddfa0",
                 "style": {
