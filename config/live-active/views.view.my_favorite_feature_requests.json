@@ -510,7 +510,7 @@
                         "ui_name": "",
                         "label": "",
                         "empty": 0,
-                        "content": "We ask you to vote for 10 or less. These are issues that you would most like to see included in future releases of Backdrop CMS. You can change your votes as often as you like. ",
+                        "content": "We ask you to vote for up to 10 features. These are issues that you would most like to see included in future releases of Backdrop CMS. You can change your votes as often as you like. ",
                         "format": "markdown",
                         "tokenize": 0
                     }
