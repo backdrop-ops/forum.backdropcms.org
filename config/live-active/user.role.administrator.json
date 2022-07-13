@@ -172,6 +172,7 @@
         "flag feature_vote",
         "unflag feature_vote",
         "administer feeds",
-        "use text format markdown"
+        "use text format markdown",
+        "administer comment settings"
     ]
 }

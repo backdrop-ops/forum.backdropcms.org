@@ -46,6 +46,7 @@
         "access akismet statistics",
         "flag feature_vote",
         "unflag feature_vote",
-        "use text format markdown"
+        "use text format markdown",
+        "administer comment settings"
     ]
 }
