@@ -134,8 +134,6 @@ body.front .search-block-form label {
     padding: 0 15px;
   }
   body.front .search-block-form input.form-search {
-    font-size: 2.25rem; /* 36px */
-    line-height: 44px;
     height: 44px;
   }
   body.front .search-block-form .form-actions {
@@ -160,8 +158,6 @@ body.front .search-block-form label {
     max-width: 700px;
   }
   body.front .search-block-form input.form-search {
-    font-size: 2.25rem; /* 36px */
-    line-height: 46px;
     height: 56px;
   }
   body.front .search-block-form .form-actions {
