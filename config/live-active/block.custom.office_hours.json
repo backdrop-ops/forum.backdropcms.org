@@ -1,0 +1,12 @@
+{
+    "_config_name": "block.custom.office_hours",
+    "delta": "office_hours",
+    "info": "Office Hours",
+    "title": "Weekly office hours",
+    "description": "",
+    "body": {
+        "value": "<p>Bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, every Wednesday. Everyone is welcome.</p>\r\n",
+        "format": "filtered_html"
+    },
+    "default_langcode": "und"
+}
