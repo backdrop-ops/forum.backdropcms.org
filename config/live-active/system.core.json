@@ -30,7 +30,7 @@
     "install_profile": "standard",
     "language_count": 1,
     "language_default": "en",
-    "log_row_limit": 1000,
+    "log_row_limit": "10000",
     "log_identity": "backdrop",
     "log_facility": "",
     "log_format": "!base_url|!timestamp|!type|!ip|!request_uri|!referer|!uid|!link|!message",
@@ -108,5 +108,7 @@
         "maintenance_mode_message"
     ],
     "block_interest_cohort": 1,
-    "messages_dismissible": 1
+    "messages_dismissible": 1,
+    "dblog_row_limit": "10000",
+    "dblog_date_format": "M d 'y - g:ia"
 }
