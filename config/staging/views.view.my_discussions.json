@@ -358,9 +358,18 @@
                 },
                 "defaults": {
                     "arguments": false,
-                    "title": false
+                    "title": false,
+                    "pager": false,
+                    "pager_options": false
                 },
-                "title": "Your discussions"
+                "title": "Your discussions",
+                "pager": {
+                    "type": "none",
+                    "options": {
+                        "offset": "0"
+                    }
+                },
+                "pager_options": null
             }
         }
     }

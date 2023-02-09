@@ -43,10 +43,13 @@
         ],
         "title": []
     },
+    "contexts": [],
+    "relationships": [],
     "content": {
         "2318217f-ef7c-4160-9614-20f4f2a2b705": {
             "plugin": "system:header",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "header",
                 "settings": {
@@ -75,6 +78,7 @@
         "1f4e71d0-18c7-4746-8c00-c941e8f97ac1": {
             "plugin": "system:user-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "user-menu",
                 "settings": {
@@ -105,6 +109,7 @@
         "488bc697-04da-4606-b301-0147ac6d7e76": {
             "plugin": "system:main-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main-menu",
                 "settings": {
@@ -135,6 +140,7 @@
         "6824ed26-b90d-4a55-ac0a-109da7149ff4": {
             "plugin": "system:page_components:title",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "page_components",
                 "settings": {
@@ -161,6 +167,7 @@
         "05ae7ae6-0566-44c9-8300-bfb1b45875a7": {
             "plugin": "layout:custom_block",
             "data": {
+                "status": 1,
                 "module": "layout",
                 "delta": "custom_block",
                 "settings": {
@@ -169,8 +176,10 @@
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n",
-                    "format": "full_html"
+                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n<div>Or bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, everyone welcome.</div>",
+                    "format": "full_html",
+                    "admin_label": "",
+                    "admin_description": ""
                 },
                 "uuid": "05ae7ae6-0566-44c9-8300-bfb1b45875a7",
                 "style": {
@@ -186,6 +195,7 @@
         "0262b9d7-4aec-4cca-a600-ca87465edeca": {
             "plugin": "search:form",
             "data": {
+                "status": 1,
                 "module": "search",
                 "delta": "form",
                 "settings": {
@@ -216,6 +226,7 @@
         "3b2245c6-1566-4f76-b001-1a3fb41146e5": {
             "plugin": "system:main",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main",
                 "settings": {
@@ -239,6 +250,7 @@
         "7b1642e9-245e-4cab-8009-9d0e444ebd3e": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
+                "status": 1,
                 "module": "borg_forum",
                 "delta": "new_forum_button",
                 "settings": {
@@ -262,6 +274,7 @@
         "ad4adc27-36d1-4509-b500-e4957498fa1b": {
             "plugin": "views:recent_topics-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "recent_topics-block",
                 "settings": {
@@ -296,6 +309,7 @@
         "5bd49fc4-692d-4926-8c47-7198c2edc874": {
             "plugin": "views:recent_comments-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "recent_comments-block",
                 "settings": {
@@ -330,6 +344,7 @@
         "c06c1fba-45e7-43c2-9900-c5c462b957f8": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
+                "status": 1,
                 "module": "borg_forum",
                 "delta": "new_forum_button",
                 "settings": {
@@ -353,6 +368,7 @@
         "7959062a-2095-431c-aa07-077beecf731f": {
             "plugin": "system:powered-by",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "powered-by",
                 "settings": {
@@ -376,6 +392,7 @@
         "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67": {
             "plugin": "on_the_web:social_links",
             "data": {
+                "status": 1,
                 "module": "on_the_web",
                 "delta": "social_links",
                 "settings": {
@@ -408,6 +425,7 @@
         "91a8c391-0c50-49bf-8000-bebfbf390ff2": {
             "plugin": "block:newsletter",
             "data": {
+                "status": 1,
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {
@@ -435,6 +453,7 @@
         "e8e63592-a767-452f-aa0c-12736ef39a05": {
             "plugin": "menu:menu-footer-menu",
             "data": {
+                "status": 1,
                 "module": "menu",
                 "delta": "menu-footer-menu",
                 "settings": {

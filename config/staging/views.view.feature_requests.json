@@ -594,9 +594,24 @@
                             "label": "Title",
                             "order": "ASC"
                         }
+                    },
+                    "created": {
+                        "id": "created",
+                        "table": "node",
+                        "field": "created",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "DESC",
+                        "exposed": true,
+                        "expose": {
+                            "label": "Created date",
+                            "order": "ASC"
+                        },
+                        "granularity": "minute"
                     }
                 },
-                "title": "Feature Requests",
+                "title": "Feature Request Wishlist",
                 "relationships": {
                     "flag_content_rel": {
                         "id": "flag_content_rel",
@@ -632,7 +647,7 @@
                         "ui_name": "",
                         "label": "",
                         "empty": 0,
-                        "content": "<p>Welcome to the Backdrop CMS feature survey. This is your opportunity to help prioritize core features.&nbsp;The results of this survey will advise core developers as to what the community would find most valuable.</p>\r\n\r\n<p>We ask you to vote for up to 10 features. These are features that you would most like to see included in future releases of Backdrop CMS. You can change your vote as often as you like. <strong>You must be logged in to vote</strong>. A list of your current votes can be found on your <a href=\"/user\">user profile page</a>.</p>\r\n\r\n<p>All issues with the label \"type - feature request\" in the core issue queue should be eligible to be voted on.</p>\r\n",
+                        "content": "<p><strong>Help prioritize core features!&nbsp;</strong>Votes cast here will help core developers understand what features the community would find most valuable.&nbsp;</p>\r\n\r\n<ul>\r\n\t<li>You must be logged in to vote.</li>\r\n\t<li>Please vote for no more than 10 new features.</li>\r\n\t<li>You can change your vote as often as you like.</li>\r\n\t<li>A list of your current votes can be found on your <a href=\"/user\">user profile page</a>.</li>\r\n</ul>\r\n\r\n<p>These are features that you would most like to see included in future releases of Backdrop CMS.&nbsp; All the issues you see here are issues tagged with the label \"type - feature request\" from the Backdrop CMS core issue queue.&nbsp;</p>\r\n",
                         "format": "filtered_html",
                         "tokenize": 0
                     }
