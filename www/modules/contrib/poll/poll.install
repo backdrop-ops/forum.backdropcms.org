@@ -180,6 +180,39 @@ function poll_install() {
 }
 
 /**
+ * Implements hook_enable().
+ */
+function poll_enable() {
+  backdrop_set_message(t('Now that the Poll module has been enabled, <a href="@permissions">ensure permissions are set</a> to allow users to vote.', array('@permissions' => '/admin/config/people/permissions#module-poll')), 'info');
+}
+
+/**
+ * Implements hook_disable().
+ */
+function poll_disable() {
+  backdrop_set_message(t('The Poll module has been disabled.'), 'info');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function poll_uninstall() {
+  // Delete all poll nodes.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node');
+  $query->entityCondition('bundle', 'poll');
+  $result = $query->execute();
+  if (!empty($result)) {
+    $result = array_shift($result);
+    foreach ($result as $id => $node) {
+      $ids[] = $id;
+    }
+    entity_delete_multiple('node', $ids);
+  }
+  backdrop_set_message(t('The Poll module has been uninstalled, all nodes of Poll content type - deleted from the database.'), 'info');
+}
+
+/**
  * Implements hook_update_N().
  */
 function poll_update_1100() {

@@ -183,7 +183,7 @@ function _date_feeds_get_date_object($value, DateTimeZone $default_tz) {
     return $value;
   }
 
-  // Convert DateTime and FeedsDateTime.
+  // Convert DateTime.
   if ($value instanceof DateTime) {
     if (!$value->getTimezone() || !preg_match('/[a-zA-Z]/', $value->getTimezone()->getName())) {
       $value->setTimezone($default_tz);

@@ -85,8 +85,9 @@ function captcha_get_form_id_setting($form_id, $symbolic = FALSE) {
     $captcha_point = $captcha_points[$form_id];
   }
 
-  // If no setting is available in database for the given form,
-  // but 'captcha_default_challenge_on_nonlisted_forms' is enabled, pick the default type anyway.
+  // If no setting is available for the given form, but
+  // 'default_challenge_on_nonlisted_forms' is enabled, pick the default type
+  // anyway.
   if (!$captcha_point && $config->get('default_challenge_on_nonlisted_forms')) {
     $captcha_point = array('captcha_type' => 'default');
   }

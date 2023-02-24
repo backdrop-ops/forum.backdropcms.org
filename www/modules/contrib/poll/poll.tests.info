@@ -52,7 +52,7 @@ description = Test the poll translation logic.
 group = Poll
 file = poll.test
 
-; Added by Backdrop CMS packaging script on 2021-02-26
+; Added by Backdrop CMS packaging script on 2022-11-14
 project = poll
-version = 1.x-1.0.4
-timestamp = 1614399604
+version = 1.x-1.0.6
+timestamp = 1668465033

@@ -206,7 +206,7 @@ function captcha_update_1002() {
 }
 
 /**
- * Add disable_catpcha setting.
+ * Add disable_captcha setting.
  */
 function captcha_update_1003() {
   config_set('captcha.settings', 'disable_captcha', FALSE);
@@ -279,6 +279,18 @@ function captcha_update_1005() {
     update_variable_del('captcha_error_message_' . $langcode);
   }
 
+  $config->save();
+}
+
+/**
+ * Convert config 'captcha_default_challenge' to 'default_challenge'.
+ */
+function captcha_update_1006() {
+  $config = config('captcha.settings');
+  if (empty($config->get('default_challenge'))) {
+    $config->set('default_challenge', $config->get('captcha_default_challenge'));
+  }
+  $config->clear('captcha_default_challenge');
   $config->save();
 }
 

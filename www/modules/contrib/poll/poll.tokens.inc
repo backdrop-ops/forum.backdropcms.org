@@ -53,6 +53,12 @@ function poll_tokens($type, $tokens, array $data = array(), array $options = arr
   if ($type == 'node' && !empty($data['node']) && $data['node']->type == 'poll') {
     $node = $data['node'];
 
+    // Exit early if somehow poll node is missing poll choices.
+    if (empty($node->choice)) {
+      form_set_error("poll", t('You must fill in at least two choices.'));
+      return;
+    }
+
     $total_votes = 0;
     $highest_votes = 0;
     foreach ($node->choice as $choice) {

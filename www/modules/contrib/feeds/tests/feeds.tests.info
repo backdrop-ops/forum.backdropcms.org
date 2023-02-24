@@ -22,12 +22,6 @@ description = Tests behavior for when an importer is attached to a content type.
 group = Feeds
 file = feeds_content_type.test
 
-[FeedsDateTimeTest]
-name = FeedsDateTimeTest
-description = TBD
-group = Feeds
-file = feeds_date_time.test
-
 [FeedsFileFetcherTestCase]
 name = FeedsFileFetcherTestCase
 description = TBD
@@ -238,7 +232,7 @@ description = TBD
 group = Feeds
 file = parser_csv.test
 
-; Added by Backdrop CMS packaging script on 2021-07-30
+; Added by Backdrop CMS packaging script on 2022-07-15
 project = feeds
-version = 1.x-1.1.2
-timestamp = 1627673925
+version = 1.x-1.1.4
+timestamp = 1657893037

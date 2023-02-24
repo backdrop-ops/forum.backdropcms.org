@@ -98,7 +98,7 @@ function poll_votes($node) {
 }
 
 /**
- * Callback for the 'results' tab for polls you can vote on
+ * Callback for the 'results' tab for polls you can vote on.
  */
 function poll_results($node) {
   backdrop_set_title($node->title);

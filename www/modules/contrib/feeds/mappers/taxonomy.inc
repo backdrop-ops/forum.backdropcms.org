@@ -180,7 +180,7 @@ function taxonomy_feeds_set_target(FeedsSource $source, $entity, $target, array 
             $cache['allowed_values'][$target][$tid] = $term->name;
 
             // Invalidate caches for other fields targeting the same vocabulary.
-            foreach ($cache['vocabulary_targets'][$term_vid] as $clear_target) {
+            foreach ($cache['vocabulary_targets'][$term->vocabulary_machine_name] as $clear_target) {
               if ($clear_target !== $target) {
                 unset($cache['allowed_values'][$clear_target]);
               }

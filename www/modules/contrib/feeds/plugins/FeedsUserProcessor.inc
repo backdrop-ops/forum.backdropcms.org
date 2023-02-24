@@ -16,15 +16,6 @@ define('FEEDS_BLOCK_NON_EXISTENT', 'block');
  * Feeds processor plugin. Create users from feed items.
  */
 class FeedsUserProcessor extends FeedsProcessor {
-  /**
-   * Search by role label.
-   */
-  const ROLE_SEARCH_LABEL = 'label';
-
-  /**
-   * Search by role name.
-   */
-  const ROLE_SEARCH_NAME = 'name';
 
   /**
    * Unencrypted password.
@@ -191,17 +182,6 @@ class FeedsUserProcessor extends FeedsProcessor {
         ->fields(array('pass' => $account->pass_crypted))
         ->condition('uid', $account->uid)
         ->execute();
-    }
-
-    if ($account->uid && !empty($account->openid)) {
-      $authmap = array(
-        'uid' => $account->uid,
-        'module' => 'openid',
-        'authname' => $account->openid,
-      );
-      if (SAVED_UPDATED != backdrop_write_record('authmap', $authmap, array('uid', 'module'))) {
-        backdrop_write_record('authmap', $authmap);
-      }
     }
   }
 
@@ -405,10 +385,6 @@ class FeedsUserProcessor extends FeedsProcessor {
         case 'mail':
           $uid = db_query("SELECT uid FROM {users} WHERE mail = :mail", array(':mail' => $value))->fetchField();
           break;
-
-        case 'openid':
-          $uid = db_query("SELECT uid FROM {authmap} WHERE authname = :authname AND module = 'openid'", array(':authname' => $value))->fetchField();
-          break;
       }
       if ($uid) {
         // Return with the first nid found.
@@ -469,7 +445,6 @@ class FeedsUserProcessor extends FeedsProcessor {
     $role_names = array_keys($roles);
     $role_names = array_combine($role_names, $role_names);
     return array(
-      'role_search' => self::ROLE_SEARCH_LABEL,
       'allowed_roles' => $role_names,
       'autocreate' => 0,
       'revoke_roles' => 1,
@@ -486,10 +461,6 @@ class FeedsUserProcessor extends FeedsProcessor {
     $defaults = $this->rolesListDefaults();
     $mapping += $defaults;
     $mapping['allowed_roles'] += $defaults['allowed_roles'];
-
-    // Role search.
-    $role_search_options = $this->rolesListRoleSearchOptions();
-    $options[] = t('Search roles by: <strong>@search</strong>', array('@search' => $role_search_options[$mapping['role_search']]));
 
     // Allowed roles.
     $role_labels = array();
@@ -533,20 +504,14 @@ class FeedsUserProcessor extends FeedsProcessor {
 
     $allowed_roles_options = user_roles(TRUE);
     unset($allowed_roles_options[BACKDROP_AUTHENTICATED_ROLE]);
-
+    array_walk($allowed_roles_options, function(&$label, $name) {$label = $label .  " ($name)";});
     return array(
-      'role_search' => array(
-        '#type' => 'select',
-        '#title' => t('Search roles by'),
-        '#options' => $this->rolesListRoleSearchOptions(),
-        '#default_value' => $mapping['role_search'],
-      ),
       'allowed_roles' => array(
         '#type' => 'checkboxes',
         '#title' => t('Allowed roles'),
         '#options' => $allowed_roles_options,
         '#default_value' => $mapping['allowed_roles'],
-        '#description' => t('Select the roles to accept from the feed.<br />Any other roles will be ignored.'),
+        '#description' => t('Select the roles to accept from the feed. Any other roles will be ignored. Use the role\'s machine name and not the label when mapping.'),
       ),
       'autocreate' => array(
         '#type' => 'checkbox',
@@ -560,16 +525,6 @@ class FeedsUserProcessor extends FeedsProcessor {
         '#description' => t('If enabled, roles that are not provided by the feed will be revoked for the user. This affects only the "Allowed roles" as configured above.'),
         '#default_value' => $mapping['revoke_roles'],
       ),
-    );
-  }
-
-  /**
-   * Returns role list options.
-   */
-  public function rolesListRoleSearchOptions() {
-    return array(
-      self::ROLE_SEARCH_LABEL => t('Role label'),
-      self::ROLE_SEARCH_NAME => t('Role name'),
     );
   }
 
@@ -599,21 +554,22 @@ class FeedsUserProcessor extends FeedsProcessor {
         continue;
       }
 
-      switch ($mapping['role_search']) {
-        case self::ROLE_SEARCH_LABEL:
-          $role = user_role_load($value);
-          if (!$role && !empty($mapping['autocreate'])) {
-            // Create new role if role doesn't exist.
-            $role = new stdClass();
-            $role->label = $value;
-            user_role_save($role);
-            $role = user_role_load($role->label);
-          }
-          break;
-
-        case self::ROLE_SEARCH_NAME:
-          $role = user_role_load($value);
-          break;
+      $role = user_role_load($value);
+      
+      if (!$role && !empty($mapping['autocreate'])) {
+        $role = new stdClass();
+        $role->name = $value;
+        // Create an arbitrary label based on the machine name.
+        // But if the machine name is an int (a Drupal 7 Role ID), then
+        // provide a default label.
+        if (!is_numeric($value)) {
+          $role->label = ucfirst(strtr($value, array('_' => ' ')));
+        } 
+        else {
+          $role->label = 'Role ' . $value;
+        }
+        user_role_save($role);
+        $role = user_role_load($role->label);
       }
 
       if ($role) {
@@ -622,7 +578,9 @@ class FeedsUserProcessor extends FeedsProcessor {
           // This role may *not* be assigned.
           continue;
         }
-        $entity->roles[$role->name] = $role->label;
+        if (!in_array($role->name, $entity->roles)) {
+          $entity->roles[] = $role->name;
+        }
       }
     }
   }

@@ -289,13 +289,13 @@ function feeds_push_unsubscribe($job) {
  *   Identifier of a FeedsImporter object.
  * @param int $feed_nid
  *   If importer is attached to content type, feed node id identifying the
- *   source to be imported.
+ *   source to be imported. Set to zero if not attached to a node.
  * @param array $context
  *   Batch context.
  *
  * @see FeedsSource::startBatchAPIJob()
  */
-function feeds_batch($method, $importer_id, $feed_nid = 0, &$context) {
+function feeds_batch($method, $importer_id, $feed_nid, &$context) {
   $context['finished'] = FEEDS_BATCH_COMPLETE;
   try {
     $context['finished'] = feeds_source($importer_id, $feed_nid)->$method();
@@ -1267,8 +1267,11 @@ function feeds_source($importer_id, $feed_nid = 0) {
  */
 function feeds_plugin($plugin, $id) {
 
-  if (class_exists($plugin)) {
-    return FeedsPlugin::instance($plugin, $id, feeds_get_plugins($plugin));
+  $plugin_definition = feeds_get_plugins($plugin);
+
+  if (class_exists($plugin_definition['handler']['class'])) {
+    $handler = $plugin_definition['handler']['class'];
+    return FeedsPlugin::instance($handler, $id, feeds_get_plugins($plugin));
   }
 
   $args = array('%plugin' => $plugin, '@id' => $id);
@@ -1635,7 +1638,7 @@ function feeds_load_importer_object($importer_id = NULL) {
     $object->config = $data['config'];
     $object->table = $table;
     $object->type = t('Normal');
-    $object->disabled = $data['disabled'];
+    $object->disabled = isset($data['disabled'])? $data['disabled']: FALSE;
 
     $cache[$object->id] = $object;
   }
@@ -1684,8 +1687,6 @@ function feeds_autoload_info() {
   'FeedsTermElement' => 'plugins/FeedsParser.inc',
   'FeedsGeoTermElement' => 'plugins/FeedsParser.inc',
   'FeedsEnclosure' => 'plugins/FeedsParser.inc',
-  'FeedsDateTimeElement' => 'plugins/FeedsParser.inc',
-  'FeedsDateTime' => 'plugins/FeedsParser.inc',
   'FeedsPlugin' => 'plugins/FeedsPlugin.inc',
   'FeedsMissingPlugin' => 'plugins/FeedsPlugin.inc',
   'FeedsProcessor' => 'plugins/FeedsProcessor.inc',
