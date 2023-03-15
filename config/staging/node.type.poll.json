@@ -14,7 +14,6 @@
         "comment_per_page": 50,
         "comment_mode": 1,
         "comment_anonymous": 0,
-        "comment_subject_field": false,
         "comment_user_picture": true,
         "comment_form_location": 1,
         "comment_preview": 1,
@@ -34,7 +33,8 @@
         "node_user_picture": true,
         "hidden_path": false,
         "language": 0,
-        "node_permissions": true
+        "node_permissions": true,
+        "comment_title_options": "auto"
     },
     "module": "node",
     "node_preview": 1,

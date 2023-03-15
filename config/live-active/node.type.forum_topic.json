@@ -16,7 +16,6 @@
         "comment_per_page": "100",
         "comment_mode": 1,
         "comment_anonymous": 0,
-        "comment_subject_field": 0,
         "comment_user_picture": 1,
         "comment_form_location": 1,
         "comment_preview": "1",
@@ -44,7 +43,8 @@
         "scheduling_enabled": 1,
         "node_preview": "1",
         "menu_default": 0,
-        "node_submitted_format": "[node:created:medium] by [node:author]"
+        "node_submitted_format": "[node:created:medium] by [node:author]",
+        "comment_title_options": "auto"
     },
     "orig_type": "forum_topic",
     "node_preview": "1"

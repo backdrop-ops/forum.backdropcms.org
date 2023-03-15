@@ -17,7 +17,6 @@
         "comment_per_page": "50",
         "comment_mode": 1,
         "comment_anonymous": 0,
-        "comment_subject_field": 0,
         "comment_user_picture": 1,
         "comment_form_location": 1,
         "comment_preview": "1",
@@ -45,7 +44,8 @@
         "node_user_picture": 1,
         "hidden_path": 0,
         "language": 0,
-        "node_permissions": true
+        "node_permissions": true,
+        "comment_title_options": "auto"
     },
     "orig_type": "feature"
 }

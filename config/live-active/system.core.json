@@ -110,5 +110,7 @@
     "block_interest_cohort": 1,
     "messages_dismissible": 1,
     "dblog_row_limit": "10000",
-    "dblog_date_format": "M d 'y - g:ia"
+    "dblog_date_format": "M d 'y - g:ia",
+    "file_additional_public_schemes": [],
+    "log_max_length": 56
 }
