@@ -112,5 +112,6 @@
     "dblog_row_limit": "10000",
     "dblog_date_format": "M d 'y - g:ia",
     "file_additional_public_schemes": [],
-    "log_max_length": 56
+    "log_max_length": 56,
+    "file_not_normalized_schemes": []
 }
