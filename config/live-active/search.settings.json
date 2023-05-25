@@ -35,5 +35,6 @@
         "forum_topic",
         "page",
         "post"
-    ]
+    ],
+    "search_pager_type": "full"
 }
