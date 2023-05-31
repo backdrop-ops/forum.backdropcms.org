@@ -38,6 +38,7 @@
         "footer": [
             "7959062a-2095-431c-aa07-077beecf731f",
             "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
+            "ea3bca44-fb3f-4512-9800-ef8756ae51b5",
             "91a8c391-0c50-49bf-8000-bebfbf390ff2",
             "e8e63592-a767-452f-aa0c-12736ef39a05"
         ],
@@ -422,10 +423,36 @@
                 }
             }
         },
+        "ea3bca44-fb3f-4512-9800-ef8756ae51b5": {
+            "plugin": "borg_signup:borg_signup",
+            "data": {
+                "status": 1,
+                "module": "borg_signup",
+                "delta": "borg_signup",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "ea3bca44-fb3f-4512-9800-ef8756ae51b5",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
         "91a8c391-0c50-49bf-8000-bebfbf390ff2": {
             "plugin": "block:newsletter",
             "data": {
-                "status": 1,
+                "status": 0,
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {
