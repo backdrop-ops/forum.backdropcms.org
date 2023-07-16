@@ -38,15 +38,19 @@
         "footer": [
             "cd4d033d-3f67-4191-8655-85ee758877c0",
             "53760ea0-b67a-416d-b100-0b87fb1c5787",
+            "fcd614e8-1b23-45e1-9808-8c2c7c18069c",
             "d1a88ac2-5470-469a-8a00-fbce978f1fdf",
             "7ebc3196-f5c5-4790-993d-61432559a2db"
         ],
         "title": []
     },
+    "contexts": [],
+    "relationships": [],
     "content": {
         "e2c497f8-cb2e-404a-a300-0b27ddd797ef": {
             "plugin": "system:header",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "header",
                 "settings": {
@@ -75,6 +79,7 @@
         "e3400ad1-cc87-4ac4-a400-f19bcff57738": {
             "plugin": "system:user-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "user-menu",
                 "settings": {
@@ -105,6 +110,7 @@
         "13b2f325-af26-40bb-8c61-97fe1d93f19f": {
             "plugin": "system:main-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main-menu",
                 "settings": {
@@ -135,6 +141,7 @@
         "09f11b4e-877e-45ab-9000-a4c6254faa04": {
             "plugin": "system:breadcrumb",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "breadcrumb",
                 "settings": {
@@ -160,6 +167,7 @@
         "eca1d63a-acb9-4187-a500-f9f92c66f3f2": {
             "plugin": "search:form",
             "data": {
+                "status": 1,
                 "module": "search",
                 "delta": "form",
                 "settings": {
@@ -190,6 +198,7 @@
         "1a6fd8a3-bd6c-44e1-ab12-18897e37bb6b": {
             "plugin": "views:taxonomy_term_data-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "taxonomy_term_data-block",
                 "settings": {
@@ -224,6 +233,7 @@
         "default": {
             "plugin": "system:main",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main",
                 "settings": {
@@ -247,6 +257,7 @@
         "a531c13d-be06-4a61-9302-2acfbc883f62": {
             "plugin": "views:categories-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "categories-block",
                 "settings": {
@@ -292,6 +303,7 @@
         "ec150984-6c03-44d9-9107-075cdc5c2bae": {
             "plugin": "borg_forum:new_forum_button",
             "data": {
+                "status": 1,
                 "module": "borg_forum",
                 "delta": "new_forum_button",
                 "settings": {
@@ -327,6 +339,7 @@
         "79eeff5e-9761-4243-a119-25fc72286611": {
             "plugin": "views:recent_topics-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "recent_topics-block",
                 "settings": {
@@ -361,6 +374,7 @@
         "33f27dc1-af7c-46be-af00-e596f277b275": {
             "plugin": "views:recent_comments-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "recent_comments-block",
                 "settings": {
@@ -395,6 +409,7 @@
         "cd4d033d-3f67-4191-8655-85ee758877c0": {
             "plugin": "system:powered-by",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "powered-by",
                 "settings": {
@@ -418,6 +433,7 @@
         "53760ea0-b67a-416d-b100-0b87fb1c5787": {
             "plugin": "on_the_web:social_links",
             "data": {
+                "status": 1,
                 "module": "on_the_web",
                 "delta": "social_links",
                 "settings": {
@@ -447,9 +463,36 @@
                 }
             }
         },
+        "fcd614e8-1b23-45e1-9808-8c2c7c18069c": {
+            "plugin": "borg_signup:newsletter",
+            "data": {
+                "status": 1,
+                "module": "borg_signup",
+                "delta": "newsletter",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "fcd614e8-1b23-45e1-9808-8c2c7c18069c",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
         "d1a88ac2-5470-469a-8a00-fbce978f1fdf": {
             "plugin": "block:newsletter",
             "data": {
+                "status": 0,
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {
@@ -476,6 +519,7 @@
         "7ebc3196-f5c5-4790-993d-61432559a2db": {
             "plugin": "menu:menu-footer-menu",
             "data": {
+                "status": 1,
                 "module": "menu",
                 "delta": "menu-footer-menu",
                 "settings": {

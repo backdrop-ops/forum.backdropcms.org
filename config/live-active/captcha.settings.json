@@ -10,7 +10,7 @@
     "default_validation": "1",
     "persistence": "1",
     "enable_stats": 1,
-    "wrong_response_counter": 24908,
+    "wrong_response_counter": 24916,
     "log_wrong_responses": 1,
     "captcha_points": {
         "user_password": {
