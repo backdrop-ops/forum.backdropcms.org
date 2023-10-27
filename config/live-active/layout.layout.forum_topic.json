@@ -353,11 +353,11 @@
                 "delta": "custom_block",
                 "settings": {
                     "title_display": "default",
-                    "title": "Atten: Backdrop LIVE ",
+                    "title": "Backdrop LIVE ",
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h4 class=\"text-align-center\">July 15-16, 2022</h4>\r\n\r\n<p>An interactive online gathering of the Backdrop CMS community. Everyone is welcome. An excellent opportunity to ask questions and solve problems.&nbsp;</p>\r\n\r\n<p>Cost = Voluntary donation to Backdrop CMS</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
+                    "content": "<h4>Sept 23-24, 2023</h4>\r\n\r\n<p>An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
                     "format": "filtered_html",
                     "admin_label": "",
                     "admin_description": ""
