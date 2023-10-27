@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * Empty on purpose.
+ *
+ * This file exists as a workaround for a problem that was inherited by the 7.x
+ * version of this module: all module files are named clone.xyz, but they live
+ * inside a node_clone folder (but no matching node_clone.info and
+ * node_clone.module files).
+ * See https://github.com/backdrop-contrib/node_clone/issues/8
+ */

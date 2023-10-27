@@ -1,0 +1,18 @@
+name = "Node Clone"
+description = "Allows users to clone (copy then edit) existing content."
+
+# This file exists as a workaround for a problem that was inherited by the 7.x
+# version of this module: all module files are named clone.xyz, but they live
+# inside a node_clone folder (but no matching node_clone.info and
+# node_clone.module files).
+$ See https://github.com/backdrop-contrib/node_clone/issues/8
+
+backdrop = 1.x
+type = module
+dependencies[] = clone
+hidden = TRUE
+
+; Added by Backdrop CMS packaging script on 2020-05-30
+project = node_clone
+version = 1.x-1.1.4
+timestamp = 1590863171

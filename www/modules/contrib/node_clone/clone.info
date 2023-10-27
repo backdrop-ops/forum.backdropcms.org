@@ -1,0 +1,10 @@
+name = "Node Clone"
+description = "Allows users to clone (copy then edit) existing content."
+backdrop = 1.x
+type = module
+configure = admin/config/content/clone
+
+; Added by Backdrop CMS packaging script on 2020-05-30
+project = node_clone
+version = 1.x-1.1.4
+timestamp = 1590863171

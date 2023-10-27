@@ -1,0 +1,51 @@
+<?php
+/**
+ * @file
+ * Install & uninstall functions for Node_Clone module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function clone_install() {
+  if (!backdrop_is_cli()) {
+    $t = get_t();
+    backdrop_set_message($t("Node Clone installed successfully. Please !link to your needs.", array(
+      '!link' => l($t('configure Node Clone'), 'admin/config/content/clone'),
+    )));
+  }
+}
+
+/**
+ * @defgroup updates-7.x-to-1.x Updates from 7.x to 1.x
+ * @{
+ * Update functions from Drupal 7.x to Backdrop CMS 1.x.
+ */
+
+/**
+ * Move node clone settings from variables to config.
+ */
+function clone_update_1000() {
+  // Migrate variables to config.
+  $config = config('clone.settings');
+  if ($config->isNew()) {
+    $config->set('clone_method', update_variable_get('clone_method', 'prepopulate'));
+    $config->set('clone_omitted', update_variable_get('clone_omitted', array()));
+    $config->set('clone_nodes_without_confirm', update_variable_get('clone_nodes_without_confirm', 0));
+    $config->set('clone_use_node_type_name', update_variable_get('clone_use_node_type_name', 0));
+    $config->set('clone_menu_links', update_variable_get('clone_menu_links', 0));
+  $config->save();
+  }
+
+  // Delete variables.
+  update_variable_del('clone_method');
+  update_variable_del('clone_omitted');
+  update_variable_del('clone_nodes_without_confirmation');
+  update_variable_del('clone_use_node_type_name');
+  update_variable_del('clone_menu_links');
+}
+
+/*
+ * @} End of "defgroup updates-7.x-to-1.x"
+ * The next series of updates should start at 2000.
+ */
