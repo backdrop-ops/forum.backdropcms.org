@@ -9,5 +9,6 @@
         "use text format filtered_html",
         "search content",
         "view files"
-    ]
+    ],
+    "description": ""
 }

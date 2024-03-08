@@ -33,15 +33,19 @@
         "footer": [
             "e5a98417-ce74-4e9b-915b-91c8244e53af",
             "d5775ad0-a70a-438e-b957-877029a55a71",
+            "a94b342a-e286-4bd0-9700-a007a4522b72",
             "07eda4ec-4017-4984-9600-e28380a46458",
             "7ad1831b-f1b3-421b-b860-9617c50c87b7"
         ],
         "title": []
     },
+    "contexts": [],
+    "relationships": [],
     "content": {
         "d72f7b1e-1af6-4700-9f1d-29fc9926a272": {
             "plugin": "system:header",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "header",
                 "settings": {
@@ -70,6 +74,7 @@
         "bef73860-72c2-4b90-ae00-a08a0ead59cd": {
             "plugin": "system:user-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "user-menu",
                 "settings": {
@@ -100,6 +105,7 @@
         "da27bf39-6bad-42b4-8100-cd1cd77d1843": {
             "plugin": "system:main-menu",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main-menu",
                 "settings": {
@@ -130,6 +136,7 @@
         "de6fbbbc-af5e-41e2-9d00-eaf0f46f7f35": {
             "plugin": "system:breadcrumb",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "breadcrumb",
                 "settings": {
@@ -155,6 +162,7 @@
         "878d72d7-d567-4ed2-8502-2bfc001bcf08": {
             "plugin": "search:form",
             "data": {
+                "status": 1,
                 "module": "search",
                 "delta": "form",
                 "settings": {
@@ -185,6 +193,7 @@
         "5186540a-7f4c-4403-9400-aad89955dd6a": {
             "plugin": "system:main",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "main",
                 "settings": {
@@ -208,6 +217,7 @@
         "761e539d-4dab-44bd-8055-851f87a803aa": {
             "plugin": "views:my_discussions-block",
             "data": {
+                "status": 1,
                 "module": "views",
                 "delta": "my_discussions-block",
                 "settings": {
@@ -242,6 +252,7 @@
         "e5a98417-ce74-4e9b-915b-91c8244e53af": {
             "plugin": "system:powered-by",
             "data": {
+                "status": 1,
                 "module": "system",
                 "delta": "powered-by",
                 "settings": {
@@ -265,6 +276,7 @@
         "d5775ad0-a70a-438e-b957-877029a55a71": {
             "plugin": "on_the_web:social_links",
             "data": {
+                "status": 1,
                 "module": "on_the_web",
                 "delta": "social_links",
                 "settings": {
@@ -294,9 +306,36 @@
                 }
             }
         },
+        "a94b342a-e286-4bd0-9700-a007a4522b72": {
+            "plugin": "borg_signup:newsletter",
+            "data": {
+                "status": 1,
+                "module": "borg_signup",
+                "delta": "newsletter",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "a94b342a-e286-4bd0-9700-a007a4522b72",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
         "07eda4ec-4017-4984-9600-e28380a46458": {
             "plugin": "block:newsletter",
             "data": {
+                "status": 0,
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {
@@ -323,6 +362,7 @@
         "7ad1831b-f1b3-421b-b860-9617c50c87b7": {
             "plugin": "menu:menu-footer-menu",
             "data": {
+                "status": 1,
                 "module": "menu",
                 "delta": "menu-footer-menu",
                 "settings": {
@@ -359,7 +399,8 @@
                     "roles": [
                         "authenticated"
                     ],
-                    "load_condition_nojs": "Load condition"
+                    "load_condition_nojs": "Load condition",
+                    "negate": false
                 }
             }
         }

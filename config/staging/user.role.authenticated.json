@@ -42,5 +42,6 @@
         "cancel own vote",
         "flag feature_vote",
         "unflag feature_vote"
-    ]
+    ],
+    "description": ""
 }

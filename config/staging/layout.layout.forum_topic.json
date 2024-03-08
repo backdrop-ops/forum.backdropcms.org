@@ -43,6 +43,7 @@
         "footer": [
             "51d37868-530d-48fe-ae51-81911d23e7e9",
             "e87600c0-a788-461c-ac00-e81f892e0568",
+            "790f54c9-4471-4981-af08-8d40bdd20602",
             "0a08e328-eb41-48ff-8900-f22076dee394",
             "54d325e1-7aa2-4ea9-8b00-c34a126ddfa0"
         ],
@@ -352,11 +353,11 @@
                 "delta": "custom_block",
                 "settings": {
                     "title_display": "default",
-                    "title": "Atten: Backdrop LIVE ",
+                    "title": "Backdrop LIVE ",
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h4 class=\"text-align-center\">July 15-16, 2022</h4>\r\n\r\n<p>An interactive online gathering of the Backdrop CMS community. Everyone is welcome. An excellent opportunity to ask questions and solve problems.&nbsp;</p>\r\n\r\n<p>Cost = Voluntary donation to Backdrop CMS</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
+                    "content": "<h4>Sept 23-24, 2023</h4>\r\n\r\n<p>An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
                     "format": "filtered_html",
                     "admin_label": "",
                     "admin_description": ""
@@ -547,10 +548,36 @@
                 }
             }
         },
+        "790f54c9-4471-4981-af08-8d40bdd20602": {
+            "plugin": "borg_signup:newsletter",
+            "data": {
+                "status": 1,
+                "module": "borg_signup",
+                "delta": "newsletter",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "790f54c9-4471-4981-af08-8d40bdd20602",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
         "0a08e328-eb41-48ff-8900-f22076dee394": {
             "plugin": "block:newsletter",
             "data": {
-                "status": 1,
+                "status": 0,
                 "module": "block",
                 "delta": "newsletter",
                 "settings": {

@@ -48,5 +48,6 @@
         "unflag feature_vote",
         "use text format markdown",
         "administer comment settings"
-    ]
+    ],
+    "description": ""
 }
