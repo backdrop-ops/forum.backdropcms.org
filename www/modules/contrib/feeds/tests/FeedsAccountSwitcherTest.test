@@ -5,6 +5,8 @@
  * Contains FeedsAccountSwitcherTest.
  */
 
+include_once __DIR__ . '/feeds_mapper.test';
+
 /**
  * Test case for account switching.
  */
@@ -34,7 +36,7 @@ class FeedsAccountSwitcherTest extends FeedsMapperTestCase {
       )
     );
 
-    // Clear cache to make permission 'create article content' available.
+    // Clear cache to make permission 'create post content' available.
     backdrop_static_reset();
     backdrop_flush_all_caches();
   }
@@ -67,7 +69,7 @@ class FeedsAccountSwitcherTest extends FeedsMapperTestCase {
     $nid = $this->createFeedNode('syndication', $GLOBALS['base_url'] . '/' . backdrop_get_path('module', 'feeds') . '/tests/feeds/content.csv', 'Node 1');
     $account = $this->backdropCreateUser(array(
       'access content',
-      'create article content',
+      'create post content',
     ));
     $this->changeNodeAuthor($nid, $account);
 
@@ -115,7 +117,7 @@ class FeedsAccountSwitcherTest extends FeedsMapperTestCase {
     $nid = $this->createFeedNode('syndication', $GLOBALS['base_url'] . '/' . backdrop_get_path('module', 'feeds') . '/tests/feeds/content.csv', 'Node 1');
     $account = $this->backdropCreateUser(array(
       'access content',
-      'create article content',
+      'create post content',
     ));
     $this->changeNodeAuthor($nid, $account);
 
@@ -258,7 +260,7 @@ class FeedsAccountSwitcherTest extends FeedsMapperTestCase {
     $nid = $this->createFeedNode('syndication', NULL, 'Node 1');
     $account = $this->backdropCreateUser(array(
       'access content',
-      'create article content',
+      'create post content',
     ));
     $this->changeNodeAuthor($nid, $account);
 

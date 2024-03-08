@@ -5,7 +5,7 @@
  * Contains FeedsMapperFieldTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test case for simple CCK field mapper mappers/content.inc.
@@ -108,6 +108,13 @@ class FeedsMapperFieldTestCase extends FeedsMapperTestCase {
       'gamma' => 'number_decimal',
       'delta' => 'number_float',
     ));
+
+    // Labels are hidden by default.
+    // @todo this does not work.
+    $configs = config_get_names_with_prefix("field.instance.node.$typename");
+    foreach ($configs as $name) {
+      config_set($name, 'display.default.label', 'above');
+    }
 
     // Create and configure importer.
     $this->createImporterConfiguration('Content CSV', 'csv');
@@ -379,7 +386,7 @@ class FeedsMapperFieldTestCase extends FeedsMapperTestCase {
       'name' => 'Addams vocabulary',
       'machine_name' => 'addams',
     );
-    $this->backdropPost('admin/structure/taxonomy/add', $edit, t('Save'));
+    $this->backdropPost('admin/structure/taxonomy/add', $edit, t('Save vocabulary'));
 
     // Create a field with settings to validate.
     field_create_field(array(
@@ -473,10 +480,10 @@ class FeedsMapperFieldTestCase extends FeedsMapperTestCase {
     // Import CSV file. Users should fail to import because mail address is
     // missing.
     $this->importFile('csv', $this->absolutePath() . '/tests/feeds/content.csv');
-    $this->assertText('Failed importing 2 users.');
-    $this->assertText('User name missing or email not valid.');
+    $this->assertText('Failed importing 2 user accounts.');
+    $this->assertText('User name or email missing.');
     $this->assertText("Field validation errors in item 'Ut wisi enim ad minim veniam'");
-    $this->assertText('alpha_text_label: the text may not be longer than 5 characters.');
+    $this->assertText('the text may not be longer than 5 characters.');
   }
 
   /**
@@ -489,7 +496,7 @@ class FeedsMapperFieldTestCase extends FeedsMapperTestCase {
       'alpha' => array(
         'type' => 'text',
         'instance_settings' => array(
-          'field[cardinality]' => $cardinality,
+          'field[cardinality_number]' => $cardinality,
         ),
       ),
     ));

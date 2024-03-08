@@ -4,15 +4,9 @@ description = Unit tests for Common Syndication Parser.
 group = Feeds
 file = common_syndication_parser.test
 
-[FeedsWebTestCase]
-name = FeedsWebTestCase
-description = TBD
-group = Feeds
-file = feeds.test
-
 [FeedsUnitTestCase]
 name = FeedsUnitTestCase
-description = TBD
+description = Test basic low-level Feeds module functionality.
 group = Feeds
 file = feeds.test
 
@@ -48,13 +42,13 @@ file = feeds_i18n_taxonomy.test
 
 [FeedsMapperConfigTestCase]
 name = FeedsMapperConfigTestCase
-description = TBD
+description = Test the mapper configuration UI.
 group = Feeds
 file = feeds_mapper_config.test
 
 [FeedsMapperDateTestCase]
 name = FeedsMapperDateTestCase
-description = TBD
+description = Test Feeds Mapper support for CCK Date fields.
 group = Feeds
 file = feeds_mapper_date.test
 
@@ -84,7 +78,7 @@ file = feeds_mapper_format_config.test
 
 [FeedsMapperHookTestCase]
 name = FeedsMapperHookTestCase
-description = TBD
+description = Test case for the various callbacks implemented for mappers.
 group = Feeds
 file = feeds_mapper_hooks.test
 
@@ -132,7 +126,7 @@ file = feeds_mapper_summary.test
 
 [FeedsMapperTaxonomyTestCase]
 name = FeedsMapperTaxonomyTestCase
-description = TBD
+description = Test Feeds Mapper support for Taxonomy.
 group = Feeds
 file = feeds_mapper_taxonomy.test
 
@@ -232,7 +226,7 @@ description = TBD
 group = Feeds
 file = parser_csv.test
 
-; Added by Backdrop CMS packaging script on 2022-07-15
+; Added by Backdrop CMS packaging script on 2023-11-22
 project = feeds
-version = 1.x-1.1.4
-timestamp = 1657893037
+version = 1.x-1.1.5
+timestamp = 1700680304

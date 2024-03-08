@@ -5,6 +5,8 @@
  * Test cases for entity API integration.
  */
 
+include_once __DIR__ . '/feeds.test';
+
 /**
  * Tests for Entity API integration.
  */

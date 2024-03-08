@@ -5,7 +5,7 @@
  * Contains FeedsMapperTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds.test';
 
 /**
  * Helper class with auxiliary functions for feeds mapper module tests.
@@ -156,10 +156,23 @@ class FeedsMapperTestCase extends FeedsWebTestCase {
       );
       $this->backdropPost($admin_type_url . '/fields', $edit, 'Save');
 
-      // (Default) Configure the field.
-      $edit = isset($options['settings']) ? $options['settings'] : array();
-      $this->backdropPost(NULL, $edit, 'Save field settings');
-      $this->assertText('Updated field ' . $label . ' field settings.');
+      // Second step is skipped if the field has no settings.
+      // @todo Is there a smarter way to check that?
+      debug($field_type);
+      $has_settings = array(
+        'text',
+        'file',
+        'image',
+        'number_decimal',
+        'date',
+        'datestamp',
+        'datetime',
+      );
+      if (in_array($field_type, $has_settings)) {
+        $edit = isset($options['settings']) ? $options['settings'] : array();
+        $this->backdropPost(NULL, $edit, 'Save field settings');
+        $this->assertText('Updated field ' . $label . ' field settings.');
+      }
 
       $edit = isset($options['instance_settings']) ? $options['instance_settings'] : array();
       $this->backdropPost(NULL, $edit, 'Save settings');

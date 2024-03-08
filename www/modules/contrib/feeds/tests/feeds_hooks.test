@@ -1,9 +1,10 @@
 <?php
-
 /**
  * @file
  * Contains FeedsHooksTestCase.
  */
+
+include_once __DIR__ . '/feeds.test';
 
 /**
  * Tests for hooks invoked by Feeds not related to mapping.
@@ -39,7 +40,7 @@ class FeedsHooksTestCase extends FeedsWebTestCase {
     $this->setPlugin('csv', 'FeedsFileFetcher');
     $this->setPlugin('csv', 'FeedsCSVParser');
     $this->setSettings('csv', 'FeedsNodeProcessor', array(
-      'bundle' => 'article',
+      'bundle' => 'post',
       'update_existing' => FEEDS_UPDATE_EXISTING,
     ));
     $this->addMappings('csv', array(
@@ -50,9 +51,9 @@ class FeedsHooksTestCase extends FeedsWebTestCase {
       ),
     ));
 
-    // Create an article node that gets updated.
+    // Create an post node that gets updated.
     $node = $this->backdropCreateNode(array(
-      'type' => 'article',
+      'type' => 'post',
       'title' => 'Lorem ipsum',
     ));
 

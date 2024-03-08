@@ -5,7 +5,7 @@
  * Tests for plugins/FeedsSitemapParser.inc.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds.test';
 
 /**
  * Test Sitemap parser.

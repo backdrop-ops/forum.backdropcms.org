@@ -5,23 +5,12 @@
  * Contains FeedsMapperConfigTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test cases for Feeds mapping configuration form.
  */
 class FeedsMapperConfigTestCase extends FeedsMapperTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Mapper: Config',
-      'description' => 'Test the mapper configuration UI.',
-      'group' => 'Feeds',
-    );
-  }
 
   /**
    * {@inheritdoc}
@@ -74,10 +63,8 @@ class FeedsMapperConfigTestCase extends FeedsMapperTestCase {
     $this->assertText('Select value: Another One');
     $this->assertText(t('Second summary: @value', array('@value' => $second_callback_value)));
 
-    // Check that settings are in db.
-    $config = unserialize(db_query("SELECT config FROM {feeds_importer} WHERE id='syndication'")->fetchField());
-
-    $settings = $config['processor']['config']['mappings'][0];
+    // Check that settings are in config.
+    $settings = config_get('feeds.feeds_importer.syndication', 'config.processor.config.mappings.0');
     $this->assertEqual($settings['checkbox'], 1);
     $this->assertEqual($settings['textfield'], 'Some text');
     $this->assertEqual($settings['textarea'], 'Textarea value: Didery dofffffffffffffffffffffffffffffffffffff');

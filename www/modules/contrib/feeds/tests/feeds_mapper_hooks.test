@@ -5,23 +5,12 @@
  * Contains FeedsMapperHookTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test case for the various callbacks implemented for mappers.
  */
 class FeedsMapperHookTestCase extends FeedsMapperTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Mapper: Hooks and callbacks',
-      'description' => 'Test case for the various callbacks implemented for mappers.',
-      'group' => 'Feeds',
-    );
-  }
 
   /**
    * Basic test loading a double entry CSV file.

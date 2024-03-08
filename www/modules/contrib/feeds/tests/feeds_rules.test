@@ -5,6 +5,8 @@
  * Contains FeedsRulesTest.
  */
 
+include_once __DIR__ . '/feeds.test';
+
 /**
  * Tests for Rules integration.
  */

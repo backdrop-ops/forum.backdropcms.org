@@ -5,8 +5,7 @@
  * Contains Feedsi18nTestCase.
  */
 
-include_once 'feeds.test';
-include_once 'feeds_mapper.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Tests importing data in a language.
@@ -90,7 +89,7 @@ class Feedsi18nTestCase extends FeedsMapperTestCase {
     $this->importFile('i18n', $this->absolutePath() . '/tests/feeds/content.csv');
 
     // Assert that the entity's language is now in Dutch.
-    $entities = entity_load_multiple_multiple($this->entityType, array(1, 2));
+    $entities = entity_load_multiple($this->entityType, array(1, 2));
     foreach ($entities as $entity) {
       $this->assertEqual('nl', $entity->langcode);
     }

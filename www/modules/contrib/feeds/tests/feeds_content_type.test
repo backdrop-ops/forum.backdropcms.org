@@ -5,6 +5,8 @@
  * Contains FeedsContentTypeTest.
  */
 
+include_once __DIR__ . '/feeds.test';
+
 /**
  * Tests for when an importer is attached to a content type.
  */
@@ -93,12 +95,7 @@ class FeedsContentTypeTest extends FeedsWebTestCase {
    */
   public function testWithContentTypeWithoutTitle() {
     // Set that the content type 'page' has no title.
-    db_update('node_type')
-      ->fields(array(
-        'has_title' => 0,
-      ))
-      ->condition('type', 'page')
-      ->execute();
+    config_set('node.type.page', 'has_title', 0);
 
     // Flush caches so this change is picked up.
     backdrop_flush_all_caches();

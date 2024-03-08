@@ -5,7 +5,7 @@
  * Contains FeedsMapperDateTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test case for CCK date field mapper mappers/date.inc.
@@ -18,21 +18,10 @@ class FeedsMapperDateTestCase extends FeedsMapperTestCase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Mapper: Date',
-      'description' => 'Test Feeds Mapper support for CCK Date fields.',
-      'group' => 'Feeds',
-      'dependencies' => array('date'),
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp() {
-    parent::setUp(array('date_api', 'date'));
+    parent::setUp(array('date'));
     config_set('feeds.settings', 'date_default_timezone', 'UTC');
+    config_set('system.date', 'formats.short.pattern', 'm/d/Y - H:i');
   }
 
   /**
@@ -48,21 +37,11 @@ class FeedsMapperDateTestCase extends FeedsMapperTestCase {
       'datetime' => 'datetime',
     ));
 
-    // Hack to get date fields to not round to every 15 minutes.
     foreach (array('date', 'datestamp', 'datetime') as $field) {
-      $field = 'field_' . $field;
-      $edit = array(
-        'widget_type' => 'date_select',
-      );
-      $this->backdropPost('admin/structure/types/manage/' . $typename . '/fields/' . $field . '/widget-type', $edit, 'Continue');
-      $edit = array(
-        'instance[widget][settings][increment]' => 1,
-      );
-      $this->backdropPost('admin/structure/types/manage/' . $typename . '/fields/' . $field, $edit, 'Save settings');
-      $edit = array(
-        'widget_type' => 'date_text',
-      );
-      $this->backdropPost('admin/structure/types/manage/' . $typename . '/fields/' . $field . '/widget-type', $edit, 'Continue');
+      $config = config('field.instance.node.' . $typename . '.field_' . $field);
+      $config->set('widget.type', 'text');
+      $config->set('widget.settings.input_format', 'm/d/Y - H:i');
+      $config->save();
     }
 
     // Create and configure importer.

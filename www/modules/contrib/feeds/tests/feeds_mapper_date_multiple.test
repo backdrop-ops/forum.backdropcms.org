@@ -5,7 +5,7 @@
  * Contains FeedsMapperDateMultipleTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test case for CCK date multi-field mapper mappers/date.inc.
@@ -31,7 +31,7 @@ class FeedsMapperDateMultipleTestCase extends FeedsMapperTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp(array('date_api', 'date', 'feeds_xpathparser'));
+    parent::setUp(array('date', 'feeds_xpathparser'));
     config_set('feeds.settings', 'date_default_timezone', 'UTC');
   }
 

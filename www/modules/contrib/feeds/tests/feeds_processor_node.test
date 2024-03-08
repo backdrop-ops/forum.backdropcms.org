@@ -5,7 +5,7 @@
  * Tests for plugins/FeedsNodeProcessor.inc.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds.test';
 
 /**
  * Test aggregating a feed as node items.
@@ -35,7 +35,7 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     // Set the teaser length display to unlimited otherwise tests looking for
     // text on nodes will fail.
     $edit = array('fields[body][type]' => 'text_default');
-    $this->backdropPost('admin/structure/types/manage/article/display/teaser', $edit, 'Save');
+    $this->backdropPost('admin/structure/types/manage/post/display/teaser', $edit, 'Save');
 
     // Create an importer configuration.
     $this->createImporterConfiguration('Syndication', 'syndication');
@@ -76,8 +76,8 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
 
     // Assert 10 items aggregated after creation of the node.
     $this->assertText('Created 10 nodes');
-    $article_nid = db_query_range("SELECT nid FROM {node} WHERE type = 'article'", 0, 1)->fetchField();
-    $this->assertEqual("Created by FeedsNodeProcessor", db_query("SELECT nr.log FROM {node} n JOIN {node_revision} nr ON n.vid = nr.vid WHERE n.nid = :nid", array(':nid' => $article_nid))->fetchField());
+    $post_nid = db_query_range("SELECT nid FROM {node} WHERE type = 'post'", 0, 1)->fetchField();
+    $this->assertEqual("Created by FeedsNodeProcessor", db_query("SELECT nr.log FROM {node} n JOIN {node_revision} nr ON n.vid = nr.vid WHERE n.nid = :nid", array(':nid' => $post_nid))->fetchField());
 
     // Navigate to feed node, there should be Feeds tabs visible.
     $this->backdropGet("node/$nid");
@@ -114,7 +114,7 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     $edit = array(
       'node_options[status]' => FALSE,
     );
-    $this->backdropPost('admin/structure/types/manage/article', $edit, t('Save content type'));
+    $this->backdropPost('admin/structure/types/manage/post', $edit, t('Save content type'));
     $this->backdropPost("node/$nid/delete-items", array(), 'Delete');
     $this->backdropPost("node/$nid/import", array(), 'Import');
     $count = db_query("SELECT COUNT(*) FROM {node} n INNER JOIN {feeds_item} fi ON fi.entity_type = 'node' AND n.nid = fi.entity_id WHERE n.status = 0")->fetchField();
@@ -122,7 +122,7 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     $edit = array(
       'node_options[status]' => TRUE,
     );
-    $this->backdropPost('admin/structure/types/manage/article', $edit, t('Save content type'));
+    $this->backdropPost('admin/structure/types/manage/post', $edit, t('Save content type'));
     $this->backdropPost("node/$nid/delete-items", array(), 'Delete');
 
     // Enable replace existing and import updated feed file.
@@ -443,14 +443,14 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
    * Test that feed elements and links are not found on non-feed nodes.
    */
   public function testNonFeedNodeUI() {
-    // There should not be feed links on an article node.
-    $non_feed_node = $this->backdropCreateNode(array('type' => 'article'));
+    // There should not be feed links on an post node.
+    $non_feed_node = $this->backdropCreateNode(array('type' => 'post'));
     $this->backdropGet('node/' . $non_feed_node->nid);
     $this->assertNoLinkByHref('node/' . $non_feed_node->nid . '/import');
     $this->assertNoLink('Delete items');
 
     // Navigate to a non-feed node form, there should be no Feed field visible.
-    $this->backdropGet('node/add/article');
+    $this->backdropGet('node/add/post');
     $this->assertNoFieldByName('feeds[FeedsHTTPFetcher][source]');
   }
 
@@ -484,7 +484,7 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     $nid = $this->createFeedNode();
 
     $this->assertText('Failed importing 10 nodes.');
-    $this->assertText('The user ' . $account->name . ' is not authorized to create content of type article.');
+    $this->assertText('The user ' . $account->name . ' is not authorized to create content of type post.');
     $node_count = db_query("SELECT COUNT(*) FROM {node}")->fetchField();
 
     // We should have 1 node, the feed node.
@@ -751,11 +751,11 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     // Now create two nodes with titles that are present in the source
     // "developmentseed.rss2".
     $this->backdropCreateNode(array(
-      'type' => 'article',
+      'type' => 'post',
       'title' => 'Open Atrium Translation Workflow: Two Way Translation Updates',
     ));
     $this->backdropCreateNode(array(
-      'type' => 'article',
+      'type' => 'post',
       'title' => 'Week in DC Tech: October 5th Edition',
     ));
 
@@ -796,10 +796,10 @@ class FeedsRSStoNodesTest extends FeedsWebTestCase {
     backdrop_static_reset();
     node_types_rebuild();
 
-    // Create a role with permission to create articles.
+    // Create a role with permission to create posts.
     $role_name = $this->backdropCreateRole(array(
       'access content',
-      'create article content',
+      'create post content',
     ));
 
     // Create account with uid 201.

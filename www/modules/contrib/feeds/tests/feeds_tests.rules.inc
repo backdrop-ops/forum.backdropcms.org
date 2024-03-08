@@ -32,7 +32,7 @@ function feeds_tests_rules_action_info() {
  * Rules action callback: creates a node.
  */
 function feeds_tests_create_node() {
-  $node = new stdClass();
+  $node = new Node();
   $node->title = 'Test node';
   $node->type = 'page';
   $node->status = 1;

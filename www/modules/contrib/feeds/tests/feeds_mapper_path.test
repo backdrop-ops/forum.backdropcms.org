@@ -5,7 +5,7 @@
  * Contains FeedsMapperPathTestCase.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Test case for path alias mapper path.inc.
@@ -163,7 +163,7 @@ class FeedsMapperPathTestCase extends FeedsMapperTestCase {
 }
 
 /**
- * Class for testing Feeds <em>path</em> mapper with pathauto.module.
+ * Class for testing Feeds <em>path</em> mapper with path.module.
  */
 class FeedsMapperPathPathautoTestCase extends FeedsMapperTestCase {
 
@@ -183,7 +183,7 @@ class FeedsMapperPathPathautoTestCase extends FeedsMapperTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp(array('pathauto'));
+    parent::setUp(array('path'));
   }
 
   /**

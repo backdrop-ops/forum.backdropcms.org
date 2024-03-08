@@ -5,7 +5,7 @@
  * Contains FeedsMapperFormatConfig.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds_mapper.test';
 
 /**
  * Class for testing "Text format" mapping configuration on text fields.
@@ -63,7 +63,7 @@ class FeedsMapperFormatConfig extends FeedsMapperTestCase {
       'format' => $format,
       'name' => $this->randomName(),
       // Authenticated users.
-      'roles[2]' => TRUE,
+      'roles[authenticated]' => TRUE,
     );
     $this->backdropPost('admin/config/content/formats/add', $edit, t('Save configuration'));
 
@@ -142,7 +142,7 @@ class FeedsMapperFormatConfig extends FeedsMapperTestCase {
       'format' => $format1,
       'name' => $this->randomName(),
       // Authenticated users.
-      'roles[2]' => TRUE,
+      'roles[authenticated]' => TRUE,
     );
     $this->backdropPost('admin/config/content/formats/add', $edit1, t('Save configuration'));
 

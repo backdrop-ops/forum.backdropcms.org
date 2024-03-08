@@ -1,9 +1,11 @@
 <?php
-
 /**
  * @file
  * Feeds hooks implementations.
  */
+
+include_once __DIR__ '/../plugins/FeedsPlugin.inc';
+include_once __DIR__ '/../includes/FeedsConfigurable.inc';
 
 /**
  * Implements hook_feeds_prevalidate().

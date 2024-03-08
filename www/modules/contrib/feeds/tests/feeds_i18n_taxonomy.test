@@ -5,8 +5,8 @@
  * Contains Feedsi18nTaxonomyTestCase.
  */
 
-include_once 'feeds.test';
-include_once 'feeds_i18n.test';
+include_once __DIR__ . '/feeds.test';
+include_once __DIR__ . '/feeds_i18n.test';
 
 /**
  * Tests importing terms in a language.

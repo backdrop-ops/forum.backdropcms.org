@@ -4,6 +4,12 @@
  * @coversDefaultClass FeedsEnclosure
  * @group feeds
  */
+
+include_once __DIR__ . '/feeds.test';
+
+/**
+ *
+ */
 class FeedsEnclosureTest extends FeedsWebTestCase {
 
   /**

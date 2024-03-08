@@ -94,10 +94,10 @@ abstract class FeedsProcessor extends FeedsPlugin {
     $languages = array(
       LANGUAGE_NONE => t('Language neutral'),
     );
-    $language_list = language_list('enabled');
-    if (!empty($language_list[1])) {
-      foreach ($language_list[1] as $language) {
-        $languages[$language->language] = $language->name;
+    $language_list = language_list(TRUE);
+    if (count($language_list)) {
+      foreach ($language_list as $language) {
+        $languages[$language->langcode] = $language->name;
       }
     }
     return $languages;
@@ -116,8 +116,8 @@ abstract class FeedsProcessor extends FeedsPlugin {
     $entity = entity_create($this->entityType(), array());
 
     $info = $this->entityInfo();
-    if (!empty($info['entity keys']['language'])) {
-      $entity->{$info['entity keys']['language']} = $this->entityLanguage();
+    if (!empty($info['translation'])) {
+      $entity->langcode = $this->entityLanguage();
     }
 
     return $entity;
@@ -157,8 +157,8 @@ abstract class FeedsProcessor extends FeedsPlugin {
       }
     }
 
-    if ($entity && !empty($info['entity keys']['language'])) {
-      $entity->{$info['entity keys']['language']} = $this->entityLanguage();
+    if ($entity && !empty($info['translation'])) {
+      $entity->langcode = $this->entityLanguage();
     }
 
     return $entity;
@@ -178,13 +178,11 @@ abstract class FeedsProcessor extends FeedsPlugin {
   protected function entityValidate($entity, FeedsSource $source = NULL) {
     $info = $this->entityInfo();
 
-    if (!empty($info['entity keys']['language'])) {
-      // Ensure that a valid language is always set.
-      $key = $info['entity keys']['language'];
+    if (!empty($info['translation'])) {
       $languages = $this->languageOptions();
 
-      if (empty($entity->$key) || !isset($languages[$entity->$key])) {
-        $entity->$key = $this->entityLanguage();
+      if (empty($entity->langcode)) {
+        $entity->langcode = $this->entityLanguage();
       }
     }
 
@@ -625,7 +623,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
       return;
     }
 
-    if ($total = count($state->removeList)) {
+    if ($state->removeList !== NULL && ($total = count($state->removeList))) {
       $this->entityDeleteMultiple($state->removeList);
       $state->deleted += $total;
     }
@@ -1025,7 +1023,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
     }
 
     // Check configured language.
-    if (module_exists('locale') && !empty($info['entity keys']['language']) && isset($config['language'])) {
+    if (module_exists('locale') && !empty($info['translation']) && isset($config['language'])) {
       $languages = $this->languageOptions();
       if (!isset($languages[$config['language']])) {
         $errors[] = t('Invalid value %value for config option %key.', array(

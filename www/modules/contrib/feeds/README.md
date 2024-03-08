@@ -38,12 +38,14 @@ SimplePie Installation
 
 To install the SimplePie parser plugin, complete the following steps:
 
-  1. Download SimplePie from <http://simplepie.org/downloads>. The recommended version is: 1.3.
+  1. Download SimplePie from <http://simplepie.org/downloads>. The recommended version is: 1.5.6.
   2. Decompress the downloaded zip file.
-  3. Rename the uncompressed folder to `simplepie`. For example rename `simplepie-simplepie-e9472a1` to `simplepie`.
-  4. Move the folder to `/libraries`. The final directory structure should be `/libraries/simplepie`.
-  5. Flush the Backdrop cache.
-  6. The SimplePie parser should be available now in the list of parsers.
+  3. Rename the uncompressed folder to `simplepie`. For example rename `simplepie-1.5` to `simplepie`.
+  4. Move the folder to `/libraries`. If the folder does not exist, created it. The final directory structure should be `/libraries/simplepie`.
+  5. In order for your site to recognize this library, you have two options. Either install the [Libraries](https://backdropcms.org/project/libraries) module, or,
+     put this line in your `settings.php` file: `$config['feeds.settings']['feeds_library_dir'] = 'libraries';`
+  6. Flush the Backdrop cache.
+  7. The SimplePie parser should be available now in the list of parsers.
 
 PubSubHubbub support
 --------------------
@@ -89,37 +91,37 @@ Hidden settings
 
 Hidden settings are variables that you can define by either updating them in `feeds.settings.json` in your active configuration folder or overriding them in `settings.php` file like this example: `$config['feeds.settings']['NAME'] = VALUE;`.
 
-Name:        `feeds_debug`  
-Default:     `FALSE`  
+Name:        `feeds_debug`\
+Default:     `FALSE`\
 Description: Set to TRUE for enabling debug output to `/BACKDROPTMPDIR/feeds_[sitename].log`
 
-Name:        `feeds_importer_class`  
-Default:     `'FeedsImporter'`  
+Name:        `feeds_importer_class`\
+Default:     `'FeedsImporter'`\
 Description: The class to use for importing feeds.
 
-Name:        `feeds_source_class`  
-Default:     `'FeedsSource'`  
+Name:        `feeds_source_class`\
+Default:     `'FeedsSource'`\
 Description: The class to use for handling feed sources.
 
-Name:        `feeds_data_$importer_id`  
-Default:     `feeds_data_$importer_id`  
+Name:        `feeds_data_$importer_id`\
+Default:     `feeds_data_$importer_id`\
 Description: The table used by FeedsDataProcessor to store feed items. Usually a FeedsDataProcessor builds a table name from a prefix (feeds_data_) and the importer's id ($importer_id). This default table name can be overridden by defining a variable with the same name.
 
-Name:        `feeds_process_limit`  
-Default:     `50`  
+Name:        `feeds_process_limit`\
+Default:     `50`\
 Description: The number of nodes feed node processor creates or deletes in one page load.
 
-Name:        `http_request_timeout`  
-Default:     `15`  
-Description: Timeout in seconds to wait for an HTTP get request to finish.  
+Name:        `http_request_timeout`\
+Default:     `15`\
+Description: Timeout in seconds to wait for an HTTP get request to finish.
 Note:        This setting could be overridden per importer in admin UI: `admin/structure/feeds/<your_importer>/settings/<your_fetcher> page.`
 
-Name:        `feeds_never_use_curl`  
-Default:     `FALSE`  
+Name:        `feeds_never_use_curl`\
+Default:     `FALSE`\
 Description: Flag to stop feeds from using its cURL for http requests. See `http_request_use_curl()`.
 
-Name:        `feeds_use_mbstring`  
-Default:     `TRUE`  
+Name:        `feeds_use_mbstring`\
+Default:     `TRUE`\
 Description: The extension mbstring is used to convert encodings during parsing. The reason that this can be turned off is to be able to test Feeds behavior when the extension is not available.
 
 Glossary

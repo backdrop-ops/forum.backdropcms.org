@@ -5,7 +5,7 @@
  * Feeds tests.
  */
 
-include_once 'feeds.test';
+include_once __DIR__ . '/feeds.test';
 
 /**
  * Test cron scheduling.
@@ -40,9 +40,9 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
     $this->cronRun();
     $this->cronRun();
 
-    // There should be 0 article nodes in the database.
-    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article' AND status = 1")->fetchField();
-    $this->assertEqual($count, 0, 'There are 0 article nodes aggregated.');
+    // There should be 0 post nodes in the database.
+    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post' AND status = 1")->fetchField();
+    $this->assertEqual($count, 0, 'There are 0 post nodes aggregated.');
   }
 
   /**
@@ -67,9 +67,9 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
       '@actual' => count($schedule),
     )));
 
-    // There should be 200 article nodes in the database.
-    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article' AND status = 1")->fetchField();
-    $this->assertEqual($count, 200, format_string('There are 200 article nodes aggregated (actual: @actual).', array(
+    // There should be 200 post nodes in the database.
+    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post' AND status = 1")->fetchField();
+    $this->assertEqual($count, 200, format_string('There are 200 post nodes aggregated (actual: @actual).', array(
       '@actual' => $count,
     )));
 
@@ -123,9 +123,9 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
     }
     $this->assertFalse($equal, 'Every feed schedule time changed.');
 
-    // There should be 200 article nodes in the database.
-    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article' AND status = 1")->fetchField();
-    $this->assertEqual($count, 200, 'The total of 200 article nodes has not changed.');
+    // There should be 200 post nodes in the database.
+    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post' AND status = 1")->fetchField();
+    $this->assertEqual($count, 200, 'The total of 200 post nodes has not changed.');
 
     // Set expire settings, check rescheduling.
     $max_last = db_query("SELECT MAX(last) FROM {job_schedule} WHERE type = 'syndication' AND name = 'feeds_source_import' AND period = 0")->fetchField();
@@ -197,8 +197,8 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
     $this->cronRun();
 
     // Assert that no nodes were created yet.
-    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField();
-    $this->assertEqual(0, $count, format_string('There are no articles yet (actual: @count).', array(
+    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField();
+    $this->assertEqual(0, $count, format_string('There are no posts yet (actual: @count).', array(
       '@count' => $count,
     )));
 
@@ -208,9 +208,9 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
     // And run cron again.
     $this->cronRun();
 
-    // Assert that 10 articles were created.
-    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField();
-    $this->assertEqual(10, $count, format_string('10 articles have been created (actual: @count).', array(
+    // Assert that 10 posts were created.
+    $count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField();
+    $this->assertEqual(10, $count, format_string('10 posts have been created (actual: @count).', array(
       '@count' => $count,
     )));
   }
@@ -351,7 +351,7 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
 
       db_query("UPDATE {job_schedule} SET next = 0");
       $this->backdropPost('import/node/delete-items', array(), 'Delete');
-      $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField();
+      $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField();
       $this->assertEqual(0, $node_count);
 
       // Hit cron for importing, until we have all items or when we are running
@@ -360,12 +360,12 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
       $ran = 0;
       while ($node_count < 86 && $ran < $max_runs) {
         $this->cronRun();
-        $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField();
+        $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField();
         $ran++;
       }
 
       // Assert that 86 nodes exist now.
-      $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField();
+      $node_count = db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField();
       $this->assertEqual(86, $node_count, format_string('86 nodes exist after batched importing via cron (actual: @actual).', array(
         '@actual' => $node_count,
       )));
@@ -376,13 +376,13 @@ class FeedsSchedulerTestCase extends FeedsWebTestCase {
 
     // Delete a couple of nodes, then hit cron again. They should not be
     // replaced as the minimum update time is 30 minutes.
-    $nodes = db_query_range("SELECT nid FROM {node} WHERE type = 'article'", 0, 2);
+    $nodes = db_query_range("SELECT nid FROM {node} WHERE type = 'post'", 0, 2);
     foreach ($nodes as $node) {
       $this->backdropPost("node/{$node->nid}/delete", array(), 'Delete');
     }
-    $this->assertEqual(84, db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField());
+    $this->assertEqual(84, db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField());
     $this->cronRun();
-    $this->assertEqual(84, db_query("SELECT COUNT(*) FROM {node} WHERE type = 'article'")->fetchField());
+    $this->assertEqual(84, db_query("SELECT COUNT(*) FROM {node} WHERE type = 'post'")->fetchField());
   }
 
   /**

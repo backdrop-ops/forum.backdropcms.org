@@ -12,6 +12,13 @@ class FeedsWebTestCase extends BackdropWebTestCase {
   protected $profile = 'testing';
 
   /**
+   * A user with permission to bypass node access and administer nodes.
+   *
+   * @var object
+   */
+  protected $admin_user;
+
+  /**
    * {@inheritdoc}
    */
   public function setUp() {
@@ -96,6 +103,12 @@ class FeedsWebTestCase extends BackdropWebTestCase {
 
     // Create an admin user and log in.
     $this->admin_user = $this->backdropCreateUser($permissions);
+    // Track down which modules are not enabled.
+    if (!$this->admin_user) {
+      $enabled_modules = array_keys(system_list('module_enabled'));
+      $result = array_intersect($modules, $enabled_modules);
+      $this->assertEqual($modules, $result);
+    }
     $this->backdropLogin($this->admin_user);
 
     // Create two content types if they don't exist yet.
@@ -125,6 +138,7 @@ class FeedsWebTestCase extends BackdropWebTestCase {
 
       $this->backdropPost('admin/structure/types/add', $type, 'Save content type');
       $this->assertText("The content type " . $type['name'] . " has been added.");
+
     }
   }
 
@@ -652,11 +666,15 @@ class FeedsWebTestCase extends BackdropWebTestCase {
    */
   public function getNid($url) {
     $matches = array();
-    preg_match('/node\/(\d+?)$/', $url, $matches);
-    $nid = $matches[1];
-
-    // Test for actual integerness.
-    $this->assertTrue($nid === (string) (int) $nid, 'Node id is an integer.');
+    $nid = NULL;
+    if (preg_match('/node\/(\d+?)$/', $url, $matches)) {
+      $nid = $matches[1];
+      // Test for actual integerness.
+      $this->assertIdentical($nid, (string) (int) $nid);
+    }
+    else {
+      $this->fail(t('URL did not contain nid: @url', array('@url' => $url)));
+    }
 
     return $nid;
   }
@@ -783,17 +801,6 @@ class FeedsUnitTestHelper extends BackdropUnitTestCase {
  *
  */
 class FeedsUnitTestCase extends FeedsUnitTestHelper {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Unit tests',
-      'description' => 'Test basic low-level Feeds module functionality.',
-      'group' => 'Feeds',
-    );
-  }
 
   /**
    * Test valid absolute urls.

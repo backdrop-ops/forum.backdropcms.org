@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ */
+
+include_once __DIR__ . '/feeds.test';
 
 /**
  * @coversDefaultClass FeedsFetcherResult
