@@ -1,6 +1,7 @@
 <?php
 
 //namespace Backdrop\xautoload\Tests;
+require_once backdrop_get_path('module', 'xautoload') . '/xautoload.early.lib.inc';
 
 class XAutoloadWebTestCase extends \BackdropWebTestCase {
 
