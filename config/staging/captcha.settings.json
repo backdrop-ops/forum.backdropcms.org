@@ -7,13 +7,22 @@
     "default_challenge_on_nonlisted_forms": 0,
     "add_captcha_description": 0,
     "description": "This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.",
+    "error_message": "The answer you entered for the CAPTCHA was not correct.",
     "default_validation": "1",
     "persistence": "1",
     "enable_stats": 0,
-    "wrong_response_counter": 26919,
+    "wrong_response_counter": 0,
     "log_wrong_responses": 1,
-    "captcha_points": null,
-    "error_message": "The answer you provided was not correct.",
-    "description_en": "This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.",
-    "error_message_en": "The answer you provided was not correct."
+    "captcha_points": {
+        "user_pass": {
+            "form_id": "user_pass",
+            "module": "recaptcha",
+            "captcha_type": "reCAPTCHA"
+        },
+        "user_register_form": {
+            "form_id": "user_register_form",
+            "module": "recaptcha",
+            "captcha_type": "reCAPTCHA"
+        }
+    }
 }

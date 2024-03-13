@@ -3,7 +3,7 @@
     "field_name": "field_forhire",
     "entity_type": "user",
     "bundle": "user",
-    "label": "Available for hire",
+    "label": "I am available for hire",
     "widget": {
         "weight": "11",
         "type": "options_onoff",
