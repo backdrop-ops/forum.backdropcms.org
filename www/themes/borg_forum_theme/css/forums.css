@@ -61,6 +61,28 @@ body.front .l-top {
 }
 
 /******************************************************************************
+* Password + Registraiton form - captchas.
+******************************************************************************/
+
+.user-register-form .field-type-list-boolean .form-item {
+  margin-top: .5em;
+}
+
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .user-register-form .field-type-list-boolean {
+    margin-left: 167px; /* 155 + 12 padding from captcha */
+  }
+  .user-register-form .captcha {
+    margin-left: 155px;
+  }
+  #user-pass .g-recaptcha > div,
+  .user-register-form .g-recaptcha > div {
+    width: 100% !important;
+      text-align: right;
+  }
+}
+
+/******************************************************************************
  * Main Menu font size
  ******************************************************************************/
 ul.menu-dropdown a {
