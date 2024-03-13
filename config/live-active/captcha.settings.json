@@ -3,27 +3,16 @@
     "disable_catpcha": false,
     "administration_mode": 0,
     "allow_on_admin_pages": 0,
-    "default_challenge": "recaptcha/reCAPTCHA",
+    "default_challenge": "captcha/Math",
     "default_challenge_on_nonlisted_forms": 0,
     "add_captcha_description": 0,
     "description": "This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.",
     "default_validation": "1",
     "persistence": "1",
-    "enable_stats": 1,
-    "wrong_response_counter": 26918,
+    "enable_stats": 0,
+    "wrong_response_counter": 26919,
     "log_wrong_responses": 1,
-    "captcha_points": {
-        "user_password": {
-            "form_id": "user_password",
-            "module": "captcha",
-            "captcha_type": "Math"
-        },
-        "user_register_form": {
-            "form_id": "user_register_form",
-            "module": "image_captcha",
-            "captcha_type": "Image"
-        }
-    },
+    "captcha_points": null,
     "error_message": "The answer you provided was not correct.",
     "description_en": "This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.",
     "error_message_en": "The answer you provided was not correct."
