@@ -645,6 +645,7 @@ a.feed-icon {
 }
 
 a.otw-svg-mask {
+  display: inline-block;
   margin: 5px;
   background: #007CBA;
   width: 28px;
