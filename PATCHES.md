@@ -15,6 +15,10 @@ feeds - prevent PHP notice
   https://github.com/backdrop-contrib/feeds/issues/13
   https://github.com/backdrop-contrib/feeds/pull/88.patch
 
+flag - PHP 8.2 deprecation fix.
+  https://github.com/backdrop-contrib/flag/issues/51
+  https://github.com/backdrop-contrib/flag/pull/54.patch
+
 node notify - allows config files to be sync'd
   https://github.com/backdrop-contrib/node_notify/issues/1
   https://github.com/backdrop-contrib/node_notify/pull/2
