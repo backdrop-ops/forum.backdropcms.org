@@ -177,7 +177,7 @@
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n<div>Or bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, everyone welcome. Also, watch this space for the next <a href=\"https://events.backdropcms.org/\">Backdrop LIVE</a> (tentatively scheduled for March 21-22, 2024).</div>",
+                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n<div>Or bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, everyone welcome. Also, watch this space for the next <a href=\"https://events.backdropcms.org/\">Backdrop LIVE</a></div>",
                     "format": "full_html",
                     "admin_label": "",
                     "admin_description": ""
