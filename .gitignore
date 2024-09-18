@@ -1,20 +1,39 @@
-# files dir
-www/files
+# Ignore this file so it can be changed as needed.
+.gitignore
 
-# local settings.local.php
-www/settings.local.php
+# Ignore the private files directory.
+private-files
 
-# Backups.
-*.gz
-*.zip
+# Ignore all backups.
 *.sql
 *.sql.gz
 *.tgz
 *.tar
 *.tar.gz
+*.zip
 
-# Ignore development modules
+# Ignore modules for development.
 www/modules/contrib/devel
 
+# Ignore config for modules for development.
+www/modules/contrib/devel
+www/modules/contrib/backup_migrate
+config/*/devel.settings.json
+config/*/backup_migrate.settings.json
+
+# Ignore local development settings
+www/settings.local.dev.php
+www/sites/*/settings.local.dev.php
+
 # Ignore env vars.
+i.env
 .env
+
+# Ignore .ddev files
+.ddev
+www/settings.ddev.php
+www/drushrc.php
+
+# OS and IDE files.
+/.idea
+.DS_Store
