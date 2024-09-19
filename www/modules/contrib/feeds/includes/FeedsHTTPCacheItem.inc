@@ -25,6 +25,13 @@ class FeedsHTTPCacheItem {
   protected $cid;
 
   /**
+   * Code.
+   *
+   * @var string
+   */
+  protected $code;
+
+  /**
    * Headers of the response.
    *
    * @var array
