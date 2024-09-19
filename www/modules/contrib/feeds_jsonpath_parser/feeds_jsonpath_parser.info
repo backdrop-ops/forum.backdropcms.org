@@ -2,6 +2,12 @@ name = Feeds JSONPath Parser
 description = Parse a JSON document using JSONPath.
 backdrop = 1.x
 type = module
+
 dependencies[] = feeds
+
 package = Feeds
 
+; Added by Backdrop CMS packaging script on 2024-10-14
+project = feeds_jsonpath_parser
+version = 1.x-1.2.3
+timestamp = 1728938697

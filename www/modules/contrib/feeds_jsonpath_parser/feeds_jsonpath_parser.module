@@ -7,60 +7,32 @@
 /**
  * Defines which commit to checkout from flow/jsonpath.
  */
-define('FEEDS_JSONPATH_PARSER_LIBRARY_VERSION', '0.5.0');
+define('FEEDS_JSONPATH_PARSER_LIBRARY_VERSION', '0.9.1');
 
 /**
  * Implements hook_autoload_info().
  */
 function feeds_jsonpath_parser_autoload_info() {
-  return array(
-    // Instead of xautoload?
-    /*
-    'JSONPath'          => 'libraries/JSONPath/src/Flow/JSONPath/JSONPath.php',
-    'JSONPathException' => 'libraries/JSONPath/src/Flow/JSONPath/JSONPathException.php',
-    'JSONPathLexer'     => 'libraries/JSONPath/src/Flow/JSONPath/JSONPathLexer.php',
-    'JSONPathToken'     => 'libraries/JSONPath/src/Flow/JSONPath/JSONPathToken.php',
-    'AccessHelper'      => 'libraries/JSONPath/src/Flow/JSONPath/AccessHelper.php',
-    'AbstractFilter'    => 'libraries/JSONPath/src/Flow/JSONPath/Filters/AbstractFilter.php',
-    'IndexesFilter'     => 'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexesFilter.php',
-    'IndexFilter'       => 'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexFilter.php',
-    'QueryMatchFilter'  => 'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryMatchFilter.php',
-    'QueryResultFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryResultFilter.php',
-    'RecursiveFilter'   => 'libraries/JSONPath/src/Flow/JSONPath/Filters/RecursiveFilter.php',
-    'SliceFilter'       => 'libraries/JSONPath/src/Flow/JSONPath/Filters/SliceFilter.php',
-    */
+  $autoloads = array(
     'FeedsJSONPathParser' => 'FeedsJSONPathParser.inc',
+
+    // Use proper namespace.
+    'Flow\JSONPath\JSONPath' => 'libraries/JSONPath/src/JSONPath.php',
+    'Flow\JSONPath\JSONPathException' => 'libraries/JSONPath/src/JSONPathException.php',
+    'Flow\JSONPath\JSONPathLexer' => 'libraries/JSONPath/src/JSONPathLexer.php',
+    'Flow\JSONPath\JSONPathToken' => 'libraries/JSONPath/src/JSONPathToken.php',
+    'Flow\JSONPath\AccessHelper' => 'libraries/JSONPath/src/AccessHelper.php',
+
+    'Flow\JSONPath\AbstractFilter' => 'libraries/JSONPath/src/Filters/AbstractFilter.php',
+    'Flow\JSONPath\IndexesFilter' => 'libraries/JSONPath/src/Filters/IndexesFilter.php',
+    'Flow\JSONPath\IndexFilter' => 'libraries/JSONPath/src/Filters/IndexFilter.php',
+    'Flow\JSONPath\QueryMatchFilter' => 'libraries/JSONPath/src/Filters/QueryMatchFilter.php',
+    'Flow\JSONPath\QueryResultFilter' => 'libraries/JSONPath/src/Filters/QueryResultFilter.php',
+    'Flow\JSONPath\RecursiveFilter' => 'libraries/JSONPath/src/Filters/RecursiveFilter.php',
+    'Flow\JSONPath\SliceFilter' => 'libraries/JSONPath/src/Filters/SliceFilter.php',
   );
-}
 
-/**
- * Implements hook_libraries_info().
- */
-function feeds_jsonpath_parser_libraries_info() {
-  $libraries = array();
-  $libraries['jsonpath'] = array(
-    'name' => 'JSONPath',
-    'vendor url' => 'https://github.com/FlowCommunications/JSONPath',
-    'download url' => 'https://github.com/FlowCommunications/JSONPath/archive/' . FEEDS_JSONPATH_PARSER_LIBRARY_VERSION . '.tar.gz',
-    'version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION,
-    'xautoload' => '_feeds_jsonpath_parser_xautoload_callback',
-  );
-
-  return $libraries;
-}
-
-/**
- * Callback for xautoload.
- *
- * @see feeds_jsonpath_parser_libraries_info()
- */
-function _feeds_jsonpath_parser_xautoload_callback($adapter) {
-  try {
-    $adapter->composerJson('composer.json');
-  }
-  catch (Exception $e) {
-    backdrop_set_message($e->getMessage(), 'error', FALSE);
-  }
+  return $autoloads;
 }
 
 /**
@@ -84,25 +56,38 @@ function feeds_jsonpath_parser_feeds_plugins() {
 }
 
 
+/******************* Deprecated below this line ********************************/
+
 /**
- * Loads the jsonpath library.
+ * Implements hook_libraries_info().
+ *
+ * Remains only for requirements check.
+ *
+ * @see feeds_jsonpath_parser.install
  */
-function feeds_jsonpath_parser_load_library() {
-  // Check first to see if the class is loaded some other way like composer.
-  if (!class_exists('\Flow\JSONPath\JSONPath', TRUE)) {
-    // If not, then we should have libraries installed.
-    if (!module_exists('libraries')) {
-      return FALSE;
-    }
-    $library = libraries_load('jsonpath');
-    if ($library['loaded'] === FALSE) {
-      return FALSE;
-    }
-    // We need to make sure that what is said to be the library here is actually
-    // the one we wanted because they may have left the old one here.
-    if (!class_exists('\Flow\JSONPath\JSONPath', TRUE)) {
-      return FALSE;
-    }
+function feeds_jsonpath_parser_libraries_info() {
+  $libraries = array();
+
+  $libraries['jsonpath'] = array(
+    'name' => 'JSONPath',
+    'vendor url' => 'https://github.com/SoftCreatR/JSONPath',
+    'download url' => 'https://github.com/SoftCreatR/JSONPath/archive/refs/tags/' . FEEDS_JSONPATH_PARSER_LIBRARY_VERSION . '.zip',
+    'version' => '9.0.1',
+  );
+
+  return $libraries;
+}
+
+/**
+ * Callback for xautoload.
+ *
+ * @see feeds_jsonpath_parser_libraries_info()
+ */
+function _feeds_jsonpath_parser_xautoload_callback($adapter) {
+  try {
+    $adapter->composerJson('composer.json');
   }
-  return TRUE;
+  catch (Exception $e) {
+    backdrop_set_message($e->getMessage(), 'error', FALSE);
+  }
 }

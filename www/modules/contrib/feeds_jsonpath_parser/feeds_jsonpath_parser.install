@@ -19,37 +19,95 @@ function feeds_jsonpath_parser_enable() {
 function feeds_jsonpath_parser_requirements($phase) {
   $requirements = array();
 
-  if ($phase !== 'runtime' && $phase !== 'install') {
+  if ($phase !== 'runtime') {
     return $requirements;
   }
 
-  drupal_load('module', 'feeds_jsonpath_parser');
-
   $t = get_t();
   $requirements['feeds_jsonpath_parser']['title'] = $t('JSONPath library');
-  $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_OK;
-  $requirements['feeds_jsonpath_parser']['value'] = $t('Installed');
 
-  if (feeds_jsonpath_parser_load_library() === FALSE) {
-    $message = '';
-    // Lets make sure they know about the security issue here too, just in case
-    // they got by without running updates.
-    if (module_exists('libraries') && file_exists(libraries_get_path('jsonpath') . '/jsonpath.php')) {
-      $message = $t('To remain secure because of issues identified in <a href="https://www.drupal.org/sa-contrib-2019-083">SA-CONTRIB-2019-083</a>, you must remove goessner/jsonpath and replace it with flow/jsonpath.');
+  // Check that the library is successfully installed.
+  if (class_exists('\Flow\JSONPath\JSONPath', TRUE)) {
+
+    // Get the bundled class location.
+    $path = backdrop_get_path('module', 'feeds_jsonpath_parser');
+    $module_path = BACKDROP_ROOT . '/' . $path;
+    $module_class_file = $module_path . '/libraries/JSONPath/src/JSONPath.php';
+
+    // Get the active class location.
+    $ReflectionClass = new ReflectionClass('\Flow\JSONPath\JSONPath');
+    $active_class_file = $ReflectionClass->getFileName();
+
+    // Compare to determine we are using the bundled class.
+    if ($module_class_file == $active_class_file) {
+      $value = $t('Version %version installed', array('%version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION));
+      $description = $t('The JSONPath library is bundled with the <em>feeds_jsonpath_parser</em> module.');
+      $severity = REQUIREMENT_OK;
     }
-    if ($phase === 'runtime' || (module_exists('libraries') && !file_exists(libraries_get_path('jsonpath') . '/src/Flow/JSONPath/JSONPath.php'))) {
-      $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_ERROR;
-      $requirements['feeds_jsonpath_parser']['description'] = $message . ' ' . $t('The <a href="@jsonpath">JSONPath</a> library is missing. Download <a href="@download">@download</a> and place the contents of JSONPath-@version in sites/all/libraries/jsonpath and enable the modules "libraries" and "xautoload".', array(
-        '@jsonpath' => 'https://github.com/FlowCommunications/JSONPath',
-        '@version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION,
-        '@download' => 'https://github.com/FlowCommunications/JSONPath/archive/' . FEEDS_JSONPATH_PARSER_LIBRARY_VERSION . '.tar.gz',
-      ));
-      $requirements['feeds_jsonpath_parser']['value'] = $t('Not installed');
+    else {
+      $value = $t('Unknown version installed');
+      $class_file = str_replace(BACKDROP_ROOT, '', $active_class_file);
+      $substitutions = array('%file' => $class_file);
+      $description = $t('The <em>feeds_jsonpath_parser</em> module has not loaded the bundled JSONPath library because it already exists at <em>%file</em>.', $substitutions);
+      $severity = REQUIREMENT_WARNING;
     }
+
+    // Set values based on known or unknown library.
+    $requirements['feeds_jsonpath_parser']['value'] = $value;
+    $requirements['feeds_jsonpath_parser']['description'] = $description;
+    $requirements['feeds_jsonpath_parser']['severity'] = $severity;
   }
 
-  if ($phase === 'install') {
-    unset($requirements['feeds_jsonpath_parser']['value']);
+  else {
+    // Mising Library.
+    $message = 'The <a href="@jsonpath">JSONPath</a> library is missing. This library is normally included automatically since it is bundled with the <em>feeds_jsonpath_parser</em> module.';
+    $substitutions = array(
+      '@jsonpath' => 'https://github.com/SoftCreatR/JSONPath',
+    );
+
+    $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_ERROR;
+    $requirements['feeds_jsonpath_parser']['description'] = $t($message, $substitutions);
+    $requirements['feeds_jsonpath_parser']['value'] = $t('The JSONPath library is missing.');
+  }
+
+  // Let's check for libraries in the libraries module location.
+  if (module_exists('libraries')) {
+
+    // Check for an insecure version.
+    $file_path_insecure = libraries_get_path('jsonpath') . '/jsonpath.php';
+    if (file_exists($file_path_insecure)) {
+      $message = 'An insecure copy of the JSONPath library has been detected at %file. Because of issues identified in <a href="@sa">SA-CONTRIB-2019-083</a>, you must remove this library.';
+      $substitutions = array(
+        '%file' => $file_path_insecure,
+        '@sa' => 'https://www.drupal.org/sa-contrib-2019-083',
+      );
+
+      $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_ERROR;
+      $requirements['feeds_jsonpath_parser']['description'] = $t($message, $substitutions);
+      $requirements['feeds_jsonpath_parser']['value'] = $t('Insecure version detected.');
+    }
+
+    // Check for a previous version.
+    $file_path_outdated = libraries_get_path('jsonpath');
+    if (file_exists($file_path_outdated  . '/src/JSONPath.php')) {
+      $message = 'An out-of-date copy of the JSONPath library has been detected at %file. If you are only using JSONPath for <em>feeds_jsonpath_parser</em> module, this copy can be removed.';
+      $substitutions = array('%file' => $file_path_outdated);
+
+      $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_WARNING;
+      $requirements['feeds_jsonpath_parser']['description'] = $t($message, $substitutions);
+      $requirements['feeds_jsonpath_parser']['value'] = $t('Out of date copy detected.');
+    }
+
+    // Check for a duplicate copy.
+    $file_path_duplicate = libraries_get_path('jsonpath');
+    if (file_exists($file_path_duplicate  . '/src/Flow/JSONPath/JSONPath.php')) {
+      $message = 'A duplicate copy of the JSONPath library was detected at %file. If you are only using JSONPath for <em>feeds_jsonpath_parser</em> module, this copy can be removed.';
+      $substitutions = array('%file' => $file_path_duplicate);
+
+      $requirements['feeds_jsonpath_parser']['severity'] = REQUIREMENT_WARNING;
+      $requirements['feeds_jsonpath_parser']['description'] = $t($message, $substitutions);
+      $requirements['feeds_jsonpath_parser']['value'] = $t('Duplicate copy detected.');
+    }
   }
 
   return $requirements;
