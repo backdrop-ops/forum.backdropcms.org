@@ -1,0 +1,11 @@
+{
+  "name": "backdrop/feeds_jsonpath_parser",
+  "require": {
+    "softcreatr/jsonpath": "^0.9"
+  },
+  "description": "Parse a JSON document using JSONPath.",
+  "homepage": "https://www.backdropcms.org/project/feeds_jsonpath_parser",
+  "support": {
+    "source": "https://github.com/backdrop-contrib/feeds_jsonpath_parser/issues"
+  }
+}
