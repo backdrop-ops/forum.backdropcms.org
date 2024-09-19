@@ -7,13 +7,21 @@ Core patches
 Contrib patches
 ===============
 
-bakismet - prevent fatal from bulk delete
+akismet - prevent fatal from bulk delete
   https://github.com/backdrop-contrib/akismet/issues/9
   https://github.com/backdrop-contrib/akismet/pull/10.patch
 
 feeds - prevent PHP notice
   https://github.com/backdrop-contrib/feeds/issues/13
   https://github.com/backdrop-contrib/feeds/pull/88.patch
+
+feeds - prevent PHP 8.2 deprecation notice
+  https://github.com/backdrop-contrib/feeds/issues/148
+  https://github.com/backdrop-contrib/feeds/pull/149.patch
+
+feeds - prevent PHP 8.2 deprecation notice
+  https://github.com/backdrop-contrib/feeds/issues/150
+  (comment out one line)
 
 flag - PHP 8.2 deprecation fix.
   https://github.com/backdrop-contrib/flag/issues/51
