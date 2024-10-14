@@ -41,7 +41,8 @@
         "vote on polls",
         "cancel own vote",
         "flag feature_vote",
-        "unflag feature_vote"
+        "unflag feature_vote",
+        "use text format markdown"
     ],
     "description": ""
 }
