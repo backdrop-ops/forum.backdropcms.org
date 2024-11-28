@@ -16,20 +16,20 @@ function feeds_jsonpath_parser_autoload_info() {
   $autoloads = array(
     'FeedsJSONPathParser' => 'FeedsJSONPathParser.inc',
 
-    // Use proper namespace.
-    'Flow\JSONPath\JSONPath' => 'libraries/JSONPath/src/Flow/JSONPath/JSONPath.php',
-    'Flow\JSONPath\JSONPathException' => 'libraries/JSONPath/src/JSONPathException.php',
-    'Flow\JSONPath\JSONPathLexer' => 'libraries/JSONPath/src/Flow/JSONPath/JSONPathLexer.php',
-    'Flow\JSONPath\JSONPathToken' => 'libraries/JSONPath/src/Flow/JSONPath/JSONPathToken.php',
-    'Flow\JSONPath\AccessHelper' => 'libraries/JSONPath/src/Flow/JSONPath/AccessHelper.php',
+// Use proper namespace.
+'Flow\JSONPath\JSONPath' =>                  'libraries/JSONPath/src/Flow/JSONPath/JSONPath.php',
+'Flow\JSONPath\JSONPathException' =>         'libraries/JSONPath/src/Flow/JSONPath/JSONPathException.php',
+'Flow\JSONPath\JSONPathLexer' =>             'libraries/JSONPath/src/Flow/JSONPath/JSONPathLexer.php',
+'Flow\JSONPath\JSONPathToken' =>             'libraries/JSONPath/src/Flow/JSONPath/JSONPathToken.php',
+'Flow\JSONPath\AccessHelper' =>              'libraries/JSONPath/src/Flow/JSONPath/AccessHelper.php',
 
-    'Flow\JSONPath\AbstractFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/AbstractFilter.php',
-    'Flow\JSONPath\IndexesFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexesFilter.php',
-    'Flow\JSONPath\IndexFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexFilter.php',
-    'Flow\JSONPath\QueryMatchFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryMatchFilter.php',
-    'Flow\JSONPath\QueryResultFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryResultFilter.php',
-    'Flow\JSONPath\RecursiveFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/RecursiveFilter.php',
-    'Flow\JSONPath\SliceFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/SliceFilter.php',
+'Flow\JSONPath\Filters\AbstractFilter' =>    'libraries/JSONPath/src/Flow/JSONPath/Filters/AbstractFilter.php',
+'Flow\JSONPath\Filters\IndexesFilter' =>     'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexesFilter.php',
+'Flow\JSONPath\Filters\IndexFilter' =>       'libraries/JSONPath/src/Flow/JSONPath/Filters/IndexFilter.php',
+'Flow\JSONPath\Filters\QueryMatchFilter' =>  'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryMatchFilter.php',
+'Flow\JSONPath\Filters\QueryResultFilter' => 'libraries/JSONPath/src/Flow/JSONPath/Filters/QueryResultFilter.php',
+'Flow\JSONPath\Filters\RecursiveFilter' =>   'libraries/JSONPath/src/Flow/JSONPath/Filters/RecursiveFilter.php',
+'Flow\JSONPath\Filters\SliceFilter' =>       'libraries/JSONPath/src/Flow/JSONPath/Filters/SliceFilter.php',
   );
 
   return $autoloads;

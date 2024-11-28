@@ -10,4 +10,4 @@ package = Feeds
 ; Added by Backdrop CMS packaging script on 2024-11-27
 project = feeds_jsonpath_parser
 version = 1.x-1.2.4
-timestamp = 1732762363
+timestamp = 1732776545

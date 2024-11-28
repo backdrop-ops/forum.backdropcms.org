@@ -118,7 +118,7 @@ class FeedsJSONPathParser extends FeedsParser {
    *   In case the parsed json is not an array.
    */
   protected function jsonPath($array, $expression) {
-    $result = (new JSONPath($array))->find($expression)->getData();
+    $result = (new JSONPath($array))->find($expression)->data();
 
     // If the returned result is empty, just return an empty array.
     if (empty($result)) {
