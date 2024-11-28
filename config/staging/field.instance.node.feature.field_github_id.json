@@ -18,7 +18,7 @@
     "default_value_function": null,
     "settings": {
         "min": "",
-        "max": "2147483646",
+        "max": "2147483647",
         "prefix": "",
         "suffix": "",
         "user_register_form": false
