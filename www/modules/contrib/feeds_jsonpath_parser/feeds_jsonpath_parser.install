@@ -29,28 +29,14 @@ function feeds_jsonpath_parser_requirements($phase) {
   // Check that the library is successfully installed.
   if (class_exists('\Flow\JSONPath\JSONPath', TRUE)) {
 
-    // Get the bundled class location.
-    $path = backdrop_get_path('module', 'feeds_jsonpath_parser');
-    $module_path = BACKDROP_ROOT . '/' . $path;
-    $module_class_file = $module_path . '/libraries/JSONPath/src/JSONPath.php';
-
     // Get the active class location.
     $ReflectionClass = new ReflectionClass('\Flow\JSONPath\JSONPath');
     $active_class_file = $ReflectionClass->getFileName();
 
-    // Compare to determine we are using the bundled class.
-    if ($module_class_file == $active_class_file) {
-      $value = $t('Version %version installed', array('%version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION));
-      $description = $t('The JSONPath library is bundled with the <em>feeds_jsonpath_parser</em> module.');
-      $severity = REQUIREMENT_OK;
-    }
-    else {
-      $value = $t('Unknown version installed');
-      $class_file = str_replace(BACKDROP_ROOT, '', $active_class_file);
-      $substitutions = array('%file' => $class_file);
-      $description = $t('The <em>feeds_jsonpath_parser</em> module has not loaded the bundled JSONPath library because it already exists at <em>%file</em>.', $substitutions);
-      $severity = REQUIREMENT_WARNING;
-    }
+    // We are using the bundled class.
+    $value = $t('Version %version included with the feeds_json_parser module.', array('%version' => FEEDS_JSONPATH_PARSER_LIBRARY_VERSION));
+    $description = $t('The JSONPath library is bundled with the <em>feeds_jsonpath_parser</em> module.');
+    $severity = REQUIREMENT_OK;
 
     // Set values based on known or unknown library.
     $requirements['feeds_jsonpath_parser']['value'] = $value;

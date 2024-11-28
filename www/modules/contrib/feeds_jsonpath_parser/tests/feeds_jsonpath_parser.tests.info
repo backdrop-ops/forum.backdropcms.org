@@ -5,7 +5,7 @@ group = Feeds JSONPath Parser
 file = feeds_jsonpath_parser.test
 
 
-; Added by Backdrop CMS packaging script on 2024-10-14
+; Added by Backdrop CMS packaging script on 2024-11-27
 project = feeds_jsonpath_parser
-version = 1.x-1.2.3
-timestamp = 1728938697
+version = 1.x-1.2.4
+timestamp = 1732762363
