@@ -5,7 +5,7 @@
     "bundle": "feature",
     "label": "GitHub Link",
     "widget": {
-        "weight": "-3",
+        "weight": "2",
         "type": "link_field",
         "module": "link",
         "active": 0,
@@ -36,7 +36,8 @@
             "title": ""
         },
         "rel_remove": "default",
-        "user_register_form": false
+        "user_register_form": false,
+        "type": "both"
     },
     "display": {
         "default": {

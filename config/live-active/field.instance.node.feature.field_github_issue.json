@@ -5,7 +5,7 @@
     "bundle": "feature",
     "label": "GitHub Issue #",
     "widget": {
-        "weight": "-1",
+        "weight": "5",
         "type": "number",
         "module": "number",
         "active": 0,
@@ -27,7 +27,7 @@
         "default": {
             "label": "inline",
             "type": "number_integer",
-            "weight": "3",
+            "weight": "2",
             "settings": {
                 "thousand_separator": "",
                 "decimal_separator": ".",
