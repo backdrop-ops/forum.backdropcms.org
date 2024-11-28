@@ -6,7 +6,7 @@
     "extra_fields": {
         "form": {
             "title": {
-                "weight": "-5"
+                "weight": "0"
             }
         },
         "display": []
