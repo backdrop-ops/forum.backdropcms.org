@@ -5,15 +5,39 @@
  * Feeds - basic API functions and hook implementations.
  */
 
-// Common request time, use as point of reference and to avoid calls to time().
+/**
+ * Common request time, use as point of reference and to avoid calls to time().
+ *
+ * @var int
+ */
 define('FEEDS_REQUEST_TIME', time());
-// Do not schedule a feed for refresh.
+
+/**
+ * Do not schedule a feed for refresh.
+ *
+ * @var int
+ */
 define('FEEDS_SCHEDULE_NEVER', -1);
-// Never expire feed items.
+
+/**
+ * Never expire feed items.
+ *
+ * @var int
+ */
 define('FEEDS_EXPIRE_NEVER', -1);
 
-// Status of batched operations.
+/**
+ * Status of batched operations: complete.
+ *
+ * @var float
+ */
 define('FEEDS_BATCH_COMPLETE', 1.0);
+
+/**
+ * Status of batched operations: active
+ *
+ * @var float
+ */
 define('FEEDS_BATCH_ACTIVE', 0.0);
 
 /**
@@ -1007,7 +1031,7 @@ function feeds_admin_bar_output_build(array &$content) {
 function feeds_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   if ($root_path == 'admin/content') {
     $data['actions']['output'][] = array(
-      '#theme' => 'menu_local_task',
+      '#theme' => 'menu_local_action',
       '#link' => array(
         'title' => t('Import'),
         'href' => 'import',
@@ -1670,7 +1694,11 @@ function feeds_autoload_info() {
   'FeedsLockException' => 'includes/FeedsSource.inc',
   'FeedsSource' => 'includes/FeedsSource.inc',
   'FeedsSourceInterface' => 'includes/FeedsSource.inc',
+  'FeedsPreviewSource' => 'includes/FeedsPreviewSource.inc',
+  'FeedsPreviewTable' => 'includes/FeedsPreviewTable.inc',
   'HRCurlException' => 'libraries/http_request.inc',
+
+  // Plugins
   'FeedsCSVParser' => 'plugins/FeedsCSVParser.inc',
   'FeedsResult' => 'plugins/FeedsPlugin.inc',
   'FeedsFetcherResult' => 'plugins/FeedsFetcher.inc',
@@ -1698,6 +1726,8 @@ function feeds_autoload_info() {
   'FeedsSyndicationParser' => 'plugins/FeedsSyndicationParser.inc',
   'FeedsTermProcessor' => 'plugins/FeedsTermProcessor.inc',
   'FeedsUserProcessor' => 'plugins/FeedsUserProcessor.inc',
+
+  // Views
   'feeds_views_handler_argument_importer_id' => 'views/feeds_views_handler_argument_importer_id.inc',
   'feeds_views_handler_field_importer_name' => 'views/feeds_views_handler_field_importer_name.inc',
   'feeds_views_handler_field_log_message' => 'views/feeds_views_handler_field_log_message.inc',

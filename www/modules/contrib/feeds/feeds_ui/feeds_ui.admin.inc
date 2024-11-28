@@ -307,6 +307,11 @@ function feeds_ui_edit_page(FeedsImporter $importer, $active = 'help', $plugin_k
       $active_container['title'] = t('Mapping for @processor', array('@processor' => $processor_name));
       $active_container['body'] = backdrop_get_form('feeds_ui_mapping_form', $importer);
       break;
+    case 'preview':
+      module_load_include('pages.inc', 'feeds');
+      $active_container['title'] = t('Import preview');
+      $active_container['body'] = backdrop_get_form('feeds_preview_form', $importer->id);
+      break;
   }
 
   // Build config info.
@@ -387,6 +392,19 @@ function feeds_ui_edit_page(FeedsImporter $importer, $active = 'help', $plugin_k
     ),
   );
   $info['actions'] = array(l(t('Change'), $path . '/processor'));
+  $config_info[] = $info;
+
+  // Preview
+  $info['title'] = t('Preview');
+  $info['body'] = array(
+    array(
+      'body' => t('Show a preview of the import.'),
+      'actions' => array(
+        l(t('Import preview'), $path . '/preview'),
+      ),
+    ),
+  );
+  $info['actions'] = array();
   $config_info[] = $info;
 
   // Validate configuration.

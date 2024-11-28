@@ -1,0 +1,42 @@
+/**
+ * @file
+ * CSS for Feeds.
+ */
+
+.feeds-preview-table-source-column,
+.feeds-preview-table-target-column {
+  width: 100px;
+  vertical-align: top;
+}
+
+.feeds-preview-table-value-column {
+  max-width: 400px;
+  overflow-x: auto;
+}
+.feeds-preview-table-value-column pre {
+  margin: 0;
+}
+
+.feeds-preview-table {
+  display: none;
+}
+.feeds-preview-table.active {
+  display: table;
+}
+
+.feeds-preview-long-content.collapsed {
+  height: 40px;
+  overflow: hidden;
+}
+
+.feeds-preview-controls-previous,
+.feeds-preview-controls-next {
+  display: inline-block;
+}
+
+.feeds-preview-table-row-not-mapped td.feeds-preview-table-target-column {
+  background-image: var(--icon-warning);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 1em;
+}

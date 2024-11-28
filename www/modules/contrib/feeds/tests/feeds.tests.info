@@ -1,232 +1,256 @@
 [CommonSyndicationParserTestCase]
 name = Common Syndication Parser
-description = Unit tests for Common Syndication Parser.
+description = 'Unit tests for Common Syndication Parser.'
 group = Feeds
 file = common_syndication_parser.test
 
 [FeedsUnitTestCase]
 name = FeedsUnitTestCase
-description = Test basic low-level Feeds module functionality.
+description = 'Test basic low-level Feeds module functionality.'
 group = Feeds
 file = feeds.test
 
 [FeedsContentTypeTest]
 name = Feed content type
-description = Tests behavior for when an importer is attached to a content type.
+description = 'Tests behavior for when an importer is attached to a content type.'
 group = Feeds
 file = feeds_content_type.test
 
 [FeedsFileFetcherTestCase]
 name = FeedsFileFetcherTestCase
-description = TBD
+description = 'File fetcher'
 group = Feeds
 file = feeds_fetcher_file.test
 
 [FeedsFileHTTPTestCase]
 name = FeedsFileHTTPTestCase
-description = TBD
+description = 'File HTTP'
 group = Feeds
 file = feeds_fetcher_http.test
 
 [Feedsi18nNodeTestCase]
 name = Feedsi18nNodeTestCase
-description = TBD
+description = 'I18n node'
 group = Feeds
 file = feeds_i18n_node.test
 
 [Feedsi18nTaxonomyTestCase]
 name = Feedsi18nTaxonomyTestCase
-description = TBD
+description = 'I18n taxonomy'
 group = Feeds
 file = feeds_i18n_taxonomy.test
 
 [FeedsMapperConfigTestCase]
 name = FeedsMapperConfigTestCase
-description = Test the mapper configuration UI.
+description = 'Test the mapper configuration UI.'
 group = Feeds
 file = feeds_mapper_config.test
 
 [FeedsMapperDateTestCase]
 name = FeedsMapperDateTestCase
-description = Test Feeds Mapper support for CCK Date fields.
+description = 'Test Feeds Mapper support for Date fields.'
 group = Feeds
 file = feeds_mapper_date.test
 
 [FeedsMapperDateMultipleTestCase]
 name = FeedsMapperDateMultipleTestCase
-description = TBD
+description = 'Mapper: date'
 group = Feeds
 file = feeds_mapper_date_multiple.test
 
 [FeedsMapperFieldTestCase]
 name = FeedsMapperFieldTestCase
-description = TBD
+description = 'Mapper: field'
 group = Feeds
 file = feeds_mapper_field.test
 
 [FeedsMapperFileTestCase]
 name = FeedsMapperFileTestCase
-description = TBD
+description = 'Mapper: file'
 group = Feeds
 file = feeds_mapper_file.test
 
 [FeedsMapperFormatConfig]
 name = FeedsMapperFormatConfig
-description = TBD
+description = 'Mapper: format config'
 group = Feeds
 file = feeds_mapper_format_config.test
 
 [FeedsMapperHookTestCase]
 name = FeedsMapperHookTestCase
-description = Test case for the various callbacks implemented for mappers.
+description = 'Test case for the various callbacks implemented for mappers.'
 group = Feeds
 file = feeds_mapper_hooks.test
 
 [FeedsMapperLinkTestCase]
 name = FeedsMapperLinkTestCase
-description = TBD
+description = 'Mapper: link'
 group = Feeds
 file = feeds_mapper_link.test
 
 [FeedsMapperListTestCase]
 name = FeedsMapperListTestCase
-description = TBD
+description = 'Mapper: list'
 group = Feeds
 file = feeds_mapper_list.test
 
 [FeedsMapperMultilingualFieldsTestCase]
 name = FeedsMapperMultilingualFieldsTestCase
-description = TBD
+description = 'Mapper: multilingual fields'
 group = Feeds
 file = feeds_mapper_multilingual_fields.test
 
 [FeedsMapperPathTestCase]
 name = FeedsMapperPathTestCase
-description = TBD
+description = 'Mapper: path'
 group = Feeds
 file = feeds_mapper_path.test
 
 [FeedsMapperPathPathautoTestCase]
 name = FeedsMapperPathPathautoTestCase
-description = TBD
+description = 'Mapper: pathauto'
 group = Feeds
 file = feeds_mapper_path.test
 
 [FeedsMapperProfileTestCase]
 name = FeedsMapperProfileTestCase
-description = TBD
+description = 'Mapper: profile'
 group = Feeds
 file = feeds_mapper_profile.test
 
 [FeedsMapperNodeSummaryTestCase]
 name = FeedsMapperNodeSummaryTestCase
-description = TBD
+description = 'Mapper: Node summary'
 group = Feeds
 file = feeds_mapper_summary.test
 
 [FeedsMapperTaxonomyTestCase]
 name = FeedsMapperTaxonomyTestCase
-description = Test Feeds Mapper support for Taxonomy.
+description = 'Test Feeds Mapper support for Taxonomy.'
 group = Feeds
 file = feeds_mapper_taxonomy.test
 
 [FeedsMapperUniqueTestCase]
 name = FeedsMapperUniqueTestCase
-description = TBD
+description = 'Mapper: unique'
 group = Feeds
 file = feeds_mapper_unique.test
 
 [FeedsCSVParserTestCase]
 name = FeedsCSVParserTestCase
-description = TBD
+description = 'CSV Parser'
 group = Feeds
 file = feeds_parser_csv.test
 
 [FeedsSitemapParserTestCase]
 name = FeedsSitemapParserTestCase
-description = TBD
+description = 'Sitemap Parser.'
 group = Feeds
 file = feeds_parser_sitemap.test
 
 [FeedsSyndicationParserTestCase]
 name = FeedsSyndicationParserTestCase
-description = TBD
+description = 'Syndication Parser.'
 group = Feeds
 file = feeds_parser_syndication.test
 
 [FeedsRSStoNodesTest]
 name = FeedsRSStoNodesTest
-description = TBD
+description = 'RSS to Nodes.'
 group = Feeds
 file = feeds_processor_node.test
 
 [FeedsCSVtoTermsTest]
 name = FeedsCSVtoTermsTest
-description = TBD
+description = 'CSV to Terms.'
 group = Feeds
 file = feeds_processor_term.test
 
 [FeedsCSVtoUsersTest]
 name = FeedsCSVtoUsersTest
-description = TBD
+description = 'CSV to Users.'
 group = Feeds
 file = feeds_processor_user.test
 
 [FeedsPushTest]
 name = FeedsPushTest
-description = TBD
+description = 'Feeds Push.'
 group = Feeds
 file = feeds_push.test
 
 [FeedsSchedulerTestCase]
 name = FeedsSchedulerTestCase
-description = TBD
+description = 'Scheduler integration.'
 group = Feeds
 file = feeds_scheduler.test
 
 [FeedsAccountSwitcherTest]
 name = Feeds account switcher test
-description = Tests if switching accounts during import happens properly.
+description = 'Tests if switching accounts during import happens properly.'
 group = Feeds
 file = FeedsAccountSwitcherTest.test
 
 [FeedsEnclosureTest]
 name = FeedsEnclosure class test
-description = Covers class FeedsEnclosure.
+description = 'Covers class FeedsEnclosure.'
 group = Feeds
 file = FeedsEnclosureTest.test
 
 [FeedsFetcherResultTest]
 name = FeedsFetcherResult class test
-description = Covers class FeedsFetcherResult.
+description = 'Covers class FeedsFetcherResult.'
 group = Feeds
 file = FeedsFetcherResultTest.test
 
 [FeedsHTTPCacheTest]
 name = FeedsHTTPCache class test
-description = Covers class FeedsHTTPCache.
+description = 'Covers class FeedsHTTPCache.'
 group = Feeds
 file = FeedsHTTPCacheTest.test
 
 [FeedsSourceTest]
 name = FeedsSource class test
-description = Covers class FeedsSource.
+description = 'Covers class FeedsSource.'
 group = Feeds
 file = FeedsSourceTest.test
 
 [FeedsHTTPRequestTestCase]
 name = FeedsHTTPRequestTestCase
-description = TBD
+description = 'HTTP Request'
 group = Feeds
 file = http_request.test
 
 [ParserCSVTest]
 name = ParserCSVTest
-description = TBD
+description = 'Parser CSV'
 group = Feeds
 file = parser_csv.test
 
-; Added by Backdrop CMS packaging script on 2023-11-22
+[FeedsPreviewCSVTest]
+name = Preview CSV files
+description = 'Tests previewing data using the CSV parser.'
+group = Feeds
+file = FeedsPreviewCSVTest.test
+
+[FeedsPreviewFeedsTamperTest]
+name = Preview: Feeds Tamper integration
+description = 'Tests compatibility with Feeds Tamper.'
+group = Feeds
+file = FeedsPreviewFeedsTamperTest.test
+
+[FeedsPreviewImportFormPreviewTest]
+name = Import form preview
+description = 'Tests if an import can be previewed on the import form.'
+group = Feeds
+file = FeedsPreviewImportFormPreviewTest.test
+
+[FeedsPreviewNoImportTest]
+name = No import preview on cron
+description = 'Tests if previewing import doesn\'t trigger an import on cron.'
+group = Feeds
+file = FeedsPreviewNoImportTest.test
+
+; Added by Backdrop CMS packaging script on 2024-10-28
 project = feeds
-version = 1.x-1.1.5
-timestamp = 1700680304
+version = 1.x-1.2.0
+timestamp = 1730147930

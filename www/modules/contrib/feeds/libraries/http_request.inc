@@ -342,7 +342,7 @@ function feeds_http_request($url, array $options = array()) {
   if ($result->code == 304) {
 
     if (isset($last_result->data)) {
-      //$last_result->from_cache = TRUE;
+      $last_result->from_cache = TRUE;
       return $last_result;
     }
     else {

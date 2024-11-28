@@ -13,17 +13,6 @@ class FeedsUIUserInterfaceTestCase extends FeedsWebTestCase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Feeds UI user interface',
-      'description' => 'Tests Feeds Admin UI module\'s GUI.',
-      'group' => 'Feeds',
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp() {
     parent::setUp(array('locale'), array('synchronize configuration', 'administer languages'));
   }

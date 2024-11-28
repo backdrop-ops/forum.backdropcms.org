@@ -41,7 +41,7 @@ function taxonomy_feeds_parser_sources_alter(array &$sources, $content_type) {
 function taxonomy_feeds_get_source(FeedsSource $source, FeedsParserResult $result, $key) {
   if ($node = node_load($source->feed_nid)) {
     $terms = taxonomy_feeds_node_get_terms($node);
-    $vocabularies = taxonomy_vocabulary_load_multiple(array(), array('machine_name' => str_replace('parent:taxonomy:', '', $key)));
+    $vocabularies = taxonomy_vocabulary_load_multiple(array(str_replace('parent:taxonomy:', '', $key)));
     $vocabulary = array_shift($vocabularies);
     $result = array();
     foreach ($terms as $tid => $term) {
@@ -164,7 +164,7 @@ function taxonomy_feeds_set_target(FeedsSource $source, $entity, $target, array 
               'name' => backdrop_substr($term, 0, 255),
               'vocabulary' => key($cache['allowed_vocabularies'][$target]),
               'vocabulary_machine_name' => reset($cache['allowed_vocabularies'][$target]),
-              'format' => 1
+              'format' => 1,
             ));
             // Set language if the taxonomy is multilingual.
             if ($language !== LANGUAGE_NONE) {

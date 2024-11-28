@@ -8,6 +8,7 @@
 /**
  * Class of a cached item.
  */
+#[AllowDynamicProperties]
 class FeedsHTTPCacheItem {
 
   /**
@@ -23,13 +24,6 @@ class FeedsHTTPCacheItem {
    * @var string
    */
   protected $cid;
-
-  /**
-   * Code.
-   *
-   * @var string
-   */
-  protected $code;
 
   /**
    * Headers of the response.

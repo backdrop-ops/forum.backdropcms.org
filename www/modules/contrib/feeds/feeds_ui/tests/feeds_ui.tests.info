@@ -1,0 +1,10 @@
+[FeedsUIUserInterfaceTestCase]
+name = Feeds UI user interface
+description = 'Tests Feeds Admin UI module\'s GUI.'
+group = Feeds
+file = feeds_ui.test
+
+; Added by Backdrop CMS packaging script on 2024-10-28
+project = feeds
+version = 1.x-1.2.0
+timestamp = 1730147930

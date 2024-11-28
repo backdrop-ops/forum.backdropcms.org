@@ -347,6 +347,52 @@ function feeds_schema() {
       'type' => array('type'),
     ),
   );
+  $schema['feeds_preview_source'] = array(
+    'description' => 'Source definitions for feeds.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Id of the feed configuration.',
+      ),
+      'config' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Configuration of the source.',
+        'serialize' => TRUE,
+      ),
+      'source' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Main source resource identifier. E. g. a path or a URL.',
+      ),
+      'state' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'State of import or clearing batches.',
+        'serialize' => TRUE,
+      ),
+      'fetcher_result' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Cache for fetcher result.',
+        'serialize' => TRUE,
+      ),
+      'imported' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => TRUE,
+        'description' => 'Timestamp when this source was imported last.',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
   $schema['cache_feeds_http'] = backdrop_get_schema_unprocessed('system', 'cache');
   $schema['cache_feeds_http']['description'] = 'Cache table for Feeds downloads.';
@@ -498,4 +544,64 @@ function feeds_update_1005() {
   update_variable_del('proxy_port');
   update_variable_del('proxy_username');
   update_variable_del('proxy_password');
+}
+
+/**
+ * Create the feeds_preview_source table.
+ */
+function feeds_update_1006() {
+  if (db_table_exists('feedspreview_source')) {
+    db_rename_table('feedspreview_source', 'feeds_preview_source');
+  }
+
+  $schema = array(
+    'description' => 'Source definitions for feeds.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Id of the feed configuration.',
+      ),
+      'config' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Configuration of the source.',
+        'serialize' => TRUE,
+      ),
+      'source' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Main source resource identifier. E. g. a path or a URL.',
+      ),
+      'state' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'State of import or clearing batches.',
+        'serialize' => TRUE,
+      ),
+      'fetcher_result' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => FALSE,
+        'description' => 'Cache for fetcher result.',
+        'serialize' => TRUE,
+      ),
+      'imported' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => TRUE,
+        'description' => 'Timestamp when this source was imported last.',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  if (!db_table_exists('feeds_preview_source')) {
+    db_create_table('feeds_preview_source', $schema);
+  }
 }
