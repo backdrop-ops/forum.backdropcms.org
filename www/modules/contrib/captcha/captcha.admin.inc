@@ -333,7 +333,7 @@ function captcha_admin_settings_validate($form, $form_state) {
  * Submission function for captcha_admin_settings form.
  */
 function captcha_admin_settings_submit($form, &$form_state) {
-
+  $captcha_points = array();
   $config = config('captcha.settings');
   $config->set('administration_mode', $form_state['values']['captcha_administration_mode']);
   $config->set('allow_on_admin_pages', $form_state['values']['captcha_allow_on_admin_pages']);

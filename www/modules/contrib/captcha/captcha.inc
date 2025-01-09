@@ -126,12 +126,15 @@ function captcha_get_captcha_points() {
   $config = config('captcha.settings');
 
   $captcha_points = $config->get('captcha_points');
+  if (!empty($captcha_points)) {
+    // Sort the configs by path and weight.
+    backdrop_sort($captcha_points, array(
+      'form_id' => SORT_STRING,
+    ));
+    return $captcha_points;
+  }
 
-  // Sort the configs by path and weight.
-  backdrop_sort($captcha_points, array(
-    'form_id' => SORT_STRING,
-  ));
-  return $captcha_points;
+  return array();
 }
 
 /**
