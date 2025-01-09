@@ -749,7 +749,7 @@ function captcha_validate($element, &$form_state) {
       form_set_error('captcha_response', _captcha_get_error_message());
       // Update wrong response counter.
       if (config_get('captcha.settings', 'enable_stats')) {
-        config_set('captcha.settings', 'wrong_response_counter', config_get('captcha.settings', 'wrong_response_counter') + 1);
+        state_set('captcha_wrong_response_counter', state_get('captcha_wrong_response_counter') + 1);
       }
       // Log to watchdog if needed.
       if (config_get('captcha.settings', 'log_wrong_responses')) {

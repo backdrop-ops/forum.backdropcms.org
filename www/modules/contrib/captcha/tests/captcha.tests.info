@@ -22,7 +22,7 @@ description = Testing of the protection against CAPTCHA session reuse attacks.
 group = CAPTCHA
 file = captcha.test
 
-; Added by Backdrop CMS packaging script on 2022-07-26
+; Added by Backdrop CMS packaging script on 2024-08-23
 project = captcha
-version = 1.x-1.7.2
-timestamp = 1658883990
+version = 1.x-1.7.3
+timestamp = 1724424792
