@@ -6,25 +6,23 @@
     "editor": "ckeditor5",
     "editor_settings": {
         "toolbar": [
-            "blockQuote",
             "bold",
             "italic",
+            "code",
+            "|",
+            "blockQuote",
+            "codeBlock",
+            "heading",
             "|",
             "bulletedList",
             "numberedList",
             "|",
-            "code",
-            "|",
             "backdropLink",
-            "|",
             "backdropImage",
             "|",
             "sourceEditing",
-            "maximize",
-            "|",
-            "heading",
-            "style",
-            "removeFormat"
+            "removeFormat",
+            "maximize"
         ],
         "image_upload": {
             "status": 1,
@@ -45,121 +43,7 @@
             "max_size": "",
             "file_extensions": "txt pdf"
         },
-        "style_list": [
-            {
-                "name": "Navigation",
-                "element": "span",
-                "classes": [
-                    "navigation"
-                ]
-            },
-            {
-                "name": "Button (primary)",
-                "element": "span",
-                "classes": [
-                    "button"
-                ]
-            },
-            {
-                "name": "Button (secondary)",
-                "element": "span",
-                "classes": [
-                    "button-secondary"
-                ]
-            },
-            {
-                "name": "Drop Button",
-                "element": "span",
-                "classes": [
-                    "dropbutton"
-                ]
-            },
-            {
-                "name": "Local Navigation (tab)",
-                "element": "span",
-                "classes": [
-                    "local-tab"
-                ]
-            },
-            {
-                "name": "Vertical tab",
-                "element": "span",
-                "classes": [
-                    "vartical-tab",
-                    ""
-                ]
-            },
-            {
-                "name": "Select Option",
-                "element": "span",
-                "classes": [
-                    "select-option"
-                ]
-            },
-            {
-                "name": "Table Header",
-                "element": "span",
-                "classes": [
-                    "table-header"
-                ]
-            },
-            {
-                "name": "Monospace",
-                "element": "span",
-                "classes": [
-                    "monospace"
-                ]
-            },
-            {
-                "name": "Call-Out",
-                "element": "span",
-                "classes": [
-                    "callout"
-                ]
-            },
-            {
-                "name": "Example",
-                "element": "span",
-                "classes": [
-                    "example"
-                ]
-            },
-            {
-                "name": "Code Block PHP",
-                "element": "pre",
-                "classes": [
-                    "php"
-                ]
-            },
-            {
-                "name": "Code Block Bash",
-                "element": "pre",
-                "classes": [
-                    "bash"
-                ]
-            },
-            {
-                "name": "Code Block JSON",
-                "element": "pre",
-                "classes": [
-                    "json"
-                ]
-            },
-            {
-                "name": "PHP",
-                "element": "code",
-                "classes": [
-                    "php"
-                ]
-            },
-            {
-                "name": "Bash",
-                "element": "code",
-                "classes": [
-                    "bash"
-                ]
-            }
-        ],
+        "style_list": [],
         "heading_list": {
             "h3": "h3",
             "h4": "h4",
@@ -170,14 +54,14 @@
         "filter_image_caption": {
             "status": 1,
             "weight": 4,
-            "settings": [],
-            "module": "filter"
+            "module": "filter",
+            "settings": []
         },
         "filter_autop": {
             "status": 0,
             "weight": 2,
-            "settings": [],
-            "module": "filter"
+            "module": "filter",
+            "settings": []
         },
         "filter_url": {
             "status": 1,
@@ -190,36 +74,34 @@
         "filter_htmlcorrector": {
             "status": 1,
             "weight": 10,
-            "settings": [],
-            "module": "filter"
+            "module": "filter",
+            "settings": []
         },
         "filter_html_escape": {
             "status": 0,
             "weight": -10,
-            "settings": [],
-            "module": "filter"
+            "module": "filter",
+            "settings": []
         },
         "filter_image_align": {
             "status": 1,
             "weight": 4,
-            "settings": [],
-            "module": "filter"
+            "module": "filter",
+            "settings": []
         },
         "filter_html": {
             "status": 1,
             "weight": 1,
             "settings": {
-                "allowed_html": "<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h3> <h4> <h5> <p> <img> <figure> <pre> <figcaption> <br>",
-                "filter_html_help": 1,
-                "filter_html_nofollow": 0
+                "allowed_html": "<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h3> <h4> <h5> <p> <img> <figure> <pre> <figcaption> <br>"
             },
             "module": "filter"
         },
         "filter_markdown": {
             "status": 0,
             "weight": 0,
-            "settings": [],
-            "module": "markdown"
+            "module": "markdown",
+            "settings": []
         }
     },
     "cache": true,
