@@ -1,7 +1,7 @@
 {
     "_config_name": "feeds.feeds_importer.github_issues",
     "id": "github_issues",
-    "disabled": false,
+    "disabled": true,
     "config": {
         "name": "GitHub Issues",
         "description": "Import GitHub Issues",
