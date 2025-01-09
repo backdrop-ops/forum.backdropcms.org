@@ -86,39 +86,35 @@ function feeds_ui_overview_form($form, array &$form_state) {
       '#default_value' => !$importer->disabled,
     );
 
-    if (!$importer->disabled) {
-      $links['edit'] = array(
-        'title' => t('Edit'),
-        'href' => 'admin/structure/feeds/' . $importer->id,
-        'query' => $options,
+    $links['edit'] = array(
+      'title' => t('Edit'),
+      'href' => 'admin/structure/feeds/' . $importer->id,
+      'query' => $options,
+    );
+    if (module_exists('config') && user_access('synchronize configuration')) {
+      $links['export'] = array(
+        'title' => t('Export'),
+        'href' => 'admin/config/development/configuration/single/export',
+        'query' => array(
+          'group' => 'Feeds importers',
+          'name' => 'feeds.feeds_importer.' . $importer->id,
+        ),
       );
-      if (module_exists('config') && user_access('synchronize configuration')) {
-        $links['export'] = array(
-          'title' => t('Export'),
-          'href' => 'admin/config/development/configuration/single/export',
-          'query' => array(
-            'group' => 'Feeds importers',
-            'name' => 'feeds.feeds_importer.' . $importer->id,
-          ),
-        );
-      }
-      $links['clone'] = array(
-        'title' => t('Clone'),
-        'href' => 'admin/structure/feeds/' . $importer->id . '/clone',
-        'query' => $options,
-      );
-      $links['delete'] = array(
-        'title' => t('Delete'),
-        'href' => 'admin/structure/feeds/' . $importer->id . '/delete',
-        'query' => $options,
-      );
-      $importer_form['operations'] = array(
-        '#type' => 'dropbutton',
-        '#links' => $links,
-      );
-    } else {
-      $importer_form['operations']['#markup'] = t('Disabled');
     }
+    $links['clone'] = array(
+      'title' => t('Clone'),
+      'href' => 'admin/structure/feeds/' . $importer->id . '/clone',
+      'query' => $options,
+    );
+    $links['delete'] = array(
+      'title' => t('Delete'),
+      'href' => 'admin/structure/feeds/' . $importer->id . '/delete',
+      'query' => $options,
+    );
+    $importer_form['operations'] = array(
+      '#type' => 'dropbutton',
+      '#links' => $links,
+    );
 
     if ($importer->disabled) {
       $form['disabled'][$importer->id] = $importer_form;

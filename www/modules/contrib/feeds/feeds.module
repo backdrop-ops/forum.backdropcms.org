@@ -1694,6 +1694,7 @@ function feeds_autoload_info() {
   'FeedsLockException' => 'includes/FeedsSource.inc',
   'FeedsSource' => 'includes/FeedsSource.inc',
   'FeedsSourceInterface' => 'includes/FeedsSource.inc',
+  'FeedsState' => 'includes/FeedsSource.inc',
   'FeedsPreviewSource' => 'includes/FeedsPreviewSource.inc',
   'FeedsPreviewTable' => 'includes/FeedsPreviewTable.inc',
   'HRCurlException' => 'libraries/http_request.inc',

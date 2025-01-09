@@ -154,13 +154,13 @@ function captcha_update_1000() {
   $config->set('add_captcha_description', update_variable_get('captcha_add_captcha_description', 1));
   $config->set('allow_on_admin_pages', update_variable_get('captcha_allow_on_admin_pages', 0));
   $config->set('persistence', update_variable_get('captcha_persistence', 1));
-  $config->set('wrong_response_counter', update_variable_get('captcha_wrong_response_counter', 0));
   $config->set('default_challenge_on_nonlisted_forms', update_variable_get('captcha_default_challenge_on_nonlisted_forms', 0));
   $config->set('captcha_default_challenge', update_variable_get('captcha_default_challenge', 'captcha/Math'));
   $config->set('administration_mode', update_variable_get('captcha_administration_mode', 0));
   $config->set('error_message', update_variable_get('captcha_error_message', 'The answer you entered for the CAPTCHA was not correct.'));
-
   $config->save();
+
+  state_set('captcha_wrong_response_counter', update_variable_get('captcha_wrong_response_counter', 0));
 
   // Delete variables.
   update_variable_del('captcha_enable_stats');
@@ -292,6 +292,13 @@ function captcha_update_1006() {
   }
   $config->clear('captcha_default_challenge');
   $config->save();
+}
+
+/**
+ * Move wrong_response_counter to state.
+ */
+function captcha_update_1007() {
+  state_set('captcha_wrong_response_counter', config_get('captcha.settings', 'wrong_response_counter'));
 }
 
 /**
