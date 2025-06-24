@@ -16,13 +16,13 @@
     "captcha_points": {
         "user_pass": {
             "form_id": "user_pass",
-            "module": "recaptcha",
-            "captcha_type": "reCAPTCHA"
+            "module": "captcha",
+            "captcha_type": "Math"
         },
         "user_register_form": {
             "form_id": "user_register_form",
-            "module": "recaptcha",
-            "captcha_type": "reCAPTCHA"
+            "module": "captcha",
+            "captcha_type": "Math"
         }
     }
 }

@@ -173,8 +173,7 @@
         "unflag feature_vote",
         "administer feeds",
         "use text format markdown",
-        "administer comment settings",
-        "administer recaptcha"
+        "administer comment settings"
     ],
     "description": ""
 }

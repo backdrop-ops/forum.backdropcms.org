@@ -357,7 +357,7 @@
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<h4>Sept 23-24, 2023</h4>\r\n\r\n<p>An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;</p>\r\n\r\n<p class=\"text-align-center\" text-align-center=\"\"><a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a></p>\r\n",
+                    "content": "<h4>\r\n    April 3-4, 2025\r\n</h4>\r\n<p>\r\n    An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;\r\n</p>\r\n<p class=\"text-align-center\" text-align-center=\"\">\r\n    <a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a>\r\n</p>",
                     "format": "filtered_html",
                     "admin_label": "",
                     "admin_description": ""
