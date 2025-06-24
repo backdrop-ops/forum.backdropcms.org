@@ -78,7 +78,7 @@ function theme_layout_info($variables) {
  * @return string
  */
 function theme_layout_condition_info($variables) {
-  /* @var Layout $layout */
+  /** @var Layout $layout */
   $layout = $variables['layout'];
   // Build a list of visibility conditions on this layout
   $conditions = array();
@@ -275,6 +275,48 @@ function theme_layout_region_inner($variables) {
     return '<' . $tag . backdrop_attributes($attributes) . '>' . implode('', $variables['blocks']) . '</' . $tag . '>';
   }
   return implode('', $variables['blocks']);
+}
+
+
+/**
+ * Output a preview of hero block background image.
+ *
+ * @see BlockHero::form()
+ * @since 1.30.0 Theme function added.
+ */
+function theme_layout_hero_background_image($variables) {
+  $element = $variables['element'];
+  $attributes = array();
+  if (isset($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  if (!empty($element['#attributes']['class'])) {
+    $attributes['class'] = (array) $element['#attributes']['class'];
+  }
+  $attributes['class'][] = 'form-managed-file';
+
+  $output = '';
+  $output .= '<div' . backdrop_attributes($attributes) . '>';
+  if (isset($element['#file']->uri)) {
+    $output .= '<div class="layout-hero-background-preview">';
+    $output .= theme('image_style',
+      array(
+        'style_name' => $element['#image_style'],
+        'uri' => $element['#file']->uri,
+        'width' => '200',
+        'height' => '250',
+      ));
+    $output .= '</div>';
+  }
+  else {
+    $output .= '<div class="layout-hero-background-preview-empty description">';
+    $output .= t('No background image is currently set.<br/>Themes, such as Basis, may display a background image defined in CSS.');
+    $output .= '</div>';
+  }
+  $output .= backdrop_render_children($element);
+  $output .= '</div>';
+
+  return $output;
 }
 
 /**

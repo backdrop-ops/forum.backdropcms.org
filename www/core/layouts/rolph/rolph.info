@@ -1,5 +1,6 @@
 type = layout
 name = Rolph
+description = Includes a header, top, four columns, bottom, and footer.
 version = BACKDROP_VERSION
 backdrop = 1.x
 
@@ -28,7 +29,7 @@ preview = rolph.png
 ; Include the Bootstrap4 Grid System
 libraries[] = bootstrap4-gs
 
-; Added by Backdrop CMS packaging script on 2025-01-08
+; Added by Backdrop CMS packaging script on 2025-05-15
 project = backdrop
-version = 1.29.3
-timestamp = 1736371781
+version = 1.31.0
+timestamp = 1747353459

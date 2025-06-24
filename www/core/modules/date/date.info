@@ -9,7 +9,7 @@ backdrop = 1.x
 
 stylesheets[all][] = css/date.css
 
-; Added by Backdrop CMS packaging script on 2025-01-08
+; Added by Backdrop CMS packaging script on 2025-05-15
 project = backdrop
-version = 1.29.3
-timestamp = 1736371781
+version = 1.31.0
+timestamp = 1747353459
