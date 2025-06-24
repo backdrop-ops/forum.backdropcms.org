@@ -14,7 +14,14 @@
             "display_options": {
                 "query": {
                     "type": "views_query",
-                    "options": []
+                    "options": {
+                        "disable_sql_rewrite": 0,
+                        "distinct": 1,
+                        "pure_distinct": 0,
+                        "replica": 0,
+                        "query_comment": "",
+                        "query_tags": []
+                    }
                 },
                 "access": {
                     "type": "perm",
@@ -335,6 +342,65 @@
                         "empty_zero": 0,
                         "hide_alter_empty": 1,
                         "link_type": ""
+                    },
+                    "count": {
+                        "id": "count",
+                        "table": "flag_counts",
+                        "field": "count",
+                        "relationship": "flag_count_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "total votes",
+                        "exclude": 0,
+                        "alter": {
+                            "alter_text": 0,
+                            "text": "",
+                            "make_link": 0,
+                            "path": "",
+                            "absolute": 0,
+                            "external": 0,
+                            "replace_spaces": 0,
+                            "path_case": "none",
+                            "trim_whitespace": 0,
+                            "alt": "",
+                            "rel": "",
+                            "link_class": "",
+                            "prefix": "",
+                            "suffix": "",
+                            "target": "",
+                            "nl2br": 0,
+                            "max_length": "",
+                            "word_boundary": 1,
+                            "ellipsis": 1,
+                            "more_link": 0,
+                            "more_link_text": "",
+                            "more_link_path": "",
+                            "strip_tags": 0,
+                            "trim": 0,
+                            "preserve_tags": "",
+                            "html": 0
+                        },
+                        "element_type": "",
+                        "element_class": "",
+                        "element_label_type": "",
+                        "element_label_class": "",
+                        "element_label_colon": 1,
+                        "element_wrapper_type": "",
+                        "element_wrapper_class": "",
+                        "element_default_classes": 1,
+                        "empty": "",
+                        "hide_empty": 0,
+                        "empty_zero": 0,
+                        "hide_alter_empty": 1,
+                        "set_precision": false,
+                        "precision": 0,
+                        "decimal": ".",
+                        "separator": ",",
+                        "format_plural": 0,
+                        "format_plural_singular": "1",
+                        "format_plural_plural": "@count",
+                        "prefix": "",
+                        "suffix": ""
                     }
                 },
                 "filters": {
@@ -358,11 +424,18 @@
                     }
                 },
                 "sorts": {
-                    "created": {
-                        "id": "created",
-                        "table": "node",
-                        "field": "created",
-                        "order": "DESC"
+                    "count": {
+                        "id": "count",
+                        "table": "flag_counts",
+                        "field": "count",
+                        "relationship": "flag_count_rel",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "DESC",
+                        "exposed": false,
+                        "expose": {
+                            "label": ""
+                        }
                     }
                 },
                 "title": "Feature Request Wishlist",
@@ -442,11 +515,25 @@
                         "format": "markdown",
                         "tokenize": 0
                     }
+                },
+                "empty": {
+                    "view": {
+                        "id": "view",
+                        "table": "views",
+                        "field": "view",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "",
+                        "empty": true,
+                        "view_to_insert": "my_favorite_feature_requests:block_1",
+                        "inherit_arguments": 0
+                    }
                 }
             }
         },
         "block": {
-            "display_title": "Block",
+            "display_title": "Block (own votes)",
             "display_plugin": "block",
             "display_options": {
                 "query": {
@@ -480,6 +567,65 @@
                 },
                 "defaults": {
                     "relationships": false
+                },
+                "display_description": ""
+            }
+        },
+        "block_1": {
+            "display_title": "Block (top votes)",
+            "display_plugin": "block",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "relationships": {
+                    "flag_content_rel": {
+                        "id": "flag_content_rel",
+                        "table": "node",
+                        "field": "flag_content_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "flag",
+                        "required": 1,
+                        "flag": "feature_vote",
+                        "user_scope": "any"
+                    },
+                    "flag_count_rel": {
+                        "id": "flag_count_rel",
+                        "table": "node",
+                        "field": "flag_count_rel",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "counter",
+                        "required": 1,
+                        "flag": "feature_vote"
+                    }
+                },
+                "defaults": {
+                    "relationships": false,
+                    "arguments": false,
+                    "sorts": false
+                },
+                "display_description": "",
+                "arguments": [],
+                "sorts": {
+                    "created": {
+                        "id": "created",
+                        "table": "node",
+                        "field": "created",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "order": "DESC",
+                        "exposed": false,
+                        "expose": {
+                            "label": ""
+                        },
+                        "granularity": "second"
+                    }
                 }
             }
         }

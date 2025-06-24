@@ -20,5 +20,5 @@
     "freshness": "2000000",
     "cookie_extension": "",
     "bakery_insecure_ssl": true,
-    "subsite_login": 0
+    "subsite_login": 0 
 }

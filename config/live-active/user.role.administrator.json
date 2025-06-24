@@ -173,7 +173,8 @@
         "unflag feature_vote",
         "administer feeds",
         "use text format markdown",
-        "administer comment settings"
+        "administer comment settings",
+        "administer turnstile"
     ],
     "description": ""
 }

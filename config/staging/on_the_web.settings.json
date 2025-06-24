@@ -1,6 +1,6 @@
 {
     "_config_name": "on_the_web.settings",
-    "type": "anchor",
+    "type": "icon",
     "size": "sm",
     "sitename": "0",
     "target": 1,
@@ -44,5 +44,7 @@
     "tiktok_page": "",
     "tiktok_weight": "1",
     "envelope_page": "",
-    "envelope_weight": "2"
+    "envelope_weight": "2",
+    "bluesky_page": "",
+    "bluesky_weight": "-10"
 }

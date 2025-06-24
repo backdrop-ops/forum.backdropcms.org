@@ -5,7 +5,7 @@
     "title": "Weekly office hours",
     "description": "",
     "body": {
-        "value": "<p>Bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, every Wednesday. Everyone is welcome.</p>\r\n",
+        "value": "<p>\r\n    Bring your questions to our <a href=\"https://backdropcms.org/support/meetings\">weekly virtual office hours</a>, every Wednesday. Everyone is welcome.\r\n</p>",
         "format": "filtered_html"
     },
     "default_langcode": "und"

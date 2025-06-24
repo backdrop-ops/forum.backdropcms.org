@@ -174,7 +174,7 @@
         "administer feeds",
         "use text format markdown",
         "administer comment settings",
-        "administer recaptcha"
+        "administer turnstile"
     ],
     "description": ""
 }
