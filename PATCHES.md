@@ -35,3 +35,6 @@ spambot - move to state system
   https://github.com/backdrop-contrib/spambot/issues/4
   https://github.com/backdrop-contrib/spambot/pull/5.patch
 
+turnstile - secret in settings
+  https://github.com/backdrop-contrib/turnstile/issues/1
+  https://github.com/backdrop-contrib/turnstile/pull/2.patch

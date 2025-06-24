@@ -1,0 +1,9 @@
+{
+  "_config_name": "turnstile.settings",
+  "site_key": "",
+  "secret_key": "",
+  "src": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+  "theme": "",
+  "tabindex": 0,
+  "size": "normal"
+}

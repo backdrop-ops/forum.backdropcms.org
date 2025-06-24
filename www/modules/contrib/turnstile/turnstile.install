@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function turnstile_install() {
+  $t = get_t();
+
+  // Be friendly to your users: what to do after install?
+  backdrop_set_message($t('You can now <a href="!turnstile_admin">configure the Turnstile module</a> for your site.',
+    array('!turnstile_admin' => url('admin/config/people/captcha/turnstile'))), 'status');
+}
+
+/**
+ * Move turnstile settings from variables to config.
+ */
+function turnstile_update_1000() {
+  $config = config('turnstile.settings');
+  $config->set('src', update_variable_get('turnstile_src', 'https://challenges.cloudflare.com/turnstile/v0/api.js'));
+  $config->set('site_key', update_variable_get('turnstile_site_key', ''));
+  $config->set('secret_key', update_variable_get('turnstile_secret_key', ''));
+  $config->set('theme', update_variable_get('turnstile_theme', ''));
+  $config->set('size', update_variable_get('turnstile_size', 'normal'));
+  $config->set('tabindex', update_variable_get('turnstile_tabindex', 0));
+  $config->save();
+
+  // Delete variables.
+  update_variable_del('turnstile_src');
+  update_variable_del('turnstile_site_key');
+  update_variable_del('turnstile_secret_key');
+  update_variable_del('turnstile_theme');
+  update_variable_del('turnstile_size');
+  update_variable_del('turnstile_tabindex');
+}

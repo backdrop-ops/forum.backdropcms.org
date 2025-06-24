@@ -1,0 +1,177 @@
+<?php
+
+use Turnstile\BackdropPost;
+use Turnstile\Turnstile;
+
+/**
+ * Implements hook_autoload_info().
+ */
+function turnstile_autoload_info() {
+  return array(
+    'Turnstile\Turnstile' => 'src/Turnstile/Turnstile.php',
+    'Turnstile\RequestMethod' => 'src/Turnstile/RequestMethod.php',
+    'Turnstile\BackdropPost' => 'src/Turnstile/BackdropPost.php',
+  );
+}
+
+/**
+ * Implements hook_config_info().
+ */
+function turnstile_config_info() {
+  $prefixes['turnstile.settings'] = array(
+    'label' => t('Turnstile settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function turnstile_permission() {
+  return array(
+    'administer turnstile' => array(
+      'title' => t('Administer Cloudflare Turnstile'),
+      'description' => t('Administer Turnstile settings.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function turnstile_menu() {
+  $items['admin/config/people/captcha/turnstile'] = array(
+    'title' => 'Turnstile',
+    'description' => 'Administer the Cloudflare Turnstile web service.',
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('turnstile_admin_settings'),
+    'access arguments' => array('administer turnstile'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'turnstile.admin.inc',
+    'weight' => 1,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_captcha().
+ *
+ * @param string $op
+ * @param string $captcha_type
+ * @return array
+ */
+function turnstile_captcha($op, $captcha_type = '') {
+  global $language;
+  $config = config('turnstile.settings');
+
+  switch ($op) {
+    case 'list':
+      return array('Turnstile');
+
+    case 'generate':
+      $captcha = array();
+      if ($captcha_type == 'Turnstile') {
+        $turnstile_site_key = $config->get('site_key');
+        $turnstile_secret_key = _turnstile_get_secret();
+
+        if (!empty($turnstile_site_key) && !empty($turnstile_secret_key)) {
+          $attributes = array(
+            'class' => 'cf-turnstile',
+            'data-sitekey' => $turnstile_site_key,
+            'data-theme' => $config->get('theme'),
+            'data-size' => $config->get('size'),
+            'data-tabindex' => $config->get('tabindex'),
+          );
+
+          $turnstile = new Turnstile($turnstile_site_key, $turnstile_secret_key, $attributes);
+          $captcha = $turnstile->getWidget('turnstile_captcha_validation');
+
+          // Load the library
+          $turnstile_src = $config->get('src');
+          $data = array(
+            '#tag' => 'script',
+            '#value' => '',
+            '#attributes' => array(
+              'src' => url($turnstile_src, array('query' => array('hl' => $language->langcode), 'absolute' => TRUE)),
+              'async' => 'async',
+              'defer' => 'defer',
+            ),
+          );
+          backdrop_add_html_head($data, 'turnstile_api');
+        } else {
+          // Fallback to Math captcha as Turnstile is not configured.
+          $captcha = captcha_captcha('generate', 'Math');
+        }
+      }
+      return $captcha;
+  }
+}
+
+/**
+ * CAPTCHA Callback; Validates the Turnstile code.
+ */
+function turnstile_captcha_validation($solution, $response, $element, $form_state) {
+  $config = config('turnstile.settings');
+  $turnstile_site_key = $config->get('site_key');
+  $turnstile_secret_key = _turnstile_get_secret();
+  if (!isset($_POST['cf-turnstile-response']) || empty($_POST['cf-turnstile-response']) || empty($turnstile_secret_key)) {
+    return false;
+  }
+
+  $captcha = new Turnstile($turnstile_site_key, $turnstile_secret_key, array(), new BackdropPost());
+  $captcha->validate($_POST['cf-turnstile-response'], ip_address());
+
+  if ($captcha->isSuccess()) {
+    // Verified!
+    return true;
+  } else {
+    foreach ($captcha->getErrors() as $error) {
+      watchdog('turnstile', '@error', array('@error' => $error), WATCHDOG_ERROR);
+    }
+  }
+  return false;
+}
+
+/**
+ * Implements hook_help().
+ */
+function turnstile_help($section = 'admin/help#turnstile', $arg = NULL) {
+  switch ($section) {
+
+    case 'admin/help#turnstile':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= t("<p>Cloudflare Turnstile delivers frustration-free, CAPTCHA-free web experiences to website visitors - with just a simple snippet of free code.</p><p>What's more, Turnstile stops abuse and confirms visitors are real without the data privacy concerns or awful UX that CAPTCHAs thrust on users.</p>");
+
+      // Add a link to the backdropcms.org project.
+      $output .= '<p>';
+      $output .= t('Visit the <a href="@project_link">Turnstile project page</a> on backdropcms.org for more information.', array(
+        '@project_link' => 'https://www.backdropcms.org/project/turnstile',
+      ));
+      $output .= '</p>';
+
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Helper function: retrieves the secret key and logs when there's a problem.
+ * Uses a static cache to decrease logging.
+ */
+function _turnstile_get_secret() {
+  $turnstile_secret_key = &backdrop_static(__FUNCTION__);
+  if (!isset($examples)) {
+    $turnstile_secret_key = settings_get('turnstile_secret_key', FALSE);
+    if (!$turnstile_secret_key) {
+      // Set a warning message and fall-back to configuration.
+      $message = t('A Turnstile secret key is saved in configuration. Move this to <code>$settings</code> in <code>settings.local.php.</code>');
+      watchdog('turnstile', $message, WATCHDOG_WARNING);
+      $turnstile_secret_key = config_get('turnstile.settings', 'secret_key');
+    }
+  }
+  return $turnstile_secret_key;
+}
