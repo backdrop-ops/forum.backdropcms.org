@@ -1,7 +1,7 @@
 {
     "_config_name": "recaptcha.settings",
-    "site_key": "6LdN55cpAAAAAMJ9wyYjoAPz_BtxnYw7-bPorjrr",
-    "secret_key": "6LdN55cpAAAAAB3h3ynpgv_JHb38r5oEcYv3IiGi",
+    "site_key": "6LfIZDwUAAAAACdyEVmDEIXLkUjZMOmPtg6PRT9U",
+    "secret_key": "",
     "theme": "light",
     "type": "image",
     "size": "",
