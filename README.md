@@ -44,3 +44,8 @@ Working on an Issue
     * Label the issue as `has PR`
     * Request review by commenting on the issue and 'at' tagging the person(s)
       that started the issue
+
+Config Management
+-----------------
+
+See the /config/README.md file for instructions on setting up Backdrop's config workflow.
