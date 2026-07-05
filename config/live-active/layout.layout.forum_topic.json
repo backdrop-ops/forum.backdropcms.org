@@ -32,8 +32,8 @@
             "e91f6de2-bbec-45a1-8700-a15ddb81de24"
         ],
         "sidebar": [
-            "0b1303ac-a9e6-41f5-b201-1dbae47ee41c",
             "b4f56fda-fb3a-4530-b506-6e3d6057b9ba",
+            "0b1303ac-a9e6-41f5-b201-1dbae47ee41c",
             "91d0a59e-8d4c-40aa-ad5b-91d1d9d73e09",
             "bc0b693b-01b4-4b47-9604-042dd9a3c54e",
             "18e7ee72-6b80-4599-b709-9bbd78a16d78",
@@ -315,6 +315,34 @@
                 }
             }
         },
+        "b4f56fda-fb3a-4530-b506-6e3d6057b9ba": {
+            "plugin": "layout:custom_block",
+            "data": {
+                "status": 0,
+                "module": "layout",
+                "delta": "custom_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "Backdrop LIVE ",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "content": "<h4>\r\n    April 23rd-24th, 2026\r\n</h4>\r\n<p>\r\n    An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;\r\n</p>\r\n<p class=\"text-align-center\" text-align-center=\"\">\r\n    <a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a>\r\n</p>",
+                    "format": "filtered_html",
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "b4f56fda-fb3a-4530-b506-6e3d6057b9ba",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
         "0b1303ac-a9e6-41f5-b201-1dbae47ee41c": {
             "plugin": "block:office_hours",
             "data": {
@@ -335,34 +363,6 @@
                     "title": ""
                 },
                 "uuid": "0b1303ac-a9e6-41f5-b201-1dbae47ee41c",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                }
-            }
-        },
-        "b4f56fda-fb3a-4530-b506-6e3d6057b9ba": {
-            "plugin": "layout:custom_block",
-            "data": {
-                "status": 0,
-                "module": "layout",
-                "delta": "custom_block",
-                "settings": {
-                    "title_display": "default",
-                    "title": "Backdrop LIVE ",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": [],
-                    "content": "<h4>\r\n    April 3-4, 2025\r\n</h4>\r\n<p>\r\n    An interactive online event for anyone interested in Backdrop CMS. Everyone is welcome.&nbsp;\r\n</p>\r\n<p class=\"text-align-center\" text-align-center=\"\">\r\n    <a class=\"button\" href=\"https://events.backdropcms.org/\">Register Now</a>\r\n</p>",
-                    "format": "filtered_html",
-                    "admin_label": "",
-                    "admin_description": ""
-                },
-                "uuid": "b4f56fda-fb3a-4530-b506-6e3d6057b9ba",
                 "style": {
                     "plugin": "default",
                     "data": {

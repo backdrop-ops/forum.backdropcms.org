@@ -438,7 +438,7 @@
                         }
                     }
                 },
-                "title": "Feature Request Wishlist",
+                "title": "Feature Request Wishlist - Top votes",
                 "arguments": {
                     "uid": {
                         "id": "uid",
@@ -566,9 +566,11 @@
                     }
                 },
                 "defaults": {
-                    "relationships": false
+                    "relationships": false,
+                    "title": false
                 },
-                "display_description": ""
+                "display_description": "",
+                "title": "Feature Request Wishlist"
             }
         },
         "block_1": {
@@ -607,7 +609,9 @@
                 "defaults": {
                     "relationships": false,
                     "arguments": false,
-                    "sorts": false
+                    "sorts": false,
+                    "pager": false,
+                    "pager_options": false
                 },
                 "display_description": "",
                 "arguments": [],
@@ -626,7 +630,15 @@
                         },
                         "granularity": "second"
                     }
-                }
+                },
+                "pager": {
+                    "type": "some",
+                    "options": {
+                        "items_per_page": "20",
+                        "offset": "0"
+                    }
+                },
+                "pager_options": null
             }
         }
     }
