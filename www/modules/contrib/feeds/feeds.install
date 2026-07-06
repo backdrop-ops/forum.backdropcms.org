@@ -605,3 +605,14 @@ function feeds_update_1006() {
     db_create_table('feeds_preview_source', $schema);
   }
 }
+
+/**
+ * Set up the user agent config for Feeds.
+ */
+function feeds_update_1007() {
+  $config = config('feeds.settings');
+  if ($config->get('user_agent') === NULL) {
+    $config->set('user_agent', 'Backdrop (+https://backdropcms.org/)');
+    $config->save();
+  }
+}

@@ -90,7 +90,7 @@ class FeedsUserProcessor extends FeedsProcessor {
   /**
    * Validates a user account.
    */
-  protected function entityValidate($account, FeedsSource $source = NULL) {
+  protected function entityValidate($account, ?FeedsSource $source = NULL) {
     parent::entityValidate($account);
     if (empty($account->name) || empty($account->mail)) {
       throw new FeedsValidationException(t('User name or email missing.'));
@@ -555,7 +555,7 @@ class FeedsUserProcessor extends FeedsProcessor {
       }
 
       $role = user_role_load($value);
-      
+
       if (!$role && !empty($mapping['autocreate'])) {
         $role = new stdClass();
         $role->name = $value;
@@ -564,7 +564,7 @@ class FeedsUserProcessor extends FeedsProcessor {
         // provide a default label.
         if (!is_numeric($value)) {
           $role->label = ucfirst(strtr($value, array('_' => ' ')));
-        } 
+        }
         else {
           $role->label = 'Role ' . $value;
         }

@@ -175,7 +175,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
    * @throws FeedsValidationException $e
    *   Thrown if validation fails.
    */
-  protected function entityValidate($entity, FeedsSource $source = NULL) {
+  protected function entityValidate($entity, ?FeedsSource $source = NULL) {
     $info = $this->entityInfo();
 
     if (!empty($info['translation'])) {

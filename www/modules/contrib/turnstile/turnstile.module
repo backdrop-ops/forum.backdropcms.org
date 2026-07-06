@@ -74,7 +74,7 @@ function turnstile_captcha($op, $captcha_type = '') {
       $captcha = array();
       if ($captcha_type == 'Turnstile') {
         $turnstile_site_key = $config->get('site_key');
-        $turnstile_secret_key = _turnstile_get_secret();
+        $turnstile_secret_key = $config->get('secret_key');
 
         if (!empty($turnstile_site_key) && !empty($turnstile_secret_key)) {
           $attributes = array(
@@ -115,7 +115,7 @@ function turnstile_captcha($op, $captcha_type = '') {
 function turnstile_captcha_validation($solution, $response, $element, $form_state) {
   $config = config('turnstile.settings');
   $turnstile_site_key = $config->get('site_key');
-  $turnstile_secret_key = _turnstile_get_secret();
+  $turnstile_secret_key = $config->get('secret_key');
   if (!isset($_POST['cf-turnstile-response']) || empty($_POST['cf-turnstile-response']) || empty($turnstile_secret_key)) {
     return false;
   }
@@ -134,44 +134,3 @@ function turnstile_captcha_validation($solution, $response, $element, $form_stat
   return false;
 }
 
-/**
- * Implements hook_help().
- */
-function turnstile_help($section = 'admin/help#turnstile', $arg = NULL) {
-  switch ($section) {
-
-    case 'admin/help#turnstile':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= t("<p>Cloudflare Turnstile delivers frustration-free, CAPTCHA-free web experiences to website visitors - with just a simple snippet of free code.</p><p>What's more, Turnstile stops abuse and confirms visitors are real without the data privacy concerns or awful UX that CAPTCHAs thrust on users.</p>");
-
-      // Add a link to the backdropcms.org project.
-      $output .= '<p>';
-      $output .= t('Visit the <a href="@project_link">Turnstile project page</a> on backdropcms.org for more information.', array(
-        '@project_link' => 'https://www.backdropcms.org/project/turnstile',
-      ));
-      $output .= '</p>';
-
-      return $output;
-
-    default:
-  }
-}
-
-/**
- * Helper function: retrieves the secret key and logs when there's a problem.
- * Uses a static cache to decrease logging.
- */
-function _turnstile_get_secret() {
-  $turnstile_secret_key = &backdrop_static(__FUNCTION__);
-  if (!isset($examples)) {
-    $turnstile_secret_key = settings_get('turnstile_secret_key', FALSE);
-    if (!$turnstile_secret_key) {
-      // Set a warning message and fall-back to configuration.
-      $message = t('A Turnstile secret key is saved in configuration. Move this to <code>$settings</code> in <code>settings.local.php.</code>');
-      watchdog('turnstile', $message, WATCHDOG_WARNING);
-      $turnstile_secret_key = config_get('turnstile.settings', 'secret_key');
-    }
-  }
-  return $turnstile_secret_key;
-}

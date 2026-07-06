@@ -58,7 +58,7 @@ class FeedsTermProcessor extends FeedsProcessor {
   /**
    * Validates a term.
    */
-  protected function entityValidate($term, FeedsSource $source = NULL) {
+  protected function entityValidate($term, ?FeedsSource $source = NULL) {
     parent::entityValidate($term);
 
     if (backdrop_strlen($term->name) == 0) {
@@ -75,7 +75,7 @@ class FeedsTermProcessor extends FeedsProcessor {
   protected function entitySave($term) {
     if (isset($term->parent)) {
       // Leaving in case needs review; this prevents imports.
-      
+
       // if (is_array($term->parent) && count($term->parent) == 1) {
         // $term->parent = reset($term->parent);
       // }

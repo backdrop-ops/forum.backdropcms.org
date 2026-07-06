@@ -27,49 +27,49 @@ class Turnstile {
   /**
    * Sets the site key.
    *
-   * @var siteKey
+   * @var string
    */
   protected $siteKey = '';
 
   /**
    * Sets the secret key.
    *
-   * @var secretKey
+   * @var string
    */
   protected $secretKey = '';
 
   /**
    * Sets the errors array.
    *
-   * @var errors
+   * @var array
    */
   protected $errors = array();
 
   /**
    * Sets the success flag.
    *
-   * @var success
+   * @var bool
    */
   private $success = FALSE;
 
   /**
    * Sets the validated flag.
    *
-   * @var validated
+   * @var object
    */
   private $validated;
 
   /**
    * Sets the request method.
    *
-   * @var requestMethod
+   * @var RequestMethod|null
    */
   private $requestMethod;
 
   /**
    * Constructor.
    */
-  public function __construct($site_key, $secret_key, $attributes = array(), RequestMethod $requestMethod = NULL) {
+  public function __construct($site_key, $secret_key, $attributes = array(), ?RequestMethod $requestMethod = NULL) {
     $this->siteKey = $site_key;
     $this->secretKey = $secret_key;
     $this->requestMethod = $requestMethod;
@@ -83,6 +83,8 @@ class Turnstile {
 
   /**
    * Build the Turnstile captcha form.
+   *
+   * @param string $validation_function
    *
    * @return mixed
    *   The return value.
@@ -109,6 +111,9 @@ class Turnstile {
   /**
    * Build the Turnstile validation mechanism.
    *
+   * @param string $response_token
+   * @param string $remote_ip
+   *
    * @return mixed
    *   The return value.
    */
@@ -118,7 +123,9 @@ class Turnstile {
       'response' => $response_token,
       'remoteip' => $remote_ip,
     );
-    $this->validated = $this->requestMethod->submit(self::SITE_VERIFY_URL, array_filter($query));
+    if ($this->requestMethod) {
+      $this->validated = $this->requestMethod->submit(self::SITE_VERIFY_URL, array_filter($query));
+    }
 
     if (isset($this->validated->success) && $this->validated->success === TRUE) {
       // Verified!
@@ -142,7 +149,7 @@ class Turnstile {
   /**
    * Get the errors.
    *
-   * @return mixed
+   * @return array
    *   The return value.
    */
   public function getErrors() {
@@ -152,7 +159,7 @@ class Turnstile {
   /**
    * Get the response errors.
    *
-   * @return mixed
+   * @return array
    *   The return value.
    */
   public function getResponseErrors() {

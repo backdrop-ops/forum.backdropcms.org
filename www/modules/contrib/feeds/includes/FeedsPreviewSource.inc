@@ -19,7 +19,7 @@ class FeedsPreviewSource extends FeedsSource {
    * @return FeedsPreviewSource
    *   An instance of this class.
    */
-  public static function instance($importer_id, $feed_nid = 0, FeedsAccountSwitcherInterface $account_switcher = NULL) {
+  public static function instance($importer_id, $feed_nid = 0, ?FeedsAccountSwitcherInterface $account_switcher = NULL) {
     $class = 'FeedsPreviewSource';
     static $instances = array();
     if (!isset($instances[$class][$importer_id][$feed_nid])) {

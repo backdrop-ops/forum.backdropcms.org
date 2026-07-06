@@ -80,13 +80,15 @@ function _image_captcha_get_enabled_fonts() {
   if (IMAGE_CAPTCHA_ERROR_NO_TTF_SUPPORT & _image_captcha_check_setup(FALSE)) {
     return array('BUILTIN');
   }
-  else {
-    $default = array(
-      backdrop_get_path('module', 'image_captcha') . '/fonts/Tesox/tesox.ttf',
-      backdrop_get_path('module', 'image_captcha') . '/fonts/Tuffy/Tuffy.ttf',
-    );
-    return config_get('image_captcha.settings', 'fonts', $default);
-  }
+
+  $default = array(
+    backdrop_get_path('module', 'image_captcha') . '/fonts/Tesox/tesox.ttf',
+    backdrop_get_path('module', 'image_captcha') . '/fonts/Tuffy/Tuffy.ttf',
+  );
+
+  $fonts = config_get('image_captcha.settings', 'fonts');
+
+  return !empty($fonts) ? $fonts : $default;
 }
 
 /**
@@ -279,7 +281,9 @@ function image_captcha_captcha($op, $captcha_type = '', $captcha_sid = NULL) {
         );
 
         // Handle the case insensitive validation option combined with ignoring spaces.
-        switch (config_get('captcha.settings', 'default_validation', CAPTCHA_DEFAULT_VALIDATION_CASE_INSENSITIVE)) {
+        $default_validation = config_get('captcha.settings', 'default_validation');
+        $default_validation = !empty($default_validation) ? $default_validation : CAPTCHA_DEFAULT_VALIDATION_CASE_INSENSITIVE;
+        switch ($default_validation) {
           case CAPTCHA_DEFAULT_VALIDATION_CASE_SENSITIVE:
             $result['captcha_validate'] = 'captcha_validate_ignore_spaces';
             break;

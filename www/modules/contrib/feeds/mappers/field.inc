@@ -37,7 +37,7 @@ function field_feeds_presave(FeedsSource $source, $entity, $item, $entity_id) {
 
     foreach ($entity->$field_name as $language => $values) {
       // Filter out empty values.
-      $values = _field_filter_items($info, $values);
+      $values = _field_filter_items($info, $values, $instance);
 
       // Check that the number of values doesn't exceed the field cardinality.
       if ($info['cardinality'] != FIELD_CARDINALITY_UNLIMITED && count($values) > $info['cardinality']) {

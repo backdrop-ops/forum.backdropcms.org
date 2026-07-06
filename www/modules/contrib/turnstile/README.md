@@ -36,7 +36,8 @@ Configuration
 2. Register at:
        <https://cloudflare.com/>
 3. Copy the site and secret keys from Cloudflare to the Turnstile
-   settings.
+   settings. Instead of saving the secret key in the admin form, we recommend
+   setting it in `settings.local.php` like `$config['turnstile.settings']['secret_key'] = "12345";`
 4. Visit the CAPTCHA administration page and set where you
    want the Turnstile form to be presented:
        `admin/config/people/captcha`

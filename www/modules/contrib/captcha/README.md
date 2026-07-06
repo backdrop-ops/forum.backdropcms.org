@@ -6,13 +6,23 @@ A CAPTCHA is a challenge-response test most often placed within web forms to det
 INSTALLATION
 ------------
 
-- Install this module using the official Backdrop CMS instructions at
-  https://backdropcms.org/guide/modules
+Install this module using the official [Backdrop CMS instructions](https://backdropcms.org/guide/modules).
 
-- Go to Configuration > People > CAPTCHA
-  (admin/config/people/captcha).
-- You can either use the default Math CAPTCHA or also enable the included Image CAPTCHA module.
-- This module allows for additional modules to extend its functionality, such as reCAPTCHA.
+Configuration
+-------------
+
+Go to Configuration > People > CAPTCHA (admin/config/people/captcha). You can either use
+the default Math CAPTCHA or also enable the included Image CAPTCHA module.
+
+This module allows for additional modules to extend its functionality, such as reCAPTCHA.
+
+Disabling in development or testing environments:
+
+The captcha module can be disabled even if the module is enabled
+by setting the variable disable_captcha to TRUE. For example, in
+settings.php you can set
+
+`$config['captcha.settings']['disable_captcha'] = TRUE;`
 
 License
 -------

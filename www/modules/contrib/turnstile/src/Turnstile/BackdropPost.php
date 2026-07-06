@@ -18,7 +18,7 @@ class BackdropPost implements RequestMethod {
    * @param array $params
    *   Request parameters.
    *
-   * @return \stdClass
+   * @return object
    *   Body of the Turnstile response.
    */
   public function submit($url, array $params) {

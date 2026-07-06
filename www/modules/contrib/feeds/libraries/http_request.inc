@@ -209,7 +209,8 @@ function feeds_http_request($url, array $options = array()) {
   $url = strtr($url, array('feed://' => 'http://', 'webcal://' => 'http://'));
 
   if ($curl) {
-    $headers[] = 'User-Agent: Backdrop (+https://backdropcms.org/)';
+    $user_agent = config_get('feeds.settings', 'user_agent');
+    $headers[] = 'User-Agent: ' . $user_agent;
     $result = new stdClass();
     $result->headers = array();
 

@@ -16,5 +16,6 @@
     "feeds_library_dir": "",
     "feeds_in_progress_dir": null,
     "feeds_process_limit": 5,
-    "feeds_use_mbstring": true
+    "feeds_use_mbstring": true,
+    "user_agent": "Backdrop (+https://backdropcms.org/)"
 }

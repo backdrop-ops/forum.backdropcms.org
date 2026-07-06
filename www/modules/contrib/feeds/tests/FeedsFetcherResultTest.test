@@ -53,13 +53,13 @@ class FeedsFetcherResultTest extends FeedsWebTestCase {
   /**
    * Serializes and unserializes a FeedsFetcherResult instance.
    *
-   * @param FeedsFetcherResult $result
+   * @param ?FeedsFetcherResult $result
    *   (optional) A FeedsFetcherResult instance.
    *
    * @return FeedsFetcherResult
    *   A FeedsFetcherResult instance, after being serialized and unserialized.
    */
-  protected function getRestoredFetcherResult(FeedsFetcherResult $result = NULL) {
+  protected function getRestoredFetcherResult(?FeedsFetcherResult $result = NULL) {
     if (is_null($result)) {
       $result = $this->fetcherResult;
     }

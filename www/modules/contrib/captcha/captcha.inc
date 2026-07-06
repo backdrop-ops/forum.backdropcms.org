@@ -11,7 +11,7 @@
  * @param string $form_id
  *   the form ID to configure.
  *
- * @param string $captcha_type
+ * @param string|object|null $captcha_type
  *   the setting for the given form_id, can be:
  *   - 'none' to disable CAPTCHA,
  *   - 'default' to use the default challenge type
@@ -69,9 +69,9 @@ function captcha_set_form_id_setting($form_id, $captcha_type) {
  * @param bool $symbolic
  *   flag to return as (symbolic) strings instead of object.
  *
- * @return NULL
+ * @return string|array|null
  *   if no setting is known
- *   or a captcha_point object with fields 'module' and 'captcha_type'.
+ *   or a captcha_point array with fields 'module' and 'captcha_type'.
  *   If argument $symbolic is true, returns (symbolic) as 'none', 'default'
  *   or in the form 'captcha/Math'.
  */
@@ -119,7 +119,8 @@ function captcha_get_form_id_setting($form_id, $symbolic = FALSE) {
 /**
  * Helper function to load all captcha points.
  *
- * @return array of all captcha_points
+ * @return array
+ *   All captcha_points.
  */
 function captcha_get_captcha_points() {
 
@@ -141,13 +142,13 @@ function captcha_get_captcha_points() {
  * Helper function for generating a new CAPTCHA session.
  *
  * @param string $form_id
- *   the form_id of the form to add a CAPTCHA to.
+ *   The form_id of the form to add a CAPTCHA to.
  *
  * @param int $status
- *   the initial status of the CAPTHCA session.
+ *   The initial status of the CAPTHCA session.
  *
  * @return int
- *   the session ID of the new CAPTCHA session.
+ *   The session ID of the new CAPTCHA session.
  */
 function _captcha_generate_captcha_session($form_id = NULL, $status = CAPTCHA_STATUS_UNSOLVED) {
   global $user;
@@ -173,10 +174,10 @@ function _captcha_generate_captcha_session($form_id = NULL, $status = CAPTCHA_ST
  * Helper function for updating the solution in the CAPTCHA session table.
  *
  * @param int $captcha_sid
- *   the CAPTCHA session ID to update.
+ *   The CAPTCHA session ID to update.
  *
  * @param string $solution
- *   the new solution to associate with the given CAPTCHA session.
+ *   The new solution to associate with the given CAPTCHA session.
  */
 function _captcha_update_captcha_session($captcha_sid, $solution) {
   db_update('captcha_sessions')
@@ -193,6 +194,13 @@ function _captcha_update_captcha_session($captcha_sid, $solution) {
  *
  * Based on the CAPTCHA persistence setting, the CAPTCHA session ID and
  * user session info.
+ *
+ * @param int $captcha_sid
+ *   Session ID.
+ * @param int $form_id
+ *   The Form ID.
+ *
+ * @return bool
  */
 function _captcha_required_for_user($captcha_sid, $form_id) {
   // Get the CAPTCHA persistence setting.
@@ -312,7 +320,7 @@ function _captcha_parse_captcha_type($captcha_type) {
   return explode('/', $captcha_type);
 }
 
-/*
+/**
  * Formats _captcha_parse_captcha_type for config
  *
  * @param string $form_id

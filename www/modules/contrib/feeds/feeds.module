@@ -1477,7 +1477,7 @@ function feeds_valid_url($url, $absolute = FALSE) {
 /**
  * Registers a feed subscription job for execution on feeds_exit().
  *
- * @param array $job
+ * @param ?array $job
  *   Information about a new job to queue; or if set to NULL (default), leaves
  *   the current queued jobs unchanged.
  *
@@ -1487,7 +1487,7 @@ function feeds_valid_url($url, $absolute = FALSE) {
  * @see feeds_exit()
  * @see feeds_get_subscription_jobs()
  */
-function feeds_set_subscription_job(array $job = NULL) {
+function feeds_set_subscription_job(?array $job = NULL) {
   $jobs = &backdrop_static(__FUNCTION__, array());
   if (isset($job)) {
     $jobs[] = $job;

@@ -6,28 +6,23 @@
 function turnstile_admin_settings() {
   $config = config('turnstile.settings');
 
-  // Add some assistance around safe secret key handling.
-  $config_secret_key = $config->get('secret_key');
-  $secret_description = t('The secret key given to you when you <a href="@url">register for turnstile</a>.', array('@url' => 'https://www.cloudflare.com/application-services/products/turnstile'));
-  if ($config_secret_key !== '') {
-    $message = t('The turnstile <strong>secret key</strong> is saved in configuration. For security, please remove it from this form, and add it to <code>$settings[' . "'turnstile_secret_key'" . ']</code> in <code>settings.local.php</code>.');
-    backdrop_set_message($message, 'warning');
-    $secret_description .= ' ' . t('For security, place this key in<code>settings.local.php</code> instead of this location.', array('@url' => 'https://www.cloudflare.com/application-services/products/turnstile'));
-  }
-  else {
-    $turnstile_secret_key = settings_get('turnstile_secret_key', FALSE);
-    if (!$turnstile_secret_key) {
-      $message = t('No turnstile <strong>secret key</strong> was found in either <code>$settings</code> or configuration.');
-      backdrop_set_message($message, 'error');
-      $secret_description .= ' ' . t('For security, place this key in<code>settings.local.php</code> instead of using this form.', array('@url' => 'https://www.cloudflare.com/application-services/products/turnstile'));
-    }
-    else {
-      $message = t('A secret key was successfully located in <code>$settings</code>.');
-      backdrop_set_message($message);
-    }
-  }
-
   $form['#config'] = 'turnstile.settings';
+
+  $help = '';
+  $help .= '<h3>' . t('About') . '</h3>';
+  $help .= t("<p>Cloudflare Turnstile delivers frustration-free, CAPTCHA-free web experiences to website visitors - with just a simple snippet of free code.</p><p>What's more, Turnstile stops abuse and confirms visitors are real without the data privacy concerns or awful UX that CAPTCHAs thrust on users.</p>");
+
+  $help .= '<p>';
+  $help .= t('Visit the <a href="@project_link">Turnstile project page</a> on backdropcms.org for more information.', array(
+    '@project_link' => 'https://www.backdropcms.org/project/turnstile',
+  ));
+  $help .= '</p>';
+
+  $form['help'] = array(
+    '#type' => 'help',
+    '#markup' => $help,
+  );
+
   $form['general'] = [
     '#type' => 'details',
     '#summary' => t('General settings'),
@@ -36,7 +31,7 @@ function turnstile_admin_settings() {
 
   $form['general']['site_key'] = [
     '#default_value' => $config->get('site_key'),
-    '#description' => t('The site key given to you when you <a href="@url">register for Turnstile</a>.',  array('@url' => 'https://www.cloudflare.com/application-services/products/turnstile')),
+    '#description' => t('The site key given to you when you <a href="@url">register for Turnstile</a>.', array('@url' => 'https://cloudflare.com')),
     '#maxlength' => 50,
     '#required' => TRUE,
     '#title' => t('Site key'),
@@ -44,9 +39,10 @@ function turnstile_admin_settings() {
   ];
 
   $form['general']['secret_key'] = [
-    '#default_value' => $config_secret_key,
-    '#description' => $secret_description,
+    '#default_value' => $config->get('secret_key'),
+    '#description' => t('The secret key given to you when you <a href="@url">register for Turnstile</a>. For security, place this key in <code>settings.local.php</code> instead saving with this form. Use the format: <code>$config[\'turnstile.settings\'][\'secret_key\'] = "12345";</code>', array('@url' => 'https://cloudflare.com')),
     '#maxlength' => 50,
+    '#required' => TRUE,
     '#title' => t('Secret key'),
     '#type' => 'textfield',
   ];
