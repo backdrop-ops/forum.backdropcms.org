@@ -9,7 +9,7 @@
     "locked": 0,
     "settings": {
         "promote_enabled": false,
-        "comment_enabled": false,
+        "comment_enabled": true,
         "comment_default": 2,
         "comment_per_page": 50,
         "comment_mode": 1,
