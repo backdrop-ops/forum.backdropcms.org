@@ -18,14 +18,37 @@
   padding: 1.5em 1em 1em 1em;
 }
 
-/** Bottom ***********************************************************************/
+/** Bottom ********************************************************************/
 
-.l-bottom,
-body.front .l-bottom {
-  background-color: #f7f7f7;
+.l-bottom {
   border-top: 2px solid #E8E6E5;
   border-bottom: 0;
   padding: 1.5em 0;
+}
+body.front .l-bottom {
+  background-color: #f7f7f7;
+  margin-bottom: 0;
+  color: #000;
+
+  h2 {
+    color: #000;
+  }
+}
+
+/** Content *******************************************************************/
+
+.l-content {
+  padding-top: 15px;
+}
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  .l-content {
+    padding-top: 30px;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .l-content {
+    padding-top: 50px;
+  }
 }
 
 /******************************************************************************
@@ -60,25 +83,6 @@ body.front .l-bottom {
   }
 }
 
-
-/******************************************************************************
- * Borg Greeting icons
- ******************************************************************************/
-.borg-greeting a.icon {
-  margin-left: 5px;
-}
-.borg-greeting .fa-2x {
-  font-size: 1.5em;
-}
-@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
-  .borg-greeting .fa-2x {
-    font-size: 2em;
-  }
-  .borg-greeting a.icon {
-    margin-left: 10px;
-  }
-}
-
 /******************************************************************************
 * Password + Registraiton form - captchas.
 ******************************************************************************/
@@ -102,10 +106,10 @@ body.front .l-bottom {
 }
 
 /******************************************************************************
- * Main Menu font size
+ * Main Menu
  ******************************************************************************/
-ul.menu-dropdown a {
-  font-size: 1.25rem; /* 20px */
+ul.menu-dropdown a:hover {
+  text-decoration: underline;
 }
 
 /******************************************************************************
@@ -135,84 +139,73 @@ body.front .page-title {
   font-weight: 400; /* Normal */
 }
 
+
 /******************************************************************************
- * Home page - welcome block
- ******************************************************************************/
-body.front .block-layout-custom-block h2 {
-  font-size: 1.625rem;
-  line-height: 1.2;
-  color: #444b53; /* soft black */
-  font-weight: 300; /* Light */
-  margin: 0 0 1em 0;
-}
-@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
-  body.front .block-layout-custom-block h2 {
-    font-size: 2.125rem;
-    margin: 0 0 .75em 0;
-  }
+** Search Form
+*******************************************************************************/
+
+.block-search-form input[type="submit"] {
+  border: 0;
+  box-shadow: none;
+  background-color: var(--color__border--gray-mid); /* match border */
+  /* @see template.php in ...search_block_form_alter() for icon addition. */
+  mask: var(--icon-magnifying-glass) center center no-repeat;
+  mask-size: 60%;
 }
 
 /******************************************************************************
 ** Search Form - Home page overrides.
 *******************************************************************************/
-body.front .search-block-form {
-  margin: 0 auto 4rem;
-  max-width: 500px;
+body.front .block-search-form {
+  margin: 15px auto 4rem;
+  max-width: 600px;
 }
-body.front .search-block-form label {
+body.front .block-search-form label {
   color: #444b53;
   font-weight: normal;
 }
 
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
-  body.front .search-block-form {
-    margin: 15px auto 5rem;
-  }
-  body.front .search-block-form label {
+  body.front .block-search-form label {
     font-size: 1.5rem; /* 33px */
     line-height: 30px;
     text-align: center;
     padding: 0 15px;
   }
-  body.front .search-block-form input.form-search {
+  body.front .block-search-form input.form-search {
     font-size: 2.25rem; /* 36px */
     line-height: 44px;
     height: 44px;
   }
-  body.front .search-block-form .form-actions {
-    width: 44px;
-  }
-  body.front .search-block-form input[type="submit"] {
+  body.front .block-search-form input[type="submit"] {
     line-height: 44px;
     height: 44px;
     width: 44px;
-    border-radius: 22px;
   }
 }
 
 @media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
-  body.front .search-block-form {
+  body.front .block-search-form {
     max-width: 600px;
   }
 }
 
 @media (min-width: 62em) { /* 992px @ 16px font size -- LG */
-  body.front .search-block-form {
+  body.front .block-search-form {
     max-width: 700px;
   }
-  body.front .search-block-form input.form-search {
+  body.front .block-search-form input.form-search {
     font-size: 2.25rem; /* 36px */
     line-height: 46px;
     height: 56px;
   }
-  body.front .search-block-form .form-actions {
+  body.front .block-search-form .form-actions {
     width: 56px;
   }
-  body.front .search-block-form input[type="submit"] {
+  body.front .block-search-form input[type="submit"] {
     line-height: 56px;
     height: 56px;
     width: 56px;
-    border-radius: 28px;
   }
 }
 
