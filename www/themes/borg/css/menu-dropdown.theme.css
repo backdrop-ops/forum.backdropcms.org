@@ -5,48 +5,51 @@
  ******************************************************************************/
 
 .menu-dropdown {
+  font-family: var(--font-family--sans);
   position: relative;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 2px;
 }
-
-/* Undo system.theme.css menu styles for dropdowns. */
+ul.menu-dropdown { /* needed to override .sm */
+  padding: 10px 0;
+}
 .menu-dropdown li,
 .menu-dropdown li.expanded,
 .menu-dropdown li.collapsed,
 .menu-dropdown li.leaf {
+  /* Undo system.theme.css menu styles for dropdowns. */
   margin: 0;
-  padding: 0;
-  background-color: #696969;
-  border-bottom: 1px solid #000;
-}
-.menu-dropdown li:last-child {
-  border-bottom: 0;
+  padding: 0 10px;
 }
 .js .menu-dropdown ul {
-  border-top: 1px solid #000;
-  background-color: #808080;
-}
-.menu-dropdown li li,
-.menu-dropdown li li.expanded,
-.menu-dropdown li li.collapsed,
-.menu-dropdown li li.leaf {
-  background-color: #808080;
+  background-color: var(--color__gray-white);
+  border-bottom: 1px solid var(--color__purple-vlight);
 }
 .menu-dropdown a,
 .menu-dropdown a:hover,
 .menu-dropdown a:focus,
 .menu-dropdown a:active {
-  padding: .75em 1em;
+  padding: 10px 16px;
+  font-size: 1.0625rem; /* 17px */
+  font-weight: normal;
+  line-height: 1.0625rem; /* 17px */
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid var(--color__purple-vlight);
+}
+.menu-dropdown li:last-child a {
+  border-bottom: 0;
+}
+.menu-dropdown a.has-submenu {
   /* make room for the toggle button (sub indicator) */
   padding-right: 58px;
-  font-weight: normal;
-  line-height: 17px;
-  text-decoration: none;
 }
 .menu-dropdown a.current {
-  color: #d23600;
+  color: var(--color__purple-light);
 }
 .menu-dropdown a.disabled {
-  color: #7D7D7D;
+  color: var(--color__gray-dark);
 }
 .menu-dropdown a span.sub-arrow {
   position: absolute;
@@ -61,6 +64,25 @@
   text-align: center;
   text-shadow: none;
 }
+.menu-dropdown a span.sub-arrow:before {
+  color: var(--color__accent--primary);
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .menu-dropdown a span.sub-arrow {
+    top: 50%;
+    right: 10px;
+    width: 0.5em;
+    height: 0.5em;
+    margin-top: 0;
+    border: 1px solid transparent;
+    border-right-color: white;
+    border-bottom-color: white;
+    transform: translate(0, -50%) rotate(45deg);
+    background: transparent;
+    border-radius: 0;
+  }
+}
+
 .menu-dropdown span.sub-arrow:before {
   display: block;
   content: '+';
@@ -70,19 +92,25 @@
   content: '-';
 }
 
+/*******************************************************************************
+ * Dopdown Styles start here
+ ******************************************************************************/
+
 @media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
   /* Switch to desktop layout
   -----------------------------------------------
      These transform the menu tree from
      collapsible to desktop (navbar + dropdowns)
   -----------------------------------------------*/
-  /* start... (it's not recommended editing these rules) */
+  /* start... (it's not recommended editing these rules) **********************/
   .js .menu-dropdown ul {
     position: absolute;
     width: 12em;
     top: 1em;
   }
-
+  ul.menu-dropdown { /* needed to override .sm */
+    padding: 0;
+  }
   .menu-dropdown li,
   .menu-dropdown li.expanded,
   .menu-dropdown li.collapsed,
@@ -90,7 +118,6 @@
     display: inline-block;
     background-color: transparent;
   }
-
   .menu-dropdown li li,
   .menu-dropdown li li.expanded,
   .menu-dropdown li li.collapsed,
@@ -98,95 +125,116 @@
     display: block;
     float: left;
   }
-
   [dir="rtl"] .menu-dropdown li {
     float: right;
   }
-
   .menu-dropdown ul li,
   [dir="rtl"] .menu-dropdown ul li {
     float: none;
   }
-
   .menu-dropdown a {
     white-space: nowrap;
   }
-
   .menu-dropdown ul a {
     white-space: normal;
   }
+  /** ...end ******************************************************************/
 
-  /* ...end */
-
+  .menu-dropdown {
+    background-color: transparent;
+    border: none;
+    left: -30px;
+  }
+  .menu-dropdown li,
+  .menu-dropdown li.expanded,
+  .menu-dropdown li.collapsed,
+  .menu-dropdown li.leaf {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-top: 0;
+  }
+  .menu-dropdown li:first-child {
+    padding-left: 0;
+  }
+  .menu-dropdown li:last-child {
+    margin-right: 0;
+  }
   .menu-dropdown a,
   .menu-dropdown a:hover,
   .menu-dropdown a:focus,
   .menu-dropdown a:active,
   .menu-dropdown a.highlighted {
     width: 100%;
-    color: #fff;
-    padding: .75em 1em;
-    padding-right: 1em;
+    color: #ffffff;
+    padding: 8px;
+    padding-right: 1em; /* override mobile pading */
+    border-bottom: 0;
+  }
+
+  /* top level only */
+  .menu-dropdown > li > a,
+  .menu-dropdown > li > a:hover,
+  .menu-dropdown > li > a:focus,
+  .menu-dropdown > li > a:active,
+  .menu-dropdown > li > a.highlighted {
     border-bottom: 2px solid transparent;
   }
-  .menu-dropdown a.active-trail,
-  .menu-dropdown a.active,
-  .menu-dropdown a:hover,
-  .menu-dropdown a:focus,
-  .menu-dropdown a:active,
-  .menu-dropdown a.highlighted {
-    border-bottom: 2px solid #fff;
+  .menu-dropdown > li li > a.active-trail,
+  .menu-dropdown > li li > a.active,
+  .menu-dropdown > li li > a:hover,
+  .menu-dropdown > li li > a:focus,
+  .menu-dropdown > li li > a:active,
+  .menu-dropdown > li li > a.highlighted {
+    _border-bottom: 2px solid var(--color__purple-vlight);
   }
+
   .menu-dropdown a.disabled {
-    color: #7D7D7D;
+    color: var(--color__gray-dark);
   }
   .js .menu-dropdown li.has-children > a:hover,
   .js .menu-dropdown li.has-children > a {
     padding-right: 28px;
   }
-  .menu-dropdown a span.sub-arrow {
-    top: 50%;
-    margin-top: -2px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border-width: 5px;
-    border-style: solid dashed dashed dashed;
-    border-color: #fff transparent transparent transparent;
-    background: transparent;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
-    border-radius: 0;
-  }
   .menu-dropdown a.highlighted span.sub-arrow:before {
     display: none;
   }
-  .menu-dropdown li,
-  .menu-dropdown li.expanded,
-  .menu-dropdown li.collapsed,
-  .menu-dropdown li.leaf {
-    border-top: 0;
-    border-bottom: 1px solid transparent;
-  }
+
+  /** second level ************************************************************/
   .js .menu-dropdown ul {
-    padding: 0;
-    padding-left: 0;
-    background-color: #696969;
+    padding: 10px;
+    padding-left: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 2px;
   }
   .js .menu-dropdown ul li {
     float: none;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--color__purple-vlight);
+  }
+  .js .menu-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+  .menu-dropdown ul li:has(a.active),
+  .menu-dropdown ul li:has(a.active-trail),
+  .menu-dropdown ul li:has(a:hover),
+  .menu-dropdown ul li:has(a:focus),
+  .menu-dropdown ul li:has(a:active),
+  .menu-dropdown ul li:has(a.highlighted) {
+    background-color: var(--color__gray-white);
   }
   .menu-dropdown ul a,
   .menu-dropdown ul a:hover,
   .menu-dropdown ul a:focus,
   .menu-dropdown ul a:active,
   .menu-dropdown ul a.highlighted {
-    border: 0 !important;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #696969;
+    border: 0;
+    padding: 10px 0;
+  }
+
+  .menu-dropdown ul a {
+    color: #000;
   }
   .menu-dropdown ul a.active,
   .menu-dropdown ul a.active-trail,
@@ -194,11 +242,11 @@
   .menu-dropdown ul a:focus,
   .menu-dropdown ul a:active,
   .menu-dropdown ul a.highlighted {
-    background-color: #808080;
+    color: var(--color__accent--primary);
   }
   .menu-dropdown ul a.disabled {
-    background: white;
-    color: #cccccc;
+    background: #fff;
+    color: #ccc;
   }
   .menu-dropdown ul .has-children > a {
     padding-right: 20px;
@@ -209,7 +257,7 @@
     margin-top: -5px;
     border-width: 5px;
     border-style: dashed dashed dashed solid;
-    border-color: transparent transparent transparent #555555;
+    border-color: transparent transparent transparent var(--color__accent--primary);
   }
   .menu-dropdown span.scroll-up,
   .menu-dropdown span.scroll-down {
@@ -235,12 +283,12 @@
     overflow: hidden;
     border-width: 6px;
     border-style: dashed dashed solid dashed;
-    border-color: transparent transparent #555555 transparent;
+    border-color: transparent transparent var(--color__accent--primary) transparent;
   }
   .menu-dropdown span.scroll-down-arrow {
     top: 8px;
     border-style: solid dashed dashed dashed;
-    border-color: #555555 transparent transparent transparent;
+    border-color: var(--color__accent--primary) transparent transparent transparent;
   }
   [dir="rtl"] .menu-dropdown li.has-children > a {
     padding-right: 12px;
@@ -265,6 +313,44 @@
     right: auto;
     left: 8px;
     border-style: dashed solid dashed dashed;
-    border-color: transparent #555555 transparent transparent;
+    border-color: transparent var(--color__accent--primary) transparent transparent;
+  }
+}
+
+@media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  /* top -evel menus only */
+  .menu-dropdown > li > a,
+  .menu-dropdown > li > a:hover,
+  .menu-dropdown > li > a:focus,
+  .menu-dropdown > li > a:active,
+  .menu-dropdown > li > a.highlighted {
+    width: 100%;
+  }
+}
+@media (min-width: 48em) {  /* 768px @ 16px font size  -- MD */
+  .js .menu-dropdown li.has-children > a:hover,
+  .js .menu-dropdown li.has-children > a {
+    _padding-right: 20px;
+  }
+  .menu-dropdown a span.sub-arrow {
+    right: 5px;
+  }
+}
+@media (min-width: 62em) { /* 992px @ 16px font size -- LG */
+  .menu-dropdown {
+    left: 0;
+  }
+  .menu-dropdown > li,
+  .menu-dropdown > li.expanded,
+  .menu-dropdown > li.collapsed,
+  .menu-dropdown > li.leaf {
+    _padding: 0 6px;
+  }
+  .js .menu-dropdown li.has-children > a:hover,
+  .js .menu-dropdown li.has-children > a {
+    padding-right: 28px;
+  }
+  .menu-dropdown a span.sub-arrow {
+    right: 10px;
   }
 }

@@ -14,12 +14,15 @@ stylesheets[screen][] = css/components.css
 stylesheets[screen][] = css/menu-dropdown.theme.css
 stylesheets[screen][] = css/menu-toggle.theme.css
 
-; These should be overridden in base themes:
+; These should be overridden in sub-themes:
+stylesheets[screen][] = css/components-header.css
 stylesheets[screen][] = css/components-nodes.css
 stylesheets[screen][] = css/components-styles.css
 stylesheets[screen][] = css/components-menus.css
 stylesheets[screen][] = css/components-views.css
 stylesheets[screen][] = css/components-blocks.css
+
+;stylesheets[screen][] = css/debug.css
 
 ; Stylesheets to be added in the rich-text editor:
 ckeditor_stylesheets[] = css/base.css
@@ -28,7 +31,6 @@ ckeditor_stylesheets[] = css/editor.css
 ; Custom javascript to be added:
 scripts[] = js/borg.js
 
-; Added by Backdrop CMS packaging script on 2025-02-27
+
 project = borg
-version = 1.x-1.2.6
-timestamp = 1740712525
+version = 1.x-2.0.2

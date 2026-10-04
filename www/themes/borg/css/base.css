@@ -4,14 +4,71 @@
  * Contains base styles for HTML elements only.
  ******************************************************************************/
 
+:root {
+
+  /* Colors by name. */
+  --color__purple: #4D00FF;        /* brand color - new design */
+  --color__purple-dark: #3909a9;   /* brand color (dark) - new design */
+  --color__purple-light: #B79CF6;  /* svgs, mobile toggle - new design */
+  --color__purple-vlight: #EAE1FF; /* section & menu item borders  - new design */
+    --color--gray-purple-light: #EAE1FF; /* @todo delete me - duplicate, see above */
+
+  --color__gray-white: #FAFAFA; /* dropdown menu background + vtabs - new design */
+  --color__gray-light: #F9F8FB; /* section background - new design */
+
+  --color__gray-dark: #7D7D7D; /* menu text and border color - new design */
+  --color__gray-black: #34333F;
+
+  /* legacy colors */
+  --color__gray: #F2F2F2;
+  --color__gray-darker: #F7F7F7; /* replace with --color__gray-light - blockquote, menu backgrounds */
+  --color__gray-dark: #444b53; /* sidebar menu borders, and ... */
+  --color__gray-purple-mid: #C3BCD5; /* tabs - legacy gray background */
+  --color__gray-faint: #E8E6E5; /* replace with #ECECEC? - legacy gray border & showcase UI bg */
+
+  /* Colors by use. */
+  --color__link: var(--color__purple-dark);
+  --color__link-hover: var(--color__purple);
+
+  --color__accent--primary: var(--color__purple);
+  --color__accent--primary--dark: var(--color__purple-dark);
+  --color__accent--primary--light: var(--color__purple-light);
+  --color__accent--secondary: #01FDA6; /* green? */
+
+  --color__border--section--gray: var(--color__purple-vlight); /* see below */
+    --color__border--gray-light: var(--color__purple-vlight); /* @todo delete me - duplicate */
+  --color__border--gray-mid: var(--color__gray-purple-mid);
+  --color__border--gray-legacy: var(--color__gray-faint);
+
+  --color__background--section--gray: var(--color__gray-light); /* use with --color__border--section--gray borders */
+  --color__background--gray: var(--color__gray);
+  --color__background--gray-mid: var(--color__gray-faint); /* rename me? */
+
+  /* Fonts */
+  --font-family--sans: "IBM Plex Sans", "Open Sans", Helvetica, sans-serif;
+  --font-family--mono: "IBM Plex Mono", Consolas, 'Courier New', Courier, monospace;
+  --font-family--sans-legacy: 'Source Sans Pro', "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  --font-family--mono-legacy: Menlo, Consolas, "Andale Mono", "Lucida Console", "Nimbus Mono L", "DejaVu Sans Mono", monospace, "Courier New";
+
+  /* Spacing */
+  --section__padding-sm: 16px;
+  --section__padding: 32px;
+}
+@media (min-width: 48em) {
+  :root {
+    --section__padding-sm: 32px;
+    --section__padding: 64px;
+  }
+}
+
 html,
 body {
-  font-family: 'Source Sans Pro', "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: var(--font-family--sans-legacy);
   font-size: 16px;
   line-height: 1.25;
   margin: 0;
   padding: 0;
-  min-width: 320px;
+  min-width: 360px;
 }
 
 @media (max-width: 47.9375em) {  /* 767px @ 16px font size  -- MD */
@@ -50,11 +107,11 @@ p {
 }
 
 a {
-  color: #0078B5;
+  color: var(--color__link);
   text-decoration: none;
 }
 a:hover {
-  color: #007CBA;
+  color: var(--color__link-hover);
 }
 
 img {
@@ -120,26 +177,50 @@ ol > li {
 
 table {
   width: 100%;
-  margin: 1em 0;
+  margin: 1rem 0;
 }
 table th {
   font-size: 1.25em;
   font-weight: 400; /* Normal */
-  border-bottom: 2px solid #E8E6E5;
+  border-bottom: 2px solid var(--color__border--section--gray);
 }
 tr.odd {
-  background-color: #f7f7f7;
+  background-color: var(--color__background--section--gray);
 }
 tr.even {
   background-color: transparent;
 }
+th.active {
+  border-bottom: 1.5px solid var(--color__accent--primary);
+}
+td.active {
+  background-color: inherit;
+  border-left: 1px solid var(--color__accent--primary);
+  border-right: 1px solid var(--color__accent--primary);
+}
+tr:last-child td.active {
+  border-bottom: 1px solid var(--color__accent--primary);
+}
+.tableresponsive-toggle-columns {
+  text-align: right; /* LTR */
+  position: relative;
+  top: 1rem; /* match top margin for table */
+}
+[dir="rtl"] .tableresponsive-toggle-columns {
+  text-align: left; /* LTR */
+}
 
+table th,
 table td {
-  padding: 1em .5em;
+  padding: 1em .5rem; /* use rems for r+l to match different fonts */
 }
 @media (min-width: 34em) { /* 544px @ 16px font size -- SM */
+  table th,
   table td {
-    padding: 1em;
+    padding: 1em 1rem; /* use rems for r+l to match different fonts */
+  }
+  table th {
+    padding: .33em 1rem; /* use rems for r+l to match different fonts */
   }
 }
 
@@ -158,7 +239,7 @@ figure {
 }
 figcaption {
   margin-top: 5px;
-  color: #444b53;
+  color: var(--color__gray-dark);
   font-size: .85em; /* relative size */
 }
 
@@ -173,7 +254,7 @@ pre {
   margin: 10px 0;
 }
 code {
-  font-family: Menlo, Consolas, "Andale Mono", "Lucida Console", "Nimbus Mono L", "DejaVu Sans Mono", monospace, "Courier New";
+  font-family: var(--font-family--mono-legacy);
   font-size: 0.857em;
   background-color: #EEEEEE;
   padding: 0.2em 0.5em;
@@ -195,63 +276,57 @@ dd {
 label {
   margin: 0 0 0.5em;
   font-size: 1.125em; /* relative size */
-  line-height: 2.2em;
 }
 input,
 textarea {
   font-size: 1.125rem; /* 18px */
-  color: #444b53;
+  color: var(--color__gray-dark);
   background-color: #fff;
-  line-height: 40px;
-  height: 40px;
   max-width: 100%;
-  padding: 4px 8px;
-  border: 2px solid #E8E6E5;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  padding: 8px 10px 4px 10px;
+  border: 1px solid var(--color__border--gray-mid);
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.075);
   box-sizing: border-box;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+}
+input {
+  line-height: 42px; /* 42+1+1 border to match button with 40+2+2 border */
+  height: 42px; /* 42+1+1 border to match button with 40+2+2 border */
 }
 textarea {
   height: auto;
   padding: 10px;
 }
 select {
-  height: 40px;
-  color: #444b53;
-  padding: 4px 16px 4px 8px;
+  height: 42px; /* match input */
+  font-size: 1.125rem; /* 18px */
+  color: var(--color__gray-dark);
+  background-color: white;
+  padding: 8px 10px 4px 10px; /* match input */
+  border: 1px solid var(--color__border--gray-mid); /* match input */
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.075); /* match input */
+  box-sizing: border-box;
 }
 input[type="checkbox"] {
-  -webkit-box-shadow: none;
   box-shadow: none;
   height: 22px;
   line-height: 22px;
   margin-right: .5em;
 }
 input[type="submit"] {
-  border: 2px solid #007CBA;
-  background-color: white;
-  color: #007CBA;
+  height: 42px; /* match input */
   font-size: 1.125rem; /* 18px */
-  border-radius: 20px;
-  width: auto;
+  color: var(--color__link);
+  background-color: white;
   margin: 10px 20px 10px 0;
-  padding: 0 20px;
+  padding: 1px 20px 0;
   white-space: nowrap;
-
-  -webkit-transition: background-color .33s;
-  -webkit-transition: color .33s;
-  -moz-transition: background-color .33s;
-  -moz-transition: color .33s;
-  -ms-transition: background-color .33s;
-  -ms-transition: olor .33s;
-  -o-transition: background-color .33s;
-  -o-transition: color .33s;
-  transition: background-color .33s;
-  transition: color .33s;
+  border: 2px solid var(--color__link);
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.075); /* match input */
 }
 input[type="submit"]:hover {
-  background-color: #007CBA;
+  background-color: var(--color__accent--primary);
   color: white;
 }

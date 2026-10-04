@@ -5,15 +5,103 @@
  */
 
 /*******************************************************************************
+ * New theme functions.
+ ******************************************************************************/
+
+/**
+ * Implements hook_theme()
+ * - Provides a theme function for outputting a list.
+ */
+function borg_theme($existing, $type, $theme, $path) {
+  return array(
+    'borg_list' => array(
+      'variables' => array(
+        'type' => 'ul',
+        'items' => array(),
+        'attributes' => array(),
+        'empty' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Outputs a HTML list.
+ * - type: UL or OL
+ * - items: A list of items to render. String values are rendered as is. Each item can also be an associative array containing:
+ *   - data: The string content of the list item.
+ *   - attrubutes: Any attributes to be applied to the LI list item.
+ *   - children: A list of nested child items to render that behave identically to 'items', but any non-numeric string keys are treated as HTML attributes for the child list that wraps 'children'.
+ */
+function borg_borg_list($variables) {
+  $type = $variables['type'];
+  $items = $variables['items'];
+  $list_attributes = $variables['attributes'];
+
+  $output = '';
+
+  if ($items) {
+    $output .= '<' . $type . backdrop_attributes($list_attributes) . '>';
+    $num_items = count($items);
+    $i = 0;
+
+    foreach ($items as $key => $item) {
+      $i++;
+      $attributes = array();
+
+      if (is_array($item)) {
+        $value = '';
+        if (isset($item['data'])) {
+          $value .= $item['data'];
+        }
+
+        if (isset($item['attributes'])) {
+          $attributes = $item['attributes'];
+        }
+
+        // Append nested child list, if any.
+        if (isset($item['children'])) {
+          // Handle child attributes.
+          $child_list_attributes = array();
+          foreach ($item['children'] as $child_key => $child_item) {
+            if (is_string($child_key)) {
+              $child_list_attributes = $child_item['attributes'];
+              unset($item['children'][$child_key]);
+            }
+          }
+          $value .= theme('borg_list', array(
+            'items' => $item['children'],
+            'type' => $type,
+            'attributes' => $child_list_attributes,
+          ));
+        }
+      }
+      else {
+        $value = $item;
+      }
+
+      $output .= '<li' . backdrop_attributes($attributes) . '>' . $value . '</li>';
+    }
+    $output .= "</$type>";
+  }
+  elseif (!empty($variables['empty'])) {
+    $output .= render($variables['empty']);
+  }
+
+  return $output;
+}
+
+
+/*******************************************************************************
  * Alter functions: modify renderable structures before used.
  ******************************************************************************/
 
 /**
- * Implements hook_form_id_alter()
- * Modify the user edit form for usability++
+ * Implements hook_form_FORM_ID_alter().
  */
-function borg_form_user_profile_form_alter(&$form, &$form_state) {
-
+function borg_form_search_block_form_alter(&$form, &$form_state) {
+  /* see components.css */
+  $form['#attached']['icons'][] = 'magnifying-glass';
 }
 
 /**
@@ -84,13 +172,24 @@ function borg_menu_alter(&$items) {
  * @see page.tpl.php
  */
 function borg_preprocess_page(&$variables) {
+  $arg0 = check_plain(arg(0));
+  $arg1 = check_plain(arg(1));
+  $arg2 = check_plain(arg(2));
+  $icons_needed = array();
+
   // Add the Source Sans Pro font.
   $source_sans = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700';
   backdrop_add_css($source_sans, array('type' => 'external'));
+
+  // Make the icons available for use in CSS.
+  $icons_needed[] = 'user-circle';
+  backdrop_add_icons($icons_needed);
+
   // Add FontAwesome.
-  $font_awesome = 'https://use.fontawesome.com/baf3c35582.js';
-  backdrop_add_js($font_awesome, array('type' => 'external'));
-  // Add ForkAwesome.
+  //$font_awesome = 'https://use.fontawesome.com/baf3c35582.js';
+  //backdrop_add_js($font_awesome, array('type' => 'external'));
+
+  // Add ForkAwesome. @todo - replace with ICON API
   $fork_awesome = 'https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css';
   $attributes = array(
     'integrity' => 'sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=',
@@ -98,28 +197,21 @@ function borg_preprocess_page(&$variables) {
   );
   backdrop_add_css($fork_awesome, array('type' => 'external', 'attributes' => $attributes));
 
+  // Load IBM Plex variable fonts.
+  backdrop_add_css(
+    'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap',
+    array('type' => 'external')
+  );
+
   // Add a body class based on the admin bar.
   if (module_exists('admin_bar') && user_access('admin_bar')) {
     $variables['classes'][] = 'admin-bar';
   }
 
   $path = backdrop_get_path('theme', 'borg');
-  $arg0 = check_plain(arg(0));
-  $arg1 = check_plain(arg(1));
-  $arg2 = check_plain(arg(2));
-
   // Add Flexslider to the front page only.
   if (backdrop_is_front_page()) {
     backdrop_add_css($path . '/css/page-front.css');
-  }
-  elseif ($arg0 == 'support') {
-    if ($arg1 == 'services') {
-      backdrop_add_css($path . '/css/page-services.css');
-    }
-  }
-  elseif ($arg0 == 'modules' || $arg0 == 'themes' || $arg0 == 'layouts') {
-    $variables['classes'][] = 'project-search';
-    backdrop_add_css($path . '/css/page-project-search.css');
   }
   elseif ($arg0 == 'user') {
     if ($arg1 == 'login') {
@@ -147,12 +239,12 @@ function borg_preprocess_page(&$variables) {
     }
   }
 
-  // Add a node class based on the node ID...
+  // Add a class based on the node ID...
   if ($arg0 == 'node' && is_numeric($arg1) && !$arg2) {
     $variables['classes'][] = 'node-' . $arg1;
   }
 
-  // ...or add body classes based on args.
+  // ...or add classes based on args.
   elseif ($arg0) {
     $variables['classes'][] = $arg0;
     if ($arg1) {
@@ -161,6 +253,11 @@ function borg_preprocess_page(&$variables) {
         $variables['classes'][] = $arg0 . '-' . $arg1 . '-' . $arg2;
       }
     }
+  }
+
+  // Make the icons needed available for use in CSS.
+  if (!empty($icons_needed)) {
+    backdrop_add_icons($icons_needed);
   }
 }
 
@@ -178,8 +275,9 @@ function borg_preprocess_layout(&$variables) {
   if ($arg0 == 'user' && !is_numeric($arg1)) {
     $variables['tabs'] = FALSE;
   }
+
   // Special handling for header image.
-  if ($arg0 == 'user' && is_numeric($arg1) && !$arg2) {
+  elseif ($arg0 == 'user' && is_numeric($arg1) && !$arg2) {
     // Check to see if there is a profile image.
     $account = user_load($arg1); // Entity cache should save us here?
     if (isset($account->field_header_photo[LANGUAGE_NONE][0]['uri'])) {
@@ -190,6 +288,12 @@ function borg_preprocess_layout(&$variables) {
       $variables['wrap_attributes']['class'][] = 'has-background';
     }
   }
+
+  // Special template suggestion for home pages.
+  if (backdrop_is_front_page()) {
+    $home_template = $variables['theme_hook_original'] . '__home';
+    $variables['theme_hook_suggestion'] = $home_template;
+  }
 }
 
 /**
@@ -197,12 +301,113 @@ function borg_preprocess_layout(&$variables) {
  * @see header.tpl.php
  */
 function borg_preprocess_header(&$variables) {
-  $path = backdrop_get_path('theme', 'borg');
-  $variables['logo'] = theme('image', array('uri' => $path . '/logo-inverse.png'));
-  // Remove Backdrop CMS from the site name in the header template.
-  if ($variables['site_name'] && strstr($variables['site_name'], 'Backdrop CMS')) {
-    $variables['site_name'] = trim(str_replace('Backdrop CMS', '', $variables['site_name']));
+  if ($variables['logo']) {
+    $uri = icon_get_path('backdrop-logo');
+    $svg_contents = file_get_contents($uri);
+    $variables['logo'] = $svg_contents;
   }
+
+  // Replace the logo with backdrop SVG.
+  // Default to width of 40.
+  if (!isset($variables['logo_attributes']['width']) &&
+      !isset($variables['logo_attributes']['height'])) {
+    $variables['logo_attributes']['width'] = 40;
+  }
+
+  $logo = icon('backdrop-logo', array('attributes' => $variables['logo_attributes']));
+  $variables['logo'] = $logo;
+
+  if ($variables['site_name']) {
+    // Remove 'Backdrop CMS' from the site name in the header template.
+    if (strstr($variables['site_name'], 'Backdrop CMS')) {
+      $variables['site_name'] = trim(str_replace('Backdrop CMS', '', $variables['site_name']));
+    }
+    // Remove 'Backdrop' from the site name in the header template.
+    if (strstr($variables['site_name'], 'Backdrop')) {
+      $variables['site_name'] = trim(str_replace('Backdrop', '', $variables['site_name']));
+    }
+  }
+
+  // Switch to drop-down menu for stated menu.
+  if ($variables['menu']) {
+    $layout = layout_load('default');
+    // Assume that the header block is the first block in the default layout.
+    $header_uuid = reset($layout->positions['header']);
+    $header_block = $layout->content[$header_uuid];
+    $menu = $header_block->settings['block_settings']['menu'];
+
+
+    // What header block does
+    $menu = $settings['menu'] ? menu_navigation_links($settings['menu']) : NULL;
+    $variables['menu'] = $menu ? theme('links__header_menu', array('links' => $menu)) : NULL;
+
+    // What menu blocks do.
+    $menu_name = str_replace('_', '-', $config['menu_name']);
+    $config += system_menu_block_defaults($menu_name);
+    $config['expand_all'] = TRUE;
+    $tree = system_menu_tree_block_data($config);
+    if (!empty($tree) && $output = menu_tree_output($tree)) {
+      $data['content'] = $output;
+      // Add any menu style (currently always "dropdown" if any).
+      if (!empty($config['style'])) {
+        $data['content']['#wrapper_attributes']['class'][] = 'menu-' . str_replace('_', '-', $config['style']);
+        $data['content']['#wrapper_attributes']['data-menu-style'] = $config['style'];
+        $data['content']['#wrapper_attributes']['data-clickdown'] = $config['clickdown'];
+        if (!empty($config['accordion'])) {
+          $collapsible_behavior = (empty($config['collapse']) || $config['collapse'] == 'default') ? 'accordion' : 'accordion-' . $config['collapse'];
+        }
+        else {
+          $collapsible_behavior = (empty($config['collapse'])) ? 'default' : $config['collapse'];
+        }
+        $data['content']['#wrapper_attributes']['data-collapse'] = $collapsible_behavior;
+        $data['content']['#attached']['library'][] = array(
+          'system',
+          'backdrop.menus',
+        );
+        if ($config['style'] === 'dropdown') {
+          $data['content']['#attached']['library'][] = array(
+            'system',
+            'smartmenus',
+          );
+        }
+      }
+      if (!empty($config['toggle']) && $config['toggle'] == TRUE) {
+        $id = backdrop_html_id('menu-toggle-state');
+        $data['content']['#wrapper_attributes']['data-menu-toggle-id'] = $id;
+        $data['content']['#prefix'] = theme('menu_toggle', array(
+          'enabled' => $config['toggle'],
+          'id' => $id,
+          // Allow the user-entered menu toggle text to be translated.
+          'text' => t(trim($config['toggle_text'])),
+        ));
+        $data['content']['#attached']['library'][] = array(
+          'system',
+          'backdrop.menu-toggle',
+        );
+      }
+    }
+
+    $variables['menu'] = '';
+
+
+  }
+
+  // Add the additional menus
+  $variables['account'] = _borg_get_account_menu();
+  $variables['demo'] = _borg_get_demo_menu();
+  $variables['branding_classes'] = array();
+  $variables['navigation_classes'] = array();
+
+  // Add grid system classes. @todo, move these to subt themes for each site.
+  if ($variables['site_name'] == 'Events') {
+    $variables['branding_classes'] = array('col-xs-6', 'col-sm-4', 'col-md-3', 'col-lg-2');
+    $variables['navigation_classes'] = array('col-xs-6', 'col-sm-8', 'col-md-9', 'col-lg-10');
+  }
+  elseif ($variables['site_name'] == 'Translations') {
+    $variables['branding_classes'] = array('col-xs-6', 'col-sm-4', 'col-md-3', 'col-lg-4');
+    $variables['navigation_classes'] = array('col-xs-6', 'col-sm-8', 'col-md-9', 'col-lg-8');
+  }
+
 }
 
 /**
@@ -246,104 +451,6 @@ function borg_preprocess_node(&$variables){
     array_unshift($variables['theme_hook_suggestions'], 'node__' . $variables['view_mode']);
   }
 
-  if ($variables['view_mode'] == 'project_search') {
-    $node = $variables['node']; // Nice shorthand.
-
-    // Set column sizes for each view-mode.
-    $variables['classes_col1'] = array('col-md-4', 'col-md-push-8');
-    $variables['classes_col2'] = array('col-md-8', 'col-md-pull-4');
-
-    if ($node->type == 'project_theme') {
-      $variables['classes_col1'] = array('col-md-6', 'col-md-push-6');
-      $variables['classes_col2'] = array('col-md-6', 'col-md-pull-6');
-    }
-
-    // Move the image into the sidebar.
-    $variables['image'] = backdrop_render($variables['content']['field_image']);
-
-    // Start a place for footer info.
-    $footer_links = array();
-
-    // Add some statistics info for the footer.
-    if (isset($variables['content']['field_download_count'])) {
-      $count = backdrop_render($variables['content']['field_download_count']);
-      $footer_links['count']['data'] = $count;
-    }
-    if (isset($variables['content']['project_usage'])) {
-      $variables['content']['project_usage']['#weight'] = 10;
-      $usage = backdrop_render($variables['content']['project_usage']);
-      $footer_links['usage']['data'] = $usage;
-    }
-
-    // Add a more info link to content.
-    $variables['content']['more'] = array(
-      '#type' => 'link',
-      '#title' => t('More details'),
-      '#href' => url('node/' . $node->nid, array('absolute' => TRUE)),
-      '#attributes' => array('class' => array('button', 'button-small', 'more-details')),
-      '#weight' => 10,
-    );
-
-    // Get the recomended release info.
-    $release = FALSE;
-    $result = views_get_view_result('project_release_download_table', 'recommended', $node->nid);
-    if (count($result) == 1) {
-      $release = reset($result);
-    }
-
-    if ($release) {
-      // Add the latest release version.
-      $version = array(
-        '#type' => 'markup',
-        '#markup' => '<span>' . t('Version: <strong>@version</strong>', array('@version' => $release->project_release_node_version)) . '</span>',
-      );
-      $footer_links['version']['data'] = backdrop_render($version);
-
-      // Add the latest release date.
-      $date = format_date($release->node_project_release_supported_versions_created, 'short');
-      $latest = array(
-        '#type' => 'markup',
-        '#markup' => '<span class="release-date">' . t('Released: <strong>@date</strong>', array('@date' => $date)) . '</span>',
-      );
-      $footer_links['latest']['data'] = backdrop_render($latest);
-
-      // Add an area for download info.
-      $variables['download'] = array();
-      // Add download link.
-      $variables['download']['button'] = array(
-        '#type' => 'link',
-        '#title' => t('Download'),
-        '#href' => $release->project_release_node_download_link,
-        '#attributes' => array('class' => array('button', 'button-small')),
-        '#weight' => -11,
-      );
-      // Add download file size.
-      $variables['download']['size'] = array(
-        '#type' => 'markup',
-        '#markup' => '<span class="download-size"><span>' . format_size($release->project_release_node_download_size) . '</span></span>',
-        '#weight' => -10,
-      );
-    }
-
-    // Put release info in a list.
-    $variables['footer_info'] = array(
-      '#theme' => 'item_list',
-      '#items' => $footer_links,
-    );
-
-  }
-
-  if ($variables['type'] == 'project_module' || $variables['type'] == 'project_theme' || $variables['type'] == 'project_layout') {
-
-    if ($variables['view_mode'] == 'teaser') {
-      if (isset($variables['content']['links'])) {
-        $old_title = $variables['content']['links']['node']['#links']['node-readmore']['title'];
-        $new_title = str_replace('Read more', 'More details', $old_title);
-        unset($variables['content']['links']);
-      }
-    }
-  }
-
   // For blog posts.
   if ($variables['type'] == 'post') {
     // Load the author.
@@ -368,33 +475,13 @@ function borg_preprocess_node(&$variables){
   // Change the submitted by language for all nodes.
   $variables['submitted'] = t('Posted by !username on !datetime', array(
     '!username' => $variables['name'], '!datetime' => $variables['date']));
-
-  // Get the theme location.
-  $path = backdrop_get_path('theme', 'borg');
-
-  // For project nodes include a special stylesheet.
-  if (($variables['type'] == 'core') || substr($variables['type'], 0, 8) == 'project_'){
-    if ($variables['type'] == 'project_release') {
-
-    }
-    else {
-      unset($variables['content']['project_release_downloads']['#prefix']);
-      $variables['classes'][] = 'node-project';
-      backdrop_add_css($path . '/css/node-project.css');
-    }
-  }
-
-  // For showcase nodes include a special stylesheet.
-  if ($variables['type'] == 'showcase') {
-    backdrop_add_css($path . '/css/node-showcase.css');
-  }
 }
 
 /**
  * Prepare variables for comment templates.
  * @see comment.tpl.php
  */
-function borg_preprocess_comment(&$variables){
+function borg_preprocess_comment(&$variables) {
   // Change text to "Comment from".
   $variables['submitted'] = str_replace('Submitted by', 'Comment from', $variables['submitted']);
   // Get the headshot photo from the field.
@@ -403,6 +490,32 @@ function borg_preprocess_comment(&$variables){
     $langcode = $author->langcode;
     $uri = $author->field_photo[$langcode][0]['uri'];
     $variables['user_picture'] = theme('image_style', array('style_name' => 'headshot_small', 'uri' => $uri));
+  }
+}
+
+/**
+ * Prepare variables for block templates.
+ * @see block.tpl.php
+ */
+function borg_preprocess_block(&$variables) {
+  if ($variables['block']->module == 'system') {
+    if ($variables['block']->delta == 'main-menu') {
+      $variables['add_wrapper'] = FALSE;
+      $variables['account'] = FALSE;
+      $variables['demo'] = FALSE;
+
+      if ($variables['content']['#wrapper_attributes']['data-menu-style'] == 'dropdown') {
+        // Build menus for header area.
+        $variables['add_wrapper'] = TRUE;
+        $variables['account'] = _borg_get_account_menu();
+        $variables['demo'] = _borg_get_demo_menu();
+      }
+    }
+  }
+  elseif ($variables['block']->module == 'borg_blocks') {
+    if ($variables['block']->delta == 'branding') {
+      $variables['classes'][] = 'branding';
+    }
   }
 }
 
@@ -711,39 +824,6 @@ function borg_socialfield_drag_components($variables) {
 }
 
 /**
- * Overrides theme_menu_tree().
- */
-function borg_menu_tree__user_menu($variables) {
-  $variables['attributes']['class'][] = 'closed';
-
-  global $user;
-
-  $output  = '<nav class="borg-greeting">';
-  $output .= '  <ul class="borg-user-menu">';
-  $output .= '    <li class=top>';
-
-  if ($user->uid) {
-    $greeting = t('Hi @name!', array('@name'  => $user->name));
-    $output .= '      <a href="#" id="greeting" class="greeting">' . $greeting . '</a>';
-  }
-  else {
-    $output .= '      <a href="#" id="greeting" class="greeting">' . t('Welcome!') . '</a>';
-  }
-
-  $output .= '      <ul' . backdrop_attributes($variables['attributes']) . '>' . $variables['tree'] . '</ul>';
-  $output .= '    </li>';
-  $output .= '  </ul>';
-
-  $output .= '  <a class="icon" title="Code on GitHub" href="https://github.com/backdrop/backdrop"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>';
-  $output .= '  <a class="icon" title="Live Chat on Zulip" href="https://backdrop.zulipchat.com/#narrow/stream/218635-Backdrop"><i class="fa fa-commenting fa-2x" aria-hidden="true"></i></a>';
-  $output .= '  <a class="icon" title="Updates from our Newsletter" href="https://backdropcms.org/newsletter"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>';
-
-  $output .= '</nav>';
-
-  return $output;
-}
-
-/**
  * Overrides theme_feed_icon().
  */
 function borg_feed_icon($variables) {
@@ -909,6 +989,90 @@ function borg_github_info($variables) {
 }
 
 /**
+ * Override theme_pager_link().
+ */
+function borg_pager_link($variables) {
+  $text = $variables['text'];
+  $page_new = $variables['page_new'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
+
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
+    $parameters['page'] = $new_page;
+  }
+
+  $query = array();
+  if (count($parameters)) {
+    $query = backdrop_get_query_parameters($parameters, array());
+  }
+  if ($query_pager = pager_get_query_parameters()) {
+    $query = array_merge($query, $query_pager);
+  }
+
+  // Set new pager link text
+  static $pager_pieces = NULL;
+  if (!isset($pager_pieces)) {
+    $pager_pieces = array(
+      t('« first') => array(
+        'title_attribute' => t('Go to first page'),
+        'before' => '« ',
+        'text' => t('first'),
+      ),
+      t('‹ previous') => array(
+        'title_attribute' => t('Go to previous page'),
+        'before' => '‹ ',
+        'text' => t('previous'),
+      ),
+      t('next ›') => array(
+        'title_attribute' => t('Go to next page'),
+        'text' => t('next'),
+        'after' => ' ›',
+      ),
+      t('last »') => array(
+        'title_attribute' => t('Go to last page'),
+        'text' => t('last'),
+        'after' => ' »',
+      ),
+    );
+  }
+
+  // Set the title attribute for each pager link.
+  if (!isset($attributes['title'])) {
+    if (isset($pager_pieces[$text])) {
+      $attributes['title'] = $pager_pieces[$text]['title_attribute'];
+    }
+    elseif (is_numeric($text)) {
+      $attributes['title'] = t('Go to page @number', array('@number' => $text));
+    }
+  }
+
+  // @todo l() cannot be used here, since it adds an 'active' class based on the
+  //   path only (which is always the current path for pager links). Apparently,
+  //   none of the pager links is active at any time - but it should still be
+  //   possible to use l() here.
+  // @see http://drupal.org/node/1410574
+  $attributes['href'] = url($_GET['q'], array('query' => $query));
+
+  // How to tell when spans and new text are needed.
+  $has_text = FALSE;
+  if (isset($pager_pieces[$text]['text'])) {
+    $has_text = TRUE;
+  }
+
+  $output  = '<a' . backdrop_attributes($attributes) . '>';
+  $output .=   isset($pager_pieces[$text]['before']) ? $pager_pieces[$text]['before'] : '';
+  $output .=   $has_text ? '<span class="pager-text">' : '';
+  $output .=   $has_text ? check_plain($pager_pieces[$text]['text']) : check_plain($text);
+  $output .=   $has_text ? '</span>' : '';
+  $output .=   isset($pager_pieces[$text]['after']) ? $pager_pieces[$text]['after']: '';
+  $output .= '</a>';
+
+  return $output;
+}
+
+/**
  * Overrides theme_system_powered_by().
  */
 function borg_system_powered_by() {
@@ -918,4 +1082,166 @@ function borg_system_powered_by() {
   $output .= '</span>';
 
   return $output;
+}
+
+/*******************************************************************************
+ * Helper functions.
+ ******************************************************************************/
+
+/**
+ * Helper function: Get User Account menu.
+ */
+function _borg_get_account_menu() {
+  $icon_size = '30px';
+  $icon_attributes = array('width' => $icon_size, 'height' => $icon_size);
+  $icon_options = array('attributes' => $icon_attributes);
+  $icon = icon('user-circle', $icon_options);
+  $link_options = array('html' => TRUE, 'attributes' => array('class' => array('has-submenu')));
+  $account_text = '<span class="element-invisible">' . t('My account') . '</span>';
+  $account_button = l($account_text . $icon, 'user', $link_options);
+
+  backdrop_add_library('system', 'smartmenus');
+
+  global $user;
+  if ($user->uid == 0) {
+    $user_links = array(
+      '#theme' => 'links',
+      '#links' => array(
+        'profile' => array(
+          'title' => 'Log In',
+          'href' => 'user/login',
+        ),
+      ),
+    );
+    if (user_register_access()) {
+      $user_links['#links']['register'] = array(
+        'title' => 'Create an account',
+        'href' => 'user/register',
+      );
+    }
+  }
+  else {
+    $user_links = array(
+      '#theme' => 'links',
+      '#links' => array(
+        'profile' => array(
+          'title' => 'My Profile',
+          'href' => 'user',
+        ),
+        'logout' => array(
+          'title' => 'Log out',
+          'href' => 'user/logout',
+        ),
+      ),
+    );
+  }
+
+  $inner_user_menu = backdrop_render($user_links);
+  $user_menu = array(
+    '#theme' => 'borg_list',
+    '#attributes' => array(
+      'class' => array(
+        'sm',
+        'menu-dropdown',
+        'closed',
+        'sm-nowrap',
+      ),
+      'data-menu-style' => 'dropdown',
+    ),
+    '#items' => array(
+      'account' => array(
+        'data' => $account_button . $inner_user_menu,
+        'attributes' => array('class' => array('has-children')),
+      ),
+    ),
+  );
+
+  return $user_menu;
+}
+
+/**
+ * Helper function: Get demo Backdrop menu.
+ */
+function _borg_get_demo_menu() {
+  $link_options = array('html' => TRUE);
+  backdrop_add_library('system', 'smartmenus');
+
+  if ($version_info = _borg_get_version()) {
+    $link_options['attributes'] = array('class' => array('has-submenu'));
+    $demo_button = l(t('Try Backdrop CMS'), 'https://backdropcms.org/try-backdrop', $link_options);
+
+    $demo_links = array(
+      '#theme' => 'links',
+      '#links' => array(
+        'demo' => array(
+          'title' => 'Demo Backdrop CMS',
+          'href' => 'https://backdropcms.org/demo',
+          'attributes' => array('title' => 'Create your own demo sandbox'),
+        ),
+        'download' => array(
+          'title' => 'Download version' . ' ' . $version_info['latest']['version'],
+          'href' => $version_info['latest']['download_link'],
+          'attributes' => array('title' => 'Download the latest version'),
+        ),
+        'more' => array(
+          'title' => 'More ways to try Backdrop',
+          'href' => 'https://backdropcms.org/try-backdrop',
+          'attributes' => array('title' => 'Discover other ways to try Backdrop CMS'),
+        ),
+      ),
+    );
+    $inner_demo_menu = backdrop_render($demo_links);
+    $demo_menu = array(
+      '#theme' => 'borg_list',
+      '#attributes' => array(
+        'class' => array(
+          'sm',
+          'menu-dropdown',
+          'closed',
+          'sm-nowrap',
+        ),
+        'data-menu-style' => 'dropdown',
+      ),
+      '#items' => array(
+        'demo' => array(
+          'data' => $demo_button . $inner_demo_menu,
+          'attributes' => array('class' => array('has-children')),
+        ),
+      ),
+    );
+  }
+  else {
+    $link_options['attributes'] = array('class' => array('button-only'));
+    $demo_menu = l(t('Try Backdrop CMS'), 'https://backdropcms.org/try-backdrop', $link_options);
+  }
+
+  return $demo_menu;
+}
+
+/**
+ * Helper function, get core version from JSON API.
+ */
+function _borg_get_version() {
+  $cached = cache_get('backdrop_core_version_latest');
+  $data = isset($cached->data) ? $cached->data : array();
+  if (empty($data)) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Accept: application/json',
+      'Content-Type: application/json'),
+    );
+    curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)");
+    curl_setopt($ch, CURLOPT_URL, 'https://backdropcms.org/core/latest.json');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+    $json = curl_exec($ch);
+    $res_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    $data = json_decode($json, TRUE);
+
+    $expires = time() + 60*60; // Expire in no less than 1 hour.
+    cache_set('backdrop_core_version_latest', $data, 'cache', $expires);
+  }
+
+  return $data;
 }
