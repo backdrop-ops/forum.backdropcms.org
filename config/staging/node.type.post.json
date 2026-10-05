@@ -15,7 +15,7 @@
         "comment_default": 2,
         "node_submitted": true,
         "node_user_picture": true,
-        "comment_enabled": false,
+        "comment_enabled": true,
         "comment_per_page": 50,
         "comment_mode": 1,
         "comment_anonymous": 0,

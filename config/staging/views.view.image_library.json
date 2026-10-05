@@ -385,7 +385,9 @@
                         "format": "filtered_html",
                         "tokenize": 0
                     }
-                }
+                },
+                "enable_ajax_history": false,
+                "exclude_ajax_args": ""
             }
         }
     }

@@ -1,6 +1,12 @@
 {
     "_config_name": "system.core",
     "_config_static": true,
+    "_config_translatables": [
+        "anonymous",
+        "site_name",
+        "site_slogan",
+        "maintenance_mode_message"
+    ],
     "action_recursion_limit": 35,
     "active_menus_default": [],
     "admin_theme": "seven",
@@ -101,12 +107,6 @@
     "user_password_reject_weak": false,
     "user_password_strength_threshold": 50,
     "config_sync_clear_staging": 1,
-    "_config_translatables": [
-        "anonymous",
-        "site_name",
-        "site_slogan",
-        "maintenance_mode_message"
-    ],
     "messages_dismissible": 1,
     "dblog_row_limit": "10000",
     "dblog_date_format": "M d 'y - g:ia",
@@ -121,5 +121,6 @@
     },
     "install_version": "1.7.x",
     "user_login_appearance": "tabs",
-    "login_admin_theme": 1
+    "login_admin_theme": 1,
+    "icon_browser_icons_per_page": 110
 }

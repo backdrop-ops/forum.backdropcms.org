@@ -11,7 +11,7 @@
     "has_title": true,
     "title_label": "Title",
     "settings": {
-        "comment_enabled": false,
+        "comment_enabled": true,
         "comment_default": "2",
         "comment_per_page": "100",
         "comment_mode": 1,
