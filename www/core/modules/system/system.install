@@ -3926,6 +3926,20 @@ function system_update_1106() {
 }
 
 /**
+ * Notify if a non-core version of Field Group module is present.
+ */
+function system_update_1107() {
+  $path = backdrop_get_path('module', 'field_group');
+  if ($path && strpos($path, 'core/modules/field_group') === FALSE) {
+    backdrop_set_message(t('Backdrop core provides a bundled @name module. A different copy of @name module is at %path. Remove this module from your installation to use the core @name module. For more information see the <a href="!url" target="_blank">@name change notice</a>.', array(
+      '@name' => t('Field Group'),
+      '%path' => $path,
+      '!url' => 'https://docs.backdropcms.org/node/49214',
+    )), 'warning');
+  }
+}
+
+/**
  * @} End of "defgroup updates-7.x-to-1.x"
  * The next series of updates should start at 2000.
  */

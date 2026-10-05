@@ -2579,6 +2579,13 @@ function format_size($size, $langcode = NULL) {
 /**
  * Formats a time interval with the requested granularity.
  *
+ * Works best if the interval is short, that is, less than 30 days. For larger
+ * intervals use format_time_diff() for more precise time spans.
+ *
+ * For intervals over 30 days, the output is approximate: a "month" is always
+ * exactly 30 days, and a "year" is always 365 days. It is not possible to make
+ * a more exact representation, given that there is only one input in seconds.
+ *
  * @param int $interval
  *   The length of the interval in seconds.
  * @param int $granularity
