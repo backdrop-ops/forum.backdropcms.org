@@ -317,13 +317,12 @@ function borg_preprocess_header(&$variables) {
   $logo = icon('backdrop-logo', array('attributes' => $variables['logo_attributes']));
   $variables['logo'] = $logo;
 
+  // Remove 'Backdrop' from the site name in the header template.
   if ($variables['site_name']) {
-    // Remove 'Backdrop CMS' from the site name in the header template.
     if (strstr($variables['site_name'], 'Backdrop CMS')) {
       $variables['site_name'] = trim(str_replace('Backdrop CMS', '', $variables['site_name']));
     }
-    // Remove 'Backdrop' from the site name in the header template.
-    if (strstr($variables['site_name'], 'Backdrop')) {
+    elseif (strstr($variables['site_name'], 'Backdrop')) {
       $variables['site_name'] = trim(str_replace('Backdrop', '', $variables['site_name']));
     }
   }
@@ -334,43 +333,36 @@ function borg_preprocess_header(&$variables) {
     // Assume that the header block is the first block in the default layout.
     $header_uuid = reset($layout->positions['header']);
     $header_block = $layout->content[$header_uuid];
-    $menu = $header_block->settings['block_settings']['menu'];
-
+    $menu_name = $header_block->settings['block_settings']['menu'];
 
     // What header block does
-    $menu = $settings['menu'] ? menu_navigation_links($settings['menu']) : NULL;
-    $variables['menu'] = $menu ? theme('links__header_menu', array('links' => $menu)) : NULL;
+    $menu = $menu_name ? menu_navigation_links($menu_name) : NULL;
+    //$variables['menu'] = $menu ? theme('links__header_menu', array('links' => $menu)) : NULL;
 
     // What menu blocks do.
-    $menu_name = str_replace('_', '-', $config['menu_name']);
-    $config += system_menu_block_defaults($menu_name);
+    module_load_include('inc', 'system', 'system.menu');
+    $config = system_menu_block_defaults($menu_name);
     $config['expand_all'] = TRUE;
+    $config['style'] = 'dropdown';
     $tree = system_menu_tree_block_data($config);
     if (!empty($tree) && $output = menu_tree_output($tree)) {
       $data['content'] = $output;
-      // Add any menu style (currently always "dropdown" if any).
-      if (!empty($config['style'])) {
-        $data['content']['#wrapper_attributes']['class'][] = 'menu-' . str_replace('_', '-', $config['style']);
-        $data['content']['#wrapper_attributes']['data-menu-style'] = $config['style'];
-        $data['content']['#wrapper_attributes']['data-clickdown'] = $config['clickdown'];
-        if (!empty($config['accordion'])) {
-          $collapsible_behavior = (empty($config['collapse']) || $config['collapse'] == 'default') ? 'accordion' : 'accordion-' . $config['collapse'];
-        }
-        else {
-          $collapsible_behavior = (empty($config['collapse'])) ? 'default' : $config['collapse'];
-        }
-        $data['content']['#wrapper_attributes']['data-collapse'] = $collapsible_behavior;
-        $data['content']['#attached']['library'][] = array(
-          'system',
-          'backdrop.menus',
-        );
-        if ($config['style'] === 'dropdown') {
-          $data['content']['#attached']['library'][] = array(
-            'system',
-            'smartmenus',
-          );
-        }
+
+      $data['content']['#wrapper_attributes']['class'][] = 'menu-' . str_replace('_', '-', $config['style']);
+      $data['content']['#wrapper_attributes']['data-menu-style'] = $config['style'];
+      $data['content']['#wrapper_attributes']['data-clickdown'] = $config['clickdown'];
+      if (!empty($config['accordion'])) {
+        $collapsible_behavior = (empty($config['collapse']) || $config['collapse'] == 'default') ? 'accordion' : 'accordion-' . $config['collapse'];
       }
+      else {
+        $collapsible_behavior = (empty($config['collapse'])) ? 'default' : $config['collapse'];
+      }
+      $data['content']['#wrapper_attributes']['data-collapse'] = $collapsible_behavior;
+      $data['content']['#attached']['library'][] = array(
+        'system',
+        'smartmenus',
+      );
+
       if (!empty($config['toggle']) && $config['toggle'] == TRUE) {
         $id = backdrop_html_id('menu-toggle-state');
         $data['content']['#wrapper_attributes']['data-menu-toggle-id'] = $id;
@@ -387,27 +379,22 @@ function borg_preprocess_header(&$variables) {
       }
     }
 
-    $variables['menu'] = '';
-
-
+    $variables['menu'] = $data['content'];
   }
 
   // Add the additional menus
   $variables['account'] = _borg_get_account_menu();
   $variables['demo'] = _borg_get_demo_menu();
+
+  // Add grid system classes.
   $variables['branding_classes'] = array();
   $variables['navigation_classes'] = array();
 
-  // Add grid system classes. @todo, move these to subt themes for each site.
-  if ($variables['site_name'] == 'Events') {
-    $variables['branding_classes'] = array('col-xs-6', 'col-sm-4', 'col-md-3', 'col-lg-2');
-    $variables['navigation_classes'] = array('col-xs-6', 'col-sm-8', 'col-md-9', 'col-lg-10');
-  }
-  elseif ($variables['site_name'] == 'Translations') {
-    $variables['branding_classes'] = array('col-xs-6', 'col-sm-4', 'col-md-3', 'col-lg-4');
-    $variables['navigation_classes'] = array('col-xs-6', 'col-sm-8', 'col-md-9', 'col-lg-8');
-  }
-
+  /* Example of adding classes in subtheme:
+  $variables['branding_classes'] = array('col-xs-6', 'col-sm-4', 'col-md-3', 'col-lg-4');
+  // Note: classes may be added to the Menu block instead of using these.
+  $variables['navigation_classes'] = array('col-xs-6', 'col-sm-8', 'col-md-9', 'col-lg-8');
+  */
 }
 
 /**

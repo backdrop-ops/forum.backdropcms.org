@@ -29,28 +29,24 @@
       <?php if ($logo): print $logo; endif; ?>
       <?php if ($site_name): print $site_name; endif; ?>
     </a>
-</div>
-<?php if ($menu || $site_slogan): ?>
-<div class="borg-navigation <?php print implode(' ', $navigation_classes); ?>">
-  <div class="borg-header-menu name-and-slogan">
     <?php if ($site_slogan): ?>
       <div class="site-slogan"><?php print $site_slogan; ?></div>
     <?php endif; ?>
+</div>
+<?php if ($menu): ?>
+<div class="borg-navigation <?php print implode(' ', $navigation_classes); ?>">
+  <div class="borg-header-menu menu-main">
+    <?php print render($menu); ?>
   </div>
-  <?php if ($menu): ?>
-    <div class="borg-header-menu menu-main">
-      <?php print render($menu); ?>
+  <?php if ($account): ?>
+    <div class="borg-header-menu menu-account">
+      <?php print render($account); ?>
     </div>
-    <?php if ($account): ?>
-      <div class="borg-header-menu menu-account">
-        <?php print render($account); ?>
-      </div>
-    <?php endif; ?>
-    <?php if ($demo): ?>
-      <div class="borg-header-menu menu-demo">
-        <?php print render($demo); ?>
-      </div>
-    <?php endif; ?>
+  <?php endif; ?>
+  <?php if ($demo): ?>
+    <div class="borg-header-menu menu-demo">
+      <?php print render($demo); ?>
+    </div>
   <?php endif; ?>
 </div>
 <?php endif; ?>
