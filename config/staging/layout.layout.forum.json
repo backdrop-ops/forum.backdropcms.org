@@ -17,11 +17,10 @@
     },
     "positions": {
         "header": [
-            "eb257f35-93e4-4353-8701-1fc8fe62d4d4"
+            "f04f0625-8943-4eb9-a44c-76b8db0a2290"
         ],
         "top": [
             "6824ed26-b90d-4a55-ac0a-109da7149ff4",
-            "6fc8fd7a-d073-4e95-be00-e5a21dc094a9",
             "05ae7ae6-0566-44c9-8300-bfb1b45875a7"
         ],
         "content": [
@@ -35,14 +34,18 @@
             "c06c1fba-45e7-43c2-9900-c5c462b957f8"
         ],
         "footer": [
-            "ae840311-c386-4c5c-b300-d047da24c3e5"
+            "7959062a-2095-431c-aa07-077beecf731f",
+            "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
+            "97e886d4-50b4-43c2-a906-6fe170ea1981",
+            "91a8c391-0c50-49bf-8000-bebfbf390ff2",
+            "e8e63592-a767-452f-aa0c-12736ef39a05"
         ],
         "title": []
     },
     "contexts": [],
     "relationships": [],
     "content": {
-        "eb257f35-93e4-4353-8701-1fc8fe62d4d4": {
+        "f04f0625-8943-4eb9-a44c-76b8db0a2290": {
             "plugin": "copy_blocks:region_copy",
             "data": {
                 "status": 1,
@@ -58,7 +61,7 @@
                     "admin_description": "",
                     "source_region": "default:header"
                 },
-                "uuid": "eb257f35-93e4-4353-8701-1fc8fe62d4d4",
+                "uuid": "f04f0625-8943-4eb9-a44c-76b8db0a2290",
                 "style": {
                     "plugin": "default",
                     "data": {
@@ -72,7 +75,7 @@
         "6824ed26-b90d-4a55-ac0a-109da7149ff4": {
             "plugin": "system:page_components:title",
             "data": {
-                "status": 0,
+                "status": 1,
                 "module": "system",
                 "delta": "page_components",
                 "settings": {
@@ -96,36 +99,6 @@
                 }
             }
         },
-        "6fc8fd7a-d073-4e95-be00-e5a21dc094a9": {
-            "plugin": "layout:hero",
-            "data": {
-                "status": 1,
-                "module": "layout",
-                "delta": "hero",
-                "settings": {
-                    "title_display": "default",
-                    "title": "Backdrop CMS Forum",
-                    "style": "default",
-                    "block_settings": [],
-                    "contexts": [],
-                    "content": "<p>\r\n    Welcome! In this forum all questions will be answered with dignity and respect.\r\n</p>",
-                    "format": "filtered_html",
-                    "image": null,
-                    "image_path": null,
-                    "admin_label": "",
-                    "admin_description": ""
-                },
-                "uuid": "6fc8fd7a-d073-4e95-be00-e5a21dc094a9",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                }
-            }
-        },
         "05ae7ae6-0566-44c9-8300-bfb1b45875a7": {
             "plugin": "layout:custom_block",
             "data": {
@@ -138,7 +111,7 @@
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "Or bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, everyone welcome. Also, watch this space for the next <a href=\"https://events.backdropcms.org/\">Backdrop LIVE</a>.",
+                    "content": "<h2>Welcome! In this forum all questions will be answered with dignity and respect.</h2>\r\n<div>Or bring your questions to our <a href=\"https://backdropcms.org/news/events\">weekly virtual office hours</a>, everyone welcome.</br>\r\nOur next <a href=\"https://events.backdropcms.org/\">Backdrop LIVE</a> is on 22nd to 24th October. Register now and tell us what you want to talk about.</div>",
                     "format": "full_html",
                     "admin_label": "",
                     "admin_description": ""
@@ -327,12 +300,69 @@
                 }
             }
         },
-        "ae840311-c386-4c5c-b300-d047da24c3e5": {
-            "plugin": "copy_blocks:region_copy",
+        "7959062a-2095-431c-aa07-077beecf731f": {
+            "plugin": "system:powered-by",
             "data": {
                 "status": 1,
-                "module": "copy_blocks",
-                "delta": "region_copy",
+                "module": "system",
+                "delta": "powered-by",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": []
+                },
+                "uuid": "7959062a-2095-431c-aa07-077beecf731f",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67": {
+            "plugin": "on_the_web:social_links",
+            "data": {
+                "status": 1,
+                "module": "on_the_web",
+                "delta": "social_links",
+                "settings": {
+                    "title_display": "custom",
+                    "title": "Stay Connected",
+                    "style": "default",
+                    "block_settings": {
+                        "services": {
+                            "display": "auto",
+                            "enabled": {
+                                "youtube": "youtube",
+                                "facebook": "facebook",
+                                "twitter": "twitter"
+                            }
+                        }
+                    },
+                    "contexts": []
+                },
+                "uuid": "947c5eb4-bcc5-4c4b-9a00-e0ae0b954c67",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "97e886d4-50b4-43c2-a906-6fe170ea1981": {
+            "plugin": "borg_signup:newsletter",
+            "data": {
+                "status": 1,
+                "module": "borg_signup",
+                "delta": "newsletter",
                 "settings": {
                     "title_display": "default",
                     "title": "",
@@ -340,10 +370,68 @@
                     "block_settings": [],
                     "contexts": [],
                     "admin_label": "",
-                    "admin_description": "",
-                    "source_region": "default:footer"
+                    "admin_description": ""
                 },
-                "uuid": "ae840311-c386-4c5c-b300-d047da24c3e5",
+                "uuid": "97e886d4-50b4-43c2-a906-6fe170ea1981",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "91a8c391-0c50-49bf-8000-bebfbf390ff2": {
+            "plugin": "block:newsletter",
+            "data": {
+                "status": 0,
+                "module": "block",
+                "delta": "newsletter",
+                "settings": {
+                    "title_display": "default",
+                    "style": "default",
+                    "block_settings": {
+                        "delta": "newsletter",
+                        "description": "",
+                        "reusable": true
+                    },
+                    "contexts": [],
+                    "title": ""
+                },
+                "uuid": "91a8c391-0c50-49bf-8000-bebfbf390ff2",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": "col-sm-6"
+                        }
+                    }
+                }
+            }
+        },
+        "e8e63592-a767-452f-aa0c-12736ef39a05": {
+            "plugin": "menu:menu-footer-menu",
+            "data": {
+                "status": 1,
+                "module": "menu",
+                "delta": "menu-footer-menu",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "menu_name": "menu-footer-menu",
+                        "style": "top_only",
+                        "level": "1",
+                        "depth": "0",
+                        "expand_all": 0,
+                        "toggle": 0
+                    },
+                    "contexts": []
+                },
+                "uuid": "e8e63592-a767-452f-aa0c-12736ef39a05",
                 "style": {
                     "plugin": "default",
                     "data": {

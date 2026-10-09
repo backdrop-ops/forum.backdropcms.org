@@ -17,9 +17,7 @@
     },
     "positions": {
         "header": [
-            "15212e11-9faa-42a1-8409-9b63772ff48c",
-            "13b2f325-af26-40bb-8c61-97fe1d93f19f",
-            "e3400ad1-cc87-4ac4-a400-f19bcff57738"
+            "e2c497f8-cb2e-404a-a300-0b27ddd797ef"
         ],
         "top": [
             "09f11b4e-877e-45ab-9000-a4c6254faa04",
@@ -47,7 +45,7 @@
     "contexts": [],
     "relationships": [],
     "content": {
-        "15212e11-9faa-42a1-8409-9b63772ff48c": {
+        "e2c497f8-cb2e-404a-a300-0b27ddd797ef": {
             "plugin": "system:header",
             "data": {
                 "status": 1,
@@ -58,7 +56,7 @@
                     "title": "",
                     "style": "default",
                     "block_settings": {
-                        "menu": "",
+                        "menu": "main-menu",
                         "logo": 1,
                         "site_name": 1,
                         "site_slogan": 0
@@ -67,75 +65,7 @@
                     "admin_label": "",
                     "admin_description": ""
                 },
-                "uuid": "15212e11-9faa-42a1-8409-9b63772ff48c",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": ""
-                        }
-                    }
-                }
-            }
-        },
-        "13b2f325-af26-40bb-8c61-97fe1d93f19f": {
-            "plugin": "system:main-menu",
-            "data": {
-                "status": 1,
-                "module": "system",
-                "delta": "main-menu",
-                "settings": {
-                    "title_display": "none",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": {
-                        "menu_name": "main-menu",
-                        "style": "dropdown",
-                        "level": "1",
-                        "depth": "0",
-                        "expand_all": 0,
-                        "clickdown": "0",
-                        "toggle": 1,
-                        "toggle_text": "Menu",
-                        "collapse": "default",
-                        "accordion": 0
-                    },
-                    "contexts": [],
-                    "admin_label": "",
-                    "admin_description": ""
-                },
-                "uuid": "13b2f325-af26-40bb-8c61-97fe1d93f19f",
-                "style": {
-                    "plugin": "default",
-                    "data": {
-                        "settings": {
-                            "classes": "col-xs-3 col-sm-6 col-md-7 col-lg-8"
-                        }
-                    }
-                }
-            }
-        },
-        "e3400ad1-cc87-4ac4-a400-f19bcff57738": {
-            "plugin": "system:user-menu",
-            "data": {
-                "status": 0,
-                "module": "system",
-                "delta": "user-menu",
-                "settings": {
-                    "title_display": "default",
-                    "title": "",
-                    "style": "default",
-                    "block_settings": {
-                        "menu_name": "user-menu",
-                        "style": "tree",
-                        "level": "1",
-                        "depth": "1",
-                        "expand_all": 1,
-                        "toggle": 0
-                    },
-                    "contexts": []
-                },
-                "uuid": "e3400ad1-cc87-4ac4-a400-f19bcff57738",
+                "uuid": "e2c497f8-cb2e-404a-a300-0b27ddd797ef",
                 "style": {
                     "plugin": "default",
                     "data": {
