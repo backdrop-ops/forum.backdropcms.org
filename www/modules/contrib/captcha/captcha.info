@@ -11,7 +11,7 @@ files[] = captcha.admin.inc
 files[] = captcha.install
 files[] = captcha.test
 
-; Added by Backdrop CMS packaging script on 2026-03-26
+; Added by Backdrop CMS packaging script on 2026-07-31
 project = captcha
-version = 1.x-1.7.6
-timestamp = 1774552776
+version = 1.x-1.7.7
+timestamp = 1785515229
