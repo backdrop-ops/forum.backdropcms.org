@@ -16,6 +16,7 @@
         "comment": true,
         "config": true,
         "contextual": true,
+        "copy_blocks": true,
         "dashboard": true,
         "date": true,
         "dblog": true,
